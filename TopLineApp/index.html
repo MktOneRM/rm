@@ -13,45 +13,76 @@
 
 		<link href="styles/main.css" rel="stylesheet" />
 	</head>
+
+	<!DOCTYPE html>
 	<html>
 
 		<body>
 
-			<div data-role="view">
+			<div data-role="view" id="tabstrip-profile" data-title="Profile" data-layout="mobile-tabstrip">
 
-				<header data-role="header">
-					<div data-role="navbar">
-						<span data-role="view-title">Top Line</span>
-					</div>
-					<div>
-						<a href="#foo" data-role="button">Foo</a>
-					</div>
-					<div>
-						<a href="#foo" data-role="button">Foo</a>
-					</div>
-					<div>
-						<a href="#foo" data-role="button">Foo</a>
-					</div>
-					<div>
-						<a href="#foo" data-role="button">Foo</a>
-					</div>
-    				</header>
+				<ul data-role="listview" data-style="inset" data-type="group">
+					<li>
+						<h2>Francisco Chang</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Daniel Tonini</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Annette Roulet</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Carine Schmitt</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Ann Devon</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Catherine Dewey</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Diego Roel</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Elizabeth Brown</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Eduardo Saavedra</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Antonio Moreno</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Felipe Izquierdo</h2><img src="images/Contacts.jpeg" />
+					</li>
+					<li>
+						<h2>Fran Wilson</h2><img src="images/Contacts.jpeg" />
+					</li>
+				</ul>
 
 			</div>
 
+			<div data-role="layout" data-id="mobile-tabstrip">
+				<header data-role="header">
+					<div data-role="navbar">						
+						<span data-role="view-title"></span>						
+					</div>
+				</header>
+
+				<p>TabStrip</p>
+
+				<div data-role="footer">
+					<div data-role="tabstrip">
+						<a href="#tabstrip-profile" data-icon="contacts">Fila</a>						
+					</div>
+				</div>
+			</div>
+
 			<script>
-				var app = new kendo.mobile.Application();
+				var app = new kendo.mobile.Application(document.body);
 			</script>
-
 		</body>
-
-		<script>
-			var btnFilaDaVez = $("#button").kendoMobileButton();
-			var btnCadastroVendedor = $("#button").kendoMobileButton();
-			var btnCadastroLoja = $("#button").kendoMobileButton();
-			var btnCadastroFranqueado = $("#button").kendoMobileButton();
-            
-		</script>
-
 	</html>
+
+</html>
 

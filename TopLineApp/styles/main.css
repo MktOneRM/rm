@@ -1,26 +1,23 @@
-body
-{
-    font: Arial, sans-serif;
+#navbar-home h2,
+#navbar-grouped h2 {
+    display: inline-block;
+    font-size: 1.1em;
+    margin: 1em 0 1.5em 1em;
 }
 
-.buttonArea,
-.footerText,
-#geoLocationContainer,
-#helloWorldInput,
-#helloWorldText
-{
-    text-align: center;
+#navbar-home img,
+#navbar-grouped img {
+	float: left;
+    width: 4em;
+    height: 4em;
+    margin: 0;
+    -webkit-box-shadow: 0 1px 3px #333;
+    box-shadow: 0 1px 3px #333;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
 }
 
-#txtName
-{
-    border: 1px solid #AAA;
-    border-radius: 15px;
-    position:static;
-    margin-left: 1em;
-    margin-top: 0.3em;
-    margin-bottom: 0.3em;
-    background:white;
-    color: black;
-    padding: 7px;
+.km-ios #navbar-home .km-listview,
+.km-ios #navbar-grouped .km-list {
+    background-color: #eaf1f5;
 }

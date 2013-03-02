@@ -20,25 +20,62 @@
 		<body>
 
 			<div data-role="view" id="tabstrip-filaVez" data-init="getListaFilaDaVez"  data-layout="mobile-tabstrip" data-title="Fila da Vez">
-				<ul id="lstVendedoresFila"></ul>
-			</div>
-
-			<div data-role="view" id="tabstrip-resultado" data-init="getListaParaResumo"  data-layout="mobile-tabstrip" data-title="Resumo diario" >
-				<ul id="lstVendedorResumo"></ul>
-			</div>
-
-			<div data-role="view" data-title="Login/Sign-up" id="view-transitions-login" data-transition="overlay:up">
-				<ul data-role="listview" data-style="inset">
+				<ul id="lstVendedoresFila" data-role="listview" data-style="inset" ></ul>
+				<ul id="actions" data-role="actionsheet" data-cancel="Cancelar">
+					<li class="km-actionsheet-title">Selecione operação:</li>
 					<li>
-						<label for="username">Username:</label>
-						<input type="text" id="username" />
+						<a href="#" data-action="editProduct">Registro de Atividade</a>
 					</li>
 					<li>
-						<label for="password">Password:</label>
-						<input type="password" id="password" />
+						<a href="#" data-action="editProduct">Resumo de Vendas</a>
 					</li>
 				</ul>
-				<a href="#tabstrip-filaVez" data-transition="overlay:up reverse" data-role="button" class="transitions-cancel">Retornar</a>
+			</div>
+
+			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
+				<img class="item-photo" src="${url}" />
+				<h3 class="item-title">${name}</h3>
+				<a class="btnActions"
+				   data-role="button"
+				   data-rel="actionsheet"                
+				   href="\\#actions"
+				   data-actionsheet-context="#= name #">Ações</a>
+			</script>
+
+			<!--Lancamento Atendimento-->
+			<div id="editor" data-role="view" data-title="Registro de Atividade" data-layout="mobile-tabstrip">
+				<ul id="form" data-role="listview" data-style="inset">
+
+					<li>
+						<h4>
+
+							<img src="images/Contacts.jpeg" width=80px/> Rafael Fernandes
+						</h4>
+					</li>
+					<li >
+						Vendeu
+						<input type="checkbox" data-role="switch" checked>
+					</li>
+
+					<li>
+						<label>
+							Valor:
+							<input id="valorVenda" name="ValorVenda"type="number" value="30" min="0" max="100" />
+						</label>
+					</li>
+					<li>
+						<label>
+							Qtde Estoque:
+							<input id="unitsInStock" name="UnitsInStock" type="number" required="required"/>
+						</label>
+					</li>
+					<li>
+						<label>
+							Inativo:
+							<input id="discontinued" name="Discontinued" type="checkbox" />
+						</label>
+					</li>
+				</ul>
 			</div>
 
 			<div data-role="layout" data-id="mobile-tabstrip"   >
@@ -53,19 +90,9 @@
 				<div data-role="footer">
 					<div data-role="tabstrip">
 						<a href="#tabstrip-filaVez" data-icon="contacts">Fila</a>
-						<a href="#tabstrip-resultado" data-icon="contacts">Resumo</a>
 					</div>
 				</div>
 			</div>
-
-			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
-				<img class="item-photo" src="${url}" />
-				<h3 class="item-title">${name}</h3>
-			</script>
-
-			<script type="text/x-kendo-template" id="listVendedoresResumoTemplate">
-				<h4 class="item-title">${name}</h4>
-			</script>
 
 			<script>
 				var groupedData = [
@@ -85,21 +112,17 @@
 					});
 				}
                 
-				function getListaParaResumo() {
-					$("#lstVendedorResumo").kendoMobileListView({
-						dataSource: kendo.data.DataSource.create({data: groupedData}),
-						template: $("#listVendedoresResumoTemplate").html(),
-						headerTemplate: "${value}",
-						fixedHeaders: true,
-						click: function(e) {
-							console.log(e.dataItem.name);
-						}
-					});
+		
+				function editProduct(e) {				
+					app.navigate("#editor"); //navigates to editor view
 				}
-        
 				
-				var app = new kendo.mobile.Application(document.body);
+			</script>
+
+			<script>
                 
+				var app = new kendo.mobile.Application(document.body);
+				
 			</script>
 
 		</body>

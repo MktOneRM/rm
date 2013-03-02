@@ -4,6 +4,7 @@
 	display: inline-block;
 	font-size: 1.1em;
 	margin: 1em 0 1.5em 1em;
+	background-color: #111;
 }
 
 #navbar-home img,
@@ -17,28 +18,31 @@
 	box-shadow: 0 1px 3px #333;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
+	background-color: #111;
 }
 
 .km-ios #navbar-home .km-listview,
 .km-ios #navbar-grouped .km-list
 {
-	background-color: #eaf1f5;
+	background-color: #111;
 }
-/*
-#tabstrip-profile h2
+
+#tabstrip-filaVez h2
 {
 	display: inline-block;
 	font-size: 1.1em;
 	margin: 1.5em 0 0 1em;
+	background-color: #111;
 }
-#tabstrip-profile h2 span
+#tabstrip-filaVez h2 span
 {
 	display: block;
 	clear: both;
 	font-size: 2em;
 	margin: .2em 0 0 0;
+	background-color: #111;
 }
-#tabstrip-profile img
+#tabstrip-filaVez img
 {
 	width: 5em;
 	height: 5em;
@@ -48,16 +52,88 @@
 	box-shadow: 0 1px 3px #333;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
+	background-color: #111;
 }
-.sales-down,
-.sales-hold,
-.sales-up,
-.value
+
+#tabstrip-resultado h2
 {
-	float: right;
+	display: inline-block;
+	font-size: 1.1em;
+	margin: 1.5em 0 0 1em;
+	background-color: #111;
 }
-.sales-up { color: green; }
-.sales-down { color: red; }
-.sales-hold { color: blue; }
-.value { color: #bbb; }
+#tabstrip-resultado h2 span
+{
+	display: block;
+	clear: both;
+	font-size: 2em;
+	margin: .2em 0 0 0;
+	background-color: #111;
+}
+#tabstrip-resultado img
+{
+	width: 5em;
+	height: 5em;
+	float: left;
+	margin: 1em;
+	-webkit-box-shadow: 0 1px 3px #333;
+	box-shadow: 0 1px 3px #333;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	background-color: #111;
+}
+
+.transitions-button,
+.transitions-cancel
+{
+	display: block;
+	text-align: center;
+	margin: .6em .8em 0;
+	font-size: 1.2em;
+}
+
+/*
+#view-transitions,
+#view-transitions-welcome p
+{
+	color: #fff;
+	text-align: center;
+}
+
+#view-transitions img,
+#view-transitions-welcome img
+{
+	display: block;
+	margin: 30px auto;
+}
+    
+#view-transitions .km-content,
+#view-transitions-login .km-content,
+#view-transitions-welcome .km-content
+{
+	background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
+}
+
+.km-ios #view-transitions-welcome .km-button
+{
+	background-color: DarkRed;
+}
+    
+.km-ios #view-transitions-login .km-button
+{
+	background-color: Green;
+}
+    
+.km-ios #view-transitions .km-button,
+.km-ios #view-transitions-login .transitions-cancel
+{
+	background-color: #000;
+}
+    
+.km-ios #view-transitions .km-navbar,
+.km-ios #view-transitions-login .km-navbar,
+.km-ios #view-transitions-welcome .km-navbar
+{
+	background-color: #000;
+}
 */

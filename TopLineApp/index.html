@@ -19,53 +19,32 @@
 
 		<body>
 
-			<div data-role="view" id="tabstrip-profile" data-title="Profile" data-layout="mobile-tabstrip">
-
-				<ul data-role="listview" data-style="inset" data-type="group">
-					<li>
-						<h2>Francisco Chang</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Daniel Tonini</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Annette Roulet</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Carine Schmitt</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Ann Devon</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Catherine Dewey</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Diego Roel</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Elizabeth Brown</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Eduardo Saavedra</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Antonio Moreno</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Felipe Izquierdo</h2><img src="images/Contacts.jpeg" />
-					</li>
-					<li>
-						<h2>Fran Wilson</h2><img src="images/Contacts.jpeg" />
-					</li>
-				</ul>
-
+			<div data-role="view" id="tabstrip-filaVez" data-init="getListaFilaDaVez"  data-layout="mobile-tabstrip" data-title="Fila da Vez">
+				<ul id="lstVendedoresFila"></ul>
 			</div>
 
-			<div data-role="layout" data-id="mobile-tabstrip">
+			<div data-role="view" id="tabstrip-resultado" data-init="getListaParaResumo"  data-layout="mobile-tabstrip" data-title="Resumo diario" >
+				<ul id="lstVendedorResumo"></ul>
+			</div>
+
+			<div data-role="view" data-title="Login/Sign-up" id="view-transitions-login" data-transition="overlay:up">
+				<ul data-role="listview" data-style="inset">
+					<li>
+						<label for="username">Username:</label>
+						<input type="text" id="username" />
+					</li>
+					<li>
+						<label for="password">Password:</label>
+						<input type="password" id="password" />
+					</li>
+				</ul>
+				<a href="#tabstrip-filaVez" data-transition="overlay:up reverse" data-role="button" class="transitions-cancel">Retornar</a>
+			</div>
+
+			<div data-role="layout" data-id="mobile-tabstrip"   >
 				<header data-role="header">
-					<div data-role="navbar">						
-						<span data-role="view-title"></span>						
+					<div data-role="navbar">
+						<span data-role="view-title"></span>
 					</div>
 				</header>
 
@@ -73,14 +52,56 @@
 
 				<div data-role="footer">
 					<div data-role="tabstrip">
-						<a href="#tabstrip-profile" data-icon="contacts">Fila</a>						
+						<a href="#tabstrip-filaVez" data-icon="contacts">Fila</a>
+						<a href="#tabstrip-resultado" data-icon="contacts">Resumo</a>
 					</div>
 				</div>
 			</div>
 
-			<script>
-				var app = new kendo.mobile.Application(document.body);
+			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
+				<img class="item-photo" src="${url}" />
+				<h3 class="item-title">${name}</h3>
 			</script>
+
+			<script type="text/x-kendo-template" id="listVendedoresResumoTemplate">
+				<h4 class="item-title">${name}</h4>
+			</script>
+
+			<script>
+				var groupedData = [
+					{ name: "Rafael Fernandes",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
+					{ name: "Celso Baia",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
+					{ name: "Ralph Araujo",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" },
+					{ name: "Vendedor ",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" }
+					
+				];
+
+				function getListaFilaDaVez() {
+					$("#lstVendedoresFila").kendoMobileListView({
+						dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
+						template: $("#listVendedoresFilaTemplate").html(),
+						headerTemplate: "${value}",
+						fixedHeaders: true
+					});
+				}
+                
+				function getListaParaResumo() {
+					$("#lstVendedorResumo").kendoMobileListView({
+						dataSource: kendo.data.DataSource.create({data: groupedData}),
+						template: $("#listVendedoresResumoTemplate").html(),
+						headerTemplate: "${value}",
+						fixedHeaders: true,
+						click: function(e) {
+							console.log(e.dataItem.name);
+						}
+					});
+				}
+        
+				
+				var app = new kendo.mobile.Application(document.body);
+                
+			</script>
+
 		</body>
 	</html>
 

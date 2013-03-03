@@ -1,35 +1,21 @@
 
 $(document).ready(function() {
 	var data = [		
-		{ text: "Black", value: "1" },
-		{ text: "Orange", value: "2" },
-		{ text: "Grey", value: "3" }
+		{ text: "Produto Inexistente", value: "1" },
+		{ text: "Tamanho Inexistente", value: "2" },
+		{ text: "Estampa Inexistente", value: "3" },		
+		{ text: "Crédito não aprovado", value: "4" }
 	];
 
 	// create DropDownList from input HTML element
-	$("#color").kendoDropDownList({
+	$("#motivoNaoVenda").kendoDropDownList({
 		dataTextField: "text",
 		dataValueField: "value",
 		dataSource: data,
-		index: 0,		
-		change: onChange
+		index: 0
 	});
 	
-	var color = $("#color").data("kendoDropDownList");
-	color.select(0);
-    
-	function onChange() {
-		var value = $("#color").val();
-     
-		$("#cap")
-		.toggleClass("black-cap", value == 1)
-		.toggleClass("orange-cap", value == 2)
-		.toggleClass("grey-cap", value == 3);
-     
-	};
-	/*
-	$("#get").click(function() {
-	alert('Thank you! Your Choice is:\n\nColor ID: ' + color.value() + ' and Size: ' + size.value());
-	});
-	*/
+	var motivo = $("#motivoNaoVenda").data("kendoDropDownList");
+	motivo.select(0);
+	
 });

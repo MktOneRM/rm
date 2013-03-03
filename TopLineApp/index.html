@@ -12,6 +12,7 @@
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 
 		<link href="styles/main.css" rel="stylesheet" />
+        
 	</head>
 
 	<!DOCTYPE html>
@@ -24,7 +25,7 @@
 				<ul id="actions" data-role="actionsheet" data-cancel="Cancelar">
 					<li class="km-actionsheet-title">Selecione operação:</li>
 					<li>
-						<a href="#" data-action="editProduct">Registro de Atividade</a>
+						<a href="#" data-action="editProduct">Resultado Atendimento</a>
 					</li>
 					<li>
 						<a href="#" data-action="editProduct">Resumo de Vendas</a>
@@ -43,7 +44,7 @@
 			</script>
 
 			<!--Lancamento Atendimento-->
-			<div id="editor" data-role="view" data-title="Registro de Atividade" data-layout="mobile-tabstrip">
+			<div id="editor" data-role="view" data-title="Resultado Atendimento" data-layout="mobile-tabstrip">
 				<ul id="form" data-role="listview" data-style="inset">
 
 					<li>
@@ -60,19 +61,13 @@
 					<li>
 						<label>
 							Valor:
-							<input id="valorVenda" name="ValorVenda"type="number" value="30" min="0" max="100" />
+							<input id="valorVenda" name="ValorVenda"type="number" value="0" min="0" />
 						</label>
 					</li>
 					<li>
 						<label>
-							Qtde Estoque:
-							<input id="unitsInStock" name="UnitsInStock" type="number" required="required"/>
-						</label>
-					</li>
-					<li>
-						<label>
-							Inativo:
-							<input id="discontinued" name="Discontinued" type="checkbox" />
+							Motivo não venda:
+							<input id="color" value="1" />
 						</label>
 					</li>
 				</ul>
@@ -90,34 +85,13 @@
 				<div data-role="footer">
 					<div data-role="tabstrip">
 						<a href="#tabstrip-filaVez" data-icon="contacts">Fila</a>
+                        <a href="#tabstrip-configuracoes" data-icon="settings">Configurações</a>
 					</div>
 				</div>
 			</div>
 
-			<script>
-				var groupedData = [
-					{ name: "Rafael Fernandes",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
-					{ name: "Celso Baia",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
-					{ name: "Ralph Araujo",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" },
-					{ name: "Vendedor ",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" }
-					
-				];
-
-				function getListaFilaDaVez() {
-					$("#lstVendedoresFila").kendoMobileListView({
-						dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
-						template: $("#listVendedoresFilaTemplate").html(),
-						headerTemplate: "${value}",
-						fixedHeaders: true
-					});
-				}
-                
-		
-				function editProduct(e) {				
-					app.navigate("#editor"); //navigates to editor view
-				}
-				
-			</script>
+            <script src="scripts/FilaDaVez.js"></script>
+			<script src="scripts/MotivoNaoVenda.js"></script>
 
 			<script>
                 
@@ -130,3 +104,5 @@
 
 </html>
 
+
+                            

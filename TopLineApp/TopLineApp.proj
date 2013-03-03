@@ -60,6 +60,7 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="html\Graficos.html" />
     <Content Include="Images\Contacts.jpeg" />
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.min.js" />
@@ -72,8 +73,9 @@
     <Content Include="kendo\styles\kendo.default.min.css" />
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
     <Content Include="scripts\FilaDaVez.js" />
+    <Content Include="scripts\Graficos.js" />
     <Content Include="scripts\MotivoNaoVenda.js" />
-    <Content Include="styles\FilaDaVez.css" />
+    <Content Include="scripts\MotivoSaida.js" />
     <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">
       <Platform>iOS</Platform>

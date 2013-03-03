@@ -1,0 +1,99 @@
+#navbar-home h2,
+#navbar-grouped h2
+{
+	display: inline-block;
+	font-size: 1.1em;
+	margin: 1em 0 1.5em 1em;
+	background-color: #111;
+}
+
+#navbar-home img,
+#navbar-grouped img
+{
+	float: left;
+	width: 4em;
+	height: 4em;
+	margin: 0;
+	-webkit-box-shadow: 0 1px 3px #333;
+	box-shadow: 0 1px 3px #333;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	background-color: #111;
+}
+
+.km-ios #navbar-home .km-listview,
+.km-ios #navbar-grouped .km-list
+{
+	background-color: #111;
+}
+
+#tabstrip-filaVez h2
+{
+	display: inline-block;
+	font-size: 1.1em;
+	margin: 1.5em 0 0 1em;
+	background-color: #111;
+}
+#tabstrip-filaVez h2 span
+{
+	display: block;
+	clear: both;
+	font-size: 2em;
+	margin: .2em 0 0 0;
+	background-color: #111;
+}
+#tabstrip-filaVez img
+{
+	width: 5em;
+	height: 5em;
+	float: left;
+	margin: 1em;
+	-webkit-box-shadow: 0 1px 3px #333;
+	box-shadow: 0 1px 3px #333;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	background-color: #111;
+}
+
+#tabstrip-resultado h2
+{
+	display: inline-block;
+	font-size: 1.1em;
+	margin: 1.5em 0 0 1em;
+	background-color: #111;
+}
+#tabstrip-resultado h2 span
+{
+	display: block;
+	clear: both;
+	font-size: 2em;
+	margin: .2em 0 0 0;
+	background-color: #111;
+}
+#tabstrip-resultado img
+{
+	width: 5em;
+	height: 5em;
+	float: left;
+	margin: 1em;
+	-webkit-box-shadow: 0 1px 3px #333;
+	box-shadow: 0 1px 3px #333;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	background-color: #111;
+}
+
+.btnActions
+{
+	float: right;
+}
+
+.label
+{
+    text-align: right;
+}
+
+.checkbox
+{
+    text-align: center;
+}

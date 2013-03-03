@@ -12,7 +12,7 @@
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 
 		<link href="styles/main.css" rel="stylesheet" />
-        
+
 	</head>
 
 	<!DOCTYPE html>
@@ -28,33 +28,38 @@
 						<a href="#" data-action="editProduct">Resultado Atendimento</a>
 					</li>
 					<li>
-						<a href="#" data-action="editProduct">Resumo de Vendas</a>
+						<a href="#" data-action="getPerformace">Resumo de Vendas</a>
+					</li>
+                    <li>
+						<a href="#" data-action="getPerformace">Sair Fila da Vez</a>
 					</li>
 				</ul>
 			</div>
 
 			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
-				<img class="item-photo" src="${url}" />
-				<h3 class="item-title">${name}</h3>
-				<a class="btnActions"
-				   data-role="button"
-				   data-rel="actionsheet"                
-				   href="\\#actions"
-				   data-actionsheet-context="#= name #">Ações</a>
+				<img class="item-photo" src="${url}" 
+					 data-role="button"
+					 data-rel="actionsheet"
+					 href="\\#actions"
+					 data-actionsheet-context="#= name #" 
+					 />
+				<h4 class="item-title">${name}</h4>
+
 			</script>
 
-			<!--Lancamento Atendimento-->
-			<div id="editor" data-role="view" data-title="Resultado Atendimento" data-layout="mobile-tabstrip">
+			<!--Resultado Atendimento-->
+			<div id="resultadoAtendimento" data-role="view" data-title="Resultado Atendimento" data-layout="mobile-tabstrip">
 				<ul id="form" data-role="listview" data-style="inset">
 
-					<li>
-						<h4>
-
-							<img src="images/Contacts.jpeg" width=80px/> Rafael Fernandes
-						</h4>
-					</li>
+					<div>
+						<li>
+							<h4>
+								<img src="images/Contacts.jpeg" width=80px/> Rafael Fernandes
+							</h4>
+						</li>
+					</div>
 					<li >
-						Vendeu
+						Vendeu:
 						<input type="checkbox" data-role="switch" checked>
 					</li>
 
@@ -67,10 +72,47 @@
 					<li>
 						<label>
 							Motivo não venda:
-							<input id="motivoNaoVenda" value="11" />
+							<input id="motivoNaoVenda"/>
 						</label>
 					</li>
+
 				</ul>
+				<ul id="form" data-role="listview" data-style="inset">
+					<li >
+						Sair fila da vez:
+						<input type="checkbox" data-role="switch" unchecked>
+					</li>
+					<li>
+
+						Motivo saída vendas:
+						<input id="motivoSaidaFila" value="1" />
+
+					</li>
+				</ul>
+				<ul id="form" data-role="listview" data-style="inset">
+
+					<div>
+						<label>
+							Contato Telefone
+						</label>
+					</div>
+
+					<li>
+						<label>
+							Total contatos:
+						</label>
+						<input id="txtTotalContatos" type="number">
+					</li>
+
+				</ul>
+			</div>
+
+			<!--Grafico resultado de Atendimento-->
+			<div id="grafResultadoAtendimento" class="k-content" data-role="view" data-title="Resumo de Vendas" data-layout="mobile-tabstrip">
+				<div class="chart-wrapper">
+					<div id="chart"></div>
+				</div>
+				<script src="scripts/Graficos.js"></script>
 			</div>
 
 			<div data-role="layout" data-id="mobile-tabstrip"   >
@@ -85,24 +127,25 @@
 				<div data-role="footer">
 					<div data-role="tabstrip">
 						<a href="#tabstrip-filaVez" data-icon="contacts">Fila</a>
-                        <a href="#tabstrip-configuracoes" data-icon="settings">Configurações</a>
+                        <a href="#tabstrip-configuracoes" data-icon="settings">Consultas</a>
+						<a href="#tabstrip-configuracoes" data-icon="settings">Configurações</a>
 					</div>
 				</div>
 			</div>
 
-            <script src="scripts/FilaDaVez.js"></script>
+			<script src="scripts/FilaDaVez.js"></script>
 			<script src="scripts/MotivoNaoVenda.js"></script>
+			<script src="scripts/MotivoSaida.js"></script>
 
 			<script>
-                
+			
 				var app = new kendo.mobile.Application(document.body);
-				
+	
 			</script>
 
 		</body>
 	</html>
 
 </html>
-
 
                             

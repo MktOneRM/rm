@@ -28,3 +28,6 @@ function editProduct(e) {
 function getPerformace(e) {				
 	app.navigate("#grafResultadoAtendimento"); //navigates to editor view
 }
+function getMotivos(e) {				
+	app.navigate("#motivosSaida"); //navigates to editor view
+}

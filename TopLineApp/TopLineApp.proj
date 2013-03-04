@@ -60,7 +60,6 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="html\Graficos.html" />
     <Content Include="Images\Contacts.jpeg" />
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.min.js" />

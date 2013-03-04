@@ -1,19 +1,16 @@
+var groupedData = [
+	{ name: "Rafael Fernandes",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
+	{ name: "Celso Baia - Veio coroca",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
+	{ name: "Ralph Araujo",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" },
+	{ name: "Vendedor ",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" }
+					
+];
 
-$(document).ready(function() {
-	var data = [		
-		{ text: "Almoço", value: "1" },
-		{ text: "Saída para cliente", value: "2" },
-		{ text: "Trabalho externo", value: "3" }
-	];
-
-	// create DropDownList from input HTML element
-	$("#motivoSaidaFila").kendoDropDownList({
-		dataTextField: "text",
-		dataValueField: "value",
-		dataSource: data,
-		index: 0
+function getMotivosSaida() {
+	$("#lstMotivosSaida").kendoMobileListView({
+		dataSource: kendo.data.DataSource.create({data: groupedData}),		
+		headerTemplate: "${value}",
+		fixedHeaders: true
+        
 	});
-	
-	var motivo = $("#motivoSaidaFila").data("kendoDropDownList");
-	motivo.select(0);
-});
+}

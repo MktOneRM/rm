@@ -90,10 +90,19 @@
 
 .label
 {
-    text-align: right;
+	text-align: right;
 }
 
 .checkbox
 {
-    text-align: center;
+	text-align: center;
+}
+
+.km-ios #navbar-home .km-listview, .km-ios #navbar-grouped .km-list
+{
+	background-color: rgb(17, 17, 17);
+}
+.km-ios .km-view .km-navbar
+{
+	background-color: rgb(25, 25, 25);
 }

@@ -30,8 +30,8 @@
 					<li>
 						<a href="#" data-action="getPerformace">Resumo de Vendas</a>
 					</li>
-                    <li>
-						<a href="#" data-action="getPerformace">Sair Fila da Vez</a>
+					<li>
+						<a href="#" data-action="getMotivos">Sair Fila da Vez</a>
 					</li>
 				</ul>
 			</div>
@@ -69,42 +69,12 @@
 							<input id="valorVenda" name="ValorVenda"type="number" value="0" min="0" />
 						</label>
 					</li>
-					<li>
-						<label>
-							Motivo não venda:
-							<input id="motivoNaoVenda"/>
-						</label>
-					</li>
-
 				</ul>
-				<ul id="form" data-role="listview" data-style="inset">
-					<li >
-						Sair fila da vez:
-						<input type="checkbox" data-role="switch" unchecked>
-					</li>
-					<li>
+			</div>
 
-						Motivo saída vendas:
-						<input id="motivoSaidaFila" value="1" />
-
-					</li>
-				</ul>
-				<ul id="form" data-role="listview" data-style="inset">
-
-					<div>
-						<label>
-							Contato Telefone
-						</label>
-					</div>
-
-					<li>
-						<label>
-							Total contatos:
-						</label>
-						<input id="txtTotalContatos" type="number">
-					</li>
-
-				</ul>
+			<!--Motivos saída salão de vendas-->
+			<div id="motivosSaida" data-role="view" data-title="Motivo Saída Salão de Vendas" data-init="getMotivosSaida" data-layout="mobile-tabstrip">
+				<ul id="lstMotivosSaida" data-role="listview" data-style="inset"/>
 			</div>
 
 			<!--Grafico resultado de Atendimento-->
@@ -127,7 +97,7 @@
 				<div data-role="footer">
 					<div data-role="tabstrip">
 						<a href="#tabstrip-filaVez" data-icon="contacts">Fila</a>
-                        <a href="#tabstrip-configuracoes" data-icon="settings">Consultas</a>
+						<a href="#tabstrip-configuracoes" data-icon="settings">Consultas</a>
 						<a href="#tabstrip-configuracoes" data-icon="settings">Configurações</a>
 					</div>
 				</div>

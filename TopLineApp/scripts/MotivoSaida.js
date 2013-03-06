@@ -1,16 +1,36 @@
-var groupedData = [
-	{ name: "Rafael Fernandes",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
-	{ name: "Celso Baia - Veio coroca",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
-	{ name: "Ralph Araujo",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" },
-	{ name: "Vendedor ",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" }
-					
-];
+//schema
+var schema = { 
+	model: {
+		id: "idMotivo",
+		fields: {
+			idMotivo: { editable: false, nullable: false },
+			Motivo: { editable: false, nullable: false }
+		} 
+	}
+};
+
+//Url
+var baseUrl = "http://localhost:50000/api";
+
+//dataSource
+var dataSource = new kendo.data.DataSource({                    
+	transport: {						
+		read:  {
+			url: baseUrl + "/Motivos",							
+			type:"GET"      
+			,contentType: "application/json"
+			,dataType: "json"
+		}
+	},
+	batch: true,
+	schema: schema
+});
 
 function getMotivosSaida() {
 	$("#lstMotivosSaida").kendoMobileListView({
-		dataSource: kendo.data.DataSource.create({data: groupedData}),		
-		headerTemplate: "${value}",
+		dataSource: dataSource,
+		template: $("#listMotivosSaidaTemplate").html(),
+		headerTemplate: "${value}",		
 		fixedHeaders: true
-        
 	});
 }

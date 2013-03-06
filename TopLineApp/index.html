@@ -12,6 +12,7 @@
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 
 		<link href="styles/main.css" rel="stylesheet" />
+		<link href="styles/ModalViewLogin.css" rel="stylesheet" />
 
 	</head>
 
@@ -28,7 +29,7 @@
 						<a href="#" data-action="editProduct">Resultado Atendimento</a>
 					</li>
 					<li>
-						<a href="#" data-action="getPerformace">Resumo de Vendas</a>
+						<a href="#" data-action="getResumoDiario">Resumo Diário de Vendas</a>
 					</li>
 					<li>
 						<a href="#" data-action="getMotivos">Sair Fila da Vez</a>
@@ -44,6 +45,11 @@
 					 data-actionsheet-context="#= name #" 
 					 />
 				<h4 class="item-title">${name}</h4>
+			</script>
+
+			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">			
+				
+				<h4 class="item-title">${Motivo}</h4>
 
 			</script>
 
@@ -65,11 +71,65 @@
 
 					<li>
 						<label>
-							Valor:
+							Valor da Venda:
 							<input id="valorVenda" name="ValorVenda"type="number" value="0" min="0" />
 						</label>
 					</li>
+					<li>
+						<label>
+							Qtde de Peças:
+							<input id="qtdePecas" name="QtdePecas"type="number" value="0" min="0" />
+						</label>
+					</li>
 				</ul>
+			</div>
+
+			<!--Resumo Diário-->
+			<div id="resumoDiario" data-role="view" >
+				<div data-role="header">
+					<div data-role="navbar">
+						<span>Resumo Diário</span>
+						<a href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</a>
+					</div>
+				</div>
+				<ul id="form" data-role="listview" data-style="inset">
+
+					<li>
+						Nome do Produto: <span data-bind="text: ProductName"></span>
+					</li>
+					<li>
+						Preço Unitário: <span data-bind="text: UnitPrice"></span>
+					</li>
+					<li>
+						Qtde Estoque: <span data-bind="text: UnitsInStock"></span>
+					</li>
+					<li>
+						<label>
+							Inativo: <span data-bind="text: Discontinued"></span>
+						</label>
+					</li>
+				</ul>
+			</div>
+
+			<div data-role="modalview" id="modalview-login" style="width: 95%; height: 190px;" data-layout="mobile-tabstrip" >
+				<div data-role="header">
+					<div data-role="navbar">
+						<span>Login</span>
+						<a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancelar</a>
+					</div>
+				</div>
+
+				<ul data-role="listview" data-style="inset">
+					<li>
+						<label for="username">Usuário:</label>
+						<input type="text" id="username" />
+					</li>
+					<li>
+						<label for="password">Senha:</label>
+						<input type="password" id="password" />
+					</li>
+				</ul>
+				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Entrar</a>
 			</div>
 
 			<!--Motivos saída salão de vendas-->
@@ -98,7 +158,7 @@
 					<div data-role="tabstrip">
 						<a href="#tabstrip-filaVez" data-icon="contacts">Fila</a>
 						<a href="#tabstrip-configuracoes" data-icon="settings">Consultas</a>
-						<a href="#tabstrip-configuracoes" data-icon="settings">Configurações</a>
+						<a href="#modalview-login" data-icon="settings" data-rel="modalview" >Configurações</a>
 					</div>
 				</div>
 			</div>
@@ -106,6 +166,7 @@
 			<script src="scripts/FilaDaVez.js"></script>
 			<script src="scripts/MotivoNaoVenda.js"></script>
 			<script src="scripts/MotivoSaida.js"></script>
+			<script src="scripts/ModalLogin.js"></script>
 
 			<script>
 			

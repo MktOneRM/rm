@@ -73,8 +73,10 @@
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
     <Content Include="scripts\FilaDaVez.js" />
     <Content Include="scripts\Graficos.js" />
+    <Content Include="scripts\ModalLogin.js" />
     <Content Include="scripts\MotivoNaoVenda.js" />
     <Content Include="scripts\MotivoSaida.js" />
+    <Content Include="scripts\ResumoDiario.js" />
     <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">
       <Platform>iOS</Platform>
@@ -84,6 +86,7 @@
       <Platform>Android</Platform>
       <TargetName>cordova.js</TargetName>
     </Content>
+    <Content Include="styles\ModalViewLogin.css" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

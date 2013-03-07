@@ -38,17 +38,21 @@
 			</div>
 
 			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
-				<img class="item-photo" src="${url}" 
-					 data-role="button"
-					 data-rel="actionsheet"
-					 href="\\#actions"
-					 data-actionsheet-context="#= name #" 
-					 />
-				<h4 class="item-title">${name}</h4>
+
+				<a
+					class="details-link"
+					data-role="listview-link"
+					data-rel="actionsheet"
+					href="\\#actions"
+					data-actionsheet-context="#= IdVendedor #" >
+					<img src="${Foto}"  />
+					<h2>#:VendedorApelido#</h2>
+				</a>
+				
 			</script>
 
 			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">			
-				
+			
 				<h4 class="item-title">${Motivo}</h4>
 
 			</script>
@@ -163,7 +167,6 @@
 				</div>
 			</div>
 
-			<script src="scripts/FilaDaVez.js"></script>
 			<script src="scripts/MotivoNaoVenda.js"></script>
 			<script src="scripts/MotivoSaida.js"></script>
 			<script src="scripts/ModalLogin.js"></script>
@@ -171,8 +174,10 @@
 			<script>
 			
 				var app = new kendo.mobile.Application(document.body);
-	
+				
 			</script>
+
+			<script src="scripts/FilaDaVez.js"></script>
 
 		</body>
 	</html>

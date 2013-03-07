@@ -1,26 +1,47 @@
-var groupedData = [
-	{ name: "Rafael Fernandes",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
-	{ name: "Celso Baia - Veio coroca",  url: "images/Contacts.jpeg", letter: "No salão de vendas" },
-	{ name: "Ralph Araujo",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" },
-	{ name: "Vendedor ",  url: "images/Contacts.jpeg", letter: "Fora do salão de vendas" }
-					
-];
+
+//schema
+var schema = { 
+	model: {
+		id: "IdVendedor",
+		fields: {
+			IdVendedor: { editable: false, nullable: false },
+			VendedorNome: { editable: false, nullable: false },
+			VendedorApelido: { editable: false, nullable: false },
+			Fila: { editable: false, nullable: false },
+			PosicaoFila: { editable: false, nullable: false },            
+			Foto: { editable: false, nullable: false }            
+		} 
+	}
+};
+
+//Url
+var baseUrl = "http://localhost:50000/api";
+
+//dataSource
+var dataSource = new kendo.data.DataSource({                    
+	transport: {						
+		read:  {
+			url: baseUrl + "/Vendedor",							
+			type:"GET"      
+			,contentType: "application/json"
+			,dataType: "json"
+		}
+	},
+	batch: true,
+	schema: schema,
+	group: "Fila", 
+	sort: { field: "PosicaoFila", dir: "asc" }	
+});
 
 function getListaFilaDaVez() {
 	$("#lstVendedoresFila").kendoMobileListView({
-		dataSource: kendo.data.DataSource.create(
-			{
-			data: groupedData, 
-			group: "letter", 
-			sort: { field: "letter", dir: "desc" }
-		}),
+		dataSource: dataSource,
 		template: $("#listVendedoresFilaTemplate").html(),
-		headerTemplate: "${value}",
+		headerTemplate: "${value}",		
 		fixedHeaders: true
-        
 	});
 }
-                		
+
 function editProduct(e) {				
 	app.navigate("#resultadoAtendimento"); //navigates to editor view
 }

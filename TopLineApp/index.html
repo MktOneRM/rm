@@ -52,8 +52,12 @@
 			</script>
 
 			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">			
-			
-				<h4 class="item-title">${Motivo}</h4>
+				
+				<a
+					class="details-link"
+					data-role="listview-link">
+					<h4>#:Motivo#</h4>
+				</a>
 
 			</script>
 
@@ -137,7 +141,13 @@
 			</div>
 
 			<!--Motivos saída salão de vendas-->
-			<div id="motivosSaida" data-role="view" data-title="Motivo Saída Salão de Vendas" data-init="getMotivosSaida" data-layout="mobile-tabstrip">
+			<div id="motivosSaida" data-role="view" data-title="Motivo Saída" data-init="getMotivosSaida" >
+				<div data-role="header">
+					<div data-role="navbar">
+						<span>Motivos Saída</span>
+						<a href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</a>
+					</div>
+				</div>
 				<ul id="lstMotivosSaida" data-role="listview" data-style="inset"/>
 			</div>
 
@@ -146,7 +156,7 @@
 				<div class="chart-wrapper">
 					<div id="chart"></div>
 				</div>
-				<script src="scripts/Graficos.js"></script>
+
 			</div>
 
 			<div data-role="layout" data-id="mobile-tabstrip"   >
@@ -167,17 +177,160 @@
 				</div>
 			</div>
 
-			<script src="scripts/MotivoNaoVenda.js"></script>
-			<script src="scripts/MotivoSaida.js"></script>
-			<script src="scripts/ModalLogin.js"></script>
-
 			<script>
 			
 				var app = new kendo.mobile.Application(document.body);
-				
-			</script>
+				      
+				//Url
+				var baseUrl = "http://localhost:50000/api";
+                
+				//schema
+				var schemaVendedores = { 
+					model: {
+						id: "IdVendedor",
+						fields: {
+							IdVendedor: { editable: false, nullable: false },
+							VendedorNome: { editable: false, nullable: false },
+							VendedorApelido: { editable: false, nullable: false },
+							Fila: { editable: false, nullable: false },
+							PosicaoFila: { editable: false, nullable: false },            
+							Foto: { editable: false, nullable: false }            
+						} 
+					}
+				};
 
-			<script src="scripts/FilaDaVez.js"></script>
+				//dataSource
+				var dataSourceVendedores = new kendo.data.DataSource({                    
+					transport: {						
+						read:  {
+							url: baseUrl + "/Vendedor",							
+							type:"GET"      
+							,contentType: "application/json"
+							,dataType: "json"
+						}
+					},
+					batch: true,
+					schema: schemaVendedores,
+					group: "Fila", 
+					sort: { field: "PosicaoFila", dir: "asc" }	
+				});
+			
+				//schema
+				var schemaMotivosSaida = { 
+					model: {
+						id: "idMotivo",
+						fields: {
+							idMotivo: { editable: false, nullable: false },
+							Motivo: { editable: false, nullable: false }
+						} 
+					}
+				};
+
+				//dataSource
+				var dataSourceMotivosSaida = new kendo.data.DataSource({                    
+					transport: {						
+						read:  {
+							url: baseUrl + "/Motivos",							
+							type:"GET"      
+							,contentType: "application/json"
+							,dataType: "json"
+						}
+					},
+					batch: true,
+					schema: schemaMotivosSaida
+				});
+
+				function getListaFilaDaVez() {
+					$("#lstVendedoresFila").kendoMobileListView({
+						dataSource: dataSourceVendedores,
+						template: $("#listVendedoresFilaTemplate").html(),
+						headerTemplate: "${value}",		
+						fixedHeaders: true
+					});
+				}
+			                
+				function getMotivosSaida() {
+					$("#lstMotivosSaida").kendoMobileListView({
+						dataSource: dataSourceMotivosSaida,
+						template: $("#listMotivosSaidaTemplate").html(),
+						headerTemplate: "${value}",		
+						fixedHeaders: true
+					});
+				}
+				                
+				function editProduct(e) {				
+					app.navigate("#resultadoAtendimento"); //navigates to editor view
+				}
+
+				function getPerformace(e) {				
+					app.navigate("#grafResultadoAtendimento"); //navigates to editor view
+				}
+				function getMotivos(e) {				
+					app.navigate("#motivosSaida"); //navigates to editor view
+				}
+                
+				function closeModalViewLogin() {
+					$("#modalview-login").kendoMobileModalView("close");
+				}
+                
+				function createChart() {
+					$("#chart").kendoChart({
+						theme: $(document).data("kendoSkin") || "default",
+						title: {
+							text: "Posição de Vendas"
+						},
+						legend: {
+							position: "bottom",
+							labels: {
+								template: "#= text # (#= value #%)"
+							}
+						},
+						seriesDefaults: {
+							labels: {
+								visible: true,
+								format: "{0}%"
+							}
+						},
+						series: [
+							{
+								type: "pie",
+								data: [
+									{
+										category: "Hydro",
+										value: 22
+									}, {
+										category: "Solar",
+										value: 2
+									}, {
+										category: "Nuclear",
+										value: 49
+									}, {
+										category: "Wind",
+										value: 27
+									}
+								]
+							}
+						],
+						tooltip: {
+							visible: true,
+							format: "{0}%"
+						}
+					});
+				}
+					
+				$(document).ready(function() {
+					setTimeout(function() {
+						// Initialize the chart with a delay to make sure
+						// the initial animation is visible
+						createChart();
+					
+						$("#example").bind("kendo:skinChange", function(e) {
+							createChart();
+						});
+					}, 400);
+				})
+                
+			</script>
 
 		</body>
 	</html>

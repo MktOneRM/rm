@@ -45,28 +45,28 @@
 					data-rel="actionsheet"
 					href="\\#actions"
 					data-actionsheet-context="#= IdVendedor #" >
-					<img src="${Foto}" width=50px heigth=50px />
 
-					<h2>#:VendedorApelido#</h2>
-
+					<img src="${Foto}"/>
+					<h3>#:VendedorApelido#</h3>
+				
 				</a>
 				
 			</script>
-
+			
 			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">			
-				
+			
 				<a
 					class="details-link"
 					data-role="listview-link">
 					<h4>#:Motivo#</h4>
 				</a>
-
+				
 			</script>
-
+			
 			<!--Resultado Atendimento-->
 			<div id="resultadoAtendimento" data-role="view" data-title="Resultado Atendimento" data-layout="mobile-tabstrip">
 				<ul id="form" data-role="listview" data-style="inset">
-
+				
 					<div>
 						<li>
 							<h4>
@@ -78,7 +78,7 @@
 						Vendeu:
 						<input type="checkbox" data-role="switch" checked>
 					</li>
-
+					
 					<li>
 						<label>
 							Valor da Venda:
@@ -93,7 +93,7 @@
 					</li>
 				</ul>
 			</div>
-
+			
 			<!--Resumo Diário-->
 			<div id="resumoDiario" data-role="view" >
 				<div data-role="header">
@@ -103,7 +103,7 @@
 					</div>
 				</div>
 				<ul id="form" data-role="listview" data-style="inset">
-
+				
 					<li>
 						Nome do Produto: <span data-bind="text: ProductName"></span>
 					</li>
@@ -120,7 +120,7 @@
 					</li>
 				</ul>
 			</div>
-
+			
 			<div data-role="modalview" id="modalview-login" style="width: 95%; height: 190px;" data-layout="mobile-tabstrip" >
 				<div data-role="header">
 					<div data-role="navbar">
@@ -128,7 +128,7 @@
 						<a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancelar</a>
 					</div>
 				</div>
-
+				
 				<ul data-role="listview" data-style="inset">
 					<li>
 						<label for="username">Usuário:</label>
@@ -141,7 +141,7 @@
 				</ul>
 				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Entrar</a>
 			</div>
-
+			
 			<!--Motivos saída salão de vendas-->
 			<div id="motivosSaida" data-role="view" data-title="Motivo Saída" data-init="getMotivosSaida" >
 				<div data-role="header">
@@ -152,24 +152,24 @@
 				</div>
 				<ul id="lstMotivosSaida" data-role="listview" />
 			</div>
-
+			
 			<!--Grafico resultado de Atendimento-->
 			<div id="grafResultadoAtendimento" class="k-content" data-role="view" data-title="Resumo de Vendas" data-layout="mobile-tabstrip">
 				<div class="chart-wrapper">
 					<div id="chart"></div>
 				</div>
-
+				
 			</div>
-
+			
 			<div data-role="layout" data-id="mobile-tabstrip"   >
 				<header data-role="header">
 					<div data-role="navbar">
 						<span data-role="view-title"></span>
 					</div>
 				</header>
-
+				
 				<p>TabStrip</p>
-
+				
 				<div data-role="footer">
 					<div data-role="tabstrip">
 						<a href="#tabstrip-filaVez" data-icon="contacts">Fila</a>
@@ -178,7 +178,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<script>
 			
 				var app = new kendo.mobile.Application(document.body);
@@ -196,7 +196,8 @@
 							VendedorApelido: { editable: false, nullable: false },
 							Fila: { editable: false, nullable: false },
 							PosicaoFila: { editable: false, nullable: false },            
-							Foto: { editable: false, nullable: false }            
+							Foto: { editable: false, nullable: false },
+							FilaChar: { editable: false, nullable: false } 
 						} 
 					}
 				};
@@ -213,7 +214,7 @@
 					},
 					batch: true,
 					schema: schemaVendedores,
-					group: "Fila", 
+					group: "FilaChar", 
 					sort: { field: "PosicaoFila", dir: "asc" }	
 				});
 				
@@ -255,7 +256,7 @@
 					$("#lstMotivosSaida").kendoMobileListView({
 						dataSource: dataSourceMotivosSaida,
 						template: $("#listMotivosSaidaTemplate").html(),
-                        //template: "${Motivo}",
+						//template: "${Motivo}",
 						headerTemplate: "${value}",		
 						fixedHeaders: true
 					});
@@ -332,12 +333,12 @@
 						});
 					}, 400);
 				})
-                
+				
 			</script>
-
+			
 		</body>
 	</html>
-
+	
 </html>
 
                             

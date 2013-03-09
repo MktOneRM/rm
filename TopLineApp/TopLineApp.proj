@@ -61,6 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Contacts.jpeg" />
+    <Content Include="Images\Foto1.jpg" />
+    <Content Include="Images\Foto2.jpg" />
+    <Content Include="Images\Foto3.jpg" />
+    <Content Include="Images\Foto4.jpg" />
+    <Content Include="Images\Foto5.jpg" />
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />

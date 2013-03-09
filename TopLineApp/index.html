@@ -45,8 +45,10 @@
 					data-rel="actionsheet"
 					href="\\#actions"
 					data-actionsheet-context="#= IdVendedor #" >
-					<img src="${Foto}"  />
+					<img src="${Foto}" width=50px heigth=50px />
+
 					<h2>#:VendedorApelido#</h2>
+
 				</a>
 				
 			</script>
@@ -148,7 +150,7 @@
 						<a href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</a>
 					</div>
 				</div>
-				<ul id="lstMotivosSaida" data-role="listview" data-style="inset"/>
+				<ul id="lstMotivosSaida" data-role="listview" />
 			</div>
 
 			<!--Grafico resultado de Atendimento-->
@@ -180,10 +182,10 @@
 			<script>
 			
 				var app = new kendo.mobile.Application(document.body);
-				      
+				
 				//Url
 				var baseUrl = "http://localhost:50000/api";
-                
+				
 				//schema
 				var schemaVendedores = { 
 					model: {
@@ -198,7 +200,7 @@
 						} 
 					}
 				};
-
+				
 				//dataSource
 				var dataSourceVendedores = new kendo.data.DataSource({                    
 					transport: {						
@@ -214,7 +216,7 @@
 					group: "Fila", 
 					sort: { field: "PosicaoFila", dir: "asc" }	
 				});
-			
+				
 				//schema
 				var schemaMotivosSaida = { 
 					model: {
@@ -225,7 +227,7 @@
 						} 
 					}
 				};
-
+				
 				//dataSource
 				var dataSourceMotivosSaida = new kendo.data.DataSource({                    
 					transport: {						
@@ -239,7 +241,7 @@
 					batch: true,
 					schema: schemaMotivosSaida
 				});
-
+				
 				function getListaFilaDaVez() {
 					$("#lstVendedoresFila").kendoMobileListView({
 						dataSource: dataSourceVendedores,
@@ -248,31 +250,32 @@
 						fixedHeaders: true
 					});
 				}
-			                
+				
 				function getMotivosSaida() {
 					$("#lstMotivosSaida").kendoMobileListView({
 						dataSource: dataSourceMotivosSaida,
 						template: $("#listMotivosSaidaTemplate").html(),
+                        //template: "${Motivo}",
 						headerTemplate: "${value}",		
 						fixedHeaders: true
 					});
 				}
-				                
+				
 				function editProduct(e) {				
 					app.navigate("#resultadoAtendimento"); //navigates to editor view
 				}
-
+				
 				function getPerformace(e) {				
 					app.navigate("#grafResultadoAtendimento"); //navigates to editor view
 				}
 				function getMotivos(e) {				
 					app.navigate("#motivosSaida"); //navigates to editor view
 				}
-                
+				
 				function closeModalViewLogin() {
 					$("#modalview-login").kendoMobileModalView("close");
 				}
-                
+				
 				function createChart() {
 					$("#chart").kendoChart({
 						theme: $(document).data("kendoSkin") || "default",
@@ -317,13 +320,13 @@
 						}
 					});
 				}
-					
+				
 				$(document).ready(function() {
 					setTimeout(function() {
 						// Initialize the chart with a delay to make sure
 						// the initial animation is visible
 						createChart();
-					
+				
 						$("#example").bind("kendo:skinChange", function(e) {
 							createChart();
 						});

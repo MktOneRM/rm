@@ -21,7 +21,13 @@
 
 		<body>
 
-			<div data-role="view" id="tabstrip-filaVez" data-init="getListaFilaDaVez"  data-layout="mobile-tabstrip" data-title="Fila da Vez">
+			<div data-role="view" id="tabstrip-filaVez" data-init="getListaFilaDaVez"  data-layout="mobile-tabstrip" >
+				<div data-role="header">
+					<div data-role="navbar">
+						<span>Fila da Vez</span>
+						<h4 href="#" data-role="button" data-icon="settings" data-rel="modalview" data-align="right">Settings</h4>
+					</div>
+				</div>
 				<ul id="lstVendedoresFila" data-role="listview" data-style="inset" ></ul>
 				<ul id="actions" data-role="actionsheet" data-cancel="Cancelar">
 					<li class="km-actionsheet-title">Selecione operação:</li>
@@ -48,11 +54,11 @@
 
 					<img src="${Foto}"/>
 					<h3>#:VendedorApelido#</h3>
-				
+
 				</a>
 				
 			</script>
-			
+
 			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">			
 			
 				<a
@@ -60,13 +66,19 @@
 					data-role="listview-link">
 					<h4>#:Motivo#</h4>
 				</a>
-				
+
 			</script>
-			
+
 			<!--Resultado Atendimento-->
 			<div id="resultadoAtendimento" data-role="view" data-title="Resultado Atendimento" data-layout="mobile-tabstrip">
+				<div data-role="header">
+					<div data-role="navbar">
+						<span>Atendimento</span>
+						<h6 href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</h6>
+					</div>
+				</div>
 				<ul id="form" data-role="listview" data-style="inset">
-				
+
 					<div>
 						<li>
 							<h4>
@@ -76,9 +88,9 @@
 					</div>
 					<li >
 						Vendeu:
-						<input type="checkbox" data-role="switch" checked>
+						<input id="chkVendeu" type="checkbox" data-role="switch" data-bind="checked: checked">
 					</li>
-					
+
 					<li>
 						<label>
 							Valor da Venda:
@@ -93,17 +105,17 @@
 					</li>
 				</ul>
 			</div>
-			
+
 			<!--Resumo Diário-->
-			<div id="resumoDiario" data-role="view" >
+			<div id="resumoDiario" data-role="view" data-layout="mobile-tabstrip">
 				<div data-role="header">
 					<div data-role="navbar">
 						<span>Resumo Diário</span>
-						<a href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</a>
+						<h6 href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</h6>
 					</div>
 				</div>
 				<ul id="form" data-role="listview" data-style="inset">
-				
+
 					<li>
 						Nome do Produto: <span data-bind="text: ProductName"></span>
 					</li>
@@ -120,7 +132,8 @@
 					</li>
 				</ul>
 			</div>
-			
+
+			<!--Login-->
 			<div data-role="modalview" id="modalview-login" style="width: 95%; height: 190px;" data-layout="mobile-tabstrip" >
 				<div data-role="header">
 					<div data-role="navbar">
@@ -128,7 +141,7 @@
 						<a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancelar</a>
 					</div>
 				</div>
-				
+
 				<ul data-role="listview" data-style="inset">
 					<li>
 						<label for="username">Usuário:</label>
@@ -141,44 +154,28 @@
 				</ul>
 				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Entrar</a>
 			</div>
-			
+
 			<!--Motivos saída salão de vendas-->
 			<div id="motivosSaida" data-role="view" data-title="Motivo Saída" data-init="getMotivosSaida" >
 				<div data-role="header">
 					<div data-role="navbar">
 						<span>Motivos Saída</span>
-						<a href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</a>
+						<h6 href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</h6>
 					</div>
 				</div>
 				<ul id="lstMotivosSaida" data-role="listview" />
 			</div>
-			
-			<!--Grafico resultado de Atendimento-->
-			<div id="grafResultadoAtendimento" class="k-content" data-role="view" data-title="Resumo de Vendas" data-layout="mobile-tabstrip">
-				<div class="chart-wrapper">
-					<div id="chart"></div>
-				</div>
-				
-			</div>
-			
+
 			<div data-role="layout" data-id="mobile-tabstrip"   >
+
 				<header data-role="header">
 					<div data-role="navbar">
 						<span data-role="view-title"></span>
 					</div>
 				</header>
-				
-				<p>TabStrip</p>
-				
-				<div data-role="footer">
-					<div data-role="tabstrip">
-						<a href="#tabstrip-filaVez" data-icon="contacts">Fila</a>
-						<a href="#tabstrip-configuracoes" data-icon="settings">Consultas</a>
-						<a href="#modalview-login" data-icon="settings" data-rel="modalview" >Configurações</a>
-					</div>
-				</div>
+
 			</div>
-			
+
 			<script>
 			
 				var app = new kendo.mobile.Application(document.body);
@@ -334,11 +331,16 @@
 					}, 400);
 				})
 				
+                
+				$("#chkVendeu").change(function() {
+					alert(1);
+				});
+                
 			</script>
-			
+
 		</body>
 	</html>
-	
+
 </html>
 
                             

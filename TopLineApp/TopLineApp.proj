@@ -86,6 +86,7 @@
       <TargetName>cordova.js</TargetName>
     </Content>
     <Content Include="styles\ModalViewLogin.css" />
+    <Content Include="styles\ScrollView.css" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

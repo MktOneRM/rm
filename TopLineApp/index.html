@@ -25,38 +25,62 @@
 				<div data-role="header">
 					<div data-role="navbar">
 						<span>Fila da Vez</span>
-						<h4 href="#" data-role="button" data-icon="settings" data-rel="modalview" data-align="right">Settings</h4>
+						<a data-role="button" data-click="showPrev" data-align="left" data-icon="rewind"></a>
+						<a data-role="button" data-click="showNext" data-align="right" data-icon="fastforward"></a>
 					</div>
 				</div>
-				<ul id="lstVendedoresFila" data-role="listview" data-style="inset" ></ul>
-				<ul id="actions" data-role="actionsheet" data-cancel="Cancelar">
-					<li class="km-actionsheet-title">Selecione operação:</li>
-					<li>
-						<a href="#" data-action="editProduct">Resultado Atendimento</a>
-					</li>
-					<li>
-						<a href="#" data-action="getResumoDiario">Resumo Diário de Vendas</a>
-					</li>
-					<li>
-						<a href="#" data-action="getMotivos">Sair Fila da Vez</a>
-					</li>
-				</ul>
+
+				<div data-role="scrollview" id="scrollview">
+
+					<div id="cont">
+						<ul id="lstVendedoresFila" data-role="listview"></ul>
+					</div>
+
+					<div class="page" data-role="page">Page 2 </div>
+					<div class="page" data-role="page">Page 3 </div>
+
+					<ul id="actions" data-role="actionsheet" data-cancel="Cancelar">
+						<li class="km-actionsheet-title">Selecione operação:</li>
+						<li>
+							<a href="#" data-action="editProduct">Resultado Atendimento</a>
+						</li>
+						<li>
+							<a href="#" data-action="getResumoDiario">Resumo Diário de Vendas</a>
+						</li>
+						<li>
+							<a href="#" data-action="getMotivos">Sair Fila da Vez</a>
+						</li>
+					</ul>
+
+				</div>
+
+				<!--
+                
+				<div id="cont">
+				<ul id="lstVendedoresFila" data-role="listview"></ul>
+
+				
+
+				</div>
+
+				<div>
+				<ul id="lstVendedoresForaFila" data-role="listview"></ul>
+				</div>
+
+				-->
+
 			</div>
 
 			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
 
-				<a
-					class="details-link"
-					data-role="listview-link"
-					data-rel="actionsheet"
-					href="\\#actions"
-					data-actionsheet-context="#= IdVendedor #" >
-
-					<img src="${Foto}"/>
-					<h3>#:VendedorApelido#</h3>
-
+				<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">
+					<li>
+						<img src="${Foto}" />
+					</li>
+					<!--<h6>#:VendedorApelido#</h6>-->
 				</a>
 				
+			
 			</script>
 
 			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">			
@@ -211,7 +235,7 @@
 					},
 					batch: true,
 					schema: schemaVendedores,
-					group: "FilaChar", 
+					//group: "FilaChar", 
 					sort: { field: "PosicaoFila", dir: "asc" }	
 				});
 				
@@ -266,7 +290,8 @@
 				function getPerformace(e) {				
 					app.navigate("#grafResultadoAtendimento"); //navigates to editor view
 				}
-				function getMotivos(e) {				
+
+                function getMotivos(e) {				
 					app.navigate("#motivosSaida"); //navigates to editor view
 				}
 				
@@ -330,12 +355,30 @@
 						});
 					}, 400);
 				})
-				
-                
+								
 				$("#chkVendeu").change(function() {
 					alert(1);
 				});
                 
+				function showPrev() {
+					var scrollview = $("#scrollview").data("kendoMobileScrollView"),
+					pageToNavigate = scrollview.page - 1; //current page - 1
+
+					if (pageToNavigate >= 0) {
+						scrollview.scrollTo(pageToNavigate);
+					}
+				}
+
+				function showNext() {
+					var scrollview = $("#scrollview").data("kendoMobileScrollView"),
+					pageToNavigate = scrollview.page + 1; //current page - 1
+
+					if (pageToNavigate < scrollview.pages) {
+						scrollview.scrollTo(pageToNavigate);
+					}
+				}
+                
+				
 			</script>
 
 		</body>
@@ -343,4 +386,3 @@
 
 </html>
 
-                            

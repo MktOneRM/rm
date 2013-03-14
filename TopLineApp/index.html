@@ -32,7 +32,7 @@
 
 				<div data-role="scrollview" id="scrollview">
 
-					<div class="page" data-role="page" >
+					<div class="page" data-role="page">
 						<ul id="lstVendedoresFila" data-role="listview"></ul>
 					</div>
 
@@ -40,9 +40,8 @@
 						<ul id="lstVendedoresForaFila" data-role="listview"></ul>
 					</div>
 
-					<div class="page" data-role="page" data-role="view" data-model="viewModel" data-title="My Database" id="vMyDatabase">
-						<ul id="lMyDatabase" data-role="listview" data-style="inset" data-template="tMyDatabase" data-bind="source: MyDatabase">
-						</ul>
+					<div class="page" data-role="page">
+						<ul id="lstVendedoresForaExpediente" data-role="listview"></ul>
 					</div>
 
 					<ul id="actions" data-role="actionsheet" data-cancel="Cancelar">
@@ -196,50 +195,10 @@
 
 			</div>
 
-			<script id="tMyDatabase" type="text/x-kendo-template">
-				<div style="font-weight:bold;">#= Name #</div>
-				<div style="font-weight:normal;font-size:smaller">#= City #, #= State #</div>
-				<div style="font-weight:normal;font-size:smaller">ID: #= ID #</div>
-			</script>
-
 			<script>
                 
-				var TestData = [
-					{ Name: "Company A", City: "Phoenix", State: "AZ", ID: "00000001" },
-					{ Name: "Company B", City: "Los Angeles", State: "CA", ID: "00000002" },
-					{ Name: "Company C", City: "Santa Fe", State: "NM", ID: "00000003" },
-					{ Name: "Company D", City: "Boulder", State: "CO", ID: "00000004" },
-					{ Name: "Company E", City: "Seattle", State: "WA", ID: "00000005" },
-					{ Name: "Company F", City: "Portland", State: "OR", ID: "00000006" },
-					{ Name: "Company G", City: "San Diego", State: "CA", ID: "00000007" },
-					{ Name: "Company H", City: "Boise", State: "ID", ID: "00000008" },
-				];
-			
 				var app = new kendo.mobile.Application($(document.body));
-				
-				var viewModel = kendo.observable({
-					ShowCustomer: function (e) {
-						// something here for drilldown
-						console.log("show customer");
-					},
-					MyDatabase: new kendo.data.DataSource.create({ data: TestData })
-				});
-                
-				var dsMyDatabase = new kendo.data.DataSource.create({ data: TestData })
-
-				function initTest() {
-					$("#lMyDatabase2").kendoMobileListView({
-						dataSource: dsMyDatabase,
-						template: $("#tMyDatabase").text(),
-						style: "inset",
-						click: function (e) {
-							// something here for drilldown
-							console.log("click event");
-						}
-					});
-				}
-				
-                
+			             
 				//Url
 				var baseUrl = "http://localhost:50000/api";
 				
@@ -385,7 +344,7 @@
 				function onInit(e) {					
 					getListaFilaDaVez();
 					getListaForaFilaDaVez();
-					//getListaForaExpediente();
+					getListaForaExpediente();
 				}
 				
 				function onBeforeShow(e) {
@@ -503,9 +462,9 @@
 				
 		
 			</script>
-			
+
 		</body>
 	</html>
-	
+
 </html>
 

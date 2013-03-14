@@ -21,7 +21,7 @@
 
 		<body>
 
-			<div data-role="view" id="tabstrip-filaVez" data-init="getListaFilaDaVez"  data-layout="mobile-tabstrip" >
+			<div data-role="view" id="tabstrip-filaVez" data-init="onInit" data-layout="mobile-tabstrip" >
 				<div data-role="header">
 					<div data-role="navbar">
 						<span>Fila da Vez</span>
@@ -32,12 +32,18 @@
 
 				<div data-role="scrollview" id="scrollview">
 
-					<div id="cont">
+					<div class="page" data-role="page" >
 						<ul id="lstVendedoresFila" data-role="listview"></ul>
 					</div>
 
-					<div class="page" data-role="page">Page 2 </div>
-					<div class="page" data-role="page">Page 3 </div>
+					<div class="page" data-role="page">
+						<ul id="lstVendedoresForaFila" data-role="listview"></ul>
+					</div>
+
+					<div class="page" data-role="page" data-role="view" data-model="viewModel" data-title="My Database" id="vMyDatabase">
+						<ul id="lMyDatabase" data-role="listview" data-style="inset" data-template="tMyDatabase" data-bind="source: MyDatabase">
+						</ul>
+					</div>
 
 					<ul id="actions" data-role="actionsheet" data-cancel="Cancelar">
 						<li class="km-actionsheet-title">Selecione operação:</li>
@@ -54,43 +60,33 @@
 
 				</div>
 
-				<!--
-                
-				<div id="cont">
-				<ul id="lstVendedoresFila" data-role="listview"></ul>
-
-				
-
-				</div>
-
-				<div>
-				<ul id="lstVendedoresForaFila" data-role="listview"></ul>
-				</div>
-
-				-->
-
 			</div>
 
 			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
-
 				<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">
-					<li>
-						<img src="${Foto}" />
-					</li>
-					<!--<h6>#:VendedorApelido#</h6>-->
+					<img src="${Foto}" />
+					<h5>#:VendedorNome#</h5>
 				</a>
-				
-			
 			</script>
 
-			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">			
-			
-				<a
-					class="details-link"
-					data-role="listview-link">
+			<script type="text/x-kendo-template" id="listVendedoresForaFilaTemplate">
+				<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">
+					<img src="${Foto}" />
+					<h5>#:VendedorNome#</h5>
+				</a>
+			</script>
+
+			<script type="text/x-kendo-template" id="listVendedoresForaExpedienteTemplate">
+				<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">
+					<img src="${Foto}" />
+					<h5>#:VendedorNome#</h5>
+				</a>
+			</script>
+
+			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">
+				<a class="details-link" data-role="listview-link">
 					<h4>#:Motivo#</h4>
 				</a>
-
 			</script>
 
 			<!--Resultado Atendimento-->
@@ -200,10 +196,50 @@
 
 			</div>
 
+			<script id="tMyDatabase" type="text/x-kendo-template">
+				<div style="font-weight:bold;">#= Name #</div>
+				<div style="font-weight:normal;font-size:smaller">#= City #, #= State #</div>
+				<div style="font-weight:normal;font-size:smaller">ID: #= ID #</div>
+			</script>
+
 			<script>
+                
+				var TestData = [
+					{ Name: "Company A", City: "Phoenix", State: "AZ", ID: "00000001" },
+					{ Name: "Company B", City: "Los Angeles", State: "CA", ID: "00000002" },
+					{ Name: "Company C", City: "Santa Fe", State: "NM", ID: "00000003" },
+					{ Name: "Company D", City: "Boulder", State: "CO", ID: "00000004" },
+					{ Name: "Company E", City: "Seattle", State: "WA", ID: "00000005" },
+					{ Name: "Company F", City: "Portland", State: "OR", ID: "00000006" },
+					{ Name: "Company G", City: "San Diego", State: "CA", ID: "00000007" },
+					{ Name: "Company H", City: "Boise", State: "ID", ID: "00000008" },
+				];
 			
-				var app = new kendo.mobile.Application(document.body);
+				var app = new kendo.mobile.Application($(document.body));
 				
+				var viewModel = kendo.observable({
+					ShowCustomer: function (e) {
+						// something here for drilldown
+						console.log("show customer");
+					},
+					MyDatabase: new kendo.data.DataSource.create({ data: TestData })
+				});
+                
+				var dsMyDatabase = new kendo.data.DataSource.create({ data: TestData })
+
+				function initTest() {
+					$("#lMyDatabase2").kendoMobileListView({
+						dataSource: dsMyDatabase,
+						template: $("#tMyDatabase").text(),
+						style: "inset",
+						click: function (e) {
+							// something here for drilldown
+							console.log("click event");
+						}
+					});
+				}
+				
+                
 				//Url
 				var baseUrl = "http://localhost:50000/api";
 				
@@ -217,26 +253,57 @@
 							VendedorApelido: { editable: false, nullable: false },
 							Fila: { editable: false, nullable: false },
 							PosicaoFila: { editable: false, nullable: false },            
-							Foto: { editable: false, nullable: false },
-							FilaChar: { editable: false, nullable: false } 
+							Foto: { editable: false, nullable: false }
 						} 
 					}
 				};
 				
 				//dataSource
-				var dataSourceVendedores = new kendo.data.DataSource({                    
+				var dsVendFila = new kendo.data.DataSource({                    
 					transport: {						
 						read:  {
-							url: baseUrl + "/Vendedor",							
+							url: baseUrl + "/Vendedor/1",							
 							type:"GET"      
 							,contentType: "application/json"
 							,dataType: "json"
-						}
+						}                 
 					},
 					batch: true,
 					schema: schemaVendedores,
-					//group: "FilaChar", 
+					serverPaging: true,
 					sort: { field: "PosicaoFila", dir: "asc" }	
+				});
+				
+				//dataSource
+				var dsVendForaFila = new kendo.data.DataSource({                    
+					transport: {						
+						read:  {
+							url: baseUrl + "/Vendedor/2",							
+							type:"GET"      
+							,contentType: "application/json"
+							,dataType: "json"
+						}                 
+					},
+					batch: true,
+					schema: schemaVendedores,
+					serverPaging: true,
+					sort: { field: "VendedorNome", dir: "asc" }	
+				});
+				
+				//dataSource
+				var dsVendForaExp = new kendo.data.DataSource({                    
+					transport: {						
+						read:  {
+							url: baseUrl + "/Vendedor/3",							
+							type:"GET"      
+							,contentType: "application/json"
+							,dataType: "json"
+						}                 
+					},
+					batch: true,
+					schema: schemaVendedores,
+					serverPaging: true,
+					sort: { field: "VendedorNome", dir: "asc" }	
 				});
 				
 				//schema
@@ -258,19 +325,75 @@
 							type:"GET"      
 							,contentType: "application/json"
 							,dataType: "json"
-						}
+						},
 					},
 					batch: true,
 					schema: schemaMotivosSaida
 				});
 				
+                       
 				function getListaFilaDaVez() {
 					$("#lstVendedoresFila").kendoMobileListView({
-						dataSource: dataSourceVendedores,
+						dataSource: dsVendFila,
+						pullToRefresh: true,
+						appendOnRefresh: false,
 						template: $("#listVendedoresFilaTemplate").html(),
-						headerTemplate: "${value}",		
-						fixedHeaders: true
+						endlessScroll: true,
+						pullParameters: function(item) {
+							return {
+								since_id: item.id_str,
+								page: 1
+							};
+						}
 					});
+				}
+				
+                
+				function getListaForaFilaDaVez() {
+					$("#lstVendedoresForaFila").kendoMobileListView({
+						dataSource: dsVendForaFila,
+						pullToRefresh: true,
+						appendOnRefresh: false,
+						template: $("#listVendedoresForaFilaTemplate").html(),
+						endlessScroll: true,
+						pullParameters: function(item) {
+							return {
+								since_id: item.id_str,
+								page: 1
+							};
+						}
+					});
+				}
+				
+				function getListaForaExpediente() {
+					$("#lstVendedoresForaExpediente").kendoMobileListView({
+						dataSource: dsVendForaExp,
+						pullToRefresh: true,
+						appendOnRefresh: false,
+						template: $("#listVendedoresForaExpedienteTemplate").html(),
+						endlessScroll: true,
+						pullParameters: function(item) {
+							return {
+								since_id: item.id_str,
+								page: 1
+							};
+						}
+					});
+				}
+				
+                
+				function onInit(e) {					
+					getListaFilaDaVez();
+					getListaForaFilaDaVez();
+					//getListaForaExpediente();
+				}
+				
+				function onBeforeShow(e) {
+					console.log("beforeShow");
+				}
+				
+				function onShow(e) {
+					console.log("show");
 				}
 				
 				function getMotivosSaida() {
@@ -290,8 +413,8 @@
 				function getPerformace(e) {				
 					app.navigate("#grafResultadoAtendimento"); //navigates to editor view
 				}
-
-                function getMotivos(e) {				
+				
+				function getMotivos(e) {				
 					app.navigate("#motivosSaida"); //navigates to editor view
 				}
 				
@@ -355,34 +478,34 @@
 						});
 					}, 400);
 				})
-								
+				
 				$("#chkVendeu").change(function() {
 					alert(1);
 				});
-                
+				
 				function showPrev() {
 					var scrollview = $("#scrollview").data("kendoMobileScrollView"),
 					pageToNavigate = scrollview.page - 1; //current page - 1
-
+				
 					if (pageToNavigate >= 0) {
 						scrollview.scrollTo(pageToNavigate);
 					}
 				}
-
+				
 				function showNext() {
 					var scrollview = $("#scrollview").data("kendoMobileScrollView"),
 					pageToNavigate = scrollview.page + 1; //current page - 1
-
-					if (pageToNavigate < scrollview.pages) {
+				
+					if (pageToNavigate < scrollview.pages - 1) {
 						scrollview.scrollTo(pageToNavigate);
 					}
 				}
-                
 				
+		
 			</script>
-
+			
 		</body>
 	</html>
-
+	
 </html>
 

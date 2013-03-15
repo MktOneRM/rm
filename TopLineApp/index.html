@@ -22,70 +22,75 @@
 		<body>
 
 			<!--This is the Flat ListView-->
-			<div data-role="view" id="vendFila" data-init="getListaFilaDaVez" data-title="ListView"
-				 data-layout="databinding">
-				<ul id="lstVendedoresFila">
+			<div data-role="view" id="vendFila" data-title="Salão de Vendas" data-model="viewModel" data-layout="default">
+				<ul id="lstVendedoresFila" data-role="listview" data-Template="listVendedoresFilaTemplate" data-style="inset" data-bind="source: dataSource" >
 				</ul>
+                <a id="btnCreate" data-role="button" type="button" data-bind="click:refreshRoutes">Salvar</a>
 			</div>
 
-			<!--This is the Grouped ListView-->
-			<div data-role="view" id="VendForaFila" data-init="getListaForaFilaDaVez" data-transition=""
-				 data-title="ListView" data-layout="databinding">
-				<ul id="lstVendedoresForaFila">
-				</ul>
+			<!--
+			<div data-role="view" id="vendForaFila" data-init="getListaForaFilaDaVez" data-title="Fora do Salão" data-layout="databinding">
+			<ul id="lstVendedoresForaFila">
+			</ul>
 			</div>
 
-			<!--This is the Grouped ListView-->
-			<div data-role="view" id="VendaForaExp" data-init="getListaForaExpediente" data-transition=""
-				 data-title="ListView" data-layout="databinding">
-				<ul id="lstVendedoresForaExpediente">
-				</ul>
+			
+			<div data-role="view" id="vendForaExp" data-init="getListaForaExpediente" data-title="Inativo" data-layout="databinding">
+			<ul id="lstVendedoresForaExpediente">
+			</ul>
 			</div>
+			-->
 
 			<!--This is the application layout-->
-			<div data-role="layout" data-id="databinding">
+			<div data-role="layout" data-id="default">
 				<header data-role="header">
 					<div data-role="navbar">
 						<span data-role="view-title"></span>
-						<a data-align="right" data-role="button" class="nav-button"
-						   href="#index">Index</a>
 					</div>
 				</header>
 				<div data-role="footer">
+					<!
 					<div data-role="tabstrip">
-						<a href="#vendFila" data-icon="contacts">Fila</a>
-						<a href="#vendForaFila" data-icon="contacts">Fora Fila</a>
-						<a href="#vendForaExp" data-icon="contacts">Fora Expediente</a>
+						
+                        
+						<!--
+                        
+						<a href="#vendFila" data-icon="contacts" data-action="viewModel.destroyProduct">Fila</a>
+						<a href="#vendForaFila" data-role="button" class="nav-button" data-icon="contacts">Fora Fila</a>
+						<a href="#vendForaExp"  data-role="button" class="nav-button" data-icon="contacts">Inativo</a>
+                        
+						-->
 
 					</div>
+
 				</div>
 			</div>
 
 			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
-				<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">
-					<img src="${Foto}" />
-					<h5>#:VendedorNome#</h5>
-				</a>
+				<!--<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">-->
+				<img src="${Foto}" />
+				<span>#:VendedorNome#</span>
+				<!--</a>-->
 			</script>
 
 			<script type="text/x-kendo-template" id="listVendedoresForaFilaTemplate">
 				<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">
 					<img src="${Foto}" />
-					<h5>#:VendedorNome#</h5>
+					<!--<h5>#:VendedorNome#</h5>-->
 				</a>
 			</script>
 
 			<script type="text/x-kendo-template" id="listVendedoresForaExpedienteTemplate">
 				<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">
 					<img src="${Foto}" />
-					<h5>#:VendedorNome#</h5>
+					<!--<h5>#:VendedorNome#</h5>-->
 				</a>
 			</script>
 
 			<script>
-
-				var app = new kendo.mobile.Application($(document.body));
-			             
+	          
+				var app;
+                
 				//Url
 				var baseUrl = "http://localhost:50000/api";
 				
@@ -109,77 +114,111 @@
 					transport: {						
 						read:  {
 							url: baseUrl + "/Vendedor/1",							
-							type:"GET"      
-							,contentType: "application/json"
-							,dataType: "json"
+							type:"GET",
+							contentType: "application/json",
+							dataType: "json"
 						}                 
 					},
 					batch: true,
-					schema: schemaVendedores,
-					sort: { field: "PosicaoFila", dir: "asc" }	
-				});
+					schema: schemaVendedores,                    
+					sort: {
+						field:
+						"PosicaoFila", dir
+						: "asc"
+					}
+				}
 				
+				);
+				
+				/*
 				//dataSource
 				var dsVendForaFila = new kendo.data.DataSource({                    
-					transport: {						
-						read:  {
-							url: baseUrl + "/Vendedor/2",							
-							type:"GET"      
-							,contentType: "application/json"
-							,dataType: "json"
-						}                 
-					},
-					batch: true,
-					schema: schemaVendedores,
-					sort: { field: "VendedorNome", dir: "asc" }	
+				transport: {						
+				read:  {
+				url: baseUrl + "/Vendedor/2",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+				}                 
+				},
+				batch: true,
+				schema: schemaVendedores,
+				sort: { field: "VendedorNome", dir: "asc" }	
 				});
 				
 				//dataSource
 				var dsVendForaExp = new kendo.data.DataSource({                    
-					transport: {						
-						read:  {
-							url: baseUrl + "/Vendedor/3",							
-							type:"GET"      
-							,contentType: "application/json"
-							,dataType: "json"
-						}                 
-					},
-					batch: true,
-					schema: schemaVendedores,
-					sort: { field: "VendedorNome", dir: "asc" }	
+				transport: {						
+				read:  {
+				url: baseUrl + "/Vendedor/3",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+				}                 
+				},
+				batch: true,
+				schema: schemaVendedores,
+				sort: { field: "VendedorNome", dir: "asc" }	
 				})	
-                
+				*/
+				
+				/*
 				function getListaFilaDaVez() {
-					$("#lstVendedoresFila").kendoMobileListView({
-						dataSource: dsVendFila,
-						template: $("#listVendedoresFilaTemplate").html(),
-						fixedHeaders: true
-					});
+				$("#lstVendedoresFila").kendoMobileListView({
+				dataSource: dsVendFila,
+				template: $("#listVendedoresFilaTemplate").html(),
+				fixedHeaders: true
+				});
 				}
-                
+				
 				function getListaForaFilaDaVez() {
-					$("#lstVendedoresForaFila").kendoMobileListView({
-						dataSource: dsVendForaFila,
-						template: $("#listVendedoresForaFilaTemplate").html(),
-						fixedHeaders: true
-					});
+				$("#lstVendedoresForaFila").kendoMobileListView({
+				dataSource: dsVendForaFila,
+				template: $("#listVendedoresForaFilaTemplate").html(),
+				fixedHeaders: true
+				});
 				}
 				
 				function getListaForaExpediente() {
-					$("#lstVendedoresForaExpediente").kendoMobileListView({
-						dataSource: dsVendForaExp,
-						template: $("#listVendedoresForaExpedienteTemplate").html(),
-						fixedHeaders: true
-					});
+				$("#lstVendedoresForaExpediente").kendoMobileListView({
+				dataSource: dsVendForaExp,
+				template: $("#listVendedoresForaExpedienteTemplate").html(),
+				fixedHeaders: true
+				});
+				}
+				*/
+				
+				function destroyProduct(e) {				
+					console.log(viewModel);
 				}
 				
 				
-                
+				
+				function editorViewInit(e) {
+					validator = $("#form").kendoValidator({ //initialize the validator
+						messages: {
+							required: function(input) { //create a custom message function
+								input.attr("placeholder", input.attr("name") + " is required");
+							}
+						}
+					}).data("kendoValidator");
+				}
+				
+				//Inicia a APP e informa quais objetos serão observados pelo ViewModel
+				var app = new kendo.mobile.Application($(document.body)),					           
+				validator,
+				viewModel = kendo.observable({
+					dataSource: dsVendFila,
+					destroyProduct: destroyProduct,
+					
+					refreshRoutes: function() {
+						dsVendFila.options.transport.read.url = baseUrl + "/Vendedor/1";
+						dsVendFila.read();        
+					}
+				}); 
+				
 			</script>
-			<script>
-				window
-				.kendoMobileApplication = new kendo.mobile.Application(document.body);
-			</script>
+
 		</body>
 	</html>
 

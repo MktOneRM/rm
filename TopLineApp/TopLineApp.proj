@@ -60,6 +60,7 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="html\HtmlPage.html" />
     <Content Include="Images\Contacts.jpeg" />
     <Content Include="Images\Foto1.jpg" />
     <Content Include="Images\Foto2.jpg" />
@@ -87,6 +88,7 @@
     </Content>
     <Content Include="styles\ModalViewLogin.css" />
     <Content Include="styles\ScrollView.css" />
+    <Content Include="styles\StyleSheet.css" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

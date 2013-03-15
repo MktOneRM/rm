@@ -21,44 +21,44 @@
 
 		<body>
 
-			<div data-role="view" id="tabstrip-filaVez" data-init="onInit" data-layout="mobile-tabstrip" >
-				<div data-role="header">
+			<!--This is the Flat ListView-->
+			<div data-role="view" id="vendFila" data-init="getListaFilaDaVez" data-title="ListView"
+				 data-layout="databinding">
+				<ul id="lstVendedoresFila">
+				</ul>
+			</div>
+
+			<!--This is the Grouped ListView-->
+			<div data-role="view" id="VendForaFila" data-init="getListaForaFilaDaVez" data-transition=""
+				 data-title="ListView" data-layout="databinding">
+				<ul id="lstVendedoresForaFila">
+				</ul>
+			</div>
+
+			<!--This is the Grouped ListView-->
+			<div data-role="view" id="VendaForaExp" data-init="getListaForaExpediente" data-transition=""
+				 data-title="ListView" data-layout="databinding">
+				<ul id="lstVendedoresForaExpediente">
+				</ul>
+			</div>
+
+			<!--This is the application layout-->
+			<div data-role="layout" data-id="databinding">
+				<header data-role="header">
 					<div data-role="navbar">
-						<span>Fila da Vez</span>
-						<a data-role="button" data-click="showPrev" data-align="left" data-icon="rewind"></a>
-						<a data-role="button" data-click="showNext" data-align="right" data-icon="fastforward"></a>
+						<span data-role="view-title"></span>
+						<a data-align="right" data-role="button" class="nav-button"
+						   href="#index">Index</a>
+					</div>
+				</header>
+				<div data-role="footer">
+					<div data-role="tabstrip">
+						<a href="#vendFila" data-icon="contacts">Fila</a>
+						<a href="#vendForaFila" data-icon="contacts">Fora Fila</a>
+						<a href="#vendForaExp" data-icon="contacts">Fora Expediente</a>
+
 					</div>
 				</div>
-
-				<div data-role="scrollview" id="scrollview">
-
-					<div class="page" data-role="page">
-						<ul id="lstVendedoresFila" data-role="listview"></ul>
-					</div>
-
-					<div class="page" data-role="page">
-						<ul id="lstVendedoresForaFila" data-role="listview"></ul>
-					</div>
-
-					<div class="page" data-role="page">
-						<ul id="lstVendedoresForaExpediente" data-role="listview"></ul>
-					</div>
-
-					<ul id="actions" data-role="actionsheet" data-cancel="Cancelar">
-						<li class="km-actionsheet-title">Selecione operação:</li>
-						<li>
-							<a href="#" data-action="editProduct">Resultado Atendimento</a>
-						</li>
-						<li>
-							<a href="#" data-action="getResumoDiario">Resumo Diário de Vendas</a>
-						</li>
-						<li>
-							<a href="#" data-action="getMotivos">Sair Fila da Vez</a>
-						</li>
-					</ul>
-
-				</div>
-
 			</div>
 
 			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
@@ -82,121 +82,8 @@
 				</a>
 			</script>
 
-			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">
-				<a class="details-link" data-role="listview-link">
-					<h4>#:Motivo#</h4>
-				</a>
-			</script>
-
-			<!--Resultado Atendimento-->
-			<div id="resultadoAtendimento" data-role="view" data-title="Resultado Atendimento" data-layout="mobile-tabstrip">
-				<div data-role="header">
-					<div data-role="navbar">
-						<span>Atendimento</span>
-						<h6 href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</h6>
-					</div>
-				</div>
-				<ul id="form" data-role="listview" data-style="inset">
-
-					<div>
-						<li>
-							<h4>
-								<img src="images/Contacts.jpeg" width=80px/> Rafael Fernandes
-							</h4>
-						</li>
-					</div>
-					<li >
-						Vendeu:
-						<input id="chkVendeu" type="checkbox" data-role="switch" data-bind="checked: checked">
-					</li>
-
-					<li>
-						<label>
-							Valor da Venda:
-							<input id="valorVenda" name="ValorVenda"type="number" value="0" min="0" />
-						</label>
-					</li>
-					<li>
-						<label>
-							Qtde de Peças:
-							<input id="qtdePecas" name="QtdePecas"type="number" value="0" min="0" />
-						</label>
-					</li>
-				</ul>
-			</div>
-
-			<!--Resumo Diário-->
-			<div id="resumoDiario" data-role="view" data-layout="mobile-tabstrip">
-				<div data-role="header">
-					<div data-role="navbar">
-						<span>Resumo Diário</span>
-						<h6 href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</h6>
-					</div>
-				</div>
-				<ul id="form" data-role="listview" data-style="inset">
-
-					<li>
-						Nome do Produto: <span data-bind="text: ProductName"></span>
-					</li>
-					<li>
-						Preço Unitário: <span data-bind="text: UnitPrice"></span>
-					</li>
-					<li>
-						Qtde Estoque: <span data-bind="text: UnitsInStock"></span>
-					</li>
-					<li>
-						<label>
-							Inativo: <span data-bind="text: Discontinued"></span>
-						</label>
-					</li>
-				</ul>
-			</div>
-
-			<!--Login-->
-			<div data-role="modalview" id="modalview-login" style="width: 95%; height: 190px;" data-layout="mobile-tabstrip" >
-				<div data-role="header">
-					<div data-role="navbar">
-						<span>Login</span>
-						<a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancelar</a>
-					</div>
-				</div>
-
-				<ul data-role="listview" data-style="inset">
-					<li>
-						<label for="username">Usuário:</label>
-						<input type="text" id="username" />
-					</li>
-					<li>
-						<label for="password">Senha:</label>
-						<input type="password" id="password" />
-					</li>
-				</ul>
-				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Entrar</a>
-			</div>
-
-			<!--Motivos saída salão de vendas-->
-			<div id="motivosSaida" data-role="view" data-title="Motivo Saída" data-init="getMotivosSaida" >
-				<div data-role="header">
-					<div data-role="navbar">
-						<span>Motivos Saída</span>
-						<h6 href="#tabstrip-filaVez" data-role="button" data-align="right">Voltar</h6>
-					</div>
-				</div>
-				<ul id="lstMotivosSaida" data-role="listview" />
-			</div>
-
-			<div data-role="layout" data-id="mobile-tabstrip"   >
-
-				<header data-role="header">
-					<div data-role="navbar">
-						<span data-role="view-title"></span>
-					</div>
-				</header>
-
-			</div>
-
 			<script>
-                
+
 				var app = new kendo.mobile.Application($(document.body));
 			             
 				//Url
@@ -229,7 +116,6 @@
 					},
 					batch: true,
 					schema: schemaVendedores,
-					serverPaging: true,
 					sort: { field: "PosicaoFila", dir: "asc" }	
 				});
 				
@@ -245,7 +131,6 @@
 					},
 					batch: true,
 					schema: schemaVendedores,
-					serverPaging: true,
 					sort: { field: "VendedorNome", dir: "asc" }	
 				});
 				
@@ -261,208 +146,40 @@
 					},
 					batch: true,
 					schema: schemaVendedores,
-					serverPaging: true,
 					sort: { field: "VendedorNome", dir: "asc" }	
-				});
-				
-				//schema
-				var schemaMotivosSaida = { 
-					model: {
-						id: "idMotivo",
-						fields: {
-							idMotivo: { editable: false, nullable: false },
-							Motivo: { editable: false, nullable: false }
-						} 
-					}
-				};
-				
-				//dataSource
-				var dataSourceMotivosSaida = new kendo.data.DataSource({                    
-					transport: {						
-						read:  {
-							url: baseUrl + "/Motivos",							
-							type:"GET"      
-							,contentType: "application/json"
-							,dataType: "json"
-						},
-					},
-					batch: true,
-					schema: schemaMotivosSaida
-				});
-				
-                       
+				})	
+                
 				function getListaFilaDaVez() {
 					$("#lstVendedoresFila").kendoMobileListView({
 						dataSource: dsVendFila,
-						pullToRefresh: true,
-						appendOnRefresh: false,
 						template: $("#listVendedoresFilaTemplate").html(),
-						endlessScroll: true,
-						pullParameters: function(item) {
-							return {
-								since_id: item.id_str,
-								page: 1
-							};
-						}
+						fixedHeaders: true
 					});
 				}
-				
                 
 				function getListaForaFilaDaVez() {
 					$("#lstVendedoresForaFila").kendoMobileListView({
 						dataSource: dsVendForaFila,
-						pullToRefresh: true,
-						appendOnRefresh: false,
 						template: $("#listVendedoresForaFilaTemplate").html(),
-						endlessScroll: true,
-						pullParameters: function(item) {
-							return {
-								since_id: item.id_str,
-								page: 1
-							};
-						}
+						fixedHeaders: true
 					});
 				}
 				
 				function getListaForaExpediente() {
 					$("#lstVendedoresForaExpediente").kendoMobileListView({
 						dataSource: dsVendForaExp,
-						pullToRefresh: true,
-						appendOnRefresh: false,
 						template: $("#listVendedoresForaExpedienteTemplate").html(),
-						endlessScroll: true,
-						pullParameters: function(item) {
-							return {
-								since_id: item.id_str,
-								page: 1
-							};
-						}
-					});
-				}
-				
-                
-				function onInit(e) {					
-					getListaFilaDaVez();
-					getListaForaFilaDaVez();
-					getListaForaExpediente();
-				}
-				
-				function onBeforeShow(e) {
-					console.log("beforeShow");
-				}
-				
-				function onShow(e) {
-					console.log("show");
-				}
-				
-				function getMotivosSaida() {
-					$("#lstMotivosSaida").kendoMobileListView({
-						dataSource: dataSourceMotivosSaida,
-						template: $("#listMotivosSaidaTemplate").html(),
-						//template: "${Motivo}",
-						headerTemplate: "${value}",		
 						fixedHeaders: true
 					});
 				}
 				
-				function editProduct(e) {				
-					app.navigate("#resultadoAtendimento"); //navigates to editor view
-				}
 				
-				function getPerformace(e) {				
-					app.navigate("#grafResultadoAtendimento"); //navigates to editor view
-				}
-				
-				function getMotivos(e) {				
-					app.navigate("#motivosSaida"); //navigates to editor view
-				}
-				
-				function closeModalViewLogin() {
-					$("#modalview-login").kendoMobileModalView("close");
-				}
-				
-				function createChart() {
-					$("#chart").kendoChart({
-						theme: $(document).data("kendoSkin") || "default",
-						title: {
-							text: "Posição de Vendas"
-						},
-						legend: {
-							position: "bottom",
-							labels: {
-								template: "#= text # (#= value #%)"
-							}
-						},
-						seriesDefaults: {
-							labels: {
-								visible: true,
-								format: "{0}%"
-							}
-						},
-						series: [
-							{
-								type: "pie",
-								data: [
-									{
-										category: "Hydro",
-										value: 22
-									}, {
-										category: "Solar",
-										value: 2
-									}, {
-										category: "Nuclear",
-										value: 49
-									}, {
-										category: "Wind",
-										value: 27
-									}
-								]
-							}
-						],
-						tooltip: {
-							visible: true,
-							format: "{0}%"
-						}
-					});
-				}
-				
-				$(document).ready(function() {
-					setTimeout(function() {
-						// Initialize the chart with a delay to make sure
-						// the initial animation is visible
-						createChart();
-				
-						$("#example").bind("kendo:skinChange", function(e) {
-							createChart();
-						});
-					}, 400);
-				})
-				
-				$("#chkVendeu").change(function() {
-					alert(1);
-				});
-				
-				function showPrev() {
-					var scrollview = $("#scrollview").data("kendoMobileScrollView"),
-					pageToNavigate = scrollview.page - 1; //current page - 1
-				
-					if (pageToNavigate >= 0) {
-						scrollview.scrollTo(pageToNavigate);
-					}
-				}
-				
-				function showNext() {
-					var scrollview = $("#scrollview").data("kendoMobileScrollView"),
-					pageToNavigate = scrollview.page + 1; //current page - 1
-				
-					if (pageToNavigate < scrollview.pages - 1) {
-						scrollview.scrollTo(pageToNavigate);
-					}
-				}
-				
-		
+                
 			</script>
-
+			<script>
+				window
+				.kendoMobileApplication = new kendo.mobile.Application(document.body);
+			</script>
 		</body>
 	</html>
 

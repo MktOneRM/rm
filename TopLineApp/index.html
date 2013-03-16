@@ -20,10 +20,10 @@
 
 		<body>
 
-			<div id="v1" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fila da Vez" data-transition="slide">
+			<div id="v1" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fila da Vez" data-transition="pop">
 				<header data-role="header">
 					<div data-role="navbar" style="height: 44px;">
-						<a id="refreshButton" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actionsV1" data-icon="organize"></a>
+						<a id="organizeBtn" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actionsV1" data-icon="organize"></a>
 						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:atualizaFilaNoSalao" data-role="button" data-icon="refresh"></a>
 						<span data-role="view-title"></span>
 					</div>
@@ -49,10 +49,10 @@
 
 			</div>
 
-			<div id="v2" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fora do Salão de Vendas" data-transition="slide">
+			<div id="v2" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fora do Salão de Vendas" data-transition="pop">
 				<header data-role="header">
 					<div data-role="navbar" style="height: 44px;">
-						<a id="refreshButton" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actionsV2" data-icon="organize"></a>
+						<a id="organizeBtn" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actionsV2" data-icon="organize"></a>
 						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:atualizaFilaForaDoSalao" data-role="button" data-icon="refresh"></a>
 						<span data-role="view-title"></span>
 					</div>
@@ -74,10 +74,10 @@
 
 			</div>
 
-			<div id="v3" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fora de expediente" data-transition="slide">
+			<div id="v3" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fora de expediente" data-transition="pop">
 				<header data-role="header">
 					<div data-role="navbar" style="height: 44px;">
-						<a id="refreshButton" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actionsV3" data-icon="organize"></a>
+						<a id="organizeBtn" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actionsV3" data-icon="organize"></a>
 						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:atualizaFilaForaExpediente" data-role="button" data-icon="refresh"></a>
 						<span data-role="view-title"></span>
 					</div>
@@ -100,18 +100,6 @@
 			</div>
 
 			<script type="text/x-kendo-template" id="t1">
-				<img src="${Foto}" />
-				<span>#:VendedorNome#</span>
-			</script>
-
-			<!--
-			<div data-role="view" id="v2" data-layout="mobile-view" data-model="viewModel" data-title="People" data-transition="slide">
-			<label id="t">Title</label>
-			<label id="n">Name</label>
-			<ul id="lv2" data-bind="source:peopleSource" data-role="listview" data-style="inset" data-template="t2"></ul>
-			</div>-->
-
-			<script type="text/x-kendo-template" id="t2">
 				<img src="${Foto}" />
 				<span>#:VendedorNome#</span>
 			</script>

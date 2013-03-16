@@ -217,12 +217,11 @@
 							data: this.get("selectedGroup").People
 						}));
 						app.navigate("#v2");
-					},
-					
+					},						
 					atualizaFilaNoSalao: function() {
 						dsVendFila.options.transport.read.url = baseUrl + "/Vendedor/1";
 						dsVendFila.read();        
-					},
+					},             
 					atualizaFilaForaDoSalao: function() {
 						dsVendForaFila.options.transport.read.url = baseUrl + "/Vendedor/2";
 						dsVendForaFila.read();        
@@ -230,14 +229,13 @@
 					atualizaFilaForaExpediente: function() {
 						dsVendForaExp.options.transport.read.url = baseUrl + "/Vendedor/3";
 						dsVendForaExp.read();        
-					}
-					,atualizaFilaNoSalao: atualizaFilaNoSalao(dsVendFila, 1)
-									
+					}				
 				});
                 
 				function atualizaFilaNoSalao(context, parametro) {
-					context.options.transport.read.url = baseUrl + "/Vendedor/" + parametro;
-					context.read();    
+					console.log(context);				
+					context.options.transport.read.url = baseUrl + "/Vendedor/" + parametro;					
+					context.read();
 				}
 				
 				function getVendedoresFila(e) {						

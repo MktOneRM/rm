@@ -12,7 +12,7 @@
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 
 		<link href="styles/main.css" rel="stylesheet" />
-		
+
 	</head>
 
 	<!DOCTYPE html>
@@ -20,15 +20,83 @@
 
 		<body>
 
-			<div id="v1" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Groups" data-transition="slide">
+			<div id="v1" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fila da Vez" data-transition="slide">
 				<header data-role="header">
-					<!--replaced navbar to not have a back button-->
 					<div data-role="navbar" style="height: 44px;">
-						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:refreshRoutes" data-role="button">Refresh</a>
+						<a id="refreshButton" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actionsV1" data-icon="organize"></a>
+						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:atualizaFilaNoSalao" data-role="button" data-icon="refresh"></a>
 						<span data-role="view-title"></span>
 					</div>
 				</header>
-				<ul id="lv1" data-bind="source:groupSource, click: selectGroup" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>
+
+				<!--Boa Referencia-->
+				<!--<ul id="lv1" data-bind="source:groupSource, click: selectGroup" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>-->
+
+				<ul id="lv1" data-bind="source:dsVendFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>
+
+				<ul id="actionsV1" data-role="actionsheet" data-cancel="Cancelar">
+					<li class="km-actionsheet-title">Selecione operação:</li>
+					<li>
+						<a data-action="getVendedoresFila">No salão de vendas</a>
+					</li>
+					<li>
+						<a data-action="getVendedoresForaFila">Fora do Salão de Vendas</a>
+					</li>
+					<li>
+						<a data-action="getVendedoresForaExpediente">Fora de expediente</a>
+					</li>
+				</ul>
+
+			</div>
+
+			<div id="v2" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fora do Salão de Vendas" data-transition="slide">
+				<header data-role="header">
+					<div data-role="navbar" style="height: 44px;">
+						<a id="refreshButton" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actionsV2" data-icon="organize"></a>
+						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:atualizaFilaForaDoSalao" data-role="button" data-icon="refresh"></a>
+						<span data-role="view-title"></span>
+					</div>
+				</header>
+				<ul id="lv1" data-bind="source:dsVendForaFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>
+
+				<ul id="actionsV2" data-role="actionsheet" data-cancel="Cancelar">
+					<li class="km-actionsheet-title">Selecione operação:</li>
+					<li>
+						<a data-action="getVendedoresFila">No salão de vendas</a>
+					</li>
+					<li>
+						<a data-action="getVendedoresForaFila">Fora do Salão de Vendas</a>
+					</li>
+					<li>
+						<a data-action="getVendedoresForaExpediente">Fora de expediente</a>
+					</li>
+				</ul>
+
+			</div>
+
+			<div id="v3" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fora de expediente" data-transition="slide">
+				<header data-role="header">
+					<div data-role="navbar" style="height: 44px;">
+						<a id="refreshButton" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actionsV3" data-icon="organize"></a>
+						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:atualizaFilaForaExpediente" data-role="button" data-icon="refresh"></a>
+						<span data-role="view-title"></span>
+					</div>
+				</header>
+				<ul id="lv1" data-bind="source:dsVendForaExp" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>
+
+				<ul id="actionsV3" data-role="actionsheet" data-cancel="Cancelar">
+					<li class="km-actionsheet-title">Selecione operação:</li>
+					<li>
+						<a data-action="getVendedoresFila">No salão de vendas</a>
+					</li>
+					<li>
+						<a data-action="getVendedoresForaFila">Fora do Salão de Vendas</a>
+					</li>
+					<li>
+						<a data-action="getVendedoresForaExpediente">Fora de expediente</a>
+					</li>
+				</ul>
+
 			</div>
 
 			<script type="text/x-kendo-template" id="t1">
@@ -36,11 +104,12 @@
 				<span>#:VendedorNome#</span>
 			</script>
 
+			<!--
 			<div data-role="view" id="v2" data-layout="mobile-view" data-model="viewModel" data-title="People" data-transition="slide">
-				<label id="t">Title</label>
-				<label id="n">Name</label>
-				<ul id="lv2" data-bind="source:peopleSource" data-role="listview" data-style="inset" data-template="t2"></ul>
-			</div>
+			<label id="t">Title</label>
+			<label id="n">Name</label>
+			<ul id="lv2" data-bind="source:peopleSource" data-role="listview" data-style="inset" data-template="t2"></ul>
+			</div>-->
 
 			<script type="text/x-kendo-template" id="t2">
 				<img src="${Foto}" />
@@ -101,11 +170,47 @@
 						"PosicaoFila", dir
 						: "asc"
 					}
-				}
-				);
-			                
+				});
+			             
+				//dataSource
+				var dsVendForaFila = new kendo.data.DataSource({                    
+					transport: {						
+						read:  {
+							url: baseUrl + "/Vendedor/2",							
+							type:"GET"      
+							,contentType: "application/json"
+							,dataType: "json"
+						}                 
+					},
+					batch: true,
+					schema: schemaVendedores,					
+					sort: { 
+						field: 
+						"VendedorNome", dir: 
+						"asc" 
+					}	
+				});
+
+				//dataSource
+				var dsVendForaExp = new kendo.data.DataSource({                    
+					transport: {						
+						read:  {
+							url: baseUrl + "/Vendedor/3",							
+							type:"GET"      
+							,contentType: "application/json"
+							,dataType: "json"
+						}                 
+					},
+					batch: true,
+					schema: schemaVendedores,
+					serverPaging: true,
+					sort: { field: "VendedorNome", dir: "asc" }	
+				});
+                
 				var viewModel = kendo.observable({
-					groupSource: dsVendFila,
+					dsVendFila: dsVendFila,
+					dsVendForaFila: dsVendForaFila,
+					dsVendForaExp: dsVendForaExp,
 					selectGroup: function(e) {
 						this.set("selectedGroup", e.dataItem);
 						this.set("peopleSource", new kendo.data.DataSource({
@@ -113,13 +218,43 @@
 						}));
 						app.navigate("#v2");
 					},
-					refreshRoutes: function() {
+					
+					atualizaFilaNoSalao: function() {
 						dsVendFila.options.transport.read.url = baseUrl + "/Vendedor/1";
 						dsVendFila.read();        
+					},
+					atualizaFilaForaDoSalao: function() {
+						dsVendForaFila.options.transport.read.url = baseUrl + "/Vendedor/2";
+						dsVendForaFila.read();        
+					},
+					atualizaFilaForaExpediente: function() {
+						dsVendForaExp.options.transport.read.url = baseUrl + "/Vendedor/3";
+						dsVendForaExp.read();        
 					}
+					,atualizaFilaNoSalao: atualizaFilaNoSalao(dsVendFila, 1)
+									
 				});
                 
-                
+				function atualizaFilaNoSalao(context, parametro) {
+					context.options.transport.read.url = baseUrl + "/Vendedor/" + parametro;
+					context.read();    
+				}
+				
+				function getVendedoresFila(e) {						
+					app.navigate("#v1");    					    
+					atualizaFilaNoSalao(dsVendFila, 1);
+				}
+				
+				function getVendedoresForaFila(e) {					
+					app.navigate("#v2");
+					atualizaFilaNoSalao(dsVendForaFila, 2);
+				}
+				
+				function getVendedoresForaExpediente(e) {
+					app.navigate("#v3");
+					atualizaFilaNoSalao(dsVendForaExp, 3);
+				}
+				
 			</script>
 
 		</body>

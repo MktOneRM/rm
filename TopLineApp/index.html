@@ -12,8 +12,7 @@
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 
 		<link href="styles/main.css" rel="stylesheet" />
-		<link href="styles/ModalViewLogin.css" rel="stylesheet" />
-
+		
 	</head>
 
 	<!DOCTYPE html>
@@ -21,75 +20,51 @@
 
 		<body>
 
-			<!--This is the Flat ListView-->
-			<div data-role="view" id="vendFila" data-title="Salão de Vendas" data-model="viewModel" data-layout="default">
-				<ul id="lstVendedoresFila" data-role="listview" data-Template="listVendedoresFilaTemplate" data-style="inset" data-bind="source: dataSource" >
-				</ul>
-                <a id="btnCreate" data-role="button" type="button" data-bind="click:refreshRoutes">Salvar</a>
-			</div>
-
-			<!--
-			<div data-role="view" id="vendForaFila" data-init="getListaForaFilaDaVez" data-title="Fora do Salão" data-layout="databinding">
-			<ul id="lstVendedoresForaFila">
-			</ul>
-			</div>
-
-			
-			<div data-role="view" id="vendForaExp" data-init="getListaForaExpediente" data-title="Inativo" data-layout="databinding">
-			<ul id="lstVendedoresForaExpediente">
-			</ul>
-			</div>
-			-->
-
-			<!--This is the application layout-->
-			<div data-role="layout" data-id="default">
+			<div id="v1" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Groups" data-transition="slide">
 				<header data-role="header">
-					<div data-role="navbar">
+					<!--replaced navbar to not have a back button-->
+					<div data-role="navbar" style="height: 44px;">
+						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:refreshRoutes" data-role="button">Refresh</a>
 						<span data-role="view-title"></span>
 					</div>
 				</header>
-				<div data-role="footer">
-					<!
-					<div data-role="tabstrip">
-						
-                        
-						<!--
-                        
-						<a href="#vendFila" data-icon="contacts" data-action="viewModel.destroyProduct">Fila</a>
-						<a href="#vendForaFila" data-role="button" class="nav-button" data-icon="contacts">Fora Fila</a>
-						<a href="#vendForaExp"  data-role="button" class="nav-button" data-icon="contacts">Inativo</a>
-                        
-						-->
-
-					</div>
-
-				</div>
+				<ul id="lv1" data-bind="source:groupSource, click: selectGroup" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>
 			</div>
 
-			<script type="text/x-kendo-template" id="listVendedoresFilaTemplate">
-				<!--<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">-->
+			<script type="text/x-kendo-template" id="t1">
 				<img src="${Foto}" />
 				<span>#:VendedorNome#</span>
-				<!--</a>-->
 			</script>
 
-			<script type="text/x-kendo-template" id="listVendedoresForaFilaTemplate">
-				<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">
-					<img src="${Foto}" />
-					<!--<h5>#:VendedorNome#</h5>-->
-				</a>
+			<div data-role="view" id="v2" data-layout="mobile-view" data-model="viewModel" data-title="People" data-transition="slide">
+				<label id="t">Title</label>
+				<label id="n">Name</label>
+				<ul id="lv2" data-bind="source:peopleSource" data-role="listview" data-style="inset" data-template="t2"></ul>
+			</div>
+
+			<script type="text/x-kendo-template" id="t2">
+				<img src="${Foto}" />
+				<span>#:VendedorNome#</span>
 			</script>
 
-			<script type="text/x-kendo-template" id="listVendedoresForaExpedienteTemplate">
-				<a data-rel="actionsheet" href="\\#actions" data-actionsheet-context="#= IdVendedor #">
-					<img src="${Foto}" />
-					<!--<h5>#:VendedorNome#</h5>-->
-				</a>
-			</script>
+			<!--default mobile settings-->
+			<div data-role="layout" data-id="mobile-view">
+				<header data-role="header">
+					<div data-role="navbar">
+						<a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+						<span data-role="view-title"></span>
+					</div>
+				</header>
+			</div>
 
 			<script>
 	          
 				var app;
+      
+				$(document).ready(function() {
+					//Start the mobile application
+					app = new kendo.mobile.Application($(document.body), {});
+				});
                 
 				//Url
 				var baseUrl = "http://localhost:50000/api";
@@ -127,96 +102,24 @@
 						: "asc"
 					}
 				}
-				
 				);
-				
-				/*
-				//dataSource
-				var dsVendForaFila = new kendo.data.DataSource({                    
-				transport: {						
-				read:  {
-				url: baseUrl + "/Vendedor/2",							
-				type:"GET"      
-				,contentType: "application/json"
-				,dataType: "json"
-				}                 
-				},
-				batch: true,
-				schema: schemaVendedores,
-				sort: { field: "VendedorNome", dir: "asc" }	
-				});
-				
-				//dataSource
-				var dsVendForaExp = new kendo.data.DataSource({                    
-				transport: {						
-				read:  {
-				url: baseUrl + "/Vendedor/3",							
-				type:"GET"      
-				,contentType: "application/json"
-				,dataType: "json"
-				}                 
-				},
-				batch: true,
-				schema: schemaVendedores,
-				sort: { field: "VendedorNome", dir: "asc" }	
-				})	
-				*/
-				
-				/*
-				function getListaFilaDaVez() {
-				$("#lstVendedoresFila").kendoMobileListView({
-				dataSource: dsVendFila,
-				template: $("#listVendedoresFilaTemplate").html(),
-				fixedHeaders: true
-				});
-				}
-				
-				function getListaForaFilaDaVez() {
-				$("#lstVendedoresForaFila").kendoMobileListView({
-				dataSource: dsVendForaFila,
-				template: $("#listVendedoresForaFilaTemplate").html(),
-				fixedHeaders: true
-				});
-				}
-				
-				function getListaForaExpediente() {
-				$("#lstVendedoresForaExpediente").kendoMobileListView({
-				dataSource: dsVendForaExp,
-				template: $("#listVendedoresForaExpedienteTemplate").html(),
-				fixedHeaders: true
-				});
-				}
-				*/
-				
-				function destroyProduct(e) {				
-					console.log(viewModel);
-				}
-				
-				
-				
-				function editorViewInit(e) {
-					validator = $("#form").kendoValidator({ //initialize the validator
-						messages: {
-							required: function(input) { //create a custom message function
-								input.attr("placeholder", input.attr("name") + " is required");
-							}
-						}
-					}).data("kendoValidator");
-				}
-				
-				//Inicia a APP e informa quais objetos serão observados pelo ViewModel
-				var app = new kendo.mobile.Application($(document.body)),					           
-				validator,
-				viewModel = kendo.observable({
-					dataSource: dsVendFila,
-					destroyProduct: destroyProduct,
-					
+			                
+				var viewModel = kendo.observable({
+					groupSource: dsVendFila,
+					selectGroup: function(e) {
+						this.set("selectedGroup", e.dataItem);
+						this.set("peopleSource", new kendo.data.DataSource({
+							data: this.get("selectedGroup").People
+						}));
+						app.navigate("#v2");
+					},
 					refreshRoutes: function() {
 						dsVendFila.options.transport.read.url = baseUrl + "/Vendedor/1";
 						dsVendFila.read();        
 					}
-				}); 
-				
+				});
+                
+                
 			</script>
 
 		</body>

@@ -146,14 +146,14 @@
 			</div>
 
 			<!--Login-->
-			<div data-role="modalview" id="modalview-login" style="width: 95%; height: 190px;" data-layout="mobile-view" >
+			<div data-role="modalview" id="modalview-login" style="width: 95%; height: 190px;" data-layout="mobile-view" data-model="viewModel" >
 				<div data-role="header">
 					<div data-role="navbar">
 						<h6>Confirmação</h6>
 						<a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancelar</a>
 					</div>
 				</div>
-                <span>Confirmar?</span>
+				<span>Confirmar?</span>
 				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Sim</a>
 				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Nao</a>
 			</div>
@@ -165,7 +165,7 @@
 			</script>
 
 			<script type="text/x-kendo-template" id="t2">				
-				<a data-rel="modalview" href="\\#modalview-login" id="modalview-open-button">
+				<a data-rel="modalview" href="\\#" id="modalview-open-button1">
 					<img src="${Foto}" />
 				</a>
 			</script>
@@ -181,8 +181,6 @@
 			</script>
 
 			<script>
-			
-				var app;
 				
 				$(document).ready(function() {
 					//Start the mobile application
@@ -226,6 +224,30 @@
 							type:"GET",
 							contentType: "application/json",
 							dataType: "json"
+						} 
+						,
+						update: {
+							url:baseUrl + "/Vendedor/1",							
+							type:"PUT"
+							,contentType:"application/json"
+							,dataType: "json"
+						},
+						destroy: {
+							url:baseUrl + "/Vendedor/1"                            
+							,type:"DELETE"
+							,contentType:"application/json"   
+							,dataType: "json"
+						},
+						create: {
+							url:baseUrl + "/Vendedor/1"												
+							,type:"POST"                            
+							,contentType:"application/json"
+							,dataType: "json" 
+						},
+						parameterMap: function(data, operation) {
+							if (operation !== "read" && data.models) {
+								return kendo.stringify([data.models[0]]);
+							}
 						}                 
 					},
 					batch: true,
@@ -245,7 +267,30 @@
 							type:"GET"      
 							,contentType: "application/json"
 							,dataType: "json"
-						}                 
+						},
+						update: {
+							url: baseUrl + "/Vendedor/2",							
+							type:"PUT"
+							,contentType:"application/json"
+							,dataType: "json"
+						},
+						destroy: {
+							url: baseUrl + "/Vendedor/2"                          
+							,type:"DELETE"
+							,contentType:"application/json"   
+							,dataType: "json"
+						},
+						create: {
+							url: baseUrl + "/Vendedor/2"													
+							,type:"POST"                            
+							,contentType:"application/json"
+							,dataType: "json" 
+						},
+						parameterMap: function(data, operation) {
+							if (operation !== "read" && data.models) {
+								return kendo.stringify([data.models[0]]);
+							}
+						}
 					},
 					batch: true,
 					schema: schemaVendedores,					
@@ -264,8 +309,31 @@
 							type:"GET"      
 							,contentType: "application/json"
 							,dataType: "json"
-						}                 
-					},
+						},
+						update: {
+							url: baseUrl + "/Vendedor/3",							
+							type:"PUT"
+							,contentType:"application/json"
+							,dataType: "json"
+						},
+						destroy: {
+							url: baseUrl + "/Vendedor/3"                          
+							,type:"DELETE"
+							,contentType:"application/json"   
+							,dataType: "json"
+						},
+						create: {
+							url: baseUrl + "/Vendedor/3"													
+							,type:"POST"                            
+							,contentType:"application/json"
+							,dataType: "json" 
+						},
+						parameterMap: function(data, operation) {
+							if (operation !== "read" && data.models) {
+								return kendo.stringify([data.models[0]]);
+							}
+						}                        
+					},             
 					batch: true,
 					schema: schemaVendedores,
 					serverPaging: true,
@@ -286,20 +354,19 @@
 					schema: schemaMotivosSaida
 				});
 				
-                
 				var viewModel = kendo.observable({
 					dsVendFila: dsVendFila,
 					dsVendForaFila: dsVendForaFila,
 					dsVendForaExp: dsVendForaExp,
-					dsMotivosSaida: dsMotivosSaida,
+					dsMotivosSaida: dsMotivosSaida, 
+					saveChanges: saveChanges,
 					selectGroup: function(e) {
 						this.set("selectedGroup", e.dataItem);
 						this.set("peopleSource", new kendo.data.DataSource({
 							data: this.get("selectedGroup").People
 						}));
 						app.navigate("#v2");
-					},
-					
+					},					
 					atualizaFilaNoSalao: function() {
 						dsVendFila.options.transport.read.url = baseUrl + "/Vendedor/1";
 						dsVendFila.read();        
@@ -315,7 +382,7 @@
 					atualizaMotivosSaida: function() {
 						dsMotivosSaida.options.transport.read.url = baseUrl + "/Motivos";
 						dsMotivosSaida.read();        
-					}	
+					}
 				});
 				
 				function atualizaFilaNoSalao(context, parametro) {
@@ -323,7 +390,8 @@
 					context.read();
 				}
 				
-				function getVendedoresFila(e) {		
+				function getVendedoresFila(e) {	
+					console.log(e);
 					app.navigate("#v1"); 
 					atualizaFilaNoSalao(dsVendFila, 1);
 				}
@@ -341,17 +409,20 @@
 				function showResultadoAtendimento() {
 					app.navigate("#resultadoAtendimento");
 				}
-				                
+				
 				function showMotivosSaidaFila() {
 					app.navigate("#motivosSaida");
 					dsMotivosSaida.options.transport.read.url = baseUrl + "/Motivos";
 					dsMotivosSaida.read(); 
 				}
-                
+				
+				function saveChanges(e) {
+				}
+				
 				function closeModalViewLogin() {
 					$("#modalview-login").kendoMobileModalView("close");
 				}
-                
+				
 			</script>
 
 		</body>

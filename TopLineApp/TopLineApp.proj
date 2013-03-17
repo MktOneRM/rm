@@ -34,6 +34,7 @@
     </Folder>
     <Folder Include="Images" />
     <Folder Include="html" />
+    <Folder Include="kendo\styles\default" />
     <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
@@ -61,17 +62,42 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="html\HtmlPage.html" />
+    <Content Include="html\HtmlPage1.html" />
+    <Content Include="Images\berlin.jpg" />
+    <Content Include="Images\bonn.jpg" />
+    <Content Include="Images\boston.jpg" />
+    <Content Include="Images\cairo.jpg" />
+    <Content Include="Images\cancun.jpg" />
+    <Content Include="Images\cape-town.jpg" />
     <Content Include="Images\Contacts.jpeg" />
     <Content Include="Images\Foto1.jpg" />
     <Content Include="Images\Foto2.jpg" />
     <Content Include="Images\Foto3.jpg" />
     <Content Include="Images\Foto4.jpg" />
     <Content Include="Images\Foto5.jpg" />
+    <Content Include="Images\liverpool.jpg" />
+    <Content Include="Images\london.jpg" />
+    <Content Include="Images\melbourne.jpg" />
+    <Content Include="Images\new-delhi.jpg" />
+    <Content Include="Images\nice.jpg" />
+    <Content Include="Images\paris.jpg" />
     <Content Include="Images\pattern1.png" />
+    <Content Include="Images\pattern10.png" />
+    <Content Include="Images\pattern2.png" />
+    <Content Include="Images\pattern3.png" />
+    <Content Include="Images\pattern4.png" />
+    <Content Include="Images\pattern5.png" />
+    <Content Include="Images\pattern6.png" />
+    <Content Include="Images\pattern7.png" />
+    <Content Include="Images\pattern8.png" />
+    <Content Include="Images\pattern9.png" />
+    <Content Include="Images\san-francisco.jpg" />
+    <Content Include="Images\sydney.jpg" />
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />
+    <Content Include="kendo\styles\default\sprite.png" />
     <Content Include="kendo\styles\images\back.png" />
     <Content Include="kendo\styles\images\KendoUI.ttf" />
     <Content Include="kendo\styles\images\KendoUI.woff" />
@@ -90,6 +116,8 @@
     <Content Include="styles\ModalViewLogin.css" />
     <Content Include="styles\ScrollView.css" />
     <Content Include="styles\StyleSheet.css" />
+    <Content Include="styles\StyleSheet1.css" />
+    <Content Include="styles\StyleSheet2.css" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

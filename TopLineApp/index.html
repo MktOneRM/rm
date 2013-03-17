@@ -1,440 +1,437 @@
 <!DOCTYPE html>
+
+<head>
+	<title></title>
+	<meta charset="utf-8" />
+	<script src="cordova.js"></script>
+	<script src="kendo/js/jquery.min.js"></script>
+	<script src="kendo/js/kendo.all.min.js"></script>
+
+	<link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
+	<link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
+	<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+
+	<link href="styles/main.css" rel="stylesheet" />
+
+</head>
+
 <html>
-	<head>
-		<title></title>
-		<meta charset="utf-8" />
-		<script src="cordova.js"></script>
-		<script src="kendo/js/jquery.min.js"></script>
-		<script src="kendo/js/kendo.all.min.js"></script>
 
-		<link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
-		<link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
-		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+	<body>
 
-		<link href="styles/main.css" rel="stylesheet" />
+		<div id="lv1" data-role="view" data-model="viewModel" data-title="Fila da Vez" data-layout="mobile-tabstrip" data-init="getVendedoresFila" data-show="getVendedoresFila" >
+			<ul data-bind="source:dsVendFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>
 
-	</head>
+			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar">
+				<li class="km-actionsheet-title">Selecione operação:</li>
+				<li>
+					<a data-action="atendimento" data-icon="add">Resultado Atendimento</a>
+				</li>
+				<li>
+					<a data-action="showMotivosSaidaFila">Sair fila da Vez</a>
+				</li>
+			</ul>
 
-	<!DOCTYPE html>
-	<html>
+		</div>
 
-		<body>
+		<div id="lv2" data-role="view"  data-model="viewModel" data-title="Fora da Fila" data-layout="mobile-tabstrip" data-init="getVendedoresForaFila" data-show="getVendedoresForaFila">
+			<ul data-bind="source:dsVendForaFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t2"></ul>
+		</div>
 
-			<div id="frmPrincipal" data-role="view" data-layout="mobile-view" data-title="Menu Principal" data-transition="pop">
+		<div id="lv3" data-role="view"  data-model="viewModel" data-title="Outros turnos" data-layout="mobile-tabstrip" data-init="getVendedoresForaExpediente" data-show="getVendedoresForaExpediente">
+			<ul data-bind="source:dsVendForaExp" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t3"></ul>
+		</div>
 
-				<header data-role="header">
-					<div data-role="navbar" style="height: 44px;">
-						<a id="organizeBtn" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actFila" data-icon="organize"></a>
-						<span data-role="view-title"></span>
-					</div>
-				</header>
-
-				<ul id="actFila" data-role="actionsheet" data-cancel="Cancelar">
-					<li class="km-actionsheet-title">Selecione operação:</li>
-					<li>
-						<a data-action="getVendedoresFila">No salão de vendas</a>
-					</li>
-					<li>
-						<a data-action="getVendedoresForaFila">Fora do Salão de Vendas</a>
-					</li>
-					<li>
-						<a data-action="getVendedoresForaExpediente">Fora de expediente</a>
-					</li>
-				</ul>
-
-				<div data-role="layout" data-id="mobile-view">
-					<header data-role="header">
-						<div data-role="navbar">
-							<a class="nav-button" data-align="left" data-role="backbutton">Back</a>
-							<span data-role="view-title"></span>
-						</div>
-					</header>
+		<div id="resultadoAtendimento" data-init="editorViewInit" data-role="view" data-title="Resultado Atendimento" data-layout="default" data-model="viewModel" >
+			<div data-role="header">
+				<div data-role="navbar">
+					<span>Atendimento</span>
 				</div>
-
 			</div>
+			<ul id="form" data-role="listview" data-style="inset" data-type="group">
 
-			<div id="v1" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fila da Vez" data-transition="pop">
-				<header data-role="header">
-					<div data-role="navbar" style="height: 44px;">
-						<a id="organizeBtn" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actFila" data-icon="organize"></a>
-						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:atualizaFilaNoSalao" data-role="button" data-icon="refresh"></a>
-						<span data-role="view-title"></span>
-					</div>
-				</header>
-				<!--Boa Referencia-->
-				<!--<ul id="lv1" data-bind="source:groupSource, click: selectGroup" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>-->
-				<ul id="lv1" data-bind="source:dsVendFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>
-
-				<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar">
-					<li class="km-actionsheet-title">Selecione operação:</li>
-					<li>
-						<a data-action="showResultadoAtendimento">Resultado Atendimento</a>
-					</li>
-					<li>
-						<a data-action="showMotivosSaidaFila">Sair fila da Vez</a>
-					</li>
-				</ul>
-
-			</div>
-
-			<div id="v2" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fora do Salão de Vendas" data-transition="pop">
-				<header data-role="header">
-					<div data-role="navbar" style="height: 44px;">
-						<a id="organizeBtn" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actFila" data-icon="organize"></a>
-						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:atualizaFilaForaDoSalao" data-role="button" data-icon="refresh"></a>
-						<span data-role="view-title"></span>
-					</div>
-				</header>
-				<ul id="lv1" data-bind="source:dsVendForaFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t2"></ul>
-			</div>
-
-			<div id="v3" data-role="view" data-layout="mobile-view" data-model="viewModel" data-title="Fora de expediente" data-transition="pop">
-				<header data-role="header">
-					<div data-role="navbar" style="height: 44px;">
-						<a id="organizeBtn" class="nav-button" data-align="left" data-role="button" data-rel="actionsheet" href="#actFila" data-icon="organize"></a>
-						<a id="refreshButton" class="nav-button" data-align="right" data-bind="click:atualizaFilaForaExpediente" data-role="button" data-icon="refresh"></a>
-						<span data-role="view-title"></span>
-					</div>
-				</header>
-				<ul id="lv1" data-bind="source:dsVendForaExp" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t3"></ul>
-			</div>
-
-			<div id="resultadoAtendimento" data-role="view" data-title="Resultado Atendimento" data-layout="mobile-view" data-model="viewModel" >
-				<div data-role="header">
-					<div data-role="navbar">
-						<span>Atendimento</span>
-						<a href="#v1" data-role="button" data-align="right">Voltar</a>
-					</div>
-				</div>
-				<ul id="form" data-role="listview" data-style="inset">
-
-					<div>
+				<li>
+					<ul>
 						<li>
-							<h4>
-								<img src="images/Contacts.jpeg" width=80px/> Rafael Fernandes
-							</h4>
+							<label>
+								Vendedor:
+								<input id="idVendedor" name="idVendedor" type="text" required="required" data-bind="value: atendimento.idVendedor" />
+							</label>
 						</li>
-					</div>
-					<li >
-						Vendeu:
-						<input id="chkVendeu" type="checkbox" data-role="switch" data-bind="checked: checked">
-					</li>
+					</ul>
+				</li>
 
-					<li>
-						<label>
-							Valor da Venda:
-							<input id="valorVenda" name="ValorVenda"type="number" value="0" min="0" />
-						</label>
-					</li>
-					<li>
-						<label>
-							Qtde de Peças:
-							<input id="qtdePecas" name="QtdePecas"type="number" value="0" min="0" />
-						</label>
-					</li>
-				</ul>
-			</div>
+				<li >
 
-			<div id="motivosSaida" data-role="view" data-title="Motivo Saída" data-layout="mobile-view" data-model="viewModel" >
-				<div data-role="header">
-					<div data-role="navbar">
-						<span>Motivos Saída</span>
-						<a href="#v1" data-role="button" data-align="right">Voltar</a>
-					</div>
+					<ul>
+						<li>
+							<label>
+								Vendeu:
+								<input id="chkVendeu" type="checkbox" data-role="switch" checked >
+							</label>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					Dados da Venda
+					<ul>
+
+						<li>
+							<label>
+								Valor Venda:
+								<input id="valorVenda" name="ValorVenda" type="number" required="required" data-bind="value: atendimento.ValorVenda" />
+							</label>
+						</li>
+						<li>
+							<label>
+								Qtde de Pecas:
+								<input id="qtdeDePecas" name="QtdeDePecas" type="number" required="required" data-bind="value: atendimento.QtdeDePecas"/>
+							</label>
+						</li>
+
+					</ul>
+
+				</li>
+
+			</ul>
+			<a id="btnCreate" data-role="button" type="button" data-bind="events: {click: salvarAtendimento}">Salvar</a>
+			<a id="btnCancel" data-role="button" type="button" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
+		</div>
+
+		<div data-role="layout" data-id="mobile-tabstrip">
+			<header data-role="header">
+				<div data-role="navbar">
+					<span data-role="view-title"></span>
+					<a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
 				</div>
-				<ul id="lstMotivosSaida" data-bind="source:dsMotivosSaida" data-role="listview" data-auto-bind="false" data-style="inset" data-template="listMotivosSaidaTemplate"></ul>
-			</div>
+			</header>
 
-			<!--Login-->
-			<div data-role="modalview" id="modalview-login" style="width: 95%; height: 190px;" data-layout="mobile-view" data-model="viewModel" >
-				<div data-role="header">
-					<div data-role="navbar">
-						<h6>Confirmação</h6>
-						<a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancelar</a>
-					</div>
+			<p>TabStrip</p>
+
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#lv1" data-icon="contacts">Fila </a>
+					<a href="#lv2" data-icon="stop">Ausentes </a>
+					<a href="#lv3" data-icon="contacts">Expediente </a>
 				</div>
-
-				<ul>
-					<li>
-						Nome do Produto: <span data-bind="text: ProductName"></span>
-					</li>
-				</ul>
-
-				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Sim</a>
-				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Nao</a>
 			</div>
+		</div>
 
-			<script type="text/x-kendo-template" id="t1">
-				<a data-rel="actionsheet" href="\\#actAcaoVendedorFila">
-					<img src="${Foto}" />
-				</a>
-			</script>
-
-			<script type="text/x-kendo-template" id="t2">				
-				<a data-rel="modalview" href="\\#modalview-login" id="modalview-open-button1">
-					<img src="${Foto}" />
-				</a>
-			</script>
-
-			<script type="text/x-kendo-template" id="t3">
+		<script type="text/x-kendo-template" id="t1">
+			<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= IdVendedor #">
 				<img src="${Foto}" />
-			</script>
+			</a>
+		</script>
 
-			<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">
-				<a class="details-link" data-role="listview-link">
-					<a>#:Motivo#</a>
-				</a>
-			</script>
+		<script type="text/x-kendo-template" id="t2">
+			<img src="${Foto}" />
+		</script>
 
-			<script>
-				
-				$(document).ready(function() {
-					//Start the mobile application
-					app = new kendo.mobile.Application($(document.body), {});
-				});
-				
-				//Url
-				var baseUrl = "http://localhost:50000/api";
-				
-				//schema
-				var schemaVendedores = { 
-					model: {
-						id: "IdVendedor",
-						fields: {
-							IdVendedor: { editable: false, nullable: false },
-							VendedorNome: { editable: false, nullable: false },
-							VendedorApelido: { editable: false, nullable: false },
-							Fila: { editable: false, nullable: false },
-							PosicaoFila: { editable: false, nullable: false },            
-							Foto: { editable: false, nullable: false }
-						} 
-					}
-				};
+		<script type="text/x-kendo-template" id="t3">
+			<img src="${Foto}" />
+		</script>
 
-				//schemaMotivosSaidaSalao
-				var schemaMotivosSaida = { 
-					model: {
-						id: "idMotivo",
-						fields: {
-							idMotivo: { editable: false, nullable: false },
-							Motivo: { editable: false, nullable: false }
-						} 
-					}
-				};
+		<script>
 				
-				//dataSource
-				var dsVendFila = new kendo.data.DataSource({                    
-					transport: {						
-						read:  {
-							url: baseUrl + "/Vendedor/1",							
-							type:"GET",
-							contentType: "application/json",
-							dataType: "json"
-						} 
-						,
-						update: {
-							url:baseUrl + "/Vendedor/1",							
-							type:"PUT"
-							,contentType:"application/json"
-							,dataType: "json"
-						},
-						destroy: {
-							url:baseUrl + "/Vendedor/1"                            
-							,type:"DELETE"
-							,contentType:"application/json"   
-							,dataType: "json"
-						},
-						create: {
-							url:baseUrl + "/Vendedor/1"												
-							,type:"POST"                            
-							,contentType:"application/json"
-							,dataType: "json" 
-						},
-						parameterMap: function(data, operation) {
-							if (operation !== "read" && data.models) {
-								return kendo.stringify([data.models[0]]);
-							}
-						}                 
+			$(document).ready(function() {
+				//Start the mobile application
+				app = new kendo.mobile.Application($(document.body), {});
+			});
+				
+			//Url
+			var baseUrl = "http://localhost:50000/api";
+				
+			//schema
+			var schemaVendedores = { 
+				model: {
+					id: "IdVendedor",
+					fields: {
+						IdVendedor: { editable: false, nullable: false },
+						VendedorNome: { editable: false, nullable: false },
+						VendedorApelido: { editable: false, nullable: false },
+						Fila: { editable: false, nullable: false },           
+						Foto: { editable: false, nullable: false }
+					} 
+				}
+			};
+            
+			//Schema Atendimento
+			var schemaAtendimento = { 
+				model: {
+					id: "IdVendedor",
+					fields:{
+						IdVendedor: { type: "int", validation: { required: true, min: 0} },
+						ValorVenda: { type: "number", validation: { required: true, min: 0} },						
+						QtdeDePecas: { type: "number", validation: { required: true, min: 0} }
+					} 
+				}
+			};
+			
+			//schemaMotivosSaidaSalao
+			var schemaMotivosSaida = { 
+				model: {
+					id: "idMotivo",
+					fields: {
+						idMotivo: { editable: false, nullable: false },
+						Motivo: { editable: false, nullable: false }
+					} 
+				}
+			};
+			
+			//dataSource
+			var dsVendFila = new kendo.data.DataSource({                    
+				transport: {						
+					read:  {
+						url: baseUrl + "/Vendedor/1",							
+						type:"GET",
+						contentType: "application/json",
+						dataType: "json"
+					} 
+					,
+					update: {
+						url:baseUrl + "/Vendedor/1",							
+						type:"PUT"
+						,contentType:"application/json"
+						,dataType: "json"
 					},
-					batch: true,
-					schema: schemaVendedores,                    
-					sort: {
-						field:
-						"PosicaoFila", dir
-						: "asc"
-					}
-				});
-				
-				//dataSource
-				var dsVendForaFila = new kendo.data.DataSource({                    
-					transport: {						
-						read:  {
-							url: baseUrl + "/Vendedor/2",							
-							type:"GET"      
-							,contentType: "application/json"
-							,dataType: "json"
-						},
-						update: {
-							url: baseUrl + "/Vendedor/2",							
-							type:"PUT"
-							,contentType:"application/json"
-							,dataType: "json"
-						},
-						destroy: {
-							url: baseUrl + "/Vendedor/2"                          
-							,type:"DELETE"
-							,contentType:"application/json"   
-							,dataType: "json"
-						},
-						create: {
-							url: baseUrl + "/Vendedor/2"													
-							,type:"POST"                            
-							,contentType:"application/json"
-							,dataType: "json" 
-						},
-						parameterMap: function(data, operation) {
-							if (operation !== "read" && data.models) {
-								return kendo.stringify([data.models[0]]);
-							}
+					destroy: {
+						url:baseUrl + "/Vendedor"                            
+						,type:"DELETE"
+						,contentType:"application/json"   
+						,dataType: "json"
+					},
+					parameterMap: function(data, operation) {
+						if (operation !== "read" && data.models) {
+							return kendo.stringify([data.models[0]]);
 						}
+					}                 
+				},
+				batch: true,
+				schema: schemaVendedores,                    
+				sort: {
+					field:
+					"IdVendedor", dir
+					: "asc"
+				}
+			});
+			
+			//dataSource
+			var dsVendForaFila = new kendo.data.DataSource({                    
+				transport: {						
+					read:  {
+						url: baseUrl + "/Vendedor/2",							
+						type:"GET"      
+						,contentType: "application/json"
+						,dataType: "json"
 					},
-					batch: true,
-					schema: schemaVendedores,					
-					sort: { 
-						field: 
-						"VendedorNome", dir: 
-						"asc" 
-					}	
-				});
-				
-				//dataSource
-				var dsVendForaExp = new kendo.data.DataSource({                    
-					transport: {						
-						read:  {
-							url: baseUrl + "/Vendedor/3",							
-							type:"GET"      
-							,contentType: "application/json"
-							,dataType: "json"
-						},
-						update: {
-							url: baseUrl + "/Vendedor/3",							
-							type:"PUT"
-							,contentType:"application/json"
-							,dataType: "json"
-						},
-						destroy: {
-							url: baseUrl + "/Vendedor/3"                          
-							,type:"DELETE"
-							,contentType:"application/json"   
-							,dataType: "json"
-						},
-						create: {
-							url: baseUrl + "/Vendedor/3"													
-							,type:"POST"                            
-							,contentType:"application/json"
-							,dataType: "json" 
-						},
-						parameterMap: function(data, operation) {
-							if (operation !== "read" && data.models) {
-								return kendo.stringify([data.models[0]]);
-							}
-						}                        
-					},             
-					batch: true,
-					schema: schemaVendedores,
-					serverPaging: true,
-					sort: { field: "VendedorNome", dir: "asc" }	
-				});
-				
-				//dataSource
-				var dsMotivosSaida = new kendo.data.DataSource({                    
-					transport: {						
-						read:  {
-							url: baseUrl + "/Motivos",							
-							type:"GET"      
-							,contentType: "application/json"
-							,dataType: "json"
-						},
+					update: {
+						url: baseUrl + "/Vendedor/2",							
+						type:"PUT"
+						,contentType:"application/json"
+						,dataType: "json"
 					},
-					batch: true,
-					schema: schemaMotivosSaida
-				});
-				
-				var viewModel = kendo.observable({
-					dsVendFila: dsVendFila,
-					dsVendForaFila: dsVendForaFila,
-					dsVendForaExp: dsVendForaExp,
-					dsMotivosSaida: dsMotivosSaida, 
-					saveChanges: saveChanges,
-					selectGroup: function(e) {
-						this.set("selectedGroup", e.dataItem);
-						this.set("peopleSource", new kendo.data.DataSource({
-							data: this.get("selectedGroup").People
-						}));
-						app.navigate("#v2");
-					},					
-					atualizaFilaNoSalao: function() {
-						dsVendFila.options.transport.read.url = baseUrl + "/Vendedor/1";
-						dsVendFila.read();        
-					},             
-					atualizaFilaForaDoSalao: function() {
-						dsVendForaFila.options.transport.read.url = baseUrl + "/Vendedor/2";
-						dsVendForaFila.read();        
-					},
-					atualizaFilaForaExpediente: function() {
-						dsVendForaExp.options.transport.read.url = baseUrl + "/Vendedor/3";
-						dsVendForaExp.read();        
-					},	
-					atualizaMotivosSaida: function() {
-						dsMotivosSaida.options.transport.read.url = baseUrl + "/Motivos";
-						dsMotivosSaida.read();        
+					parameterMap: function(data, operation) {
+						if (operation !== "read" && data.models) {
+							return kendo.stringify([data.models[0]]);
+						}
 					}
-				});
-				
-				function atualizaFilaNoSalao(context, parametro) {
-					context.options.transport.read.url = baseUrl + "/Vendedor/" + parametro;					
-					context.read();
+				},
+				batch: true,
+				schema: schemaVendedores,					
+				sort: { 
+					field: 
+					"VendedorNome", dir: 
+					"asc" 
+				}	
+			});
+			
+			//dataSource
+			var dsVendForaExp = new kendo.data.DataSource({                    
+				transport: {						
+					read:  {
+						url: baseUrl + "/Vendedor/3",							
+						type:"GET"      
+						,contentType: "application/json"
+						,dataType: "json"
+					},
+					update: {
+						url: baseUrl + "/Vendedor/3",							
+						type:"PUT"
+						,contentType:"application/json"
+						,dataType: "json"
+					},
+					parameterMap: function(data, operation) {
+						if (operation !== "read" && data.models) {
+							return kendo.stringify([data.models[0]]);
+						}
+					}                        
+				},             
+				batch: true,
+				schema: schemaVendedores,
+				serverPaging: true,
+				sort: { field: "VendedorNome", dir: "asc" }	
+			});
+			
+			//dataSource
+			var dsMotivosSaida = new kendo.data.DataSource({                    
+				transport: {						
+					read:  {
+						url: baseUrl + "/Motivos",							
+						type:"GET"      
+						,contentType: "application/json"
+						,dataType: "json"
+					},
+				},
+				batch: true,
+				schema: schemaMotivosSaida
+			});
+			
+			//dataSource Atendimento
+			var dsAtendimento = new kendo.data.DataSource({                    
+				transport: {						
+					read:  {
+						url: baseUrl + "/Atendimento/1",							
+						type:"GET"      
+						,contentType: "application/json"
+						,dataType: "json"
+					},
+					create: {
+						url:baseUrl + "/Atendimento"													
+						,type:"POST"                            
+						,contentType:"application/json"
+						,dataType: "json" 
+					},
+					parameterMap: function(data, operation) {
+						if (operation !== "read" && data.models) {							
+							return kendo.stringify(data.models[0]);
+						}
+					}
+				},
+				batch: true,
+				schema: schemaAtendimento
+			});
+			
+            
+			function atendimento(e) {
+				var novoAtendimento = this.dsAtendimento.add(); 
+				viewModel.set("atendimento", novoAtendimento); 
+			
+				var vendedor = viewModel.dsVendFila.get(e.context);
+				viewModel.set("vendedorSelecionado", vendedor); 
+			
+				app.navigate("#resultadoAtendimento"); //navigates to editor view
+			}
+			
+			function salvarAtendimento (e) {
+				if (validator.validate()) { //validates the input
+					
+                    this.dsAtendimento.sync(); //synchronizes changes through the transport	                
+					console.log(this.dsAtendimento);
+			
+					//Atualiza a posicao do vendedor na fila
+					var vend = viewModel.vendedorSelecionado;			
+					               
+					this.dsVendFila.remove(vend); //removes the product from the DataSource
+					this.dsVendFila.sync(); //synchronizes changes through the transport
+			
+					getVendedoresFila();
+                    app.navigate("#lv1");
 				}
-				
-				function getVendedoresFila(e) {	
-					console.log(e);
-					app.navigate("#v1"); 
-					atualizaFilaNoSalao(dsVendFila, 1);
-				}
-				
-				function getVendedoresForaFila(e) {					
+			}
+			
+			function cancelarAtendimento() {
+				this.dsAtendimento.cancelChanges(); //cancels the changes made to the DataSource after the last sync
+				app.navigate("#lv1"); //navigates to main view                
+			}
+			
+			function editorViewInit(e) {
+				validator = $("#form").kendoValidator({ //initialize the validator
+					messages: {
+						required: function(input) { //create a custom message function
+							input.attr("placeholder", input.attr("name") + " is required");
+						}
+					}
+				}).data("kendoValidator");
+			}
+			
+			var viewModel = kendo.observable({
+				dsVendFila: dsVendFila,
+				dsVendForaFila: dsVendForaFila,
+				dsVendForaExp: dsVendForaExp,
+				dsMotivosSaida: dsMotivosSaida,
+				dsAtendimento: dsAtendimento,
+				vendedorSelecionado: {},
+				atendimento: {},
+				salvarAtendimento: salvarAtendimento,
+				cancelarAtendimento: cancelarAtendimento,
+				selectGroup: function(e) {
+					this.set("selectedGroup", e.dataItem);
+					this.set("peopleSource", new kendo.data.DataSource({
+						data: this.get("selectedGroup").People
+					}));
 					app.navigate("#v2");
-					atualizaFilaNoSalao(dsVendForaFila, 2);
-				}
-				
-				function getVendedoresForaExpediente(e) {
-					app.navigate("#v3");
-					atualizaFilaNoSalao(dsVendForaExp, 3);
-				}
-				
-				function showResultadoAtendimento() {
-					app.navigate("#resultadoAtendimento");
-				}
-				
-				function showMotivosSaidaFila() {
-					app.navigate("#motivosSaida");
+				},					
+				atualizaFilaNoSalao: function() {
+					dsVendFila.options.transport.read.url = baseUrl + "/Vendedor/1";
+					dsVendFila.read();        
+				},             
+				atualizaFilaForaDoSalao: function() {
+					dsVendForaFila.options.transport.read.url = baseUrl + "/Vendedor/2";
+					dsVendForaFila.read();        
+				},
+				atualizaFilaForaExpediente: function() {
+					dsVendForaExp.options.transport.read.url = baseUrl + "/Vendedor/3";
+					dsVendForaExp.read();        
+				},	
+				atualizaMotivosSaida: function() {
 					dsMotivosSaida.options.transport.read.url = baseUrl + "/Motivos";
-					dsMotivosSaida.read(); 
+					dsMotivosSaida.read();        
 				}
-				
-				function saveChanges(e) {
-				}
-				
-				function closeModalViewLogin(e) {
-					console.log(e);
-				
-					$("#modalview-login").kendoMobileModalView("close");
-				}
-				
-			</script>
+			});
+			
+			function atualizaFilaNoSalao(context, parametro) {
+				context.options.transport.read.url = baseUrl + "/Vendedor/" + parametro;					
+				context.read();
+			}
+			
+			function getVendedoresFila(e) {
+				atualizaFilaNoSalao(dsVendFila, 1);
+			}
+			
+			function getVendedoresForaFila(e) {	
+				atualizaFilaNoSalao(dsVendForaFila, 2);
+			}
+			
+			function getVendedoresForaExpediente(e) {
+				atualizaFilaNoSalao(dsVendForaExp, 3);
+			}
+			
+			function showResultadoAtendimento() {
+				app.navigate("#resultadoAtendimento");
+			}
+			
+			function showMotivosSaidaFila() {
+				app.navigate("#motivosSaida");
+			
+				dsMotivosSaida.options.transport.read.url = baseUrl + "/Motivos";
+				dsMotivosSaida.read(); 
+			}
+			
+			
+			
+			function closeModalViewLogin(e) {
+				console.log(e);
+			
+				$("#modalview-login").kendoMobileModalView("close");
+			}
+			
+			
+			
+		</script>
 
-		</body>
-	</html>
+	</body>
 
 </html>
 
+	

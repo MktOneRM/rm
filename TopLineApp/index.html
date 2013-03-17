@@ -153,7 +153,13 @@
 						<a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancelar</a>
 					</div>
 				</div>
-				<span>Confirmar?</span>
+
+				<ul>
+					<li>
+						Nome do Produto: <span data-bind="text: ProductName"></span>
+					</li>
+				</ul>
+
 				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Sim</a>
 				<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Nao</a>
 			</div>
@@ -165,7 +171,7 @@
 			</script>
 
 			<script type="text/x-kendo-template" id="t2">				
-				<a data-rel="modalview" href="\\#" id="modalview-open-button1">
+				<a data-rel="modalview" href="\\#modalview-login" id="modalview-open-button1">
 					<img src="${Foto}" />
 				</a>
 			</script>
@@ -419,7 +425,9 @@
 				function saveChanges(e) {
 				}
 				
-				function closeModalViewLogin() {
+				function closeModalViewLogin(e) {
+					console.log(e);
+				
 					$("#modalview-login").kendoMobileModalView("close");
 				}
 				

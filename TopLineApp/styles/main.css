@@ -27,14 +27,15 @@
 	visibility: visible;
 }
 
-
 #modalview-login-button,
 #modalview-reg-button,
+#btnConfirma,
+#btnNaoConfirma,
 
 
 #modalview-open-button
 {
-	display: block;	
+	display: block; 
 	margin: .6em .8em 0;
 	font-size: 1.2em;
 }
@@ -44,7 +45,6 @@
 	margin: 0 3em;
 	padding: .5em;
 }
-
 
 #modalview-camera
 {
@@ -79,13 +79,24 @@
 	background-color: #2e2e2e;
 }
 
-.km-ios #modalview-login #modalview-login-button
+.km-ios #modalview-login #btnConfirma
 {
 	background-color: Green;
+}
+
+.km-ios #modalview-login #btnNaoConfirma
+{
+	background-color: Red;
 }
 
 .km-tablet .km-ios #modalview-camera .km-view-title, .km-tablet .km-ios #modalview-login .km-view-title
 {
 	color: #fff;
 	text-shadow: 0 -1px rgba(0, 0, 0, .5);
+}
+
+#btnNaoConfirma
+{
+  
+	background-color: #FF0000; 
 }

@@ -1,3 +1,136 @@
+.km-ios .km-view .km-navbar
+{
+	background-color: rgb(0, 0, 0);
+}
+.km-ios .km-view .km-navbar .km-button
+{
+	background-color: rgb(0, 0, 0);
+}
+.km-ios .km-view .km-content
+{
+	background-color: rgb(127, 127, 127);
+}
+.km-ios .km-view .km-content .km-listgroup .km-group-title .km-text
+{
+	color: rgb(255, 255, 255);
+}
+.km-ios .km-view .km-content .km-list > li
+{
+	background-color: rgb(127, 127, 127);
+}
+.km-ios .km-view .km-content .km-listgroup .km-group-title
+{
+	color: rgb(0, 0, 0);
+}
+.km-android .km-navbar .km-view-title
+{
+	visibility: visible;
+}
+
+#modalview-login-button,
+#modalview-reg-button,
+
+
+#modalview-open-button
+{
+	display: block; 
+	margin: .6em .8em 0;
+	font-size: 1.2em;
+}
+
+#modalview-open-button img
+{
+	margin: 0 3em;
+	padding: .5em;
+}
+
+#modalview-camera
+{
+	text-align: center;
+}
+
+#modalview-camera img
+{
+	display: block;
+	margin: 30px auto;
+}
+
+#modalview-camera .km-content,
+.km-ios #modalview-login .km-content
+{
+	background: url(../images/pattern1.png) repeat 0 0;
+}
+
+.km-ios #modalview-camera .km-button,
+.km-ios #modalview-login .km-button,
+.km-ios #modalview-camera .km-navbar,
+.km-ios #modalview-login .km-header
+{
+	background-color: #000;
+}
+
+.km-ios #modalview-camera .km-button:active,
+.km-ios #modalview-camera .km-state-active,
+.km-ios #modalview-login .km-button:active,
+.km-ios #modalview-login .km-state-active
+{
+	background-color: #2e2e2e;
+}
+
+.km-ios #modalview-login #modalview-login-button
+{
+	background-color: Green;
+}
+
+.km-tablet .km-ios #modalview-camera .km-view-title, .km-tablet .km-ios #modalview-login .km-view-title
+{
+	color: #fff;
+	text-shadow: 0 -1px rgba(0, 0, 0, .5);
+}
+
+.mobile-fila
+{
+	margin: 10px 0 0 0;
+	border-top: 0; 
+	border: 0;
+	padding: 0;
+	display: inline;
+	float: left;
+	width: 750px;
+	background: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.mobile-fila img
+{
+	clear: both;
+	width: 50px;
+	height: 50px;
+	padding: 0px 15px 15px 15px;
+	margin: 0;
+	border: 0;
+	display: block;
+}
+.mobile-fila h5
+{
+	border: 0;
+	width: 50px;
+	margin: -13px 0 -13px 0;
+	padding: 0 0 5px 5px;
+	font-size: 9px;
+	position: relative;
+	text-align: center; 
+}
+.mobile-fila ul, li, #listview-templates
+{
+	padding: 0;
+	border-top: 0; 
+	border: none;
+	border-radius: 0;
+	box-shadow: none;	
+	display: inline-block;    
+}
    
 #btnAdd, #btnCreate, #btnCancel, #btnBack
 {

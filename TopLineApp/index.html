@@ -19,8 +19,25 @@
 
 	<body>
 
-		<div id="lv1" data-role="view" data-model="viewModel" data-title="Fila da Vez" data-layout="mobile-tabstrip" data-init="getVendedoresFila" data-show="getVendedoresFila" >
-			<ul data-bind="source:dsVendFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t1"></ul>
+		<div id="frmPrincipal" data-role="layout" data-id="mobile-tabstrip">
+			<header data-role="header">
+				<div data-role="navbar" style="height: 44px;">
+					<a href="#" class="nav-button" data-align="right" data-role="button" data-icon="organize"></a>
+					<span>Top Line</span>
+				</div>
+			</header>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#vdentroFila" data-icon="reply">Dentro</a>
+					<a href="#vforaFila" data-icon="action">Fora</a>
+					<a href="#vforaTurno" data-icon="recents">Turno</a>
+				</div>
+			</div>
+		</div>
+
+		<div id="vdentroFila" data-role="view" data-model="viewModel" data-title="Fila da Vez" data-layout="mobile-tabstrip" data-init="getVendedoresFila" data-show="getVendedoresFila" >
+			<div style="text-align:center;">Dentro da Fila</div>
+			<ul id="ldentroFila" data-bind="source:dsVendFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tdentroFila" class="mobile-fila" data-type="group"></ul>
 
 			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar">
 				<li class="km-actionsheet-title">Selecione operação:</li>
@@ -34,12 +51,14 @@
 
 		</div>
 
-		<div id="lv2" data-role="view"  data-model="viewModel" data-title="Fora da Fila" data-layout="mobile-tabstrip" data-init="getVendedoresForaFila" data-show="getVendedoresForaFila">
-			<ul data-bind="source:dsVendForaFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t2"></ul>
+		<div id="vforaFila" data-role="view"  data-model="viewModel" data-title="Fora da Fila" data-layout="mobile-tabstrip" data-init="getVendedoresForaFila" data-show="getVendedoresForaFila">
+			<div style="text-align:center;">Fora da Fila</div>
+			<ul  id="lforaFila" data-bind="source:dsVendForaFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tforaFila" class="mobile-fila"></ul>
 		</div>
 
-		<div id="lv3" data-role="view"  data-model="viewModel" data-title="Outros turnos" data-layout="mobile-tabstrip" data-init="getVendedoresForaExpediente" data-show="getVendedoresForaExpediente">
-			<ul data-bind="source:dsVendForaExp" data-role="listview" data-auto-bind="false" data-style="inset" data-template="t3"></ul>
+		<div id="vforaTurno" data-role="view"  data-model="viewModel" data-title="Outros turnos" data-layout="mobile-tabstrip" data-init="getVendedoresForaExpediente" data-show="getVendedoresForaExpediente">
+			<div style="text-align:center;">Fora do Turno</div>
+			<ul id="lforaTuarno" data-bind="source:dsVendForaExp" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tforaTurno" class="mobile-fila"></ul>
 		</div>
 
 		<div id="resultadoAtendimento" data-init="editorViewInit" data-role="view" data-title="Resultado Atendimento" data-layout="default" data-model="viewModel" >
@@ -54,10 +73,18 @@
 					<ul>
 						<li>
 							<label>
-								Vendedor:
-								<input id="idVendedor" name="idVendedor" type="text" required="required" data-bind="value: atendimento.idVendedor" />
+								Vendedor
+								<input id="idVendedor" name="idVendedor" type="text" required="required" data-bind="value: atendimento.IdVendedor" />
 							</label>
+
 						</li>
+						<li>
+							<label>
+								Vendedor2 <span data-bind="text: vendedorSelecionado.vendedorNome"/>
+							</label>
+
+						</li>
+
 					</ul>
 				</li>
 
@@ -66,7 +93,7 @@
 					<ul>
 						<li>
 							<label>
-								Vendeu:
+								Vendeu
 								<input id="chkVendeu" type="checkbox" data-role="switch" checked >
 							</label>
 						</li>
@@ -79,13 +106,13 @@
 
 						<li>
 							<label>
-								Valor Venda:
+								Valor Venda
 								<input id="valorVenda" name="ValorVenda" type="number" required="required" data-bind="value: atendimento.ValorVenda" />
 							</label>
 						</li>
 						<li>
 							<label>
-								Qtde de Pecas:
+								Qtde de Peças
 								<input id="qtdeDePecas" name="QtdeDePecas" type="number" required="required" data-bind="value: atendimento.QtdeDePecas"/>
 							</label>
 						</li>
@@ -99,49 +126,37 @@
 			<a id="btnCancel" data-role="button" type="button" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
 		</div>
 
-		<div data-role="layout" data-id="mobile-tabstrip">
-			<header data-role="header">
-				<div data-role="navbar">
-					<span data-role="view-title"></span>
-					<a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
-				</div>
-			</header>
-
-			<p>TabStrip</p>
-
-			<div data-role="footer">
-				<div data-role="tabstrip">
-					<a href="#lv1" data-icon="contacts">Fila </a>
-					<a href="#lv2" data-icon="stop">Ausentes </a>
-					<a href="#lv3" data-icon="contacts">Expediente </a>
-				</div>
-			</div>
-		</div>
-
-		<script type="text/x-kendo-template" id="t1">
+		<script type="text/x-kendo-template" id="tdentroFila">
 			<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= IdVendedor #">
 				<img src="${Foto}" />
+				<h5>${VendedorApelido}</h5>
 			</a>
 		</script>
 
-		<script type="text/x-kendo-template" id="t2">
-			<img src="${Foto}" />
+		<script type="text/x-kendo-template" id="tforaFila">		
+			<a data-rel="modalview" href="\\#modalview-login">
+				<img src="${Foto}" />
+				<h5>${VendedorApelido}</h5>
+			</a>
 		</script>
 
-		<script type="text/x-kendo-template" id="t3">
-			<img src="${Foto}" />
+		<script type="text/x-kendo-template" id="tforaTurno">
+			<a class="details-link" data-role="listview-link">
+				<img src="${Foto}" />
+				<h5>${VendedorApelido}</h5>
+			</a>
 		</script>
 
 		<script>
-				
+			
 			$(document).ready(function() {
 				//Start the mobile application
 				app = new kendo.mobile.Application($(document.body), {});
 			});
-				
+			
 			//Url
 			var baseUrl = "http://localhost:50000/api";
-				
+			
 			//schema
 			var schemaVendedores = { 
 				model: {
@@ -155,12 +170,13 @@
 					} 
 				}
 			};
-            
+			
 			//Schema Atendimento
 			var schemaAtendimento = { 
 				model: {
-					id: "IdVendedor",
+					id: "IdAtendimento",
 					fields:{
+						IdAtendimento: { type: "int", validation: { required: true, min: 0} },
 						IdVendedor: { type: "int", validation: { required: true, min: 0} },
 						ValorVenda: { type: "number", validation: { required: true, min: 0} },						
 						QtdeDePecas: { type: "number", validation: { required: true, min: 0} }
@@ -312,37 +328,37 @@
 				schema: schemaAtendimento
 			});
 			
-            
+			
 			function atendimento(e) {
 				var novoAtendimento = this.dsAtendimento.add(); 
 				viewModel.set("atendimento", novoAtendimento); 
-			
+				
 				var vendedor = viewModel.dsVendFila.get(e.context);
 				viewModel.set("vendedorSelecionado", vendedor); 
-			
-				app.navigate("#resultadoAtendimento"); //navigates to editor view
+				
+				console.log(viewModel);
+				
+				app.navigate("#resultadoAtendimento"); 
 			}
 			
 			function salvarAtendimento (e) {
 				if (validator.validate()) { //validates the input
+					this.dsAtendimento.sync(); 	                
 					
-                    this.dsAtendimento.sync(); //synchronizes changes through the transport	                
-					console.log(this.dsAtendimento);
-			
 					//Atualiza a posicao do vendedor na fila
 					var vend = viewModel.vendedorSelecionado;			
-					               
-					this.dsVendFila.remove(vend); //removes the product from the DataSource
-					this.dsVendFila.sync(); //synchronizes changes through the transport
-			
+					
+					this.dsVendFila.remove(vend); 
+					this.dsVendFila.sync(); 
+					
 					getVendedoresFila();
-                    app.navigate("#lv1");
+					app.navigate("#vdentroFila");
 				}
 			}
 			
 			function cancelarAtendimento() {
-				this.dsAtendimento.cancelChanges(); //cancels the changes made to the DataSource after the last sync
-				app.navigate("#lv1"); //navigates to main view                
+				this.dsAtendimento.cancelChanges(); 
+				app.navigate("#vdentroFila");                 
 			}
 			
 			function editorViewInit(e) {
@@ -407,18 +423,11 @@
 				atualizaFilaNoSalao(dsVendForaExp, 3);
 			}
 			
-			function showResultadoAtendimento() {
-				app.navigate("#resultadoAtendimento");
-			}
-			
 			function showMotivosSaidaFila() {
-				app.navigate("#motivosSaida");
-			
+				app.navigate("#motivosSaida");			
 				dsMotivosSaida.options.transport.read.url = baseUrl + "/Motivos";
 				dsMotivosSaida.read(); 
 			}
-			
-			
 			
 			function closeModalViewLogin(e) {
 				console.log(e);
@@ -426,12 +435,12 @@
 				$("#modalview-login").kendoMobileModalView("close");
 			}
 			
+            function onClick(){ alert("dadsa");}
 			
-			
+		
 		</script>
 
 	</body>
 
 </html>
 
-	

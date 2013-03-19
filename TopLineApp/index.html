@@ -37,7 +37,7 @@
 
 		<div id="vdentroFila" data-role="view" data-model="viewModel" data-title="Fila da Vez" data-layout="mobile-tabstrip" data-init="getVendedoresFila" data-show="getVendedoresFila" >
 			<div style="text-align:center;">Dentro da Fila</div>
-			<ul id="ldentroFila" data-bind="source:dsVendFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tdentroFila" class="mobile-fila" data-type="group"></ul>
+			<ul id="ldentroFila" data-bind="source:dsVendFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tdentroFila" class="mobile-fila" <!--data-type="group"--> ></ul>
 
 			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar">
 				<li class="km-actionsheet-title">Selecione operação:</li>
@@ -53,12 +53,12 @@
 
 		<div id="vforaFila" data-role="view"  data-model="viewModel" data-title="Fora da Fila" data-layout="mobile-tabstrip" data-init="getVendedoresForaFila" data-show="getVendedoresForaFila">
 			<div style="text-align:center;">Fora da Fila</div>
-			<ul  id="lforaFila" data-bind="source:dsVendForaFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tforaFila" class="mobile-fila"></ul>
+			<ul  id="lforaFila" data-bind="source:dsVendForaFila" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tforaFila" class="mobile-fila" ></ul>
 		</div>
 
 		<div id="vforaTurno" data-role="view"  data-model="viewModel" data-title="Outros turnos" data-layout="mobile-tabstrip" data-init="getVendedoresForaExpediente" data-show="getVendedoresForaExpediente">
 			<div style="text-align:center;">Fora do Turno</div>
-			<ul id="lforaTuarno" data-bind="source:dsVendForaExp" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tforaTurno" class="mobile-fila"></ul>
+			<ul id="lforaTuarno" data-bind="source:dsVendForaExp" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tforaTurno" class="mobile-fila" ></ul>
 		</div>
 
 		<div id="resultadoAtendimento" data-init="editorViewInit" data-role="view" data-title="Resultado Atendimento" data-layout="default" data-model="viewModel" >
@@ -72,24 +72,18 @@
 				<li>
 					<ul>
 						<li>
-							<label>
-								Vendedor
-								<input id="idVendedor" name="idVendedor" type="text" required="required" data-bind="value: atendimento.IdVendedor" />
-							</label>
+							<h2>
+								<!--Carine <span>Callahan</span>-->
+								<span data-bind="text: vendedorSelecionado.VendedorApelido"></span>
 
-						</li>
-						<li>
-							<label>
-								Vendedor2 <span data-bind="text: vendedorSelecionado.vendedorNome"/>
-							</label>
-
+							</h2>
+							<img data-bind="attr: { src: imageSrc}" />
 						</li>
 
 					</ul>
 				</li>
 
-				<li >
-
+				<li>
 					<ul>
 						<li>
 							<label>
@@ -334,23 +328,26 @@
 				viewModel.set("atendimento", novoAtendimento); 
 				
 				var vendedor = viewModel.dsVendFila.get(e.context);
-				viewModel.set("vendedorSelecionado", vendedor); 
-				
-				console.log(viewModel);
-				
+				viewModel.set("vendedorSelecionado", vendedor); 				
+				viewModel.imageSrc = viewModel.vendedorSelecionado.Foto;
+                    
+                console.log(viewModel.vendedorSelecionado.Foto);
+                console.log(viewModel.imageSrc);
+                console.log(viewModel);
+                
 				app.navigate("#resultadoAtendimento"); 
 			}
 			
 			function salvarAtendimento (e) {
 				if (validator.validate()) { //validates the input
 					this.dsAtendimento.sync(); 	                
-					
+			
 					//Atualiza a posicao do vendedor na fila
 					var vend = viewModel.vendedorSelecionado;			
-					
+			
 					this.dsVendFila.remove(vend); 
 					this.dsVendFila.sync(); 
-					
+			
 					getVendedoresFila();
 					app.navigate("#vdentroFila");
 				}
@@ -381,6 +378,9 @@
 				atendimento: {},
 				salvarAtendimento: salvarAtendimento,
 				cancelarAtendimento: cancelarAtendimento,
+				urlImage: null,				
+				imageAlt: "Alt attribute value",
+				imageTitle: "Title attribute value",
 				selectGroup: function(e) {
 					this.set("selectedGroup", e.dataItem);
 					this.set("peopleSource", new kendo.data.DataSource({
@@ -435,9 +435,6 @@
 				$("#modalview-login").kendoMobileModalView("close");
 			}
 			
-            function onClick(){ alert("dadsa");}
-			
-		
 		</script>
 
 	</body>

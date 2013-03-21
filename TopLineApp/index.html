@@ -36,9 +36,9 @@
 			</div>
 		</div>
 
-		<div id="vdentroFila" data-role="view" data-layout="mobile-tabstrip" data-show="getVendedoresFila" data-model="viewModel">
+		<div id="vdentroFila" data-role="view" data-layout="mobile-tabstrip" data-init="getVendedoresFilaA" data-model="vFilaViewModel">
 			<div class="mobile-fila-titulo">Dentro da Fila</div>
-			<ul id="ldentroFila" data-bind="source:dsVendFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" class="mobile-fila"></ul>
+			<ul id="ldentroFila" data-bind="source:vFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" class="mobile-fila"></ul>
 			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
@@ -50,74 +50,17 @@
 			</ul>
 		</div>
 
-		<div id="vforaFila" data-role="view" data-layout="mobile-tabstrip" data-show="getVendedoresForaFila" data-model="viewModel">
-			<div class="mobile-fila-titulo">Fora da Fila</div>
-			<ul id="lforaFila" data-bind="source:dsVendForaFila" data-role="listview" data-auto-bind="false" data-template="tforaFila" class="mobile-fila"></ul>
+		<!--
+		<div id="vforaFila" data-role="view" data-layout="mobile-tabstrip" data-show="getVendedoresForaFila" data-model="vFilaViewModel">
+		<div class="mobile-fila-titulo">Fora da Fila</div>
+		<ul id="lforaFila" data-bind="source:vFila" data-role="listview" data-auto-bind="false" data-template="tforaFila" class="mobile-fila"></ul>
 		</div>
 
-		<div id="vforaTurno" data-role="view" data-layout="mobile-tabstrip" data-show="getVendedoresForaExpediente" data-model="viewModel">
-			<div class="mobile-fila-titulo">Fora do Turno</div>
-			<ul id="lforaTuarno" data-bind="source:dsVendForaExp" data-role="listview" data-auto-bind="false" data-template="tforaTurno" class="mobile-fila"></ul>
+		<div id="vforaTurno" data-role="view" data-layout="mobile-tabstrip" data-show="getVendedoresForaExpediente" data-model="vFilaViewModel">
+		<div class="mobile-fila-titulo">Fora do Turno</div>
+		<ul id="lforaTuarno" data-bind="source:vFila" data-role="listview" data-auto-bind="false" data-template="tforaTurno" class="mobile-fila"></ul>
 		</div>
-
-		<div id="resultadoAtendimento" data-init="editorViewInit" data-role="view" data-title="Resultado Atendimento" data-layout="default" data-model="viewModel" >
-			<div data-role="header">
-				<div data-role="navbar">
-					<span>Atendimento</span>
-				</div>
-			</div>
-			<ul id="form" data-role="listview" data-style="inset" data-type="group">
-
-				<li>
-					<ul>
-						<li>
-							<h2>
-								<!--Carine <span>Callahan</span>-->
-								<span data-bind="text: vendedorSelecionado.VendedorApelido"></span>
-
-							</h2>
-							<img data-bind="attr: { src: imageSrc}" />
-						</li>
-
-					</ul>
-				</li>
-
-				<li>
-					<ul>
-						<li>
-							<label>
-								Vendeu
-								<input id="chkVendeu" type="checkbox" data-role="switch" checked >
-							</label>
-						</li>
-					</ul>
-				</li>
-
-				<li>
-					Dados da Venda
-					<ul>
-
-						<li>
-							<label>
-								Valor Venda
-								<input id="valorVenda" name="ValorVenda" type="number" required="required" data-bind="value: atendimento.ValorVenda" />
-							</label>
-						</li>
-						<li>
-							<label>
-								Qtde de Peças
-								<input id="qtdeDePecas" name="QtdeDePecas" type="number" required="required" data-bind="value: atendimento.QtdeDePecas"/>
-							</label>
-						</li>
-
-					</ul>
-
-				</li>
-
-			</ul>
-			<a id="btnCreate" data-role="button" type="button" data-bind="events: {click: salvarAtendimento}">Salvar</a>
-			<a id="btnCancel" data-role="button" type="button" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
-		</div>
+		-->
 
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= LojaColId #">
@@ -126,26 +69,29 @@
 			</a>
 		</script>
 
+		<!--
 		<script type="text/x-kendo-template" id="tforaFila">		
-			<a data-rel="modalview" href="\\#modalview-login">
-				<img src="${Foto}" />
-				<h5>${ColApelido}</h5>
-			</a>
+		<a data-rel="modalview" href="\\#modalview-login">
+		<img src="${Foto}" />
+		<h5>${ColApelido}</h5>
+		</a>
 		</script>
 
 		<script type="text/x-kendo-template" id="tforaTurno">
-			<a class="details-link" data-role="listview-link">
-				<img src="${Foto}" />
-				<h5>${ColApelido}</h5>
-			</a>
+		<a class="details-link" data-role="listview-link">
+		<img src="${Foto}" />
+		<h5>${ColApelido}</h5>
+		</a>
 		</script>
+		-->
 
 		<script>
 			
+			/*
 			$(document).ready(function() {
-				//Start the mobile application
-				app = new kendo.mobile.Application($(document.body), {});
-			});
+			//Start the mobile application
+			app = new kendo.mobile.Application($(document.body), {});
+			});*/
 			
 			//Url
 			var baseUrl = "http://localhost:50000/api";
@@ -460,7 +406,9 @@
 			
 		</script>
 
+		<script type="text/javascript" src="scripts/appData.js"></script>
 		<script type="text/javascript" src="viewModels/viewModels.js"></script>
+		<script type="text/javascript" src="scripts/main.js"></script>
 
 		<script>
 			var app = new kendo.mobile.Application(document.body, { transition: "slide"});

@@ -1,4 +1,4 @@
-<div data-role="view" id="lojasView" data-title="Loja" data-init="getLojas" data-model="lojaViewModel">
+<div data-role="view" id="lojasView" data-title="Loja" data-show="getLojas" data-model="lojaViewModel">
 	<header data-role="header">
 		<div data-role="navbar">
 			<a id="buttonAddNewLoja" data-role="button" href="views/CadastroLoja.html" 
@@ -11,7 +11,7 @@
 		<!-- List of cards -->
 		<ul class="lojasListWrapper" data-role="listview" data-style="inset" data-type="group">
 			<li>
-				<ul id="lojasList" data-role="listview" data-bind="source: dsLoja" data-template="lojasListTemplate">
+				<ul id="lojasList" data-role="listview" data-bind="source: lojas" data-template="lojasListTemplate">
 				</ul>
 			</li>
 		</ul>

@@ -106,6 +106,8 @@
     <Content Include="kendo\styles\kendo.common.min.css" />
     <Content Include="kendo\styles\kendo.default.min.css" />
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
+    <Content Include="scripts\appData.js" />
+    <Content Include="scripts\main.js" />
     <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">
       <Platform>iOS</Platform>
@@ -121,6 +123,7 @@
     <Content Include="styles\StyleSheet1.css" />
     <Content Include="styles\StyleSheet2.css" />
     <Content Include="viewModels\viewModels.js" />
+    <Content Include="views\AtendimentoView.html" />
     <Content Include="views\CadastroLoja.html" />
     <Content Include="views\Configuracoes.html" />
     <Content Include="views\ConsultaLoja.html" />

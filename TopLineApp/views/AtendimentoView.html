@@ -1,0 +1,60 @@
+
+
+		<div id="resultadoAtendimento" data-init="editorViewInit" data-role="view" data-title="Resultado Atendimento" data-layout="default" data-model="viewModel" >
+			<div data-role="header">
+				<div data-role="navbar">
+					<span>Atendimento</span>
+				</div>
+			</div>
+			<ul id="form" data-role="listview" data-style="inset" data-type="group">
+
+				<li>
+					<ul>
+						<li>
+							<h2>
+								<!--Carine <span>Callahan</span>-->
+								<span data-bind="text: vendedorSelecionado.VendedorApelido"></span>
+
+							</h2>
+							<img data-bind="attr: { src: imageSrc}" />
+						</li>
+
+					</ul>
+				</li>
+
+				<li>
+					<ul>
+						<li>
+							<label>
+								Vendeu
+								<input id="chkVendeu" type="checkbox" data-role="switch" checked >
+							</label>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					Dados da Venda
+					<ul>
+
+						<li>
+							<label>
+								Valor Venda
+								<input id="valorVenda" name="ValorVenda" type="number" required="required" data-bind="value: atendimento.ValorVenda" />
+							</label>
+						</li>
+						<li>
+							<label>
+								Qtde de Peças
+								<input id="qtdeDePecas" name="QtdeDePecas" type="number" required="required" data-bind="value: atendimento.QtdeDePecas"/>
+							</label>
+						</li>
+
+					</ul>
+
+				</li>
+
+			</ul>
+			<a id="btnCreate" data-role="button" type="button" data-bind="events: {click: salvarAtendimento}">Salvar</a>
+			<a id="btnCancel" data-role="button" type="button" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
+		</div>

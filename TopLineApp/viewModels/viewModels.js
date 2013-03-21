@@ -27,8 +27,6 @@
 				vFila = JSON.parse(window.localStorage.getItem("vFila"));
 			}
 			
-            console.log(window.localStorage.getItem("vFila"), "T1");
-            
 			that.set("vFila", vFila);
 			that.vFila.bind("change", that.writeIntoLocalStorage);
             

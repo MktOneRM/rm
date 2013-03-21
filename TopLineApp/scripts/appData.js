@@ -11,17 +11,17 @@ var AppData = function() {
 	
 	_private = {
 		
-		load: function(route, options) {
+		load: function(route, options, cacheName) {
 			var path = route.path,
 			verb = route.verb,
 			dfd = new $.Deferred();
 
-			console.log("GETTING", path, verb, options);
+			console.log("GETTING", path, verb, options, cacheName);
 
 			//Return cached data if available (and fresh)
-			if (verb === "GET" && _private.checkCache(path) === true) {
+			if (verb === "GET" && _private.checkCache(cacheName) === true) {
 				//Return cached data
-				dfd.resolve(_private.getCache(path));
+				dfd.resolve(_private.getCache(cacheName));
 			}
 			else {
 				//Get fresh data
@@ -31,7 +31,7 @@ var AppData = function() {
 					data: options,
 					dataType: "json"
 				}).success(function (data, code, xhr) {
-					_private.setCache(path, {
+					_private.setCache(cacheName, {
 						data: data,
 						expires: new Date(new Date().getTime() + (15 * 60000)) //+15min
 					});
@@ -95,14 +95,14 @@ var AppData = function() {
 		getLojas: function() {
 			var route = $.extend({}, _endpoints.urlLoja);
             
-			return _private.load(route, {});
+			return _private.load(route, {}, "Lojas");
 		},
         
 		getVendedoresFilaA:
 		function() {
 			var route = $.extend({}, _endpoints.urlVFila);
-            
-			return _private.load(route, {});
+			
+			return _private.load(route, {}, "vFila");
 		}
 	};
 }

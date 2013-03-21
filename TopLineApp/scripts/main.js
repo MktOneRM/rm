@@ -9,6 +9,8 @@
             
 			vFilaViewModel.load(_appData.getVendedoresFilaA());
             
+            vFilaViewModel.loadFromLocalStorage();
+            
 			/*
 			if (window.localStorage.getItem("Loja") === null) {
 			localStorage.setItem("Loja", _appData.getLojas());

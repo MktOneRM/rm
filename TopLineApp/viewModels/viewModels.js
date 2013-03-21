@@ -13,11 +13,32 @@
     
 	vFilaViewModel = kendo.observable({
 		vFila: [],    
-        
+		
 		load: function(vFila) {
 			var that = this;
 			that.set("vFila", vFila);
 		}
+		,
+		loadFromLocalStorage: function() {
+			var that = this;			
+			var vFila = [];
+
+			if (window.localStorage.getItem("vFila") !== null) {
+				vFila = JSON.parse(window.localStorage.getItem("vFila"));
+			}
+			
+            console.log(window.localStorage.getItem("vFila"), "T1");
+            
+			that.set("vFila", vFila);
+			that.vFila.bind("change", that.writeIntoLocalStorage);
+            
+			console.log(that, "rafael", vFila);
+		},
+		writeIntoLocalStorage: function(e) {
+			var dataToWrite = JSON.stringify(vFilaViewModel.vFila);
+			window.localStorage.setItem("vFila", dataToWrite);
+		},
+        
 	});
     
 	$.extend(window, {

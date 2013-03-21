@@ -35,6 +35,8 @@
     <Folder Include="Images" />
     <Folder Include="html" />
     <Folder Include="kendo\styles\default" />
+    <Folder Include="viewModels" />
+    <Folder Include="views" />
     <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +120,10 @@
     <Content Include="styles\StyleSheet.css" />
     <Content Include="styles\StyleSheet1.css" />
     <Content Include="styles\StyleSheet2.css" />
+    <Content Include="viewModels\viewModels.js" />
+    <Content Include="views\CadastroLoja.html" />
+    <Content Include="views\Configuracoes.html" />
+    <Content Include="views\ConsultaLoja.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

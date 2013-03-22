@@ -92,9 +92,18 @@ var AppData = function() {
 			cache = JSON.parse(localStorage.getItem(path));
          
 			console.log("LOADING FROM CACHE", cache, path);
-
+            
+			var result;
+            
+			if (cache == null) {
+				result = "";
+			}
+			else {
+				result = cache.data.data;
+			}
+            
 			//TODO: Deserialize JSON string
-			return cache.data.data;
+			return result
 		}
 	};
 

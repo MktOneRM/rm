@@ -1,23 +1,42 @@
-<div data-role="view" id="addCardView" data-title="Add Card" data-show="onAddCardViewShow" data-model="addCardViewModel">
+
+<div id="editor" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Loja" data-layout="mobile-tabstrip">
+
 	<div data-role="header">
 		<div data-role="navbar">
 			<a href="#consultaLojaView" data-role="button" data-align="left">Cancelar</a>
-            <span data-role="view-title"></span>
-            <button data-role="button" data-align="right" id="buttonAddNewLoja" class="isCardValid" data-bind="events: { click: addNewCard }">Add</button>
+			<span data-role="view-title"></span>
+			<button data-role="button" data-align="right" id="buttonAddNewLoja"  data-bind="events: { click: addNewCard }">Ok</button>
 		</div>
 	</div>
-    <div data-role="content">
-        <div class="addCardLogo clear">
-            <div class="cardPicture">
-            </div>
-            <span class="addCardLogoText">Create New Jitterz Card</span>
-        </div>
-        <ul class="addNewCardWrapper" data-role="listview" data-style="inset">
+	<div data-role="content">
+		<ul id="form" data-role="listview" data-style="inset">
 			<li>
-				<label for="cardNumberField">Card Number </label>
-				<input type="number" id="cardNumberField" min="3" max="10" maxlength="10" maxlength="9" data-bind="value: cardNumber, events: { keyup: cardIdChanged }"/>
+				<label>
+					Nome do produto:
+					<input id="productName" name="ProductName" type="text" required="required" data-bind="value: selectedProduct.ProductName" />
+				</label>
+			</li>
+			<li>
+				<label>
+					Preço Unitário:
+					<input id="unitPrice" name="UnitPrice" type="number" required="required" data-bind="value: selectedProduct.UnitPrice" />
+				</label>
+			</li>
+			<li>
+				<label>
+					Qtde Estoque:
+					<input id="unitsInStock" name="UnitsInStock" type="number" required="required" data-bind="value: selectedProduct.UnitsInStock"/>
+				</label>
+			</li>
+			<li>
+				<label>
+					Inativo:
+					<input id="discontinued" name="Discontinued" type="checkbox" data-bind="value: selectedProduct.Discontinued"/>
+				</label>
 			</li>
 		</ul>
-		<div id="addNewCardErrorLog"></div>
-    </div>
+	</div>
+    
+	<a id="btnCreate" data-role="button" type="button" data-bind="events: {click: saveProduct}">Salvar</a>
+	<a id="btnCancel" data-role="button" type="button" data-bind="events: {click: cancelChanges}">Cancelar</a>
 </div>

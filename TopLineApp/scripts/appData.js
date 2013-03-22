@@ -93,9 +93,15 @@ var AppData = function() {
          
 			console.log("LOADING FROM CACHE", cache, path);
             
+            var result  = null;
+            
+			if(cache == null)
+                result = {"data":{"data":[],"expires":"2013-03-22T21:48:17.015Z"}};
+            else 
+                result = cache.data.data;
             
 			//TODO: Deserialize JSON string
-			return cache.data.data;
+			return result;
 		}
 	};
 

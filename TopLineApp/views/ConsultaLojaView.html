@@ -1,4 +1,4 @@
-<div data-role="view" id="lojasView" data-title="Loja" data-show="getLojas" data-model="lojaViewModel">
+<div data-role="view" id="lojasView" data-title="Loja" data-show="getLojasShow" data-model="lojaViewModel">
 	<header data-role="header">
 		<div data-role="navbar">
 			<a id="buttonAddNewLoja" data-role="button" href="views/CadastroLojaView.html" 
@@ -7,23 +7,39 @@
 		</div>
 	</header>
 
-	<div id="lojaViewContent" data-role="content">
-		<!-- List of cards -->
-		<ul class="lojasListWrapper" data-role="listview" data-style="inset" data-type="group">
+	<!--details view-->
+	<div id="lojaViewContent" data-role="content" data-title="Lojas" data-layout="default">
+		<ul id="info" data-role="listview" data-style="inset">
 			<li>
-				<ul id="lojasList" data-role="listview" data-bind="source: lojas" data-template="lojasListTemplate">
-				</ul>
+				Cnpj: <span data-bind="text: lojas[0].LOJ_CNPJ"></span>
 			</li>
+			<li>
+				Codigo da Loja: <span data-bind="text: lojas[0].LOJ_CODIGO"></span>
+			</li>
+			<li>
+				Razao Social: <span data-bind="text: lojas[0].LOJ_RAZAOSOCIAL"></span>
+			</li>
+			<li>
+				Nome Fantasia: <span data-bind="text: lojas[0].LOJ_NOMEFANTASIA"></span>
+			</li>
+            
+            <li>
+				DDD: <span data-bind="text: lojas[0].LOJ_RAZAO_SOCIAL"></span>
+			</li>
+			<li>
+				Inativo: <span data-bind="text: lojas[0].LOJ_NOMEFANTASIA"></span>
+			</li>
+            
 		</ul>
+
 	</div>
+
 </div>
 
-<script type="text/x-kendo-template" id="lojasListTemplate">
-	<a data-role="listview-link">
-		<div>
-			<span>Loja: </span>
-			<span>${LojNomeFantasia}</span>
-		</div>
-		<div class="clear"></div>
-	</a>
+<script>
+    function getLojasShow(){
+        onLojasShow();
+    }
+    
 </script>
+

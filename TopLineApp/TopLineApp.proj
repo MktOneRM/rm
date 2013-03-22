@@ -102,8 +102,6 @@
     <Content Include="views\CadastroLojaView.html" />
     <Content Include="views\ConfiguracoesView.html" />
     <Content Include="views\ConsultaLojaView.html" />
-    <Content Include="views\teste.html" />
-    <Content Include="views\teste2.html" />
     <Content Include="views\VForaFilaView.html" />
     <Content Include="views\VForaTurnoView.html" />
   </ItemGroup>

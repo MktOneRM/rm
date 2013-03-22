@@ -1,0 +1,19 @@
+<div id="vforaFila" data-role="view" data-layout="mobile-tabstrip" data-show="vForaFilaShow" data-model="vForaFilaViewModel">
+	<div class="mobile-fila-titulo">Fora da Fila</div>
+	<ul id="lforaFila" data-bind="source: vForaFila" data-role="listview" data-auto-bind="false" data-template="tforaFila" class="mobile-fila"></ul>
+</div>
+
+<script type="text/x-kendo-template" id="tforaFila">
+	<a data-rel="modalview" href="\\#modalview-login">
+		<img src="${ColFoto}" />
+		<h5>${ColApelido}</h5>
+	</a>
+</script>
+
+<script>
+    
+    function vForaFilaShow(){
+        onVForaFilaShow();
+    }
+    
+</script>

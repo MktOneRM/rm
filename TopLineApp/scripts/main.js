@@ -4,20 +4,24 @@
     
 	_app = {
 		init: function() {
-            
-			//lojaViewModel.load(_appData.getLojas());
-            
-			vFilaViewModel.load(_appData.getVendedoresFilaA());
-            
-            vFilaViewModel.loadFromLocalStorage();
-            
-			/*
-			if (window.localStorage.getItem("Loja") === null) {
-			localStorage.setItem("Loja", _appData.getLojas());
-			}            
-			cardsViewModel.loadFromLocalStorage();
-			*/
+			vFilaViewModel.load(_appData.getVendedoresFila());
+		},        
+        
+		vFilaShow: function() {
+			vFilaViewModel.load(_appData.getVendedoresFila());
 		},
+        
+		vForaFilaShow: function() {
+			vForaFilaViewModel.load(_appData.getVendedoresForaFila());
+		},
+        
+		vForaTurnoShow: function() {			
+			vForaTurnoViewModel.load(_appData.getVendedoresForaTurno());
+		},
+        
+        lojasShow: function(){
+            lojaViewModel.load(_appData.getLojas());
+        }
        
 	};
     
@@ -25,7 +29,16 @@
         
 	$.extend(window, {
 		lojaViewModel: _app.lojaViewModel,
-		vFilaViewModel: _app.vFilaViewModel
+        onLojasShow: _app.lojasShow,
+		
+		vFilaViewModel: _app.vFilaViewModel,
+		onVFilaShow: _app.vFilaShow,
+        
+		vForaFilaViewModel: _app.vForaFilaViewModel,
+		onVForaFilaShow: _app.vForaFilaShow,
+        
+		vForaTurnoViewModel: _app.vForaTurnoViewModel,
+		onVForaTurnoShow: _app.vForaTurnoShow,
 		
 	});
 }(jQuery, document));

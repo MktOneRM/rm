@@ -1,6 +1,8 @@
 (function($, console, doc) {
 	var lojaViewModel,
-	vFilaViewModel;
+	vFilaViewModel,
+	vForaFilaViewModel,
+	vForaTurnoViewModel;
       
 	lojaViewModel = kendo.observable({
 		lojas: [],    
@@ -12,36 +14,40 @@
 	});
     
 	vFilaViewModel = kendo.observable({
-		vFila: [],    
+		vFila: [],
 		
 		load: function(vFila) {
 			var that = this;
 			that.set("vFila", vFila);
-		}
-		,
-		loadFromLocalStorage: function() {
-			var that = this;			
-			var vFila = [];
-
-			if (window.localStorage.getItem("vFila") !== null) {
-				vFila = JSON.parse(window.localStorage.getItem("vFila"));
-			}
-			
-			that.set("vFila", vFila);
-			that.vFila.bind("change", that.writeIntoLocalStorage);
-            
-			console.log(that, "rafael", vFila);
-		},
-		writeIntoLocalStorage: function(e) {
-			var dataToWrite = JSON.stringify(vFilaViewModel.vFila);
-			window.localStorage.setItem("vFila", dataToWrite);
-		},
+		} 
         
 	});
     
+	vForaFilaViewModel = kendo.observable({		
+		vForaFila: [],
+				
+		load: function(vForaFila) {
+			var that = this;
+			that.set("vForaFila", vForaFila);
+		}    
+        
+	});
+    
+	vForaTurnoViewModel = kendo.observable({		
+		vForaTurno: [],
+		      
+		load: function(vForaTurno) {
+			var that = this;
+			that.set("vForaTurno", vForaTurno);
+		}     
+        
+	});
+
 	$.extend(window, {
 		lojaViewModel: lojaViewModel,
-		vFilaViewModel: vFilaViewModel
+		vFilaViewModel: vFilaViewModel,
+		vForaFilaViewModel: vForaFilaViewModel,
+		vForaTurnoViewModel: vForaTurnoViewModel
 		
 	});
 })(jQuery, console, document);

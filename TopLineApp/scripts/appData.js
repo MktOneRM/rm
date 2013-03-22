@@ -4,11 +4,11 @@ var AppData = function() {
 
 	_endpoints = {
 		urlLoja: {path:"http://localhost:50000/api/rmLoja", verb:"GET"},        
-		urlVFila: {path:"http://localhost:50000/api/rmFilaLoja/3", verb:"GET"},
-		urlVForaFila: {path:"http://localhost:50000/api/rmFilaLoja/1", verb:"GET"},
-		urlVForaExp: {path:"http://localhost:50000/api/rmFilaLoja/1", verb:"GET"}
+		urlVFila: {path:"http://localhost:50000/api/rmFilaLoja/1", verb:"GET"},
+		urlVForaFila: {path:"http://localhost:50000/api/rmFilaLoja/2", verb:"GET"},
+		urlVForaTurno: {path:"http://localhost:50000/api/rmFilaLoja/3", verb:"GET"}
 	};
-	
+    
 	_private = {
 		
 		load: function(route, options, cacheName) {
@@ -19,28 +19,31 @@ var AppData = function() {
 			console.log("GETTING", path, verb, options, cacheName);
 
 			//Return cached data if available (and fresh)
-			if (verb === "GET" && _private.checkCache(cacheName) === true) {
-				//Return cached data
-				dfd.resolve(_private.getCache(cacheName));
-			}
-			else {
-				//Get fresh data
-				$.ajax({
-					type: verb,
-					url: path,
-					data: options,
-					dataType: "json"
-				}).success(function (data, code, xhr) {
-					_private.setCache(cacheName, {
-						data: data,
-						expires: new Date(new Date().getTime() + (15 * 60000)) //+15min
-					});
-					dfd.resolve(data, code, xhr);
-				}).error(function (e, r, m) {
-					console.log("ERROR", e, r, m);
-					dfd.reject(m);
+			//if (verb === "GET" && _private.checkCache(cacheName) === true) {
+			//	//Return cached data
+			//	dfd.resolve(_private.getCache(cacheName));
+			//}
+			//else {
+                
+			//Get fresh data
+			$.ajax({
+				type: verb,
+				url: path,
+				data: options,
+				dataType: "json"
+			}).success(function (data, code, xhr) {
+				_private.setCache(cacheName, {
+					data: data,
+					expires: new Date(new Date().getTime() + (15 * 60000)) //+15min
 				});
-			}
+                
+				dfd.resolve(data, code, xhr);
+			}).error(function (e, r, m) {
+				console.log("ERROR", e, r, m);
+				dfd.reject(m);
+			});
+                
+			//}
 
 			return dfd.promise();
 		},
@@ -82,7 +85,7 @@ var AppData = function() {
 		getCache: function(path) {
 			var path = JSON.stringify(path),
 			cache = JSON.parse(localStorage.getItem(path));
-
+         
 			console.log("LOADING FROM CACHE", cache, path);
 
 			//TODO: Deserialize JSON string
@@ -92,17 +95,39 @@ var AppData = function() {
 
 	return {
         
-		getLojas: function() {
-			var route = $.extend({}, _endpoints.urlLoja);
-            
-			return _private.load(route, {}, "Lojas");
+        
+		getVendedoresFila:
+		function() {
+			var route = $.extend({}, _endpoints.urlVFila);            
+			_private.load(route, {}, "vFila");            
+			var result = _private.getCache("vFila");            
+			return result;
 		},
         
-		getVendedoresFilaA:
+		getVendedoresForaFila:
 		function() {
-			var route = $.extend({}, _endpoints.urlVFila);
-			
-			return _private.load(route, {}, "vFila");
+			var route = $.extend({}, _endpoints.urlVForaFila);            
+			_private.load(route, {}, "vForaFila");            
+			var result = _private.getCache("vForaFila");            
+			return result;
+		},
+        
+		getVendedoresForaTurno: 
+		function() {
+			var route = $.extend({}, _endpoints.urlVForaTurno);                 
+			_private.load(route, {}, "vForaTurno");            
+			var result = _private.getCache("vForaTurno");            
+			return result;
+		},
+        
+		getLojas: 
+		function() {
+			var route = $.extend({}, _endpoints.urlLoja);            
+			_private.load(route, {}, "Lojas");
+			var result = _private.getCache("Lojas");            
+			return result;
 		}
+        
+	
 	};
 }

@@ -1,11 +1,13 @@
 
-<div id="editor" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Loja" data-layout="mobile-tabstrip">
+<div id="editor" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Loja" data-layout="mobile-view">
 
 	<div data-role="header">
 		<div data-role="navbar">
-			<a href="#consultaLojaView" data-role="button" data-align="left">Cancelar</a>
+			<a href="views/ConsultaLojaView.html" data-role="button" data-align="left">Cancelar</a>
 			<span data-role="view-title"></span>
-			<button data-role="button" data-align="right" id="buttonAddNewLoja"  data-bind="events: { click: addNewCard }">Ok</button>
+			<button data-role="button" data-align="right" id="buttonAddNewLoja" data-click="addNovaLoja"  data-bind="events: { click: addNovaLoja }">
+				<h5>Ok</h5>
+			</button>
 		</div>
 	</div>
 	<div data-role="content">
@@ -36,7 +38,13 @@
 			</li>
 		</ul>
 	</div>
-    
-	<a id="btnCreate" data-role="button" type="button" data-bind="events: {click: saveProduct}">Salvar</a>
-	<a id="btnCancel" data-role="button" type="button" data-bind="events: {click: cancelChanges}">Cancelar</a>
 </div>
+
+<script>
+    
+	function addNovaLoja() {
+        alert("dasds");
+        
+		app.navigate("views/AtendimentoView.html");
+	}    
+</script>

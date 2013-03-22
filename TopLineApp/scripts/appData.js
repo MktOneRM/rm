@@ -93,17 +93,9 @@ var AppData = function() {
          
 			console.log("LOADING FROM CACHE", cache, path);
             
-			var result;
-            
-			if (cache == null) {
-				result = "";
-			}
-			else {
-				result = cache.data.data;
-			}
             
 			//TODO: Deserialize JSON string
-			return result
+			return cache.data.data;
 		}
 	};
 

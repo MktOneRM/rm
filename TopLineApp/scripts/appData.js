@@ -41,6 +41,11 @@ var AppData = function() {
 			}).error(function (e, r, m) {
 				console.log("ERROR", e, r, m);
 				dfd.reject(m);
+				//Return cached data if available (and fresh)
+				//if (verb === "GET" && _private.checkCache(cacheName) === true) {
+				//Return cached data
+				//dfd.resolve(_private.getCache(cacheName));
+				//}
 			});
                 
 			//}
@@ -99,7 +104,7 @@ var AppData = function() {
 		getVendedoresFila:
 		function() {
 			var route = $.extend({}, _endpoints.urlVFila);            
-			_private.load(route, {}, "vFila");            
+			_private.load(route, {}, "vFila");                
 			var result = _private.getCache("vFila");            
 			return result;
 		},

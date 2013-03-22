@@ -13,6 +13,7 @@
 		}
 	});
     
+    
 	vFilaViewModel = kendo.observable({
 		vFila: [],
 		

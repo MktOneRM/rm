@@ -13,7 +13,6 @@
 		}
 	});
     
-    
 	vFilaViewModel = kendo.observable({
 		vFila: [],
 		
@@ -42,6 +41,10 @@
 			that.set("vForaTurno", vForaTurno);
 		}     
         
+	});
+    
+	editLojaViewModel = kendo.observable({
+		
 	});
 
 	$.extend(window, {

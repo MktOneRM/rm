@@ -15,6 +15,16 @@
 		}
 	});
     
+    colsViewModel = kendo.observable({
+        colaboradores: [],
+        
+        load: function(colaboradores){
+            var that = this;
+            that.set("colaboradores", colaboradores);
+        }
+        
+    });
+    
 	AddLojaViewModel = kendo.data.ObservableObject.extend({
 		loja: null,
         

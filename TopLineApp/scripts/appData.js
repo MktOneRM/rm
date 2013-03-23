@@ -1,19 +1,23 @@
 var AppData = function() {
 	var _endpoints,	
-        _url,
-	    _private;
+	_url,
+	_private;
 
-    _url = "http://revenuemachine11.provisorio.ws/api";
+	_url = "http://revenuemachine11.provisorio.ws/api";
     
 	_endpoints = {
-		urlLoja: {path:"http://localhost:50000/api/rmLoja", verb:"GET"},         
-		urlLojaPost: {path:"http://localhost:50000/api/rmLoja", verb:"POST"}, 
+		urlLoja:          {path: _url + "/rmLoja", verb:"GET"},         
+		urlLojaPost:      {path: _url + "/rmLoja", verb:"POST"}, 
         
-		urlVFila: {path:"http://localhost:50000/api/rmFilaLoja/1", verb:"GET"},
-		urlVForaFila: {path:"http://localhost:50000/api/rmFilaLoja/2", verb:"GET"},
-		urlVForaTurno: {path:"http://localhost:50000/api/rmFilaLoja/3", verb:"GET"},
+        urlColsGet: {path: _url + "/rmColaborador", verb:"GET"}, 
+        urlColsPost: {path: _url + "/rmColaborador", verb:"POST"}, 
         
-		urlTiposMov: {path:"http://localhost:50000/api/RmTipoMovimento", verb:"GET"}
+		urlVFila:         {path: _url + "/rmFilaLoja/1", verb:"GET"},
+		urlVForaFila:     {path: _url + "/rmFilaLoja/2", verb:"GET"},
+		urlVForaTurno:    {path: _url + "/rmFilaLoja/3", verb:"GET"},
+        
+		urlTiposMov: {path:_url + "/RmTipoMovimento", verb:"GET"}
+        
         
 	};
     
@@ -148,8 +152,16 @@ var AppData = function() {
 			return result;
 		},
         
+        getColaboradores:
+        function(){
+            var route = $.extend({}, _endpoints.urlColsGet);            
+			_private.load(route, {}, "Colaboradores");
+			var result = _private.getCache("Colaboradores");            
+			return result;            
+        },
+        
 		getTiposMov: function() {            
-            var route = $.extend({}, _endpoints.urlTiposMov);            
+			var route = $.extend({}, _endpoints.urlTiposMov);            
 			_private.load(route, {}, "TiposMov");
 			var result = _private.getCache("TiposMov");            
 			return result;

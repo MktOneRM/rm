@@ -23,6 +23,10 @@
 			lojaViewModel.load(_appData.getLojas());
 		},
         
+        colsShow: function(){
+            colsViewModel.load(_appData.getColaboradores());            
+        },
+        
         tiposMovShow: function(){
             tiposMovViewModel.load(_appData.getTiposMov());
         },
@@ -39,7 +43,10 @@
 	$.extend(window, {
 		lojaViewModel: _app.lojaViewModel,
 		onLojasShow: _app.lojasShow,        
-        onAddLojaViewShow: _app.onAddLojaViewShow,        
+        onAddLojaViewShow: _app.onAddLojaViewShow,       
+        
+        colsViewModel: _app.colsViewModel,
+        colsShow: _app.colsShow,
 		
 		vFilaViewModel: _app.vFilaViewModel,
 		onVFilaShow: _app.vFilaShow,

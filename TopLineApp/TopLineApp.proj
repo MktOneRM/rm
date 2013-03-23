@@ -75,6 +75,7 @@
     <Content Include="Images\Foto4.jpg" />
     <Content Include="Images\Foto5.jpg" />
     <Content Include="index.html" />
+    <Content Include="kendo\js\jquery.maskedinput.min.js" />
     <Content Include="kendo\js\jquery.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />

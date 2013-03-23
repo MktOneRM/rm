@@ -1,21 +1,34 @@
+
+jQuery.noConflict();
+(function($) {
+$(function() {
+$('.mask-cnpj').mask('99.999.999/0000-99'); //data
+$('.mask-data').mask('99/99/9999'); //data
+$('.mask-fone').mask('(999) 999-9999'); //telefone
+});
+})(jQuery);
+
 <div data-role="view" id="lojasView" data-title="Loja" data-show="getLojasShow" data-model="lojaViewModel">
 	<header data-role="header">
 		<div data-role="navbar">
-			<a id="buttonAddNewLoja" data-role="button" href="views/CadastroLojaView.html" 
-			   data-align="right" data-icon="add"></a>
+            <a href="views/ConfiguracoesView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+			<a id="buttonAddNewLoja" data-role="button" href="views/CadastroLojaView.html" data-align="right">Editar</a>
 			<span data-role="view-title"></span>
 		</div>
 	</header>
 
-	<!--details view-->
-	<div id="lojaViewContent" data-role="content" data-title="Lojas" data-layout="default">
-		<ul id="info" data-role="listview" data-style="inset">
-			<li>
-				Cnpj: <span data-bind="text: lojas[0].LOJ_CNPJ"></span>
-			</li>
-			<li>
-				Codigo da Loja: <span data-bind="text: lojas[0].LOJ_CODIGO"></span>
-			</li>
+	<div id="lojaViewContent" data-role="content">
+		<ul id="info" data-role="listview" data-style="inset" data-type="group">
+            <li>Dados Cadastrais
+                <ul>
+                     <li>
+                         <label>CNPJ:</label><span data-format="{0:C}" data-bind="text: lojas[0].LOJ_CNPJ"></span>
+                     </li>
+  			       <li>
+				         <label>Codigo:</label><span data-bind="text: lojas[0].LOJ_CODIGO"></span>
+			         </li>
+                </ul>
+            </li>
 			<li>
 				Razao Social: <span data-bind="text: lojas[0].LOJ_RAZAOSOCIAL"></span>
 			</li>
@@ -41,5 +54,12 @@
         onLojasShow();
     }
     
+    function MascaraCNPJ(cnpj){
+	if(mascaraInteiro(cnpj)==false){
+		event.returnValue = false;
+	}	
+	return formataCampo(cnpj, '00.000.000/0000-00', event);
+}
+
 </script>
 

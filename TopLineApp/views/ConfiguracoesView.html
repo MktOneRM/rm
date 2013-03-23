@@ -1,42 +1,30 @@
-<div data-role="view" id="Configuracoes" data-title="Configurações" data-layout="mobile-view" >
+<div data-role="view" id="Configuracoes" data-title="Top Line" data-title="Detail Buttons">
 	<header data-role="header">
 		<div data-role="navbar">
-			<a class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+			<a href="views/VForaTurnoView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 			<span data-role="view-title"></span>
 		</div>
 	</header>
 	<div id="configContents" data-role="content">
 		<!-- Lista de opções de configurações-->
 		<ul data-role="listview" data-style="inset" data-type="group">
-
-			<li>
+         
+			<li>Configuração
 				<ul>
-					<li data-icon="globe">
-						<a>Cadastro de Loja</a>
+					<li>Cadastro de Loja
+						<a href="views/ConsultaLojaView.html" data-role="detailbutton" data-style="detaildisclose"></a>
+					</li>
+					<li>Cadastro de Colaboradores
+						<a href="#" data-role="detailbutton" data-style="detaildisclose"></a>
+					</li>
+					<li>Escala de Trabalho
+						<a href="#" data-role="detailbutton" data-style="detaildisclose"></a>
+					</li>
+					<li>Horário de Funcionamento
+						<a href="#" data-role="detailbutton" data-style="detaildisclose"></a>
 					</li>
 				</ul>
 
-			</li>
-
-			<li>
-				<ul>
-					<li data-icon="globe">
-						<a>Cadastro de Colaboradores</a>
-					</li>
-				</ul>
-
-			</li>
-
-			<li>
-				Cadastro de Parâmetros
-				<ul>
-					<li data-icon="toprated">
-						<a>Escala de Trabalho</a>
-					</li>
-					<li data-icon="toprated">
-						<a>Horário de funcionamento</a>
-					</li>
-				</ul>
 			</li>
 		</ul>
 

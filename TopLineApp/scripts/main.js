@@ -23,6 +23,10 @@
 			lojaViewModel.load(_appData.getLojas());
 		},
         
+        tiposMovShow: function(){
+            tiposMovViewModel.load(_appData.getTiposMov());
+        },
+        
 		onAddLojaViewShow: function() {
 			addLojaViewModel.resetView();            
 		}
@@ -45,6 +49,8 @@
         
 		vForaTurnoViewModel: _app.vForaTurnoViewModel,
 		onVForaTurnoShow: _app.vForaTurnoShow,
+        
+        onTiposMovShow: _app.tiposMovShow
 		
 	});
 }(jQuery, document));

@@ -3,13 +3,15 @@ var AppData = function() {
 	_private;
 
 	_endpoints = {
-		urlLoja: {path:"http://localhost:50000/api/rmLoja", verb:"GET"}, 
-        
+		urlLoja: {path:"http://localhost:50000/api/rmLoja", verb:"GET"},         
 		urlLojaPost: {path:"http://localhost:50000/api/rmLoja", verb:"POST"}, 
         
 		urlVFila: {path:"http://localhost:50000/api/rmFilaLoja/1", verb:"GET"},
 		urlVForaFila: {path:"http://localhost:50000/api/rmFilaLoja/2", verb:"GET"},
-		urlVForaTurno: {path:"http://localhost:50000/api/rmFilaLoja/3", verb:"GET"}
+		urlVForaTurno: {path:"http://localhost:50000/api/rmFilaLoja/3", verb:"GET"},
+        
+		urlTiposMov: {path:"http://localhost:50000/api/RmTipoMovimento", verb:"GET"}
+        
 	};
     
 	_private = {
@@ -143,13 +145,20 @@ var AppData = function() {
 			return result;
 		},
         
-        saveLoja:
-        function(){
-          	var route = $.extend({}, _endpoints.urlLojaPost);            
+		getTiposMov: function() {            
+            var route = $.extend({}, _endpoints.urlTiposMov);            
+			_private.load(route, {}, "TiposMov");
+			var result = _private.getCache("TiposMov");            
+			return result;
+		},
+        
+		saveLoja:
+		function() {
+			var route = $.extend({}, _endpoints.urlLojaPost);            
 			_private.load(route, {}, "Lojas");
 			var result = _private.getCache("Lojas");            
 			return result;  
-        }
+		}
         
 	
 	};

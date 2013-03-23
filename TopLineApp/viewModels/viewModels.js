@@ -3,6 +3,7 @@
 	vFilaViewModel,
 	vForaFilaViewModel,
 	vForaTurnoViewModel,
+	tiposMovViewModel,
 	AddLojaViewModel;
       
 	lojaViewModel = kendo.observable({
@@ -36,7 +37,7 @@
 			console.log(lojaViewModel);
 			console.log(JSON.stringify(lojaViewModel.loja), "JSON");
             
-            lojaViewModel.lojas.bind("change", that);
+			lojaViewModel.lojas.bind("change", that);
             
 			app.navigate("views/ConsultaLojaView.html");
 		},
@@ -78,15 +79,22 @@
         
 	});
     
-	editLojaViewModel = kendo.observable({
-		
+	tiposMovViewModel = kendo.observable({
+		tiposMov: [],
+        
+		load: function(tiposMov) {
+			var that = this;
+			that.set("tiposMov", tiposMov);
+		}     
+        
 	});
-
+    
 	$.extend(window, {
 		lojaViewModel: lojaViewModel,
 		vFilaViewModel: vFilaViewModel,
 		vForaFilaViewModel: vForaFilaViewModel,
 		vForaTurnoViewModel: vForaTurnoViewModel,
+		tiposMovViewModel: tiposMovViewModel,
 		addLojaViewModel: new AddLojaViewModel(),
 		
 	});

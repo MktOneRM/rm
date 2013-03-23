@@ -16,52 +16,35 @@
 
 	<body>
 
-		<div id="frmPrincipal" data-role="layout" data-id="mobile-tabstrip">
+		<div data-role="view" id="Configuracoes" data-title="Top Line" data-id="mobile-tabstrip">
 			<header data-role="header">
-				<div data-role="navbar" style="height: 44px;">
+				<div data-role="navbar">
 					<a href="views/ConfiguracoesView.html" class="nav-button" data-align="right" data-role="button" data-icon="settings" data-transition="pop"></a>
-					<span>Top Line</span>
+					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<div data-role="footer">
-				<div data-role="tabstrip">
-					<a href="views/VFilaView.html" data-icon="reply">Dentro</a>
-					<a href="views/VForaFilaView.html" data-icon="action">Fora</a>
-					<a href="views/VForaTurnoView.html" data-icon="recents">Turno</a>
-				</div>
+			<div id="configContents" data-role="content">
+				
+				<ul data-role="listview" data-style="inset" data-type="group">
+
+					<li>
+						Menu Principal
+						<ul>
+							<li>
+								<a href="views/VFilaView.html" data-role="detailbutton" data-style="detaildisclose">Filas</a>
+							</li>				
+						</ul>
+
+					</li>
+				</ul>
+
 			</div>
+
 		</div>
 
-		<div id="vdentroFila" data-role="view" data-layout="mobile-tabstrip" data-show="vFilaShow" data-model="vFilaViewModel">
-			<div class="mobile-fila-titulo">Dentro da Fila</div>
-			<ul id="ldentroFila" data-bind="source: vFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" class="mobile-fila"></ul>
-			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
-				<li class="km-actionsheet-title">Selecione operação:</li>
-				<li>
-					<a data-action="showResultadoAtendimento">Resultado Atendimento</a>
-				</li>
-				<li>
-					<a data-action="showMotivosSaidaFila">Sair fila da Vez</a>
-				</li>
-			</ul>
-		</div>
-
-		<script type="text/x-kendo-template" id="tdentroFila">
-			<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= LojaColId #">
-				<img src="${ColFoto}" />
-				<h5>${ColApelido}</h5>
-			</a>
-		</script>
 
 		<script>
-    
-			function vFilaShow() {
-				onVFilaShow();
-			}    
-		</script>
-
-		<script>
-			            
+		
 			/*
 			$(document).ready(function() {
 			//Start the mobile application

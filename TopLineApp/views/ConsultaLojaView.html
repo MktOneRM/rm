@@ -8,7 +8,7 @@ $('.mask-fone').mask('(999) 999-9999'); //telefone
 });
 })(jQuery);
 
-<div data-role="view" id="lojasView" data-title="Loja" data-show="getLojasShow" data-model="lojaViewModel">
+<div data-role="view" id="lojasView" data-title="Top Line" data-show="getLojasShow" data-model="lojaViewModel">
 	<header data-role="header">
 		<div data-role="navbar">
             <a href="views/ConfiguracoesView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -22,7 +22,7 @@ $('.mask-fone').mask('(999) 999-9999'); //telefone
             <li>Dados Cadastrais
                 <ul>
                      <li>
-                         <label>CNPJ:</label><span data-format="{0:C}" data-bind="text: lojas[0].LOJ_CNPJ"></span>
+                         <label>CNPJ:</label><span data-bind="text: lojas[0].LOJ_CNPJ" class="mask-cnpj"></span> 
                      </li>
   			       <li>
 				         <label>Codigo:</label><span data-bind="text: lojas[0].LOJ_CODIGO"></span>

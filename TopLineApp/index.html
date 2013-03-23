@@ -1,46 +1,74 @@
 <!DOCTYPE html>
-
+<html>
 <head>
-	<title></title>
 	<meta charset="utf-8" />
-
-	<link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
 	<link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
 	<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-
-	<link href="styles/main.css" rel="stylesheet" />
-
+    <link href="styles/main.css" rel="stylesheet" />
+	<script src="cordova.js" type="text/javascript"></script>
+	<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
+	<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
+    <script src="kendo/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+	<script src="scripts/appData.js" type="text/javascript"></script>
+	<script src="viewModels/viewModels.js" type="text/javascript"></script>
+	<script src="scripts/main.js" type="text/javascript"></script>
 </head>
-
-<html>
-
-	<body>
-
-		<div data-role="view" id="Configuracoes" data-title="Top Line" data-id="mobile-tabstrip">
-			<header data-role="header">
-				<div data-role="navbar">
-					<a href="views/ConfiguracoesView.html" class="nav-button" data-align="right" data-role="button" data-icon="settings" data-transition="pop"></a>
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-			<div id="configContents" data-role="content">
-				
-				<ul data-role="listview" data-style="inset" data-type="group">
-
-					<li>
-						Menu Principal
-						<ul>
-							<li>
-								<a href="views/VFilaView.html" data-role="detailbutton" data-style="detaildisclose">Filas</a>
-							</li>				
-						</ul>
-
-					</li>
-				</ul>
-
-			</div>
-
+<body>
+<div id="frmPrincipal" data-role="layout" data-id="mobile-tabstrip">
+	<header data-role="header">
+		<div data-role="navbar" style="height: 44px;">
+			<a href="views/ConfiguracoesView.html" class="nav-button" data-align="right" data-role="button" data-icon="settings" data-transition="pop"></a>
+            <a href="index.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+			<span>Top Line</span>
 		</div>
+	</header>
+	<div data-role="footer">
+		<div data-role="tabstrip">
+			<a href="views/VFilaView.html" data-icon="reply">Dentro</a>
+			<a href="views/VForaFilaView.html" data-icon="action">Fora</a>
+			<a href="views/VForaTurnoView.html" data-icon="recents">Turno</a>
+		</div>
+	</div>
+</div>
+
+<div id="vdentroFila" data-role="view" data-layout="mobile-tabstrip" data-show="vFilaShow" data-model="vFilaViewModel">
+	<div class="mobile-fila-titulo">Dentro da Fila</div>
+	<ul id="ldentroFila" data-bind="source: vFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" class="mobile-fila"></ul>
+	<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
+		<li class="km-actionsheet-title">Selecione operação:</li>
+		<li>
+			<a data-action="atendimentoShow">Resultado Atendimento</a>
+		</li>
+		<li>
+			<a data-action="tiposMovShow">Sair fila da Vez</a>
+		</li>
+	</ul>
+</div>
+
+<script type="text/x-kendo-template" id="tdentroFila">
+	<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= LojaColId #">
+		<img src="${ColFoto}" />
+		<h5>${ColApelido}</h5>
+	</a>
+</script>
+
+<script>
+    
+	function vFilaShow() {
+		onVFilaShow();
+	}    
+    
+	function atendimentoShow(e) {	
+		app.navigate("views/AtendimentoView.html");
+	}
+    
+	function tiposMovShow(e) {	
+		app.navigate("views/TiposMovView.html");
+	}            
+</script>	<script>
+		var app = new kendo.mobile.Application(document.body, { transition: "slide"});
+	</script>
 
 
 		<script>
@@ -362,16 +390,7 @@
 			
 		</script>
 
-		<script src="cordova.js"></script>
-		<script src="kendo/js/jquery.min.js"></script>
-		<script src="kendo/js/kendo.mobile.min.js"></script>
-		<script type="text/javascript" src="scripts/appData.js"></script>
-		<script type="text/javascript" src="viewModels/viewModels.js"></script>
-		<script type="text/javascript" src="scripts/main.js"></script>
 
-		<script>
-			var app = new kendo.mobile.Application(document.body, { transition: "slide"});
-		</script>
 
 	</body>
 

@@ -1,81 +1,4 @@
-label 
-{
-    color: #161d54;
-	font-weight: bold;
-	padding-left: 0;
-    padding-right: 5px;
-	text-align: left;
-    width:200px;
-}                                                                  
-                                             
-.km-android .km-navbar .km-view-title
-{
-	visibility: visible;
-}
-
-
-#modalview-login-button,
-#modalview-reg-button,
-
-
-#modalview-open-button
-{
-	display: block;	
-	margin: .6em .8em 0;
-	font-size: 1.2em;
-}
-
-#modalview-open-button img
-{
-	margin: 0 3em;
-	padding: .5em;
-}
-
-
-#modalview-camera
-{
-	text-align: center;
-}
-
-#modalview-camera img
-{
-	display: block;
-	margin: 30px auto;
-}
-
-#modalview-camera .km-content,
-.km-ios #modalview-login .km-content
-{
-	background: url(../images/pattern1.png) repeat 0 0;
-}
-
-.km-ios #modalview-camera .km-button,
-.km-ios #modalview-login .km-button,
-.km-ios #modalview-camera .km-navbar,
-.km-ios #modalview-login .km-header
-{
-	background-color: #000;
-}
-
-.km-ios #modalview-camera .km-button:active,
-.km-ios #modalview-camera .km-state-active,
-.km-ios #modalview-login .km-button:active,
-.km-ios #modalview-login .km-state-active
-{
-	background-color: #2e2e2e;
-}
-
-.km-ios #modalview-login #modalview-login-button
-{
-	background-color: Green;
-}
-
-.km-tablet .km-ios #modalview-camera .km-view-title, .km-tablet .km-ios #modalview-login .km-view-title
-{
-	color: #fff;
-	text-shadow: 0 -1px rgba(0, 0, 0, .5);
-}
-
+                                     
 .mobile-fila {
     margin:5px 0 0 0;
     border-top: 0;     
@@ -120,4 +43,3 @@ label
     width:100%;
     text-align:center;
 }
-

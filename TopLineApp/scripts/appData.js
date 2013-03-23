@@ -1,7 +1,10 @@
 var AppData = function() {
 	var _endpoints,	
-	_private;
+        _url,
+	    _private;
 
+    _url = "http://revenuemachine11.provisorio.ws/api";
+    
 	_endpoints = {
 		urlLoja: {path:"http://localhost:50000/api/rmLoja", verb:"GET"},         
 		urlLojaPost: {path:"http://localhost:50000/api/rmLoja", verb:"POST"}, 

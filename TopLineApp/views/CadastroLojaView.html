@@ -1,50 +1,51 @@
 
-<div id="editor" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Loja" data-layout="mobile-view">
+<div id="editor" data-role="view" data-show="onAddLojaViewShow" data-model="addLojaViewModel" data-title="Loja">
 
 	<div data-role="header">
 		<div data-role="navbar">
 			<a href="views/ConsultaLojaView.html" data-role="button" data-align="left">Cancelar</a>
 			<span data-role="view-title"></span>
-			<button data-role="button" data-align="right" id="buttonAddNewLoja" data-click="addNovaLoja"  data-bind="events: { click: addNovaLoja }">
+			<button data-role="button" data-align="right" id="buttonAddNewLoja" data-bind="events: { click: addNewLoja }">
 				<h5>Ok</h5>
 			</button>
 		</div>
 	</div>
 	<div data-role="content">
 		<ul id="form" data-role="listview" data-style="inset">
+
 			<li>
-				<label>
-					Nome do produto:
-					<input id="productName" name="ProductName" type="text" required="required" data-bind="value: selectedProduct.ProductName" />
-				</label>
+				<label for="cnpjField">Card Number </label>
+				<input type="number" id="cnpjField" min="3" max="10" maxlength="10" maxlength="9" data-bind="value: LOJ_CNPJ"/>
+			</li>
+
+			<!--
+			<li>
+			<label>
+			Nome do produto:
+			<input id="productName" name="ProductName" type="text" required="required" data-bind="value: LOJ_CNPJ" />
+			</label>
 			</li>
 			<li>
-				<label>
-					Preço Unitário:
-					<input id="unitPrice" name="UnitPrice" type="number" required="required" data-bind="value: selectedProduct.UnitPrice" />
-				</label>
+			<label>
+			Preço Unitário:
+			<input id="unitPrice" name="UnitPrice" type="number" required="required" data-bind="value: selectedProduct.UnitPrice" />
+			</label>
 			</li>
 			<li>
-				<label>
-					Qtde Estoque:
-					<input id="unitsInStock" name="UnitsInStock" type="number" required="required" data-bind="value: selectedProduct.UnitsInStock"/>
-				</label>
+			<label>
+			Qtde Estoque:
+			<input id="unitsInStock" name="UnitsInStock" type="number" required="required" data-bind="value: selectedProduct.UnitsInStock"/>
+			</label>
 			</li>
 			<li>
-				<label>
-					Inativo:
-					<input id="discontinued" name="Discontinued" type="checkbox" data-bind="value: selectedProduct.Discontinued"/>
-				</label>
+			<label>
+			Inativo:
+			<input id="discontinued" name="Discontinued" type="checkbox" data-bind="value: selectedProduct.Discontinued"/>
+			</label>
 			</li>
+            
+			-->
+
 		</ul>
 	</div>
 </div>
-
-<script>
-    
-	function addNovaLoja() {
-        alert("dasds");
-        
-		app.navigate("views/.html");
-	}    
-</script>

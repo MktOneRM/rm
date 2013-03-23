@@ -3,7 +3,10 @@ var AppData = function() {
 	_private;
 
 	_endpoints = {
-		urlLoja: {path:"http://localhost:50000/api/rmLoja", verb:"GET"},        
+		urlLoja: {path:"http://localhost:50000/api/rmLoja", verb:"GET"}, 
+        
+		urlLojaPost: {path:"http://localhost:50000/api/rmLoja", verb:"POST"}, 
+        
 		urlVFila: {path:"http://localhost:50000/api/rmFilaLoja/1", verb:"GET"},
 		urlVForaFila: {path:"http://localhost:50000/api/rmFilaLoja/2", verb:"GET"},
 		urlVForaTurno: {path:"http://localhost:50000/api/rmFilaLoja/3", verb:"GET"}
@@ -93,12 +96,12 @@ var AppData = function() {
          
 			console.log("LOADING FROM CACHE", cache, path);
             
-            var result  = null;
+			var result = null;
             
-			if(cache == null)
-                result = {"data":{"data":[],"expires":"2013-03-22T21:48:17.015Z"}};
-            else 
-                result = cache.data.data;
+			if (cache == null)
+				result = {"data":{"data":[],"expires":"2013-03-22T21:48:17.015Z"}};
+			else 
+				result = cache.data.data;
             
 			//TODO: Deserialize JSON string
 			return result;
@@ -138,7 +141,15 @@ var AppData = function() {
 			_private.load(route, {}, "Lojas");
 			var result = _private.getCache("Lojas");            
 			return result;
-		}
+		},
+        
+        saveLoja:
+        function(){
+          	var route = $.extend({}, _endpoints.urlLojaPost);            
+			_private.load(route, {}, "Lojas");
+			var result = _private.getCache("Lojas");            
+			return result;  
+        }
         
 	
 	};

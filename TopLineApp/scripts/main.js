@@ -19,9 +19,14 @@
 			vForaTurnoViewModel.load(_appData.getVendedoresForaTurno());
 		},
         
-        lojasShow: function(){
-            lojaViewModel.load(_appData.getLojas());
-        }
+		lojasShow: function() {
+			lojaViewModel.load(_appData.getLojas());
+		},
+        
+		onAddLojaViewShow: function() {
+			addLojaViewModel.resetView();            
+		}
+        
        
 	};
     
@@ -29,7 +34,8 @@
         
 	$.extend(window, {
 		lojaViewModel: _app.lojaViewModel,
-        onLojasShow: _app.lojasShow,
+		onLojasShow: _app.lojasShow,        
+        onAddLojaViewShow: _app.onAddLojaViewShow,        
 		
 		vFilaViewModel: _app.vFilaViewModel,
 		onVFilaShow: _app.vFilaShow,

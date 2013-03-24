@@ -11,11 +11,11 @@
 		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.maskedinput.min.js" type="text/javascript"></script>
 
-	<!--	<script src="content/topLine.js" type="text/javascript"></script> -->
+			<script src="content/topLine.js" type="text/javascript"></script>
 
-		<script src="scripts/appData.js" type="text/javascript"></script>
+		<!--<script src="scripts/appData.js" type="text/javascript"></script>
 		<script src="viewModels/viewModels.js" type="text/javascript"></script>
-		<script src="scripts/main.js" type="text/javascript"></script>
+		<script src="scripts/main.js" type="text/javascript"></script>-->
 
 	</head>
 	<body>
@@ -63,13 +63,12 @@
 			});
 			
 			function showAtendimentoView(e) {
-				
 				var vendedor = viewModel.dsVendFila.get(e.context);
 				viewModel.set("vendedorSelecionado", vendedor); 				
 			
-                    console.log(e.context);
+				console.log(e.context);
 				console.log(viewModel);
-                    
+			
 				app.navigate("views/AtendimentoView.html");
 			};
 			
@@ -79,9 +78,9 @@
 			
 			
 		</script>
-
+		
 		<script>
-			
+		
 			/*
 			$(document).ready(function() {
 			//Start the mobile application
@@ -398,8 +397,8 @@
 			*/
 			
 		</script>
-
+		
 	</body>
-
+	
 </html>
 

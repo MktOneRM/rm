@@ -1,85 +1,11 @@
-<div data-role="view" id="lojasView" data-title="Top Line" data-show="getLojasShow" data-model="lojaViewModel">
-	<header data-role="header">
-		<div data-role="navbar">
-            <a href="views/ConfiguracoesView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
-			<a id="buttonAddNewLoja" data-role="button" href="views/CadastroLojaView.html" data-align="right">Editar</a>
-			<span data-role="view-title"></span>
-		</div>
-	</header>
-
-	<div id="lojaViewContent" data-role="content">
-		<ul id="info" data-role="listview" data-style="inset" data-type="group">
-            <li>Dados Cadastrais
-                <ul>
-                     <li>
-                         <label>CNPJ: </label><span data-bind="text: MascaraCNPJ(lojas[0].LOJ_CNPJ)"></span>
-                     </li>
-  			       <li>
-				         <label>Código: </label><span data-bind="text: lojas[0].LOJ_CODIGO"></span> 
-			         </li>
-         			<li>
-        				<label>Razao Social: </label><span data-bind="text: lojas[0].LOJ_RAZAOSOCIAL"></span>
-        			 </li>
-                </ul>
-            </li>
-			<li>
-				Nome Fantasia: <span data-bind="text: lojas[0].LOJ_NOMEFANTASIA"></span>
-			</li>
-            
-            <li>
-				DDD: <span data-bind="text: lojas[0].LOJ_RAZAO_SOCIAL"></span>
-			</li>
-			<li>
-				Inativo: <span data-bind="text: lojas[0].LOJ_NOMEFANTASIA"></span>
-			</li>
-            
-		</ul>
-
-	</div>
+<div id="lojasView" data-role="view" data-layout="mobile-tabstrip" data-show="showLojas" data-model="viewModel">
+	<div class="mobile-fila-titulo">Fora da Fila</div>
+	<ul id="lforaFila" data-bind="source: dsLoja" data-role="listview" data-auto-bind="false" data-template="tpConsultaLojas" class="mobile-fila"></ul>
 </div>
 
-<script type="text/javascript"> 
-    function getLojasShow(){
-        onLojasShow();
-    }
-    //adiciona mascara de cnpj
-    function MascaraCNPJ(cnpj){
-    	if(mascaraInteiro(cnpj)==false){
-    		event.returnValue = false;
-    	}	
-    	return formataCampo(cnpj, '00.000.000/0000-00', event);
-    }
-    
-    //adiciona mascara de cep
-    function MascaraCep(cep){
-    		if(mascaraInteiro(cep)==false){
-    		event.returnValue = false;
-    	}	
-    	return formataCampo(cep, '00.000-000', event);
-    }
-    
-    //adiciona mascara de data
-    function MascaraData(data){
-    	if(mascaraInteiro(data)==false){
-    		event.returnValue = false;
-    	}	
-    	return formataCampo(data, '00/00/0000', event);
-    }
-    
-    //adiciona mascara ao telefone
-    function MascaraTelefone(tel){	
-    	if(mascaraInteiro(tel)==false){
-    		event.returnValue = false;
-    	}	
-    	return formataCampo(tel, '(00) 0000-0000', event);
-    }
-    
-    //adiciona mascara ao CPF
-    function MascaraCPF(cpf){
-    	if(mascaraInteiro(cpf)==false){
-    		event.returnValue = false;
-    	}	
-    	return formataCampo(cpf, '000.000.000-00', event);
-    }
-</script> 
-
+<script type="text/x-kendo-template" id="tpConsultaLojas">
+	<a data-rel="modalview" href="\\#modalview-login">
+		<img src="${ColFoto}" />
+		<h5>${LojCnpj}</h5>
+	</a>
+</script>

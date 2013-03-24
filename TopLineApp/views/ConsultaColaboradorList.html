@@ -1,0 +1,21 @@
+<div data-role="view" id="ColaboradorList" data-title="Top Line" data-show="showColaboradores" data-model="viewModel.ColaboradorSelecionado">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a href="views/ConfiguracoesView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
+ </div>
+
+<script type="text/x-kendo-template" id="tColaborador">
+	<a data-rel="actionsheet" href="views/CadastroColaboradorView.html" data-actionsheet-context="#= ColId #">
+		<h4>${ColNome}</h4>
+	</a>
+</script>
+
+<script>
+   function getColaboradorShow(){
+        onColaboradorShow();
+    }
+</script>

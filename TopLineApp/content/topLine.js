@@ -1,8 +1,8 @@
 (function($, undefined) {
-	
 	//Url
-	//var baseUrl = "http://localhost:50000/api";
-    var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	
+    //var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
 
 	//schema
 	var schemaVendedores = { 
@@ -38,7 +38,7 @@
 	};
 			
 	//schemaMotivosSaidaSalao
-	var schemaMotivosSaida = { 
+	var schemaTiposMovto = { 
 		model: {
 			id: "TmoId",
 			fields: {
@@ -153,7 +153,7 @@
 			},
 		},
 		batch: true,
-		schema: schemaMotivosSaida
+		schema: schemaTiposMovto
 	});
 			
 	//dataSource Atendimento
@@ -198,7 +198,8 @@
 		vendedoresFila: vendedoresFila,
 		vendedoresForaFila: vendedoresForaFila,
 		vendedoresForaTurno: vendedoresForaTurno,
-		tiposMovto: tiposMovto
+		tiposMovtoSaida: tiposMovtoSaida,
+        tiposMovtoEntrada: tiposMovtoEntrada
 		
 	});
     
@@ -258,23 +259,27 @@
 		atualizaFilaNoSalao(dsVendForaTurno, 3);
 	}
 			
-	function tiposMovto() {		
-        alert("pqp");
-        
-		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento";
+	function tiposMovtoEntrada() {		
+		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/true";
 		dsTiposMovto.read(); 
 	}
-		
+	
+	function tiposMovtoSaida() {		
+		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
+		dsTiposMovto.read(); 
+	}
+    
 	function atualizaFilaNoSalao(context, parametro) {
 		context.options.transport.read.url = baseUrl + "/RmFilaLoja/" + parametro;					
 		context.read();
 	}
-
+    
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,
 		showVendedoresForaTurno: vendedoresForaTurno,
-		showTiposMovto: tiposMovto,
+		showTiposMovtoSaida: tiposMovtoSaida,
+		showTiposMovtoEntrada: tiposMovtoEntrada,
 		viewModel: viewModel 
 	});
 })(jQuery);

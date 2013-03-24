@@ -11,8 +11,8 @@ var AppData = function() {
 		urlLoja:          {path: _url + "/rmLoja", verb:"GET"},         
 		urlLojaPost:      {path: _url + "/rmLoja", verb:"POST"}, 
         
-		urlColsGet: {path: _url + "/rmColaborador", verb:"GET"}, 
-		urlColsPost: {path: _url + "/rmColaborador", verb:"POST"}, 
+		urlColsGet:     {path: _url + "/rmColaborador", verb:"GET"}, 
+		urlColsPost:    {path: _url + "/rmColaborador", verb:"POST"}, 
         
 		urlVFila:         {path: _url + "/rmFilaLoja/1", verb:"GET"},
 		urlVForaFila:     {path: _url + "/rmFilaLoja/2", verb:"GET"},

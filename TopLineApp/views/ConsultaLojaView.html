@@ -1,4 +1,5 @@
-<div id="lojasView" data-role="view" data-init="listViewInit" data-title= "Top Line">
+
+<div id="edit-listview" data-role="view" data-init="listViewInit" data-title= "Top Line">
 
 	<header data-role="header">
 		<div data-role="navbar">
@@ -7,18 +8,17 @@
 			<span data-role="view-title"></span>
 		</div>
 	</header>
-
+	
 	<ul id="listview"></ul>
-
-
-    <script id="itemTemplate" type="text/x-kendo-template">
-        <a> #=LojNomefantasia# </a>
-        <a href="\\#detalhesLojasView" data-role="listview-link"/>
-    </script>
-    
+	
+	<script id="itemTemplate" type="text/x-kendo-template">
+		<a> #=LojNomefantasia# </a>
+		<a href="\\#" data-role="button" class="delete" >Delete</a>
+	</script>
+	
 </div>
 
-<div data-role="view" id="detalhesLojasView" data-title="Top Line" data-show="detailShow" data-init="detailInit">
+<div data-role="view" id="edit-detailview" data-title="Top Line" data-show="detailShow" data-init="detailInit">
 
 	<header data-role="header">
 		<div data-role="navbar">
@@ -27,7 +27,7 @@
 			<a class="nav-button" data-align="right" data-role="button" id="done">OK</a>
 		</div>
 	</header>
-
+	
 	<form>
 		<ul data-role="listview" data-style="inset" onclick="">
 			<li>
@@ -50,14 +50,14 @@
 			</li>
 		</ul>
 	</form>
-
+	
 </div>
 
 <script type="text/javascript"> 
-    
+
 	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
 	//var baseUrl = "http://localhost:50000/api";
-    
+	
 	//schema
 	var scLoja = { 
 		model: {
@@ -86,7 +86,7 @@
 			}     
 		}
 	};
-    
+	
 	var dataSource = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -117,48 +117,91 @@
 		batch: true,
 		schema: scLoja
 	})
-    
+	
 	function listViewInit(e) {
 		e.view.element.find("#listview").kendoMobileListView({
 			dataSource: dataSource,
 			template: $("#itemTemplate").html()
 		})
+		.kendoTouch({
+			filter: ">li",
+			enableSwipe: true,
+			touchstart: touchstart,
+			tap: navigate,
+			swipe: swipe
+		});
 	}
-    
+	
+	function navigate(e) {
+		var itemUID = $(e.touch.currentTarget).data("uid");
+		kendo.mobile.application.navigate("#edit-detailview?uid=" + itemUID);
+	}
+	
+	function swipe(e) {
+		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
+		button.expand().duration(200).play();
+	}
+	
+	function touchstart(e) {
+		var target = $(e.touch.initialTouch),
+		listview = $("#listview").data("kendoMobileListView"),
+		model,
+		button = $(e.touch.target).find("[data-role=button]:visible");
+	
+		if (target.closest("[data-role=button]")[0]) {
+			model = dataSource.getByUid($(e.touch.target).attr("data-uid"));
+			dataSource.remove(model);
+	
+			//prevent `swipe`
+			this.events.cancel();
+			e.event.stopPropagation();
+		}
+		else if (button[0]) {
+			button.hide();
+	
+			//prevent `swipe`
+			this.events.cancel();
+		}
+		else {
+			listview.items().find("[data-role=button]:visible").hide();
+		}
+	}
+
 	function detailShow(e) {
 		var model = dataSource.getByUid(e.view.params.uid);
 		kendo.bind(e.view.element, model, kendo.mobile.ui);
-        
+	
 		console.log(model, "model");
+        console.log(dataSource);
 	}
-
+	
 	function detailInit(e) {
 		var view = e.view;
-        
+	
 		console.log(view, "dasdsa");
-        
+	
 		view.element.find("#done").data("kendoMobileButton").bind("click", function() {
-			dsLoja.one("change", function() {
+			datasource.one("change", function() {
 				view.loader.hide();
 				window.kendoMobileApplication.navigate("#:back");
 			});
-
+	
 			view.loader.show();
-			dsLoja.sync();
+			datasource.sync();
 		});
-		
+	
 		view.element.find("#cancel").data("kendoMobileBackButton").bind("click", function(e) {
 			e.preventDefault();
-			viewModel.dsLoja.one("change", function() {
+			dataSource.one("change", function() {
 				view.loader.hide();
 				window.kendoMobileApplication.navigate("#:back");
 			});
-
+	
 			view.loader.show();
-			viewModel.dsLoja.cancelChanges();
+			datasource.cancelChanges();
 		});
 	}
-    
+	
 	function getLojasShow() {
 		onLojasShow();
 	}
@@ -200,7 +243,6 @@
 			event.returnValue = false;
 		}	
 		return formataCampo(cpf, '000.000.000-00', event);
-	}
-    
+	}    
 </script>
 

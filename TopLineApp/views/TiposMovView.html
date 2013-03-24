@@ -1,4 +1,4 @@
-<div data-role="view" id="tiposMovView" data-show="getTiposMov" data-title="Top Line" data-model="tiposMovViewModel" data-layout="mobile-tabstrip" >
+<div data-role="view" id="tiposMovView" data-show="showTiposMovto" data-title="Top Line" data-model="viewModel">
 	<header data-role="header">
 		<div data-role="navbar">
 			<a href="views/VFilaView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -6,16 +6,9 @@
 		</div>
 	</header>
     <div class="mobile-fila-titulo">Tipos de movimentação</div>
-	<ul id="lstMotivosSaida" data-bind="source: tiposMov" data-role="listview" data-auto-bind="false" data-style="inset" data-template="listMotivosSaidaTemplate"></ul>
+	<ul id="lstMotivosSaida" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-style="inset" data-template="listMotivosSaidaTemplate"></ul>
 </div>
 
 <script type="text/x-kendo-template" id="listMotivosSaidaTemplate">
 	<a class="details-link" data-role="listview-link">#:TmoDescricao#</a>
-</script>
-
-<script>
-    
-	function getTiposMov() {        
-		onTiposMovShow();
-	};    
 </script>

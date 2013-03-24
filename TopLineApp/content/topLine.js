@@ -40,10 +40,10 @@
 	//schemaMotivosSaidaSalao
 	var schemaMotivosSaida = { 
 		model: {
-			id: "idMotivo",
+			id: "TmoId",
 			fields: {
-				idMotivo: { editable: false, nullable: false },
-				Motivo: { editable: false, nullable: false }
+				TmoId: { editable: false, nullable: false },
+				TmoDescricao: { editable: false, nullable: false }
 			} 
 		}
 	};
@@ -146,7 +146,7 @@
 	var dsTiposMovto = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl + "/Motivos",							
+				url: baseUrl + "/RmTipoMovimento",							
 				type:"GET"      
 				,contentType: "application/json"
 				,dataType: "json"
@@ -208,7 +208,6 @@
 			
 		var vendedor = viewModel.dsVendFila.get(e.context);
 		viewModel.set("vendedorSelecionado", vendedor); 				
-		viewModel.imageSrc = viewModel.vendedorSelecionado.Foto;
 			
 		console.log(viewModel.vendedorSelecionado.Foto);
 		console.log(viewModel.imageSrc);
@@ -259,9 +258,10 @@
 		atualizaFilaNoSalao(dsVendForaTurno, 3);
 	}
 			
-	function tiposMovto() {
-		app.navigate("#motivosSaida");			
-		dsTiposMovto.options.transport.read.url = baseUrl + "/Motivos";
+	function tiposMovto() {		
+        alert("pqp");
+        
+		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento";
 		dsTiposMovto.read(); 
 	}
 		

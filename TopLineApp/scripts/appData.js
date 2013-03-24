@@ -1,26 +1,41 @@
 var AppData = function() {
 	var _endpoints,	
 	_url,
+	_initAtendimento,
 	_private;
 
-	_url = "http://revenuemachine11.provisorio.ws/api";
+	//_url = "http://revenuemachine11.provisorio.ws/api";
+    _url = "http://localhost:50000/api";
     
 	_endpoints = {
 		urlLoja:          {path: _url + "/rmLoja", verb:"GET"},         
 		urlLojaPost:      {path: _url + "/rmLoja", verb:"POST"}, 
         
-        urlColsGet: {path: _url + "/rmColaborador", verb:"GET"}, 
-        urlColsPost: {path: _url + "/rmColaborador", verb:"POST"}, 
+		urlColsGet: {path: _url + "/rmColaborador", verb:"GET"}, 
+		urlColsPost: {path: _url + "/rmColaborador", verb:"POST"}, 
         
 		urlVFila:         {path: _url + "/rmFilaLoja/1", verb:"GET"},
 		urlVForaFila:     {path: _url + "/rmFilaLoja/2", verb:"GET"},
 		urlVForaTurno:    {path: _url + "/rmFilaLoja/3", verb:"GET"},
         
-		urlTiposMov: {path:_url + "/RmTipoMovimento", verb:"GET"}
+		urlTiposMov: {path:_url + "/RmTipoMovimento", verb:"GET"},
+        
+        urlAtendPost: {path: _url + "/RmAtendimentoRepositorio", verb:"POST"}, 
         
         
 	};
     
+	_initAtendimento = [
+		{
+			"RepId": 0,
+			"RLoId": 0,
+			"LCoId": 0,
+			"DtHrTransacao": "",
+			"RepQtde": 0,
+			"RepValor": 0
+		}
+	];
+
 	_private = {
 		
 		load: function(route, options, cacheName) {
@@ -51,8 +66,10 @@ var AppData = function() {
                 
 				dfd.resolve(data, code, xhr);
 			}).error(function (e, r, m) {
-				console.log("ERROR", e, r, m);
+				
+                console.log("ERROR", e, r, m);
 				dfd.reject(m);
+                
 				//Return cached data if available (and fresh)
 				//if (verb === "GET" && _private.checkCache(cacheName) === true) {
 				//Return cached data
@@ -152,13 +169,13 @@ var AppData = function() {
 			return result;
 		},
         
-        getColaboradores:
-        function(){
-            var route = $.extend({}, _endpoints.urlColsGet);            
+		getColaboradores:
+		function() {
+			var route = $.extend({}, _endpoints.urlColsGet);            
 			_private.load(route, {}, "Colaboradores");
 			var result = _private.getCache("Colaboradores");            
 			return result;            
-        },
+		},
         
 		getTiposMov: function() {            
 			var route = $.extend({}, _endpoints.urlTiposMov);            
@@ -173,7 +190,19 @@ var AppData = function() {
 			_private.load(route, {}, "Lojas");
 			var result = _private.getCache("Lojas");            
 			return result;  
-		}
+		},
+        
+		getInitialAtendimento: function() {            
+			return JSON.stringify(_initAtendimento);
+		},
+        
+        setAtendimento: function(data){
+            
+            alert("Chegue");
+            console.log(data, "Data");            
+            var route = $.extend({}, _endpoints.urlAtendPost);            
+			_private.load(route, data, "Atendimento");
+        }
         
 	
 	};

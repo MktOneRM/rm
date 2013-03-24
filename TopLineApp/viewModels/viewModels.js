@@ -1,10 +1,13 @@
 (function($, console, doc) {
 	var lojaViewModel,
+	addLojaViewModel,
 	vFilaViewModel,
 	vForaFilaViewModel,
 	vForaTurnoViewModel,
-	tiposMovViewModel,
-	AddLojaViewModel;
+	tiposMovViewModel,	
+	addAtendimentoViewModel,
+	atendimentoViewModel,
+    _appData = new AppData();
       
 	lojaViewModel = kendo.observable({
 		lojas: [],    
@@ -15,17 +18,17 @@
 		}
 	});
     
-    colsViewModel = kendo.observable({
-        colaboradores: [],
+	colsViewModel = kendo.observable({
+		colaboradores: [],
         
-        load: function(colaboradores){
-            var that = this;
-            that.set("colaboradores", colaboradores);
-        }
+		load: function(colaboradores) {
+			var that = this;
+			that.set("colaboradores", colaboradores);
+		}
         
-    });
+	});
     
-	AddLojaViewModel = kendo.data.ObservableObject.extend({
+	addLojaViewModel = kendo.data.ObservableObject.extend({
 		loja: null,
         
 		init: function() {
@@ -56,6 +59,55 @@
 			var $cnpjField = $('#cnpjField');            
 			$cnpjField.focus();
 			$cnpjField.val("");
+		}
+	});
+    
+	atendimentoViewModel = kendo.observable({
+		atendimento: [],
+        
+		load: function(atendimento) {
+			var that = this;
+			that.set("atendimento", atendimento);
+            
+            console.log(atendimento);
+            
+		} 
+        
+	});
+    
+	addAtendimentoViewModel = kendo.data.ObservableObject.extend({
+		atendimento: [],
+        
+		init: function() {
+			kendo.data.ObservableObject.fn.init.apply(this, [this]);            
+			var that = this;
+			that.set("atendimento", null);
+		},
+        
+		resetView: function() {
+			var that = this;
+			that._reset();
+		},
+        
+		addNewAtendimento: function() {            
+			var that = this;                 
+            
+			console.log(this, "this");
+            console.log(atendimentoViewModel.atendimento, "Aten");
+            
+            atendimentoViewModel.set("atendimento", that);
+			atendimentoViewModel.atendimento.bind("change", that);
+            
+			_appData.setAtendimento(JSON.stringify(atendimentoViewModel.atendimento));
+					       
+			//app.navigate("views/VFilaView.html");
+            
+		},
+        
+		_reset: function() {
+			var $RepQtde = $('#RepQtde');            
+			$RepQtde.focus();
+			$RepQtde.val("");
 		}
 	});
     
@@ -105,7 +157,11 @@
 		vForaFilaViewModel: vForaFilaViewModel,
 		vForaTurnoViewModel: vForaTurnoViewModel,
 		tiposMovViewModel: tiposMovViewModel,
-		addLojaViewModel: new AddLojaViewModel(),
+        
+		atendimentoViewModel: atendimentoViewModel,
+		
+        addAtendimentoViewModel: new addAtendimentoViewModel(),        
+		addLojaViewModel: new addLojaViewModel(),
 		
 	});
 })(jQuery, console, document);

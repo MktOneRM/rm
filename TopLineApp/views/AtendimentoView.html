@@ -1,28 +1,31 @@
-<div id="resultadoAtendimento" data-init="editorViewInit" data-role="view" data-title="Top Line" data-layout="default" data-model="viewModel" >
+<div id="resultadoAtendimento" data-role="view" data-title="Top Line" data-layout="default" data-show="onAddAtendimentoShow"  data-model="addAtendimentoViewModel">
 	<div data-role="header">
 		<div data-role="navbar">
 			<a href="views/VFilaView.html" data-role="button" data-align="left">Cancelar</a>
 			<span data-role="view-title"></span>
-			<button data-role="button" data-align="right" id="buttonAddNewLoja" data-bind="events: { click: addNewLoja }">
+			<button data-role="button" data-align="right" id="buttonAddNewLoja" data-bind="events: { click: addNewAtendimento }">
 				<h5>Ok</h5>
 			</button>
 		</div>
 	</div>
 	<ul id="form" data-role="listview" data-style="inset" data-type="group">
 		<div class="mobile-fila-titulo">Atendimento</div>
+
+		<!--
 		<li>
-			<ul>
-				<li>
-					<h2>
-						<!--Carine <span>Callahan</span>-->
-						<span data-bind="text: vendedorSelecionado.VendedorApelido"></span>
+		<ul>
+		<li>
+		<h2>
+		
+		<span data-bind="text: vendedorSelecionado.VendedorApelido"></span>
 
-					</h2>
-					<img data-bind="attr: { src: imageSrc}" />
-				</li>
-
-			</ul>
+		</h2>
+		<img data-bind="attr: { src: imageSrc}" />
 		</li>
+
+		</ul>
+		</li>
+		-->
 
 		<li>
 			<ul>
@@ -42,13 +45,13 @@
 				<li>
 					<label>
 						Valor Venda
-						<input id="valorVenda" name="ValorVenda" type="number" required="required" data-bind="value: atendimento.ValorVenda" />
+						<input id="valorVenda" name="ValorVenda" type="number" required="required" data-bind="value: RepValor" />
 					</label>
 				</li>
 				<li>
 					<label>
 						Qtde de Peças
-						<input id="qtdeDePecas" name="QtdeDePecas" type="number" required="required" data-bind="value: atendimento.QtdeDePecas"/>
+						<input id="qtdeDePecas" name="QtdeDePecas" type="number" required="required" data-bind="value: RepQtde"/>
 					</label>
 				</li>
 
@@ -60,3 +63,10 @@
 	<!--<a id="btnCreate" data-role="button" type="button" data-bind="events: {click: salvarAtendimento}">Salvar</a>
 	<a id="btnCancel" data-role="button" type="button" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>-->
 </div>
+
+<script>
+    
+	function addAtendimentoShow() {		
+		onAddAtendimentoShow();
+	}    
+</script>

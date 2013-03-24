@@ -5,6 +5,7 @@
 	_app = {
 		init: function() {
 			vFilaViewModel.load(_appData.getVendedoresFila());
+            atendimentoViewModel.load(_appData.getInitialAtendimento());
 		},        
         
 		vFilaShow: function() {
@@ -33,7 +34,11 @@
         
 		onAddLojaViewShow: function() {
 			addLojaViewModel.resetView();            
-		}
+		},
+        
+        onAddAtendimentoShow: function(){
+            addAtendimentoViewModel.resetView();
+        }
         
        
 	};
@@ -57,7 +62,9 @@
 		vForaTurnoViewModel: _app.vForaTurnoViewModel,
 		onVForaTurnoShow: _app.vForaTurnoShow,
         
-        onTiposMovShow: _app.tiposMovShow
+        onTiposMovShow: _app.tiposMovShow,
+        
+        onAddAtendimentoShow: _app.onAddAtendimentoShow
 		
 	});
 }(jQuery, document));

@@ -67,6 +67,7 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\topLine.js" />
     <Content Include="html\HtmlPage.html" />
     <Content Include="html\HtmlPage1.html" />
     <Content Include="Images\Foto1.jpg" />

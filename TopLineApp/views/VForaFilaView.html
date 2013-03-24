@@ -1,6 +1,6 @@
-<div id="vforaFila" data-role="view" data-layout="mobile-tabstrip" data-show="vForaFilaShow" data-model="vForaFilaViewModel">
+<div id="vforaFila" data-role="view" data-layout="mobile-tabstrip" data-show="showVendedoresForaFila" data-model="viewModel">
 	<div class="mobile-fila-titulo">Fora da Fila</div>
-	<ul id="lforaFila" data-bind="source: vForaFila" data-role="listview" data-auto-bind="false" data-template="tforaFila" class="mobile-fila"></ul>
+	<ul id="lforaFila" data-bind="source: dsVendForaFila" data-role="listview" data-auto-bind="false" data-template="tforaFila" class="mobile-fila"></ul>
 </div>
 
 <script type="text/x-kendo-template" id="tforaFila">

@@ -16,9 +16,9 @@
 	</div>
 </div>
 
-<div id="vdentroFila" data-role="view" data-layout="mobile-tabstrip" data-show="atualizaFilaNoSalao" data-model="viewModelTeste">
+<div id="vdentroFila" data-role="view" data-layout="mobile-tabstrip" data-show="showVendedoresFila" data-model="viewModel">
 	<div class="mobile-fila-titulo">Dentro da Fila</div>
-	<ul id="ldentroFila" data-bind="source: vFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" class="mobile-fila"></ul>
+	<ul id="ldentroFila" data-bind="source: dsVendFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" class="mobile-fila"></ul>
 	<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
 		<li class="km-actionsheet-title">Selecione operação:</li>
 		<li>

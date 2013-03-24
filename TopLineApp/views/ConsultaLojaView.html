@@ -10,9 +10,10 @@
 
 	<ul id="listview"></ul>
 
-	<script id="itemTemplate" type="text/x-kendo-template">
-		<a> #=LojNomefantasia# </a>
-		<a href="\\#" data-role="button" class="delete" >Delete</a>
+	<script type="text/x-kendo-template" id="itemTemplate">
+		<a class="details-link" data-role="listview-link"  href="\\#detalhesLojasView">
+			<a>#:LojNomefantasia#</a>
+		</a>            
 	</script>
 
 </div>
@@ -53,6 +54,11 @@
 </div>
 
 <script type="text/javascript"> 
+    
+	function showDetalhes() {
+		alert("pqp");
+		app.navigate("#detalhesLojasView");
+	}
     
 	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
 	//var baseUrl = "http://localhost:50000/api";
@@ -125,7 +131,7 @@
 	}
     
 	function detailShow(e) {
-		var model = dsLoja.getByUid(e.view.params.uid);
+		var model = dataSource.getByUid(e.view.params.uid);
 		kendo.bind(e.view.element, model, kendo.mobile.ui);
         
 		console.log(model, "model");
@@ -158,7 +164,7 @@
 		});
 	}
     
-    <!-- "Celso seu codigo esta aqui" -->
+	< !-- "Celso seu codigo esta aqui" -->
     
 	function getLojasShow() {
 		onLojasShow();

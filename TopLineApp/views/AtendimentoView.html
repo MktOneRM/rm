@@ -1,31 +1,20 @@
-<div id="resultadoAtendimento" data-role="view" data-title="Top Line" data-layout="default" data-model="viewModel">
+<div id="resultadoAtendimento" data-role="view" data-title="Top Line" data-init="editorViewInit" data-show="showAtendimento" data-layout="default" data-model="viewModel">
 	<div data-role="header">
 		<div data-role="navbar">
-			<a href="views/VFilaView.html" data-role="button" data-align="left">Cancelar</a>
+			<a data-role="button" data-align="left" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
 			<span data-role="view-title"></span>
-			<button data-role="button" data-align="right" id="buttonAddNewLoja" data-bind="events: { click: addNewAtendimento }">
-				<h5>Ok</h5>
-			</button>
+			<button data-role="button" data-align="right" id="buttonAddNewLoja" data-bind="events: { click: salvarAtendimento }">Ok</button>
 		</div>
 	</div>
 	<ul id="form" data-role="listview" data-style="inset" data-type="group">
 		<div class="mobile-fila-titulo">Atendimento</div>
 
-		<!--
-		<li>
-		<ul>
-		<li>
-		<h2>
-		
-		<span data-bind="text: vendedorSelecionado.VendedorApelido"></span>
-
-		</h2>
-		<img data-bind="attr: { src: imageSrc}" />
-		</li>
-
-		</ul>
-		</li>
-		-->
+		<div data-role="content">
+			<aside>
+				<img data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+                <span data-bind="text:  vendedorSelecionado.ColNome"/>
+			</aside>
+		</div>
 
 		<li>
 			<ul>
@@ -40,18 +29,17 @@
 
 		<li>
 			Dados da Venda
-			<ul>
-
+			<ul>         
 				<li>
 					<label>
 						Valor Venda
-						<input id="valorVenda" name="ValorVenda" type="number" required="required" data-bind="value: RepValor" />
+						<input id="RepValor" name="ValorVenda" type="number" required="required" data-bind="value: atendimento.RepValor" />
 					</label>
 				</li>
 				<li>
 					<label>
 						Qtde de Peças
-						<input id="qtdeDePecas" name="QtdeDePecas" type="number" required="required" data-bind="value: RepQtde"/>
+						<input id="RepQtde" name="QtdeDePecas" type="number" required="required" data-bind="value: atendimento.RepQtde"/>
 					</label>
 				</li>
 

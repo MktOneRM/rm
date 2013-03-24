@@ -1,8 +1,37 @@
 (function($, undefined) {
-	//Url
-	
-    //var baseUrl = "http://localhost:50000/api";
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	kendo.data.binders.srcPath = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["srcPath"].get();
+
+			if (value) {
+				$(this.element).attr("src", value);
+			}
+		}
+	});
+
+	kendo.data.binders.format = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["format"].get();
+
+			if (value) {
+				$(this.element).text(kendo.toString(value, "c"));
+			}
+		}
+	});
+
+	kendo.data.binders.innerText = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["innerText"].get();
+
+			if (value) {
+				$(this.element).text("Vendedor : " + value);
+			}
+		}
+	});
+    
+	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+    var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -23,20 +52,7 @@
 			} 
 		}
 	};
-			
-	//Schema Atendimento
-	var schemaAtendimento = { 
-		model: {
-			id: "IdAtendimento",
-			fields:{
-				IdAtendimento: { type: "int", validation: { required: true, min: 0} },
-				IdVendedor: { type: "int", validation: { required: true, min: 0} },
-				ValorVenda: { type: "number", validation: { required: true, min: 0} },						
-				QtdeDePecas: { type: "number", validation: { required: true, min: 0} }
-			} 
-		}
-	};
-			
+		    			
 	//schemaMotivosSaidaSalao
 	var schemaTiposMovto = { 
 		model: {
@@ -47,7 +63,52 @@
 			} 
 		}
 	};
-			
+	   
+	//Schema Atendimento
+	var schemaAtendimento = { 
+		model: {
+			id: "RepId",
+			fields:{
+				RepId:  { editable: false, nullable: false },
+                RLoId: { type: "int", validation: { required: true} },            
+                LCoId: { type: "int", validation: { required: true} },            
+                DtHrTransacao: { type: "datetime", validation: { required: true} },            
+				RepQtde: { type: "number", validation: { required: true, min: 0} },						
+				RepValor: { type: "number", validation: { required: true, min: 0} }
+			} 
+		}
+	};
+
+	//schema
+	var scLoja = { 
+		model: {
+			id: "LojId",
+			fields: {
+				LojId: { editable: false, nullable: false },
+				LojCnpj: { editable: false, nullable: false },
+				LojCodigo: { editable: false, nullable: false },
+				LojRazaoSocial: { editable: false, nullable: false },           
+				LojNomeFantasia: { editable: false, nullable: false },
+				LojDDD: { editable: false, nullable: false },                        
+				LojTelefone: { editable: false, nullable: false },
+				LojLogradouro: { editable: false, nullable: false },                        
+				LojNumero: { editable: false, nullable: false },
+				LojComplemento: { editable: false, nullable: false },
+				LojBairro: { editable: false, nullable: false },
+				LojCidade: { editable: false, nullable: false },
+				LojUF: { editable: false, nullable: false },
+				LojCep: { editable: false, nullable: false },           
+				LojRua: { editable: false, nullable: false },
+				LojShopping: { editable: false, nullable: false },                        
+				LojFranquia: { editable: false, nullable: false },
+				LojMultimarca: { editable: false, nullable: false },                        
+				LojDtCadastro: { editable: false, nullable: false },
+				LojLatitude: { editable: false, nullable: false },
+				LojLongitude: { editable: false, nullable: false }
+			}     
+		}
+	};
+    
 	//dataSource
 	var dsVendFila = new kendo.data.DataSource({                    
 		transport: {						
@@ -160,37 +221,70 @@
 	var dsAtendimento = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl + "/Atendimento/1",							
+				url: baseUrl + "/RmAtendimentoRepositorio",							
 				type:"GET"      
 				,contentType: "application/json"
 				,dataType: "json"
 			},
 			create: {
-				url:baseUrl + "/Atendimento"													
+				url:baseUrl + "/RmAtendimentoRepositorio"													
 				,type:"POST"                            
 				,contentType:"application/json"
 				,dataType: "json" 
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {							
-					return kendo.stringify(data.models[0]);
+					return kendo.stringify([data.models[0]]);
 				}
 			}
 		},
 		batch: true,
 		schema: schemaAtendimento
 	});
-			
+		
+	//dataSource
+	var dsLoja = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmLoja",							
+				type:"GET",
+				contentType: "application/json",
+				dataType: "json"
+			} 
+			,
+			update: {
+				url:baseUrl + "/RmLoja",							
+				type:"PUT"
+				,contentType:"application/json"
+				,dataType: "json"
+			},
+			destroy: {
+				url:baseUrl + "/RmLoja"                            
+				,type:"DELETE"
+				,contentType:"application/json"   
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}                 
+		},
+		batch: true,
+		schema: scLoja
+	})
+    
 	var viewModel = kendo.observable({
 		
 		dsVendFila: dsVendFila,		
 		dsVendForaFila: dsVendForaFila,
 		dsVendForaTurno: dsVendForaTurno,
 		dsTiposMovto: dsTiposMovto,        
-		dsAtendimento: dsAtendimento,     
+		dsAtendimento: dsAtendimento,  
+        dsLoja: dsLoja,
         
-		vendedorSelecionado: [],		
-		atendimento: [],
+		vendedorSelecionado: {},		
+		atendimento: {},
         
 		salvarAtendimento: salvarAtendimento,
 		cancelarAtendimento: cancelarAtendimento,
@@ -199,36 +293,29 @@
 		vendedoresForaFila: vendedoresForaFila,
 		vendedoresForaTurno: vendedoresForaTurno,
 		tiposMovtoSaida: tiposMovtoSaida,
-        tiposMovtoEntrada: tiposMovtoEntrada
+		tiposMovtoEntrada: tiposMovtoEntrada
 		
 	});
     
-	function atendimento(e) {
-		var novoAtendimento = this.dsAtendimento.add(); 
+	function atendimento() {
+		var novoAtendimento = viewModel.dsAtendimento.add(); 
 		viewModel.set("atendimento", novoAtendimento); 
 			
-		var vendedor = viewModel.dsVendFila.get(e.context);
-		viewModel.set("vendedorSelecionado", vendedor); 				
-			
-		console.log(viewModel.vendedorSelecionado.Foto);
-		console.log(viewModel.imageSrc);
 		console.log(viewModel);
-			
-		app.navigate("#resultadoAtendimento"); 
+		//app.navigate("#resultadoAtendimento"); 
 	}
 			
-	function salvarAtendimento (e) {
+	function salvarAtendimento () {
 		if (validator.validate()) { //validates the input
-			this.dsAtendimento.sync(); 	                
+            this.dsAtendimento.sync(); 	                
 			
 			//Atualiza a posicao do vendedor na fila
-			var vend = viewModel.vendedorSelecionado;			
+			//var vend = viewModel.vendedorSelecionado;			
 			
-			this.dsVendFila.remove(vend); 
-			this.dsVendFila.sync(); 
+			//this.dsVendFila.remove(vend); 
+			//this.dsVendFila.sync(); 
 			
-			vendedoresFila();
-			app.navigate("#vdentroFila");
+			app.navigate("views/VFilaView.html");
 		}
 	}
 			
@@ -237,7 +324,7 @@
 		app.navigate("#vdentroFila");                 
 	}
 			
-	function editorViewInit(e) {
+	function editorViewInit() {
 		validator = $("#form").kendoValidator({ //initialize the validator
 			messages: {
 				required: function(input) { //create a custom message function
@@ -258,6 +345,11 @@
 	function vendedoresForaTurno() {
 		atualizaFilaNoSalao(dsVendForaTurno, 3);
 	}
+    
+	function tiposMovto() {
+		var vendedor = viewModel.dsVendFila.get(e.context);
+		viewModel.set("vendedorSelecionado", vendedor); 	
+	}
 			
 	function tiposMovtoEntrada() {		
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/true";
@@ -267,6 +359,8 @@
 	function tiposMovtoSaida() {		
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
 		dsTiposMovto.read(); 
+        
+		console.log(viewModel);
 	}
     
 	function atualizaFilaNoSalao(context, parametro) {
@@ -278,8 +372,14 @@
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,
 		showVendedoresForaTurno: vendedoresForaTurno,
+        
+		showTiposMovto: tiposMovto,
 		showTiposMovtoSaida: tiposMovtoSaida,
 		showTiposMovtoEntrada: tiposMovtoEntrada,
+        
+		showAtendimento: atendimento,
+		editorViewInit: editorViewInit,
+        
 		viewModel: viewModel 
 	});
 })(jQuery);

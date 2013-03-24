@@ -63,14 +63,15 @@
 			});
 			
 			function showAtendimentoView(e) {
-				var vendedor = viewModel.dsVendFila.get(e.context);
+				var vendedor = this.dsVendFila.get(e.context);
 				viewModel.set("vendedorSelecionado", vendedor); 				
+			
+				console.log(viewModel);
+                    
 				app.navigate("views/AtendimentoView.html");
 			};
 			
-			function showTiposMovtoView(e) {                    
-				var vendedor = viewModel.dsVendFila.get(e.context);
-				viewModel.set("vendedorSelecionado", vendedor); 				
+			function showTiposMovtoView(e) {       
 				app.navigate("views/TiposMovView.html");
 			};
 			

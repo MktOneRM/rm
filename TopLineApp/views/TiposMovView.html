@@ -5,12 +5,24 @@
 			<span data-role="view-title"></span>
 		</div>
 	</header>
-	<div class="mobile-fila-titulo">Tipos de movimentação</div>
-	<ul id="lstMotivosSaida" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-style="inset" data-template="listMotivosSaidaTemplate"></ul>
+
+	<div class="mobile-fila-titulo">
+		<h4 data-bind="innerText: vendedorSelecionado.ColNome"></h4>
+	</div>
+	<ul id="lstMotivosSaida" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tpTiposMovto"></ul>
 </div>
 
-<script type="text/x-kendo-template" id="listMotivosSaidaTemplate">
+<script type="text/x-kendo-template" id="tpTiposMovto">
 	<a class="details-link" data-role="listview-link">
 		#:TmoDescricao#
 	</a>
+</script>
+
+
+<script>
+    
+    function teste(){
+        alert("!");
+    }
+    
 </script>

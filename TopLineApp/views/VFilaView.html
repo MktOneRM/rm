@@ -3,7 +3,7 @@
 	<header data-role="header">
 		<div data-role="navbar" style="height: 44px;">
 			<!--			<a href="views/ConfiguracoesView.html" class="nav-button" data-align="right" data-role="button" data-icon="settings" data-transition="pop"></a>-->
-            <a href="index.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+			<a href="index.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 			<span>Top Line</span>
 		</div>
 	</header>
@@ -16,7 +16,7 @@
 	</div>
 </div>
 
-<div id="vdentroFila" data-role="view" data-layout="mobile-tabstrip" data-show="vFilaShow" data-model="vFilaViewModel">
+<div id="vdentroFila" data-role="view" data-layout="mobile-tabstrip" data-show="atualizaFilaNoSalao" data-model="viewModelTeste">
 	<div class="mobile-fila-titulo">Dentro da Fila</div>
 	<ul id="ldentroFila" data-bind="source: vFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" class="mobile-fila"></ul>
 	<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
@@ -39,6 +39,7 @@
 
 <script>
     
+    /*
 	function vFilaShow() {
 		onVFilaShow();
 	}    
@@ -49,5 +50,84 @@
     
 	function tiposMovShow(e) {	
 		app.navigate("views/TiposMovView.html");
-	}            
+	}  
+    */
+    
+	//Url
+	var baseUrl = "http://localhost:50000/api";
+			
+	//schema
+	var schemaVendedores = { 
+		model: {
+			id: "IdVendedor",
+			fields: {
+				IdVendedor: { editable: false, nullable: false },
+				VendedorNome: { editable: false, nullable: false },
+				VendedorApelido: { editable: false, nullable: false },
+				Fila: { editable: false, nullable: false },           
+				Foto: { editable: false, nullable: false }
+			} 
+		}
+	};
+
+	//dataSource
+	var dsVendFila = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmFilaLoja/1",							
+				type:"GET",
+				contentType: "application/json",
+				dataType: "json"
+			} 
+			,
+			update: {
+				url:baseUrl + "/RmFilaLoja/1",							
+				type:"PUT"
+				,contentType:"application/json"
+				,dataType: "json"
+			},
+			destroy: {
+				url:baseUrl + "/RmFilaLoja"                            
+				,type:"DELETE"
+				,contentType:"application/json"   
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}                 
+		},
+		batch: true,
+		schema: schemaVendedores,                    
+		sort: {
+			field:
+			"FilaLojId", dir
+			: "asc"
+		}
+	});
+	
+	var viewModelTeste = kendo.observable({
+		dsVendFila: dsVendFila,
+		urlImage: null,				
+		imageAlt: "Alt attribute value",
+		imageTitle: "Title attribute value",						
+		atualizaFilaNoSalao: function() {
+            
+            alert("pqp");
+            
+			dsVendFila.options.transport.read.url = baseUrl + "/RmFilaLoja/1";
+			dsVendFila.read();        
+		}
+	});
+			
+	function atualizaFilaNoSalao(context, parametro) {
+		context.options.transport.read.url = baseUrl + "/RmFilaLoja/" + parametro;					
+		context.read();
+	}
+			
+	function getVendedoresFila(e) {
+		atualizaFilaNoSalao(dsVendFila, 1);
+	}
+ 
 </script>

@@ -1,13 +1,3 @@
-
-jQuery.noConflict();
-(function($) {
-$(function() {
-$('.mask-cnpj').mask('99.999.999/0000-99'); //data
-$('.mask-data').mask('99/99/9999'); //data
-$('.mask-fone').mask('(999) 999-9999'); //telefone
-});
-})(jQuery);
-
 <div data-role="view" id="lojasView" data-title="Top Line" data-show="getLojasShow" data-model="lojaViewModel">
 	<header data-role="header">
 		<div data-role="navbar">
@@ -22,16 +12,16 @@ $('.mask-fone').mask('(999) 999-9999'); //telefone
             <li>Dados Cadastrais
                 <ul>
                      <li>
-                         <label>CNPJ:</label><span data-bind="text: lojas[0].LOJ_CNPJ" class="mask-cnpj"></span> 
+                         <label>CNPJ: </label><span data-bind="text: lojas[0].LOJ_CNPJ"></span>
                      </li>
   			       <li>
-				         <label>Codigo:</label><span data-bind="text: lojas[0].LOJ_CODIGO"></span>
+				         <label>Código: </label><span data-bind="text: lojas[0].LOJ_CODIGO"></span> 
 			         </li>
+         			<li>
+        				<label>Razao Social: </label><span id="LOJ_RAZAOSOCIAL" data-bind="text: lojas[0].LOJ_RAZAOSOCIAL"></span>
+        			 </li>
                 </ul>
             </li>
-			<li>
-				Razao Social: <span data-bind="text: lojas[0].LOJ_RAZAOSOCIAL"></span>
-			</li>
 			<li>
 				Nome Fantasia: <span data-bind="text: lojas[0].LOJ_NOMEFANTASIA"></span>
 			</li>
@@ -46,20 +36,11 @@ $('.mask-fone').mask('(999) 999-9999'); //telefone
 		</ul>
 
 	</div>
-
 </div>
 
-<script>
+<script type="text/javascript"> 
     function getLojasShow(){
         onLojasShow();
     }
-    
-    function MascaraCNPJ(cnpj){
-	if(mascaraInteiro(cnpj)==false){
-		event.returnValue = false;
-	}	
-	return formataCampo(cnpj, '00.000.000/0000-00', event);
-}
-
-</script>
+</script> 
 

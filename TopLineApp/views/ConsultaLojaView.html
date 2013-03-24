@@ -10,12 +10,12 @@
 
 	<ul id="listview"></ul>
 
-	<script type="text/x-kendo-template" id="itemTemplate">
-		<a class="details-link" data-role="listview-link"  href="\\#detalhesLojasView">
-			<a>#:LojNomefantasia#</a>
-		</a>            
-	</script>
 
+    <script id="itemTemplate" type="text/x-kendo-template">
+        <a> #=LojNomefantasia# </a>
+        <a href="\\#detalhesLojasView" data-role="listview-link"/>
+    </script>
+    
 </div>
 
 <div data-role="view" id="detalhesLojasView" data-title="Top Line" data-show="detailShow" data-init="detailInit">
@@ -54,11 +54,6 @@
 </div>
 
 <script type="text/javascript"> 
-    
-	function showDetalhes() {
-		alert("pqp");
-		app.navigate("#detalhesLojasView");
-	}
     
 	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
 	//var baseUrl = "http://localhost:50000/api";
@@ -164,8 +159,6 @@
 		});
 	}
     
-	< !-- "Celso seu codigo esta aqui" -->
-    
 	function getLojasShow() {
 		onLojasShow();
 	}
@@ -208,5 +201,6 @@
 		}	
 		return formataCampo(cpf, '000.000.000-00', event);
 	}
+    
 </script>
 

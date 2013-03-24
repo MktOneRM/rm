@@ -31,7 +31,7 @@
     
 	//var baseUrl = "http://localhost:50000/api";
 	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-    var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -70,9 +70,9 @@
 			id: "RepId",
 			fields:{
 				RepId:  { editable: false, nullable: false },
-                RLoId: { type: "int", validation: { required: true} },            
-                LCoId: { type: "int", validation: { required: true} },            
-                DtHrTransacao: { type: "datetime", validation: { required: true} },            
+				RLoId: { type: "int", validation: { required: true} },            
+				LCoId: { type: "int", validation: { required: true} },            
+				DtHrTransacao: { type: "datetime", validation: { required: true} },            
 				RepQtde: { type: "number", validation: { required: true, min: 0} },						
 				RepValor: { type: "number", validation: { required: true, min: 0} }
 			} 
@@ -281,9 +281,9 @@
 		dsVendForaTurno: dsVendForaTurno,
 		dsTiposMovto: dsTiposMovto,        
 		dsAtendimento: dsAtendimento,  
-        dsLoja: dsLoja,
+		dsLoja: dsLoja,
         
-		vendedorSelecionado: {},		
+		vendedorSelecionado: [],		
 		atendimento: {},
         
 		salvarAtendimento: salvarAtendimento,
@@ -297,17 +297,20 @@
 		
 	});
     
-	function atendimento() {
+	function atendimento(e) {
 		var novoAtendimento = viewModel.dsAtendimento.add(); 
 		viewModel.set("atendimento", novoAtendimento); 
 			
+		var vendedor = viewModel.dsVendFila.get(e.context);
+		viewModel.set("vendedorSelecionado", vendedor); 
+        
 		console.log(viewModel);
 		//app.navigate("#resultadoAtendimento"); 
 	}
 			
 	function salvarAtendimento () {
 		if (validator.validate()) { //validates the input
-            this.dsAtendimento.sync(); 	                
+			this.dsAtendimento.sync(); 	                
 			
 			//Atualiza a posicao do vendedor na fila
 			//var vend = viewModel.vendedorSelecionado;			

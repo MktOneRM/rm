@@ -107,7 +107,6 @@
     <Content Include="views\ConfiguracoesView.html" />
     <Content Include="views\ConsultaColaboradorView.html" />
     <Content Include="views\ConsultaLojaView.html" />
-    <Content Include="views\DetalhesLojaView.html" />
     <Content Include="views\TiposMovView.html" />
     <Content Include="views\VFilaView.html" />
     <Content Include="views\VForaFilaView.html" />

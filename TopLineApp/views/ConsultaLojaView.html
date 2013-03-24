@@ -1,11 +1,206 @@
-<div id="lojasView" data-role="view" data-layout="mobile-tabstrip" data-show="showLojas" data-model="viewModel">
-	<div class="mobile-fila-titulo">Fora da Fila</div>
-	<ul id="lforaFila" data-bind="source: dsLoja" data-role="listview" data-auto-bind="false" data-template="tpConsultaLojas" class="mobile-fila"></ul>
+<div id="lojasView" data-role="view" data-init="listViewInit" data-title= "Top Line">
+
+	<header data-role="header">
+		<div data-role="navbar">
+			<a href="views/ConfiguracoesView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+			<a id="buttonAddNewLoja" data-role="button" href="views/CadastroLojaView.html" data-align="right">Editar</a>
+			<span data-role="view-title"></span>
+		</div>
+	</header>
+
+	<ul id="listview"></ul>
+
+	<script id="itemTemplate" type="text/x-kendo-template">
+		<a> #=LojNomefantasia# </a>
+		<a href="\\#" data-role="button" class="delete" >Delete</a>
+	</script>
+
 </div>
 
-<script type="text/x-kendo-template" id="tpConsultaLojas">
-	<a data-rel="modalview" href="\\#modalview-login">
-		<img src="${ColFoto}" />
-		<h5>${LojCnpj}</h5>
-	</a>
+<div data-role="view" id="detalhesLojasView" data-title="Top Line" data-show="detailShow" data-init="detailInit">
+
+	<header data-role="header">
+		<div data-role="navbar">
+			<a class="nav-button" data-align="left" data-role="backbutton" id="cancel">Cancelar</a>
+			<span data-role="view-title"></span>
+			<a class="nav-button" data-align="right" data-role="button" id="done">OK</a>
+		</div>
+	</header>
+
+	<form>
+		<ul data-role="listview" data-style="inset" onclick="">
+			<li>
+				<label>
+					Cnpj
+					<input type="text" data-bind="value: LojCnpj"/>
+				</label>
+			</li>
+			<li>
+				<label>
+					Razao Social
+					<input type="text" data-bind="value: LojRazaoSocial"/>
+				</label>
+			</li>
+			<li>
+				<label>
+					Nome fantasia
+					<input type="text" data-bind="value: LojNomeFantasia"/>
+				</label>
+			</li>
+		</ul>
+	</form>
+
+</div>
+
+<script type="text/javascript"> 
+    
+	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	//var baseUrl = "http://localhost:50000/api";
+    
+	//schema
+	var scLoja = { 
+		model: {
+			id: "LojId",
+			fields: {
+				LojId: { editable: false, nullable: false },
+				TloId: { editable: false, nullable: false },
+				LojCnpj: { editable: false, nullable: false },
+				LojCodigo: { editable: false, nullable: false },
+				LojRazaoSocial: { editable: false, nullable: false },           
+				LojNomeFantasia: { editable: false, nullable: false },
+				LojDDD: { editable: false, nullable: false },                        
+				LojTelefone: { editable: false, nullable: false },
+				LojLogradouro: { editable: false, nullable: false },                        
+				LojNumero: { editable: false, nullable: false },
+				LojComplemento: { editable: false, nullable: false },
+				LojBairro: { editable: false, nullable: false },
+				LojCidade: { editable: false, nullable: false },
+				LojUF: { editable: false, nullable: false },
+				LojCep: { editable: false, nullable: false },           				
+				LojShopping_rua: { editable: false, nullable: false },                        
+				LojFranquia: { editable: false, nullable: false },				
+				LojDtCadastro: { editable: false, nullable: false },
+				LojLatitude: { editable: false, nullable: false },
+				LojLongitude: { editable: false, nullable: false }
+			}     
+		}
+	};
+    
+	var dataSource = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmLoja",							
+				type:"GET",
+				contentType: "application/json",
+				dataType: "json"
+			} 
+			,
+			update: {
+				url:baseUrl + "/RmLoja",							
+				type:"PUT"
+				,contentType:"application/json"
+				,dataType: "json"
+			},
+			destroy: {
+				url:baseUrl + "/RmLoja"                            
+				,type:"DELETE"
+				,contentType:"application/json"   
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}                 
+		},
+		batch: true,
+		schema: scLoja
+	})
+    
+	function listViewInit(e) {
+		e.view.element.find("#listview").kendoMobileListView({
+			dataSource: dataSource,
+			template: $("#itemTemplate").html()
+		})
+	}
+    
+	function detailShow(e) {
+		var model = dsLoja.getByUid(e.view.params.uid);
+		kendo.bind(e.view.element, model, kendo.mobile.ui);
+        
+		console.log(model, "model");
+	}
+
+	function detailInit(e) {
+		var view = e.view;
+        
+		console.log(view, "dasdsa");
+        
+		view.element.find("#done").data("kendoMobileButton").bind("click", function() {
+			dsLoja.one("change", function() {
+				view.loader.hide();
+				window.kendoMobileApplication.navigate("#:back");
+			});
+
+			view.loader.show();
+			dsLoja.sync();
+		});
+		
+		view.element.find("#cancel").data("kendoMobileBackButton").bind("click", function(e) {
+			e.preventDefault();
+			viewModel.dsLoja.one("change", function() {
+				view.loader.hide();
+				window.kendoMobileApplication.navigate("#:back");
+			});
+
+			view.loader.show();
+			viewModel.dsLoja.cancelChanges();
+		});
+	}
+    
+    <!-- "Celso seu codigo esta aqui" -->
+    
+	function getLojasShow() {
+		onLojasShow();
+	}
+	//adiciona mascara de cnpj
+	function MascaraCNPJ(cnpj) {
+		if (mascaraInteiro(cnpj) == false) {
+			event.returnValue = false;
+		}	
+		return formataCampo(cnpj, '00.000.000/0000-00', event);
+	}
+	
+	//adiciona mascara de cep
+	function MascaraCep(cep) {
+		if (mascaraInteiro(cep) == false) {
+			event.returnValue = false;
+		}	
+		return formataCampo(cep, '00.000-000', event);
+	}
+	
+	//adiciona mascara de data
+	function MascaraData(data) {
+		if (mascaraInteiro(data) == false) {
+			event.returnValue = false;
+		}	
+		return formataCampo(data, '00/00/0000', event);
+	}
+	
+	//adiciona mascara ao telefone
+	function MascaraTelefone(tel) {	
+		if (mascaraInteiro(tel) == false) {
+			event.returnValue = false;
+		}	
+		return formataCampo(tel, '(00) 0000-0000', event);
+	}
+	
+	//adiciona mascara ao CPF
+	function MascaraCPF(cpf) {
+		if (mascaraInteiro(cpf) == false) {
+			event.returnValue = false;
+		}	
+		return formataCampo(cpf, '000.000.000-00', event);
+	}
 </script>
+

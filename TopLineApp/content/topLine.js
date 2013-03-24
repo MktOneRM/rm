@@ -28,10 +28,9 @@
 			}
 		}
 	});
-    
+ 
+	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
 	//var baseUrl = "http://localhost:50000/api";
-	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -80,11 +79,13 @@
 	};
 
 	//schema
+    /*
 	var scLoja = { 
 		model: {
 			id: "LojId",
 			fields: {
 				LojId: { editable: false, nullable: false },
+				TloId: { editable: false, nullable: false },
 				LojCnpj: { editable: false, nullable: false },
 				LojCodigo: { editable: false, nullable: false },
 				LojRazaoSocial: { editable: false, nullable: false },           
@@ -97,18 +98,16 @@
 				LojBairro: { editable: false, nullable: false },
 				LojCidade: { editable: false, nullable: false },
 				LojUF: { editable: false, nullable: false },
-				LojCep: { editable: false, nullable: false },           
-				LojRua: { editable: false, nullable: false },
-				LojShopping: { editable: false, nullable: false },                        
-				LojFranquia: { editable: false, nullable: false },
-				LojMultimarca: { editable: false, nullable: false },                        
+				LojCep: { editable: false, nullable: false },           				
+				LojShopping_rua: { editable: false, nullable: false },                        
+				LojFranquia: { editable: false, nullable: false },				
 				LojDtCadastro: { editable: false, nullable: false },
 				LojLatitude: { editable: false, nullable: false },
 				LojLongitude: { editable: false, nullable: false }
 			}     
 		}
 	};
-    
+    */
 	//dataSource
 	var dsVendFila = new kendo.data.DataSource({                    
 		transport: {						
@@ -243,6 +242,7 @@
 	});
 		
 	//dataSource
+    /*
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -273,6 +273,7 @@
 		batch: true,
 		schema: scLoja
 	})
+    */
     
 	var viewModel = kendo.observable({
 		
@@ -281,19 +282,21 @@
 		dsVendForaTurno: dsVendForaTurno,
 		dsTiposMovto: dsTiposMovto,        
 		dsAtendimento: dsAtendimento,  
-		dsLoja: dsLoja,
+		//dsLoja: dsLoja,
         
 		vendedorSelecionado: [],		
 		atendimento: {},
+		lojaSelecionada: [],
         
 		salvarAtendimento: salvarAtendimento,
-		cancelarAtendimento: cancelarAtendimento,
+		cancelarAtendimento : cancelarAtendimento,
         
-		vendedoresFila: vendedoresFila,
-		vendedoresForaFila: vendedoresForaFila,
-		vendedoresForaTurno: vendedoresForaTurno,
-		tiposMovtoSaida: tiposMovtoSaida,
-		tiposMovtoEntrada: tiposMovtoEntrada
+		vendedoresFila : vendedoresFila,
+		vendedoresForaFila : vendedoresForaFila,
+		vendedoresForaTurno : vendedoresForaTurno,
+		tiposMovtoSaida : tiposMovtoSaida,
+		tiposMovtoEntrada : tiposMovtoEntrada,        
+		lojas: lojas
 		
 	});
     
@@ -362,8 +365,11 @@
 	function tiposMovtoSaida() {		
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
 		dsTiposMovto.read(); 
-        
-		console.log(viewModel);
+	}
+    
+	function lojas() {	
+		dsLoja.options.transport.read.url = baseUrl + "/RmLoja";
+		dsLoja.read(); 
 	}
     
 	function atualizaFilaNoSalao(context, parametro) {
@@ -382,6 +388,8 @@
         
 		showAtendimento: atendimento,
 		editorViewInit: editorViewInit,
+        
+		showLojas: lojas,
         
 		viewModel: viewModel 
 	});

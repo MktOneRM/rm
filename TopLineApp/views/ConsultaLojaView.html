@@ -8,14 +8,14 @@
 			<span data-role="view-title"></span>
 		</div>
 	</header>
-	
+
 	<ul id="listview"></ul>
-	
+
 	<script id="itemTemplate" type="text/x-kendo-template">
 		<a> #=LojNomefantasia# </a>
 		<a href="\\#" data-role="button" class="delete" >Delete</a>
 	</script>
-	
+
 </div>
 
 <div data-role="view" id="edit-detailview" data-title="Top Line" data-show="detailShow" data-init="detailInit">
@@ -27,7 +27,7 @@
 			<a class="nav-button" data-align="right" data-role="button" id="done">OK</a>
 		</div>
 	</header>
-	
+
 	<form>
 		<ul data-role="listview" data-style="inset" onclick="">
 			<li>
@@ -50,7 +50,7 @@
 			</li>
 		</ul>
 	</form>
-	
+
 </div>
 
 <script type="text/javascript"> 
@@ -108,11 +108,11 @@
 				,contentType:"application/json"   
 				,dataType: "json"
 			},
-			parameterMap: function(data, operation) {
-				if (operation !== "read" && data.models) {
-					return kendo.stringify([data.models[0]]);
+			parameterMap: function(options, operation) {
+				if (operation !== "read" && options.models) {
+					return {models: kendo.stringify(options.models)};
 				}
-			}                 
+			}                
 		},
 		batch: true,
 		schema: scLoja
@@ -172,7 +172,7 @@
 		kendo.bind(e.view.element, model, kendo.mobile.ui);
 	
 		console.log(model, "model");
-        console.log(dataSource);
+		console.log(dataSource);
 	}
 	
 	function detailInit(e) {

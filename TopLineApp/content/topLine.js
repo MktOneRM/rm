@@ -4,7 +4,7 @@
 			var value = this.bindings["srcPath"].get();
 
 			if (value) {
-				$(this.element).attr("src", value);
+				$(this.element).attr("src", "data:image/png;base64,${" + value + "}"); 
 			}
 		}
 	});
@@ -302,7 +302,6 @@
     
 	function atendimento(e) {
         
-        alert("to aqui");
 		var novoAtendimento = viewModel.dsAtendimento.add(); 
 		viewModel.set("atendimento", novoAtendimento); 
 			

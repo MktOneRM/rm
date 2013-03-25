@@ -79,7 +79,7 @@
 	};
 
 	//schema
-    /*
+    
 	var scLoja = { 
 		model: {
 			id: "LojId",
@@ -107,7 +107,7 @@
 			}     
 		}
 	};
-    */
+    
 	//dataSource
 	var dsVendFila = new kendo.data.DataSource({                    
 		transport: {						
@@ -242,7 +242,7 @@
 	});
 		
 	//dataSource
-    /*
+    
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -273,7 +273,7 @@
 		batch: true,
 		schema: scLoja
 	})
-    */
+    
     
 	var viewModel = kendo.observable({
 		
@@ -282,9 +282,9 @@
 		dsVendForaTurno: dsVendForaTurno,
 		dsTiposMovto: dsTiposMovto,        
 		dsAtendimento: dsAtendimento,  
-		//dsLoja: dsLoja,
+		dsLoja: dsLoja,
         
-		vendedorSelecionado: [],		
+		vendedorSelecionado: {},		
 		atendimento: {},
 		lojaSelecionada: [],
         
@@ -301,13 +301,15 @@
 	});
     
 	function atendimento(e) {
+        
+        alert("to aqui");
 		var novoAtendimento = viewModel.dsAtendimento.add(); 
 		viewModel.set("atendimento", novoAtendimento); 
 			
 		var vendedor = viewModel.dsVendFila.get(e.context);
 		viewModel.set("vendedorSelecionado", vendedor); 
         
-		console.log(viewModel);
+		console.log(viewModel,"Salvar A");
 		//app.navigate("#resultadoAtendimento"); 
 	}
 			

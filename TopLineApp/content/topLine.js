@@ -4,7 +4,7 @@
 			var value = this.bindings["srcPath"].get();
 
 			if (value) {
-				$(this.element).attr("src", "data:image/png;base64,${" + value + "}"); 
+				$(this.element).attr("src", "data:image/png;base64," + value ); 
 			}
 		}
 	});

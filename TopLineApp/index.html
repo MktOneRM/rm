@@ -53,22 +53,18 @@
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= FilaLojId #">
 				<!--<img src="${ColFoto}" />-->
-                <img src="data:image/png;base64,${ColFoto}"/>
+				<img src="data:image/png;base64,${ColFoto}"/>
 				<h5>${ColApelido}</h5>
 			</a>
 		</script>
 
 		<script>
+			
 			app = new kendo.mobile.Application($(document.body), { transition: "slide" });
 			
 			function showAtendimentoView(e) {
-                
 				var vendedor = viewModel.dsVendFila.get(e.context);
 				viewModel.set("vendedorSelecionado", vendedor); 				
-			
-				console.log(e.context);
-				console.log(viewModel.VendedorSelecionado, "Vendedor");
-			
 				app.navigate("views/AtendimentoView.html");
 			};
 			

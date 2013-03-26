@@ -4,7 +4,7 @@
 			var value = this.bindings["srcPath"].get();
 
 			if (value) {
-				$(this.element).attr("src", "data:image/png;base64," + value ); 
+				$(this.element).attr("src", "data:image/png;base64," + value); 
 			}
 		}
 	});
@@ -37,6 +37,7 @@
 		model: {
 			id: "FilaLojId",
 			fields: {
+				RedeLojId: { editable: false, nullable: false },
 				LojaColId: { editable: false, nullable: false },
 				FilaLojOrdem: { editable: false, nullable: false },
 				ColApelido: { editable: false, nullable: false },
@@ -68,7 +69,7 @@
 		model: {
 			id: "RepId",
 			fields:{
-				RepId:  { editable: false, nullable: false },
+				RepId:  { editable: false, nullable: false, defaultValue:0 },
 				RLoId: { type: "int", validation: { required: true} },            
 				LCoId: { type: "int", validation: { required: true} },            
 				DtHrTransacao: { type: "datetime", validation: { required: true} },            
@@ -274,7 +275,6 @@
 		schema: scLoja
 	})
     
-    
 	var viewModel = kendo.observable({
 		
 		dsVendFila: dsVendFila,		
@@ -300,25 +300,26 @@
 		
 	});
     
-	function atendimento(e) {
-        
+	function atendimento() {
 		var novoAtendimento = viewModel.dsAtendimento.add(); 
 		viewModel.set("atendimento", novoAtendimento); 
-			
-		var vendedor = viewModel.dsVendFila.get(e.context);
-		viewModel.set("vendedorSelecionado", vendedor); 
-        
-		console.log(viewModel,"Salvar A");
-		//app.navigate("#resultadoAtendimento"); 
 	}
 			
 	function salvarAtendimento () {
 		if (validator.validate()) { //validates the input
+			//Busca o código da Rede da Loja
+			var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");
+            
+			//Busca o código da Loja do Colaborador
+			var LcoId = viewModel.vendedorSelecionado.get("LojaColId");
+            
+			viewModel.atendimento.set("RLoId", RLoId);
+			viewModel.atendimento.set("LcoId", LcoId);
+   
 			this.dsAtendimento.sync(); 	                
 			
 			//Atualiza a posicao do vendedor na fila
 			//var vend = viewModel.vendedorSelecionado;			
-			
 			//this.dsVendFila.remove(vend); 
 			//this.dsVendFila.sync(); 
 			

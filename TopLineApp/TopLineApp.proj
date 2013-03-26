@@ -101,11 +101,9 @@
     <Content Include="styles\ModalViewLogin.css" />
     <Content Include="viewModels\viewModels.js" />
     <Content Include="views\AtendimentoView.html" />
-    <Content Include="views\CadastroColaboradorView.html" />
     <Content Include="views\CadastroLojaView.html" />
-    <Content Include="views\ConsultaColaboradorList.html" />
+    <Content Include="views\ColaboradorView.html" />
     <Content Include="views\ConfiguracoesView.html" />
-    <Content Include="views\ConsultaColaboradorView.html" />
     <Content Include="views\ConsultaLojaView.html" />
     <Content Include="views\TiposMovView.html" />
     <Content Include="views\VFilaView.html" />

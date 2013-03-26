@@ -29,8 +29,8 @@
 		}
 	});
  
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -319,9 +319,9 @@
 			this.dsAtendimento.sync(); 	                
 			
 			//Atualiza a posicao do vendedor na fila
-			//var vend = viewModel.vendedorSelecionado;			
-			//this.dsVendFila.remove(vend); 
-			//this.dsVendFila.sync(); 
+			var vend = viewModel.vendedorSelecionado;			
+			this.dsVendFila.remove(vend); 
+			this.dsVendFila.sync(); 
 			
 			app.navigate("views/VFilaView.html");
 		}
@@ -329,7 +329,7 @@
 			
 	function cancelarAtendimento() {
 		this.dsAtendimento.cancelChanges(); 
-		app.navigate("#vdentroFila");                 
+		app.navigate("#views/VFilaView.html");                 
 	}
 			
 	function editorViewInit() {

@@ -2,8 +2,8 @@
 <div id="frmPrincipal" data-role="layout" data-id="overview-layout">
 	<header data-role="header">
 		<div data-role="navbar" style="height: 44px;">
-			<!--<a href="views/ConfiguracoesView.html" class="nav-button" data-align="right" data-role="button" data-icon="settings" data-transition="pop"></a>-->
-			<a href="index.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+			<a href="views/ConfiguracoesView.html" class="nav-button" data-align="right" data-role="button" data-icon="settings" data-transition="slide"></a>
+			<!--<a href="index.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>-->
 			<span>Top Line</span>
 		</div>
 	</header>
@@ -32,7 +32,22 @@
 
 <script type="text/x-kendo-template" id="tdentroFila">
 	<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= LojaColId #">
-		<img src="${ColFoto}" />
+		<!--<img src="${ColFoto}" />-->
+		<img src="data:image/png;base64,${ColFoto}"/>
 		<h5>${ColApelido}</h5>
 	</a>
+</script>
+
+<script>
+			
+	function showAtendimentoView(e) {
+		var vendedor = viewModel.dsVendFila.get(e.context);
+		viewModel.set("vendedorSelecionado", vendedor); 				
+		app.navigate("views/AtendimentoView.html");
+	};
+	
+	function showTiposMovtoView(e) {       
+		app.navigate("views/TiposMovView.html");
+	};			
+    
 </script>

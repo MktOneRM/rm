@@ -3,18 +3,23 @@
 		<div data-role="navbar">
 			<a data-role="button" data-align="left" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
 			<span data-role="view-title"></span>
-			<button data-role="button" data-align="right" data-bind="events: { click: salvarAtendimento }">Gravar</button>
+			<a data-role="button" data-align="right" data-bind="events: { click: salvarAtendimento }">Gravar</a>
 		</div>
 	</div>
 	<ul id="form" data-role="listview" data-style="inset" data-type="group">
 		<div class="mobile-fila-titulo">Atendimento</div>
 
-		<div data-role="content">
-			<aside>
-				<img data-bind="srcPath: vendedorSelecionado.ColFoto"/>
-                <span data-bind="text:  vendedorSelecionado.ColNome"/>
-			</aside>
-		</div>
+		<li>
+            Vendedor
+			<ul>
+				<li>
+					<h2 data-bind="text:  vendedorSelecionado.ColNome">
+						<span data-bind="text:  vendedorSelecionado.ColSobreNome"/>
+					</h2>
+					<img data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+				</li>
+			</ul>
+		</li>
 
 		<li>
 			<ul>
@@ -29,18 +34,18 @@
 
 		<li>
 			Dados da Venda
-			<ul> 
-       
+			<ul>
+
 				<li>
 					<label>
 						Valor Venda
-						<input id="RepValor" name="ValorVenda" type="number" required="required" data-bind="value: atendimento.RepValor" />
+						<input id="RepValor" name="Valor da Venda" type="number" required="required" data-bind="value: atendimento.RepValor" />
 					</label>
 				</li>
 				<li>
 					<label>
 						Qtde de Peças
-						<input id="RepQtde" name="QtdeDePecas" type="number" required="required" data-bind="value: atendimento.RepQtde"/>
+						<input id="RepQtde" name="Qtde de peças" type="number" required="required" data-bind="value: atendimento.RepQtde"/>
 					</label>
 				</li>
 
@@ -48,7 +53,14 @@
 
 		</li>
 
+		<li>
+            Total Atendimento
+			<ul>
+				<h1>
+					Total Atendimento: <span data-bind="text: atendAggregates.formattedTotal"></span>
+				</h1>
+			</ul>
+		</li>
+
 	</ul>
-	<!--<a id="btnCreate" data-role="button" type="button" data-bind="events: {click: salvarAtendimento}">Salvar</a>
-	<a id="btnCancel" data-role="button" type="button" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>-->
 </div>

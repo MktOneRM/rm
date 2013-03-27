@@ -29,8 +29,8 @@
 		}
 	});
  
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -72,7 +72,7 @@
 				RepId:  { editable: false, nullable: false, defaultValue:0 },
 				RLoId: { type: "int", validation: { required: true} },            
 				LCoId: { type: "int", validation: { required: true} },            
-				DtHrTransacao: { type: "datetime", validation: { required: true} },            
+				DtHrTransacao: { type: "date", validation: { required: true} },            
 				RepQtde: { type: "number", validation: { required: true, min: 0} },						
 				RepValor: { type: "number", validation: { required: true, min: 0} }
 			} 
@@ -221,7 +221,7 @@
 	var dsAtendimento = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl + "/RmAtendimentoRepositorio",							
+				url: baseUrl +  "/RmAtendimentoRepositorio",							
 				type:"GET"      
 				,contentType: "application/json"
 				,dataType: "json"
@@ -238,10 +238,29 @@
 				}
 			}
 		},
+		change: function() {
+			alert("pqp funcionou");
+            
+			var totalAtendimento = 0;
+			var atendimento = dsAtendimento.data();
+            
+			for (var i = 0; i < atendimento.lenght;i++) {
+				var atendEntrada = atendimento[i];
+				totalAtendimento += atendEntrada.get("RepValor") * atendEntrada.get("RepQtde");
+			}
+			atendAggregates.set("total", totalAtendimento);
+		},
 		batch: true,
 		schema: schemaAtendimento
 	});
 		
+	var atendAggregates = kendo.observable({
+		total: 0,
+		formattedTotal: function () {
+			return kendo.toString(this.get("total"), "c");
+		}
+	});
+    
 	//dataSource
     
 	var dsLoja = new kendo.data.DataSource({                    
@@ -303,6 +322,8 @@
 	function atendimento() {
 		var novoAtendimento = viewModel.dsAtendimento.add(); 
 		viewModel.set("atendimento", novoAtendimento); 
+        
+		console.log(viewModel, "viewModel");
 	}
 			
 	function salvarAtendimento () {

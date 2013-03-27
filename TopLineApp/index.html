@@ -11,7 +11,7 @@
 		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.maskedinput.min.js" type="text/javascript"></script>
 
-		<script src="content/topLine.js" type="text/javascript"></script>
+		<script src="scripts/topLine.js" type="text/javascript"></script>
 
 		<!--<script src="scripts/appData.js" type="text/javascript"></script>
 		<script src="viewModels/viewModels.js" type="text/javascript"></script>
@@ -22,8 +22,8 @@
 		<div id="frmPrincipal" data-role="layout" data-id="overview-layout">
 			<header data-role="header">
 				<div data-role="navbar" style="height: 44px;">
-					<a href="views/ConfiguracoesView.html" class="nav-button" data-align="right" data-role="button" data-icon="settings" data-transition="pop"></a>
-					<a href="index.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="views/ConfiguracoesView.html" class="nav-button" data-align="right" data-role="button" data-icon="settings" data-transition="slide"></a>
+					<!--<a href="index.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>-->
 					<span>Top Line</span>
 				</div>
 			</header>
@@ -36,7 +36,7 @@
 			</div>
 		</div>
 
-		<div id="vdentroFila" data-role="view" data-layout="overview-layout" data-show="showVendedoresFila" data-model="viewModel">
+		<div id="vdentroFila" data-role="view" data-layout="overview-layout"  data-show="showVendedoresFila" data-model="viewModel">
 			<div class="mobile-fila-titulo">Dentro da Fila</div>
 			<ul id="ldentroFila" data-bind="source: dsVendFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" class="mobile-fila"></ul>
 			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
@@ -48,6 +48,19 @@
 					<a data-action="showTiposMovtoView">Sair fila da Vez</a>
 				</li>
 			</ul>
+		</div>
+
+		<!-- Error Views -->
+
+		<div data-role="modalview" id="error-view" style="display: none; width: 95%; height: 90%;">
+			<div data-role="header">
+				<div data-role="navbar">
+					<span>Erro</span>
+					<a data-click="app.closeErrorModal" data-role="button" data-align="right">Fechar</a>
+				</div>
+			</div>
+
+			<div class="message"></div>
 		</div>
 
 		<script type="text/x-kendo-template" id="tdentroFila">
@@ -74,6 +87,8 @@
 			
 			
 		</script>
+
+		<!--<script data-main="scripts/main.js" src="scripts/require.js"></script>-->
 
 		<script>
 		

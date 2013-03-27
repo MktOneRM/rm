@@ -221,7 +221,7 @@
 	var dsAtendimento = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl +  "/RmAtendimentoRepositorio",							
+				url: baseUrl + "/RmAtendimentoRepositorio",							
 				type:"GET"      
 				,contentType: "application/json"
 				,dataType: "json"
@@ -239,15 +239,10 @@
 			}
 		},
 		change: function() {
-			alert("pqp funcionou");
-            
 			var totalAtendimento = 0;
-			var atendimento = dsAtendimento.data();
-            
-			for (var i = 0; i < atendimento.lenght;i++) {
-				var atendEntrada = atendimento[i];
-				totalAtendimento += atendEntrada.get("RepValor") * atendEntrada.get("RepQtde");
-			}
+			var atendimento = dsAtendimento.data();            
+			var atendEntrada = atendimento[0];                
+			totalAtendimento += atendEntrada.get("RepValor") * atendEntrada.get("RepQtde");
 			atendAggregates.set("total", totalAtendimento);
 		},
 		batch: true,
@@ -257,6 +252,8 @@
 	var atendAggregates = kendo.observable({
 		total: 0,
 		formattedTotal: function () {
+            alert("pqp");
+            
 			return kendo.toString(this.get("total"), "c");
 		}
 	});
@@ -322,8 +319,6 @@
 	function atendimento() {
 		var novoAtendimento = viewModel.dsAtendimento.add(); 
 		viewModel.set("atendimento", novoAtendimento); 
-        
-		console.log(viewModel, "viewModel");
 	}
 			
 	function salvarAtendimento () {
@@ -349,6 +344,9 @@
 	}
 			
 	function cancelarAtendimento() {
+        
+        console.log(atendAggregates.total,"Teste");
+        
 		this.dsAtendimento.cancelChanges(); 
 		app.navigate("#views/VFilaView.html");                 
 	}
@@ -412,8 +410,8 @@
 		showAtendimento: atendimento,
 		editorViewInit: editorViewInit,
         
-		showLojas: lojas,
+		showLojas: lojas,        
+		viewModel: viewModel,
         
-		viewModel: viewModel 
 	});
 })(jQuery);

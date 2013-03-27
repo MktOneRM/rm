@@ -10,11 +10,10 @@
 		<div class="mobile-fila-titulo">Atendimento</div>
 
 		<li>
-            Vendedor
 			<ul>
 				<li>
 					<h2 data-bind="text:  vendedorSelecionado.ColNome">
-						<span data-bind="text:  vendedorSelecionado.ColSobreNome"/>
+						<span>Teste</span>
 					</h2>
 					<img data-bind="srcPath: vendedorSelecionado.ColFoto"/>
 				</li>
@@ -26,7 +25,7 @@
 				<li>
 					<label>
 						Vendeu
-						<input id="chkVendeu" type="checkbox" data-role="switch" checked >
+						<input id="chkVendeu" type="checkbox" data-role="switch" data-on-label="Sim" data-off-label="Não" checked data-change="switchChange" >
 					</label>
 				</li>
 			</ul>
@@ -38,14 +37,14 @@
 
 				<li>
 					<label>
-						Valor Venda
-						<input id="RepValor" name="Valor da Venda" type="number" required="required" data-bind="value: atendimento.RepValor" />
+						Valor da Venda
+						<input id="RepValor" name="RepValor" type="number" required="required" data-bind="value: atendimento.RepValor" />
 					</label>
 				</li>
 				<li>
 					<label>
-						Qtde de Peças
-						<input id="RepQtde" name="Qtde de peças" type="number" required="required" data-bind="value: atendimento.RepQtde"/>
+						Qtde Total de Peças
+						<input id="RepQtde" name="RepQtde" type="number" required="required" data-bind="value: atendimento.RepQtde"/>
 					</label>
 				</li>
 
@@ -53,14 +52,25 @@
 
 		</li>
 
+		<!--
 		<li>
-            Total Atendimento
-			<ul>
-				<h1>
-					Total Atendimento: <span data-bind="text: atendAggregates.formattedTotal"></span>
-				</h1>
-			</ul>
+		<ul>
+		<h1>
+		Total: <span  class="total" data-bind="text: total"></span>
+		</h1>
+		</ul>
 		</li>
+		-->
 
 	</ul>
 </div>
+
+<script>
+
+    function switchChange(e) {
+        alert("pqp");
+        console.log("switch value was changed to " + (e.checked ? "checked" : "unchecked"));
+    }
+    
+    
+</script>

@@ -338,6 +338,8 @@
 			var vend = viewModel.vendedorSelecionado;			
 			this.dsVendFila.remove(vend); 
 			this.dsVendFila.sync(); 
+            
+            alert("Gravado com sucesso!");
 			
 			app.navigate("views/VFilaView.html");
 		}

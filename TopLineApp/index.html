@@ -38,7 +38,7 @@
             <ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
-					<a data-action="showAtendimentoView">Resultado Atendimento</a>
+					<a href="resultadoAtendimento-view">Resultado Atendimento</a>
 				</li>
 				<li>
 					<a data-action="showTiposMovtoView">Sair fila da Vez</a>
@@ -57,7 +57,7 @@
         </div>
         
         <!-- Resultado Atendimento -->
-        <div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-layout="home-layout"  data-model="viewModel">
+        <div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-layout="home-layout" data-model="viewModel">
         	<div data-role="header">
         		<div data-role="navbar">
         			<a data-role="button" data-align="left" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
@@ -205,9 +205,11 @@
 		<script>
  		
 			function showAtendimentoView(e) {
-				var vendedor = viewModel.dsVendFila.get(e.context);
+				
+                var vendedor = viewModel.dsVendFila.get(e.context);
 				viewModel.set("vendedorSelecionado", vendedor); 				
-				app.navigate("views/AtendimentoView.html");
+                
+				utils.navigate("resultadoAtendimento-view");
 			};
 			
 			function showTiposMovtoView(e) {       

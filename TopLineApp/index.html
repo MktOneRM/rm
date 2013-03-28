@@ -8,18 +8,23 @@
         <link href="kendo/styles/kendo.indexedlistview.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
+		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
+		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
+		<script src="kendo/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+
+		<script src="scripts/topLine.js" type="text/javascript"></script>
 	</head>
 	<body>
         <!-- Home-Layout -->
-		<div data-role="layout" data-id="home-layout" data-init="app.homeLayout.init" data-title="Top Line">
+		<div data-role="layout" data-id="home-layout" data-title="Top Line">
 			<header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
                 </div>
-                <ul class="select-group">
-                    <li data-target="#dentroFila-view">Fila</li>
-                    <li data-target="#foraFila-view">Fora</li>
-                    <li data-target="#foraTurno-view">Turno</li>
+                <ul data-role="buttongroup" class="select-group">
+                    <li><a href="#dentroFila-view">Fila</a></li>
+                    <li><a href="#foraFila-view">Fora</a></li>
+                    <li><a href="#foraTurno-view">Turno</a></li>
                 </ul>
 			</header>
             <div data-role="footer">
@@ -38,7 +43,7 @@
             <ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
-					<a href="resultadoAtendimento-view">Resultado Atendimento</a>
+					<a data-action="showAtendimentoView">Resultado Atendimento</a>
 				</li>
 				<li>
 					<a data-action="showTiposMovtoView">Sair fila da Vez</a>
@@ -57,7 +62,7 @@
         </div>
         
         <!-- Resultado Atendimento -->
-        <div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-layout="home-layout" data-model="viewModel">
+        <div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="editorViewInit" data-layout="home-layout" data-model="viewModel">
         	<div data-role="header">
         		<div data-role="navbar">
         			<a data-role="button" data-align="left" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
@@ -203,20 +208,18 @@
         </script>
         
 		<script>
+			app = new kendo.mobile.Application($(document.body), { transition: "slide" });
  		
 			function showAtendimentoView(e) {
 				
                 var vendedor = viewModel.dsVendFila.get(e.context);
 				viewModel.set("vendedorSelecionado", vendedor); 				
-                
-				utils.navigate("resultadoAtendimento-view");
+    			app.navigate("#resultadoAtendimento-view");
 			};
 			
 			function showTiposMovtoView(e) {       
 				app.navigate("views/TiposMovView.html");
 			};
 		</script>
-        <script data-main="scripts/main.js" src="scripts/require.js"></script>
-	</body>
+ 	</body>
 </html>
-

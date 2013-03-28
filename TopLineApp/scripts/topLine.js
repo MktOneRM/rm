@@ -1,6 +1,4 @@
-define(["jQuery", "kendo", "config", "utils"], function ($, kendo, config, utils) {
-    "use strict";
-
+(function($, undefined) {
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["srcPath"].get();
@@ -240,25 +238,10 @@ define(["jQuery", "kendo", "config", "utils"], function ($, kendo, config, utils
 				}
 			}
 		},
-		change: function() {
-			var totalAtendimento = 0;
-			var atendimento = dsAtendimento.data();            
-			var atendEntrada = atendimento[0];                
-			totalAtendimento += atendEntrada.get("RepValor") * atendEntrada.get("RepQtde");
-			atendAggregates.set("total", totalAtendimento);
-		},
 		batch: true,
 		schema: schemaAtendimento
 	});
 		
-	var atendAggregates = kendo.observable({
-		total: 0,
-		formattedTotal: function () {
-            alert("pqp");
-            
-			return kendo.toString(this.get("total"), "c");
-		}
-	});
     
 	//dataSource
     
@@ -343,7 +326,7 @@ define(["jQuery", "kendo", "config", "utils"], function ($, kendo, config, utils
             
             alert("Gravado com sucesso!");
 			         
-            utils.navigate("#VFilaView");
+            app.navigate("#VFilaView");
 		}
 	}
 			
@@ -418,4 +401,4 @@ define(["jQuery", "kendo", "config", "utils"], function ($, kendo, config, utils
 		viewModel: viewModel,
         
 	});
-});
+})(jQuery);

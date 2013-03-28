@@ -1,4 +1,6 @@
-(function($, undefined) {
+define(["jQuery", "kendo"], function ($, kendo) {
+    "use strict";
+
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["srcPath"].get();
@@ -29,8 +31,8 @@
 		}
 	});
  
-	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -416,4 +418,4 @@
 		viewModel: viewModel,
         
 	});
-})(jQuery);
+});

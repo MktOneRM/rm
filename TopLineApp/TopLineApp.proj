@@ -69,10 +69,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="kendo\js\kendo.indexedlistview.js" />
+    <Content Include="kendo\styles\kendo.indexedlistview.css" />
     <Content Include="scripts\app.js" />
     <Content Include="scripts\data.js" />
+    <Content Include="scripts\homeLayout.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\require.js" />
+    <Content Include="scripts\toolslayout.js" />
     <Content Include="scripts\topLine.js" />
     <Content Include="Bkp\html\HtmlPage.html" />
     <Content Include="Bkp\html\HtmlPage1.html" />

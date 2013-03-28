@@ -1,5 +1,5 @@
-define(["jQuery", "kendo", "kendoIndexedListView",  "config", "utils", "topLine"],
-	   function($, kendo, x, config, utils, topLine) {
+define(["jQuery", "kendo", "kendoIndexedListView",  "config", "utils", "topLine", "homeLayout"],
+	   function($, kendo, x, config, utils, topLine, homeLayout) {
        
 		   var _onError = function (error, url, line) {
 			   utils.showError(error);
@@ -20,6 +20,7 @@ define(["jQuery", "kendo", "kendoIndexedListView",  "config", "utils", "topLine"
 			   closeErrorModal: utils.closeError,
 			   config: config,
 			   init: init,
-			   topLine: topLine
-		   };
+			   topLine: topLine,
+               homeLayout: homeLayout
+           };
 	   });

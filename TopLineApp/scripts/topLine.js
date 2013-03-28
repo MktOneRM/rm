@@ -1,4 +1,4 @@
-define(["jQuery", "kendo"], function ($, kendo) {
+define(["jQuery", "kendo", "config", "utils"], function ($, kendo, config, utils) {
     "use strict";
 
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
@@ -342,8 +342,8 @@ define(["jQuery", "kendo"], function ($, kendo) {
 			this.dsVendFila.sync(); 
             
             alert("Gravado com sucesso!");
-			
-			app.navigate("views/VFilaView.html");
+			         
+            utils.navigate("#VFilaView");
 		}
 	}
 			

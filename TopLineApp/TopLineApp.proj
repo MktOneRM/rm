@@ -72,6 +72,7 @@
     <Content Include="kendo\styles\kendo.indexedlistview.css" />
     <Content Include="scripts\app.js" />
     <Content Include="scripts\data.js" />
+    <Content Include="scripts\fila-view.js" />
     <Content Include="scripts\homeLayout.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\require.js" />

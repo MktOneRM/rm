@@ -326,7 +326,7 @@
             
             alert("Gravado com sucesso!");
 			         
-            app.navigate("#VFilaView");
+            app.navigate("#dentroFila-view");
 		}
 	}
 			
@@ -335,7 +335,7 @@
         console.log(atendAggregates.total,"Teste");
         
 		this.dsAtendimento.cancelChanges(); 
-		app.navigate("#views/VFilaView.html");                 
+		app.navigate("#dentroFila-view");                 
 	}
 			
 	function editorViewInit() {

@@ -5,7 +5,7 @@
 		<link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
 		<link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-        <link href="kendo/styles/kendo.indexedlistview.css" rel="stylesheet" />
+		<link href="kendo/styles/kendo.indexedlistview.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
@@ -15,32 +15,38 @@
 		<script src="scripts/topLine.js" type="text/javascript"></script>
 	</head>
 	<body>
-        <!-- Home-Layout -->
+		<!-- Home-Layout -->
 		<div data-role="layout" data-id="home-layout" data-title="Top Line" data-init="selBtn">
 			<header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title"></span>
-                </div>
-                <ul data-role="buttongroup" class="select-group">
-                    <li><a href="#dentroFila-view">Fila</a></li>
-                    <li><a href="#foraFila-view">Fora</a></li>
-                    <li><a href="#foraTurno-view">Turno</a></li>
-                </ul>
+				<div data-role="navbar">
+					<span data-role="view-title"></span>
+				</div>
+				<ul data-role="buttongroup" class="select-group">
+					<li>
+						<a href="#dentroFila-view">Fila</a>
+					</li>
+					<li>
+						<a href="#foraFila-view">Fora</a>
+					</li>
+					<li>
+						<a href="#foraTurno-view">Turno</a>
+					</li>
+				</ul>
 			</header>
-            <div data-role="footer">
-                <div data-role="tabstrip">
-                    <a href="#dentroFila-view" data-icon="action">Fila</a>
-                    <a href="#consulta-view" data-icon="search">Consulta</a>
-                    <a href="#config-view" data-icon="settings">Configuração</a>
-                    <a href="#about-view" data-icon="about">Sobre</a>
-                </div>
-            </div>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#dentroFila-view" data-icon="action">Fila</a>
+					<a href="#consulta-view" data-icon="search">Consulta</a>
+					<a href="#config-view" data-icon="settings">Configuração</a>
+					<a href="#about-view" data-icon="about">Sobre</a>
+				</div>
+			</div>
 		</div>
-        
-         <!-- Fila da Vez -->
+
+		<!-- Fila da Vez -->
 		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel">
 			<ul data-bind="source: dsVendFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" data-style="inset"></ul>
-            <ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
+			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
 					<a data-action="showAtendimentoView">Resultado Atendimento</a>
@@ -51,184 +57,189 @@
 			</ul>
 		</div>
 
-        <!-- Fora da Fila da Vez -->
-        <div id="foraFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresForaFila" data-model="viewModel">
-        	<ul data-bind="source: dsVendForaFila" data-role="listview" data-auto-bind="false" data-template="tforaFila" data-style="inset"></ul>
-        </div>
+		<!-- Fora da Fila da Vez -->
+		<div id="foraFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresForaFila" data-model="viewModel">
+			<ul data-bind="source: dsVendForaFila" data-role="listview" data-auto-bind="false" data-template="tforaFila" data-style="inset"></ul>
+		</div>
+
+		<!-- Fora do Turno -->
+		<div id="foraTurno-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresForaTurno" data-model="viewModel">
+			<ul data-bind="source: dsVendForaTurno" data-role="listview" data-auto-bind="false" data-template="tforaTurno" data-style="inset"></ul>
+		</div>
+
+		<!-- Resultado Atendimento -->
+		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="editorViewInit" data-layout="home-layout" data-model="viewModel">
+			<div data-role="header">
+				<div data-role="navbar">
+					<a data-role="button" data-align="left" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
+					<span data-role="view-title"></span>
+					<a data-role="button" data-align="right" data-bind="events: { click: salvarAtendimento }">Gravar</a>
+				</div>
+			</div>
+			<ul id="form" data-role="listview" data-style="inset" data-type="group">
+				<div class="mobile-fila-titulo">Atendimento</div>
+				<li>
+					<ul>
+						<li>
+							<h2 data-bind="text:  vendedorSelecionado.ColNome">
+								<span>Teste</span>
+							</h2>
+							<img data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<ul>
+						<li>
+							<label>
+								Vendeu
+								<input id="chkVendeu" data-role="switch" data-on-label="Sim" data-off-label="Não" data-change="switchChange" checked>
+							</label>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					Dados da Venda
+					<ul>
+
+						<li>
+							<label>
+								Valor da Venda
+								<input id="RepValor" name="RepValor" type="number" required="required" data-bind="value: atendimento.RepValor" />
+							</label>
+						</li>
+						<li>
+							<label>
+								Qtde Total de Peças
+								<input id="RepQtde" name="RepQtde" type="number" required="required" data-bind="value: atendimento.RepQtde"/>
+							</label>
+						</li>
+
+					</ul>
+
+				</li>
+			</ul>
+		</div>
+
+		<script>
         
-        <!-- Fora do Turno -->
-        <div id="foraTurno-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresForaTurno" data-model="viewModel">
-        	<ul data-bind="source: dsVendForaTurno" data-role="listview" data-auto-bind="false" data-template="tforaTurno" data-style="inset"></ul>
-        </div>
-        
-        <!-- Resultado Atendimento -->
-        <div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="editorViewInit" data-layout="home-layout" data-model="viewModel">
-        	<div data-role="header">
-        		<div data-role="navbar">
-        			<a data-role="button" data-align="left" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
-        			<span data-role="view-title"></span>
-        			<a data-role="button" data-align="right" data-bind="events: { click: salvarAtendimento }">Gravar</a>
-        		</div>
-        	</div>
-        	<ul id="form" data-role="listview" data-style="inset" data-type="group">
-        		<div class="mobile-fila-titulo">Atendimento</div>
-        		<li>
-        			<ul>
-        				<li>
-        					<h2 data-bind="text:  vendedorSelecionado.ColNome">
-        						<span>Teste</span>
-        					</h2>
-        					<img data-bind="srcPath: vendedorSelecionado.ColFoto"/>
-        				</li>
-        			</ul>
-        		</li>
-        
-        		<li>
-        			<ul>
-        				<li>
-        					<label>
-        						Vendeu
-        						<input id="chkVendeu" data-role="switch" data-on-label="Sim" data-off-label="Não" data-change="switchChange" checked>
-        					</label>
-        				</li>
-        			</ul>
-        		</li>
-        
-        		<li>
-        			Dados da Venda
-        			<ul>
-        
-        				<li>
-        					<label>
-        						Valor da Venda
-        						<input id="RepValor" name="RepValor" type="number" required="required" data-bind="value: atendimento.RepValor" />
-        					</label>
-        				</li>
-        				<li>
-        					<label>
-        						Qtde Total de Peças
-        						<input id="RepQtde" name="RepQtde" type="number" required="required" data-bind="value: atendimento.RepQtde"/>
-        					</label>
-        				</li>
-        
-        			</ul>
-        
-        		</li>
-          	</ul>
-        </div>
-        
-        <script>
-        
-            function switchChange(e) {
-                   if (e.checked) {
-                       alert("verdadeiro");
-                   }else {
-                       alert("Falso");
-                   }    
-            }    
-            
-        </script>
-                
-        <!-- Toos-Layout -->
+			function switchChange(e) {
+				if (e.checked) {
+					alert("verdadeiro");
+				}
+				else {
+					alert("Falso");
+				}    
+			}    
+		
+		</script>
+		
+		<!-- Toos-Layout -->
 		<div data-role="layout" data-id="tools-layout" data-title="Top Line">
 			<header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title"></span>
-                </div>
- 		   </header>
-            <div data-role="footer">
-                <div data-role="tabstrip">
-                    <a href="#dentroFila-view" data-icon="action">Fila</a>
-                    <a href="#consulta-view" data-icon="search">Consulta</a>
-                    <a href="#config-view" data-icon="settings">Configuração</a>
-                    <a href="#about-view" data-icon="about">Sobre</a>
-                </div>
-            </div>
+				<div data-role="navbar">
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#dentroFila-view" data-icon="action">Fila</a>
+					<a href="#consulta-view" data-icon="search">Consulta</a>
+					<a href="#config-view" data-icon="settings">Configuração</a>
+					<a href="#about-view" data-icon="about">Sobre</a>
+				</div>
+			</div>
 		</div>
-         
-        <!-- Consulta -->
-    	<div id="consulta-view" data-role="view" data-layout="tools-layout" data-title="Top Line">
-    		<ul data-role="listview" data-style="inset" data-type="group">
-    			<li>Configuração
-    				<ul>
-    					<li>
-    						<a>Loja</a>
-    					</li>
-    					<li>
-    						<a>Vendedor</a>
-    					</li>
-    				</ul>
-    
-    			</li>
-    		</ul>
-    	</div>
-    
-        <!-- Configuração -->
-    	<div id="config-view" data-role="view" data-layout="tools-layout" data-title="Top Line">
-    		<ul data-role="listview" data-style="inset" data-type="group">
-    			<li>Configuração
-    				<ul>
-    					<li>
-    						<a href="views/ConsultaLojaView.html">Cadastro de Loja</a>
-    					</li>
-    					<li>
-    						<a href="views/ConsultaColaboradorList.html">Cadastro de Colaboradores</a>
-    					</li>
-    					<li>
-    						<a href="#">Escala de Trabalho</a>
-    					</li>
-    					<li>
-    						<a href="#">Horário de Funcionamento</a>
-    					</li>
-    				</ul>
-    
-    			</li>
-    		</ul>
-    	</div>
-
-            <!-- Templates -->
+		
+		<!-- Consulta -->
+		<div id="consulta-view" data-role="view" data-layout="tools-layout" data-title="Top Line">
+			<ul data-role="listview" data-style="inset" data-type="group">
+				<li>
+					Configuração
+					<ul>
+						<li>
+							<a>Loja</a>
+						</li>
+						<li>
+							<a>Vendedor</a>
+						</li>
+					</ul>
+				
+				</li>
+			</ul>
+		</div>
+		
+		<!-- Configuração -->
+		<div id="config-view" data-role="view" data-layout="tools-layout" data-title="Top Line">
+			<ul data-role="listview" data-style="inset" data-type="group">
+				<li>
+					Configuração
+					<ul>
+						<li>
+							<a href="views/ConsultaLojaView.html">Cadastro de Loja</a>
+						</li>
+						<li>
+							<a href="views/ConsultaColaboradorList.html">Cadastro de Colaboradores</a>
+						</li>
+						<li>
+							<a href="#">Escala de Trabalho</a>
+						</li>
+						<li>
+							<a href="#">Horário de Funcionamento</a>
+						</li>
+					</ul>
+				
+				</li>
+			</ul>
+		</div>
+		
+		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= FilaLojId #">
-                <img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
-                <h1 class="fila-nome">${ColApelido}</h1>
-                <h2 class="fila-turno">1 Turno</h2>
-     	   </a>
+				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
+				<h1 class="fila-nome">${ColApelido}</h1>
+				<h2 class="fila-turno">1 Turno</h2>
+			</a>
 		</script>
-        <script type="text/x-kendo-template" id="tforaFila">
-        	<a data-rel="modalview" href="\\#modalview-login">
-                <img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
-                <h1 class="fila-nome">${ColApelido}</h1>
-                <h2 class="fila-turno">1 Turno</h2>
-        	</a>
-        </script>
-        <script type="text/x-kendo-template" id="tforaTurno">
-        	<a class="details-link" data-role="listview-link">
-                <img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
-                <h1 class="fila-nome">${ColApelido}</h1>
-                <h2 class="fila-turno">1 Turno</h2>
-        	</a>
-        </script>
-        
+		<script type="text/x-kendo-template" id="tforaFila">
+			<a data-rel="modalview" href="\\#modalview-login">
+				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
+				<h1 class="fila-nome">${ColApelido}</h1>
+				<h2 class="fila-turno">1 Turno</h2>
+			</a>
+		</script>
+		<script type="text/x-kendo-template" id="tforaTurno">
+			<a class="details-link" data-role="listview-link">
+				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
+				<h1 class="fila-nome">${ColApelido}</h1>
+				<h2 class="fila-turno">1 Turno</h2>
+			</a>
+		</script>
+		
 		<script>
-			app = new kendo.mobile.Application($(document.body), { transition: "slide" });
- 		
+			app = new kendo.mobile.Application($(document.body), { 
+				transition: "slide",
+				loading: '<h1 class="loading-message">Carregando...</h1>'
+			});
+			
 			function showAtendimentoView(e) {
-				
-                var vendedor = viewModel.dsVendFila.get(e.context);
+				var vendedor = viewModel.dsVendFila.get(e.context);
 				viewModel.set("vendedorSelecionado", vendedor); 				
-    			app.navigate("#resultadoAtendimento-view");
+				app.navigate("#resultadoAtendimento-view");
 			};
 			
 			function showTiposMovtoView(e) {       
 				app.navigate("views/TiposMovView.html");
 			};
-            function selBtn(e) {
-                var btnGrp = $(e.sender.element).find(".select-group").data("kendoMobileButtonGroup");
-                if(btnGrp) {
-                    btnGrp.select(0);
-                }
-            }
+			function selBtn(e) {
+				var btnGrp = $(e.sender.element).find(".select-group").data("kendoMobileButtonGroup");
+				if (btnGrp) {
+					btnGrp.select(0);
+				}
+			}
 
 		</script>
- 	</body>
+	</body>
 </html>

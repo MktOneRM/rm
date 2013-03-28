@@ -332,8 +332,6 @@
 			
 	function cancelarAtendimento() {
         
-        console.log(atendAggregates.total,"Teste");
-        
 		this.dsAtendimento.cancelChanges(); 
 		app.navigate("#dentroFila-view");                 
 	}

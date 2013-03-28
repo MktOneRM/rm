@@ -2,7 +2,9 @@ body
 {
     font: Arial, sans-serif;
 }
-
+label{
+    font-size: 12px;
+}
 input[type="text"], input[type="password"] {
     margin: 4px;
     width: 70%;

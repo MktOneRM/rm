@@ -16,7 +16,7 @@
 	</head>
 	<body>
         <!-- Home-Layout -->
-		<div data-role="layout" data-id="home-layout" data-title="Top Line">
+		<div data-role="layout" data-id="home-layout" data-title="Top Line" data-init="selBtn">
 			<header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
@@ -220,6 +220,13 @@
 			function showTiposMovtoView(e) {       
 				app.navigate("views/TiposMovView.html");
 			};
+            function selBtn(e) {
+                var btnGrp = $(e.sender.element).find(".select-group").data("kendoMobileButtonGroup");
+                if(btnGrp) {
+                    btnGrp.select(0);
+                }
+            }
+
 		</script>
  	</body>
 </html>

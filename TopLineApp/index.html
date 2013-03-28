@@ -182,11 +182,10 @@
             <!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= FilaLojId #">
-				<!--<img src="${ColFoto}" />-->
-				<img src="data:image/png;base64,${ColFoto}"/>
-				<h5>${ColApelido}</h5>
-                <h5>1 turno</h5>
-			</a>
+                <img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
+                <h1 class="fila-nome">${ColApelido}</h1>
+                <h2 class="fila-turno">1 Turno</h2>
+     	   </a>
 		</script>
         <script type="text/x-kendo-template" id="tforaFila">
         	<a data-rel="modalview" href="\\#modalview-login">

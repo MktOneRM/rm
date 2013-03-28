@@ -82,7 +82,7 @@ input[type="text"], input[type="password"] {
 .km-ios .km-tabstrip .km-state-active .km-icon, .km-android .km-tabstrip .km-state-active .km-icon, .km-ios .km-tabstrip .km-state-active .km-text { color: #fff; }
 
 .km-android .km-tabstrip .km-badge { 
-    bottom: -0.3em;
+    bottom: 0;
     font-size: 10px;
     background: #D88E2E;
 }
@@ -98,7 +98,7 @@ input[type="text"], input[type="password"] {
 /* Login & Register */
 
 #login-view .km-content, #register-view .km-content {
-    padding: 20% 0 0;
+    padding: 20% 0 0 0;
     text-align: center;
 }
 
@@ -149,11 +149,11 @@ input[type="text"], input[type="password"] {
 .order-history-list li span {
     font-size: 15px;
 }
-    .order-history-list li .item-title {
+.order-history-list li .item-title {
         float: left;
         display: block;
         width: 55%;
-    }
+}
     .order-history-list li .item-quantity {
         float: right;
     }
@@ -168,7 +168,7 @@ input[type="text"], input[type="password"] {
     width: 100%;
 }
 
-.album-art
+.fila-art
 {
     float: left;
     margin-right: 10px;
@@ -176,58 +176,42 @@ input[type="text"], input[type="password"] {
     height: 50px;
 }
 
-.album-artist
+.fila-nome
 {
-    font-size: .8em;
+    font-size: 14px;
 }
 
-.album-price
+.fila-turno
 {
-    font-size: .7em;
+    font-size: 10px;
     font-style: italic;
 }
 
-.album-cart
-{
-    float: right;
-}
-
-.album-cart .km-icon.km-add, .album-cart .km-icon.cartQty
+.km-icon.km-add, .album-cart .km-icon.cartQty
 {
     font-size: .6em;
     margin-right: .8em;
     vertical-align: middle;
 }
 
-.album-cart .km-icon.cartQty {
+.km-icon.cartQty {
     padding-bottom: .45em;
+}
+
+.fila .km-icon.km-add, .album-cart .km-icon.cartQty
+{
+    font-size: .6em;
+    margin-right: .8em;
+    vertical-align: middle;
+}
+
+.km-icon.cartQty {
+    padding-bottom: 0;
 }
 
 .km-android #artists-view .km-buttongroup
 {
-    padding: 4px;
-}
-
-#artists-view .buttongroup.km-buttongroup .km-button
-{
-    padding: 0;
-}
-
-#artists-view .buttongroup.km-buttongroup .km-button a
-{
-    height: 1em;
-    padding: .12em .2em .28em .2em;
-    font-size: 2em;
-    width: 1em;
-    text-align: center;
-}
-
-#cart-view input[type="number"]
-{
-    min-width: 3.01em;
-    width: 100%;
-    border: 1px solid #999;
-    position: relative;
+    padding: 2px;
 }
 
 .km-ios .km-list .km-icon
@@ -239,10 +223,6 @@ input[type="text"], input[type="password"] {
 {
     top: 0;
     right: 0;
-}
-
-.search-container {
-    text-align: center;
 }
 
 .km-ios .search-container {
@@ -273,29 +253,6 @@ input[type="text"], input[type="password"] {
 
 .km-android .cart-header { margin-bottom: 1em; }
 
-.cart-header h3 {
-    padding: 5px 0;
-    background: #E6E6E6;
-    font-weight: normal;
-    text-align: center;
-}
-
-    .km-android .cart-header h3 { background: #999; }
-
-.cart-header h1 {
-    padding: 5px 0;
-    background: #fff;
-    text-align: center;
-}
-
-    .km-android .cart-header h1 {
-        background: #333;
-        color: #ddd;
-    }
-
-.album-cart {
-    margin-left: 10px;
-}
 
 #checkout-view input
 {
@@ -338,7 +295,7 @@ input[type="text"], input[type="password"] {
 /* Album Lists */
 .km-listview h1, .km-listview h2 {
     margin: 0;
-    font-size: 16px;
+
     margin-left: 60px;
 }
 
@@ -346,7 +303,7 @@ input[type="text"], input[type="password"] {
     font-weight: normal;
 }
 
-.km-listview .album-price { 
+.km-listview .fila-turno { 
     display: block;
     margin-left: 60px;
 }
@@ -372,15 +329,6 @@ input[type="text"], input[type="password"] {
 }
 
 /* About */
-
-.km-ios #about-view .km-content { 
-    background: url('../Images/rays-background.png') no-repeat;
-    background-size: cover;
-}
-
-.km-ios .km-horizontal #about-view .km-content { 
-    background: url('../Images/rays-background-horizontal.png') no-repeat 50% 50%;
-}
 
 #about-view h1 {
     font-size: 1.7em;
@@ -550,4 +498,11 @@ input[type="text"], input[type="password"] {
 {
     display: none;
     content: "";
+}
+
+.km-ios .km-view .km-navbar {
+    background-color: rgb(0, 0, 0);
+}
+.km-ios .km-view .km-navbar .km-button {
+    background-color: rgb(0, 0, 0);
 }

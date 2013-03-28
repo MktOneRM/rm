@@ -202,10 +202,9 @@ input[type="text"], input[type="password"] {
 	-webkit-border-radius: 8px;
     width: 20px;
     height: 20px;
-    background: red;
     font-size: 12px;
     text-align: center;
-    color: #fff;
+    color: #000;
     font-weight:bold;
     margin-right:15px;
 }

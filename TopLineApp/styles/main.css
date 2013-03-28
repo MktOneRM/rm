@@ -178,12 +178,12 @@ input[type="text"], input[type="password"] {
 
 .fila-nome
 {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .fila-turno
 {
-    font-size: 10px;
+    font-size: 12px;
     font-style: italic;
 }
 

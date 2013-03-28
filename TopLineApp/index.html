@@ -88,7 +88,7 @@
         				<li>
         					<label>
         						Vendeu
-        						<input id="chkVendeu" type="checkbox" data-role="switch" data-on-label="Sim" data-off-label="Não" data-change="switchChange" checked>
+        						<input id="chkVendeu" data-role="switch" data-on-label="Sim" data-off-label="Não" data-change="switchChange" checked>
         					</label>
         				</li>
         			</ul>
@@ -120,10 +120,12 @@
         <script>
         
             function switchChange(e) {
-                alert("pqp");
-                console.log("switch value was changed to " + (e.checked ? "checked" : "unchecked"));
-            }
-            
+                   if (e.checked) {
+                       alert("verdadeiro");
+                   }else {
+                       alert("Falso");
+                   }    
+            }    
             
         </script>
                 

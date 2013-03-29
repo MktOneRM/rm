@@ -43,8 +43,6 @@ input[type="text"], input[type="password"] {
     color:red;
 }
 
-.km-android .k-invalid-msg { background: rgba(255, 0, 0, .2); }
-
 /* Modals */
 
 .km-ios .km-modalview .km-header { background: #D88E2E; }
@@ -91,9 +89,6 @@ input[type="text"], input[type="password"] {
     background: #D88E2E;
 }
 
-.km-android .km-buttongroup .km-state-active,
-.km-android .km-navbar .km-buttongroup .km-state-active,
-.km-android .km-touch-scrollbar,
 .km-ios .km-header > .km-buttongroup .km-state-active,
 .km-ios .km-footer > .km-buttongroup .km-state-active,
 .km-ios .km-content .km-buttongroup .km-state-active
@@ -117,50 +112,12 @@ input[type="text"], input[type="password"] {
 }
 
 /* Account View */
-#login-view { font-weight: normal; }
-
-#login-view ul {
-    list-style-type: none;
-    padding: 0;
-}
-
 #account-view header h2 {
     padding: 10px;
     text-align: center;
     text-transform: capitalize;
 }
     .km-android #account-view header h2 { color: #fff; }
-
-.order-history-list li .order-number { 
-    float: left;
-    margin: 5px 0;
-}
-.order-history-list li .order-total { 
-    float: right;
-    margin: 5px 1rem 5px 0;
-}
-.order-history-list li .order-date { 
-    clear: both;
-    display: block;
-    font-weight: normal;
-    font-size: 12px;
-}
-
-.km-android .order-history-list li .km-group-title {
-    border-top: 2px solid #aaa;
-}
-
-.order-history-list li span {
-    font-size: 15px;
-}
-.order-history-list li .item-title {
-        float: left;
-        display: block;
-        width: 55%;
-}
-    .order-history-list li .item-quantity {
-        float: right;
-    }
 
 /* Main View */
 
@@ -170,6 +127,10 @@ input[type="text"], input[type="password"] {
     display: block;
     height: 100%;
     width: 100%;
+}
+span a
+{
+    text-decoration: none;
 }
 
 .fila-art
@@ -196,32 +157,6 @@ input[type="text"], input[type="password"] {
     font-style: italic;
 }
 
-.fila_ordem
-{
-    float: left;
-    font-size: 12px;
-    background: #D88E2E;
-    border:2px;
-	-webkit-box-shadow: 0 1px 3px #000;
-	box-shadow: 0 1px 3px #000;
-	-webkit-border-radius: 8px;
-    height:15px;
-    width:15px;
-    text-align: center;
-    color: #fff;
-    font-weight:bold;
-    position:relative;
-    margin:0;
-    display: block; 
-    padding:1px;
-}
-
-
-.km-android #artists-view .km-buttongroup
-{
-    padding: 2px;
-}
-
 .km-ios .km-list .km-icon
 {
     color: #fff;
@@ -242,10 +177,6 @@ input[type="text"], input[type="password"] {
     margin: 0;
     line-height: 20px;
     height: 16px;
-}
-
-.km-ios .search-container a {
-    margin: 0;
 }
 
 #about-view footer
@@ -283,11 +214,6 @@ input[type="text"], input[type="password"] {
     padding: 0;
 }
 
-.thank-you {
-    margin: 20% auto;
-    text-align: center;
-}
-
 /* Album Lists */
 .km-listview h1, .km-listview h2 {
     margin: 0;
@@ -304,26 +230,6 @@ input[type="text"], input[type="password"] {
     margin-left: 60px;
 }
 
-.km-listview .qty-and-price {
-    font-size: 16px;
-    float: right;
-    width: 50px;
-    margin-left: 10px;
-}
-
-.km-listview .qty-and-price strong {
-    display: block;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.km-listview .subtotal {
-    font-size: 12px;
-    clear: both;
-    text-align:right;
-    padding-top: 10px;
-}
-
 /* About */
 
 #about-view h1 {
@@ -336,123 +242,8 @@ input[type="text"], input[type="password"] {
     display: block;
 }
 
-.km-ios #about-view h1, .km-ios #about-view p { color: #000; }
-
-#about-view p { text-align: center; }
-
-#about-view .footer-images {
-    text-align: center;
-    margin: 0 10% 20px;
-}
-
-    #about-view .footer-images img {
-        width: 80%;
-        background: #fff;
-        padding: 5px 20px 10px;
-        border-radius: 5px;
-    }
-
-#about-view footer .km-button
-{
-    padding: 10px;
-}
-
-/* Make Android look more like the v4.x style guide. */
-
-.km-android .km-navbar
-{
-    height: 48px;
-}
-
-.km-android.km-horizontal .km-view-title
-{
-    line-height: 2.5em;
-}
-
-.km-android.km-horizontal .km-tabstrip .km-text
-{
-    margin-top: 0;
-}
-
-.km-android .km-view {
-    -moz-box-direction: normal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -moz-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-}
-
 .km-view-title {
     visibility: visible;
-}
-
-.km-android .km-view-title {
-    text-align: left;
-    padding-left: 60px;
-}
-
-.km-android .km-view-title img {
-    vertical-align: middle;
-}
-
-.km-android .km-back,
-.km-android .km-navbar .km-button.km-back,
-.km-android .km-toolbar .km-button.km-back,
-.km-android .app-icon {
-    background-image: url("../Images/icon.png");
-    background-repeat: no-repeat;
-    width: 36px;
-    height: 36px;
-    margin: 6px 0 0 .8rem;
-    padding: 0;
-}
-
-.km-android .app-icon {
-    height: 36px;
-}
-
-.km-android .km-back * {
-    visibility: hidden;
-}
-
-.km-android .km-back::before {
-    border-color: #777;
-    content: " ";
-    position: absolute;
-    top: 50%;
-    margin-top: -0.32rem;
-    margin-left: -0.7rem;
-    border-style: solid;
-    border-width: 0 0 .24rem .24rem;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-    width: .5rem;
-    height: .5rem;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.km-android .km-navbar {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFZJREFUeNpi/P//vwoDFHz9+vUzDw8PJ5ApDBMrKCj4DyKMQAph+MuXL+JAOQUgNkbCDMZEKIQwCChEGItHIar9WBVicyi6QgZcPkJWyIDP6zCFAAEGAPRWfgx4dcnyAAAAAElFTkSuQmCC);
-    background-repeat: repeat;
-    background-position: 0;
-}
-
-.km-android .km-navbar div {
-    display: inline-block;
-}
-
-.km-android .km-navbar [class*="item"] .action-buttons .km-button {
-    padding: 0;
-}
-
-.km-android .action-buttons .km-button .km-icon {
-    font-size: 1.5rem;
-    margin:.8rem .5rem;
 }
 
 .km-root .km-pane .km-view .km-action-overflow {

@@ -347,22 +347,18 @@
     }
 
     function navigate(e) {
-        console.log(e, "navigate");
         var itemUID = $(e.touch.currentTarget).data("uid");
-        console.log(itemUID);
         kendo.mobile.application.navigate("#resultadoAtendimento-view?uid=" + itemUID);
     }
 
     function swipe(e) {
-        console.log(e, "swipe");
         var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
         button.expand().duration(200).play();
     }
 
     function touchstart(e) {
-        console.log(e, "touchstart");
         var target = $(e.touch.initialTouch),
-             listview = $("#listviewFila").data("kendoMobileListView"),
+             listviewFila = $("#listviewFila").data("kendoMobileListView"),
              button = $(e.touch.target).find("[data-role=button]:visible");
 
         if (target.closest("[data-role=button]")[0]) {
@@ -377,7 +373,7 @@
             //prevent `swipe`
             this.events.cancel();
         } else {
-            listview.items().find("[data-role=button]:visible").hide();
+            listviewFila.items().find("[data-role=button]:visible").hide();
         }
     }
     

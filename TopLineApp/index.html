@@ -9,7 +9,7 @@
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
-        <script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
+        <script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
     </head>    
 	<body>
@@ -44,17 +44,7 @@
 
 		<!-- Fila da Vez -->
 		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel" data-init="listViewInitFila">
-			<ul id="listviewFila" data-style="inset"></ul>
-<!--			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
-				<li class="km-actionsheet-title">Selecione operação:</li>
-				<li>
-					<a data-action="showAtendimentoView">Resultado Atendimento</a>
-				</li>
-				<li>
-					<a data-action="showSaidaFilaView">Sair fila da Vez</a>
-				</li>
-			</ul>
- -->
+			<ul id="listviewFila" data-style="inset" data-type="group"></ul>
 		</div>
 
 		<!-- Fora da Fila da Vez -->
@@ -171,23 +161,17 @@
 		<!-- Configuração -->
 		<div id="config-view" data-role="view" data-layout="tools-layout" data-title="Top Line">
 			<ul data-role="listview" data-style="inset" data-type="group">
-				<li>
-					Configuração
+				<li>Configuração
 					<ul>
+						<li><a href="\\#">Cadastro de Loja</a></li>
+						<li><span><a href="#colaboradores-view">Cadastro de Colaboradores</a></span></li>
 						<li>
-							<a href="##config-view">Cadastro de Loja</a>
+							<a href="\\#">Escala de Trabalho</a>
 						</li>
 						<li>
-							<a href="#colaboradores-view">Cadastro de Colaboradores</a>
-						</li>
-						<li>
-							<a href="#">Escala de Trabalho</a>
-						</li>
-						<li>
-							<a href="#">Horário de Funcionamento</a>
+							<a href="\\#">Horário de Funcionamento</a>
 						</li>
 					</ul>
-
 				</li>
 			</ul>
 		</div>
@@ -367,7 +351,7 @@
 
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
-			<a>
+ 			<a>
 				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
 				<h1 class="fila-nome">${ColApelido}</h1>
 				<h2 class="fila-turno">${ColTurno}</h2>
@@ -376,7 +360,7 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tforaFila">
-			<a data-rel="modalview" href="\\#modalview-login">
+			<a class="details-link" data-role="listview-link">
 				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
 				<h1 class="fila-nome">${ColApelido}</h1>
 				<h2 class="fila-turno">${ColTurno}</h2>

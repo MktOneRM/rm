@@ -475,6 +475,8 @@
 	}
     
 	function editarColaborador(e) {
+		cameraApp = new cameraApp();
+		cameraApp.run();
 		var colaborador = viewModel.dsColaborador.get(e.context);                 
 		viewModel.set("colaboradorSelecionado", colaborador);  
 		app.navigate("#editorColaborador-view"); 
@@ -535,9 +537,6 @@
 	}
     
 	function colaboradores() {
-		cameraApp = new cameraApp();
-		cameraApp.run();
-        
 		dsColaborador.options.transport.read.url = baseUrl + "/RmColaborador";
 		dsColaborador.read(); 		
 	}
@@ -644,7 +643,9 @@
 			smallImage.style.display = 'block';
     
 			// Show the captured photo.
-			smallImage.src = "data:image/jpeg;base64," + imageData;
+			smallImage.src = "data:image/jpeg;base64," + imageData;            
+            viewModel.colaboradorSelecionado.set("ColFoto", imageData);
+            
 		},
     
 		_onPhotoURISuccess: function(imageURI) {

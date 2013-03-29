@@ -279,8 +279,16 @@
 						<button class="button" id="getPhotoFromLibraryButton">Select from Photo Library</button>
 						<button class="button" id="getPhotoFromAlbumButton">Select from Photo Album</button>
 					</div>
-					<img style="display:none;margin:0 auto; width:120px; height:120px;" id="smallImage" src="" />
 				</div>
+
+				<li>
+					<ul>
+						<li style="height:65px">
+							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
+							<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+						</li>
+					</ul>
+				</li>
 
 				<li>
 					<label>
@@ -361,7 +369,6 @@
 						<input id="turnoId" name="Turno" type="text" required="required" data-bind="value: colaboradorSelecionado.ColHfuId"/>
 					</label>
 				</li>
-
 			</ul>
 
 		</div>

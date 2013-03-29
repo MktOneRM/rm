@@ -1,104 +1,88 @@
-define([], function () {
-    var _kendoApp;
+/*** 
+* Descrição.: formata um campo do formulário de 
+* acordo com a máscara informada... 
+* Parâmetros: - objForm (o Objeto Form) 
+* - strField (string contendo o nome 
+* do textbox) 
+* - sMask (mascara que define o 
+* formato que o dado será apresentado, 
+* usando o algarismo "9" para 
+* definir números e o símbolo "!" para 
+* qualquer caracter... 
+* - evtKeyPress (evento) 
+* Uso.......: <input type="textbox" 
+* name="xxx"..... 
+* onkeypress="return txtBoxFormat(document.rcfDownload, 'str_cep', '99999-999', event);"> 
+* Observação: As máscaras podem ser representadas como os exemplos abaixo: 
+* CEP -> 99.999-999 
+* CPF -> 999.999.999-99 
+* CNPJ -> 99.999.999/9999-99 
+* Data -> 99/99/9999 
+* Tel Resid -> (99) 999-9999 
+* Tel Cel -> (99) 9999-9999 
+* Processo -> 99.999999999/999-99 
+* C/C -> 999999-! 
+* E por aí vai... 
+***/
 
-    return {
-        init: function (kendoApp) {
-            _kendoApp = kendoApp;
-        },
+function txtBoxFormat(strField, sMask, evtKeyPress) {
+      var i, nCount, sValue, fldLen, mskLen,bolMask, sCod, nTecla;
 
-        parseQueryStringToObject: function () {
-            var argsParsed = {},
-                arg,
-                kvp,
-                hash = document.location.hash;
+      if(document.all) { // Internet Explorer
+        nTecla = evtKeyPress.keyCode; }
+      else if(document.layers) { // Nestcape
+        nTecla = evtKeyPress.which;
+      }
+alert(strField.value);
+      sValue = strField.value;
+        alert(sValue);
+      // Limpa todos os caracteres de formatação que
+      // já estiverem no campo.
+      sValue = sValue.toString().replace( "-", "" );
+      sValue = sValue.toString().replace( "-", "" );
+      sValue = sValue.toString().replace( ".", "" );
+      sValue = sValue.toString().replace( ".", "" );
+      sValue = sValue.toString().replace( "/", "" );
+      sValue = sValue.toString().replace( "/", "" );
+      sValue = sValue.toString().replace( "(", "" );
+      sValue = sValue.toString().replace( "(", "" );
+      sValue = sValue.toString().replace( ")", "" );
+      sValue = sValue.toString().replace( ")", "" );
+      sValue = sValue.toString().replace( " ", "" );
+      sValue = sValue.toString().replace( " ", "" );
+      fldLen = sValue.length;
+      mskLen = sMask.length;
 
-            if(!hash || hash.length == 0) {
-                return argsParsed;
-            }
-            var args = document.location.hash.split('?');
-            if(args.length < 2) {
-                return argsParsed;
-            }
-            args = args[1].split('&');
-            
-            for (i=0; i < args.length; i++)
-            {
-                arg = decodeURIComponent(args[i]);
-            
-                if (arg.indexOf('=') == -1)
-                {
-                    argsParsed[arg.trim()] = true;
-                }
-                else
-                {
-                    kvp = arg.split('=');
-                    var val = kvp[1].trim();
-                    argsParsed[kvp[0].trim()] = isNaN(val) ? val : parseFloat(val);
-                }
-            }
-            return argsParsed;
-        },
-        
-        setViewTitle: function (view, title) {
-            view.data("kendoMobileView").title = title;
-            var navbar = view.find(".km-navbar").data("kendoMobileNavBar");
-            if (navbar) {
-                navbar.title(title);
-            }
-        },
+      i = 0;
+      nCount = 0;
+      sCod = "";
+      mskLen = fldLen;
 
-        navigate: function (location) {
-            _kendoApp.navigate(location);
-        },
+      while (i <= mskLen) {
+        bolMask = ((sMask.charAt(i) == "-") || (sMask.charAt(i) == ".") || (sMask.charAt(i) == "/"))
+        bolMask = bolMask || ((sMask.charAt(i) == "(") || (sMask.charAt(i) == ")") || (sMask.charAt(i) == " "))
 
-        redirect: function (location) {
-            _kendoApp.pane.history.pop();
-            _kendoApp.navigate(location);
-        },
-
-        scrollViewToTop: function (viewElement) {
-            viewElement.data("kendoMobileView").scroller.reset();
-        },
-        
-        showLoading: function (message) {
-            $(".loading-message").text(message ? message : "Carregando...");
-            _kendoApp.showLoading();
-        },
-        
-        hideLoading: function () {
-            _kendoApp.hideLoading();
-        },
-
-        /*
-        updateCartBadges: function ($, cart) {
-            var numberInCart = cart.items.aggregates() && cart.items.aggregates().qty ? cart.items.aggregates().qty.sum : 0;
-            var cartBadges = $(".cart-badge");
-            cartBadges.text(numberInCart);
-            if(numberInCart > 0) {
-                cartBadges.show();
-            } else {
-                cartBadges.hide();
-            }
-        },
-        */
-        
-        showError: function (message, error) {
-            var errorMessage = message + (error === undefined ? "" : "\n" + error.status + ": " + error.statusText);
-            $("#error-view .message").text(errorMessage);
-            $("#error-view").show().data().kendoMobileModalView.open();
-        },
-
-        closeError: function () {
-            $("#error-view").data().kendoMobileModalView.close();
-        },
-
-        closeAllPopovers: function() {
-            $(".km-popup").each(function (idx, item) {
-                var popover = $(item).data().kendoMobilePopOver;
-                if(popover) {
-                    popover.close();
-                }
-            });
+        if (bolMask) {
+          sCod += sMask.charAt(i);
+          mskLen++; }
+        else {
+          sCod += sValue.charAt(nCount);
+          nCount++;
         }
-    };
-});
+
+        i++;
+      }
+
+      strField.value = sCod;
+
+      if (nTecla != 8) { // backspace
+        if (sMask.charAt(i-1) == "9") { // apenas números...
+          return ((nTecla > 47) && (nTecla < 58)); } // números de 0 a 9
+        else { // qualquer caracter...
+          return true;
+        } }
+      else {
+        return true;
+      }
+    }
+//Fim da Função Máscaras Gerais

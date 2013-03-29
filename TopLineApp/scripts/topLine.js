@@ -503,14 +503,10 @@
 	}
     
 	function editorViewInit() {
-		validator = $("#form").kendoValidator({ //initialize the validator
-			messages: {
-				required: function(input) { //create a custom message function
-					input.attr("placeholder", input.attr("name") + " é obrigatório");
-				}
-			}
+		validator = $("#form").kendoValidator({ 
 		}).data("kendoValidator");
 	}
+	
    
 	function vendedoresFila() {
 		atualizaFilaNoSalao(dsVendFila, 1);

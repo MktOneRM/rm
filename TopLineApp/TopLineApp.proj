@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\default.png" />
+    <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="kendo\js\kendo.indexedlistview.js" />
     <Content Include="kendo\styles\kendo.indexedlistview.css" />
     <Content Include="scripts\app.js" />
@@ -84,7 +85,6 @@
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.maskedinput.min.js" />
     <Content Include="kendo\js\jquery.min.js" />
-    <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />
     <Content Include="kendo\styles\default\sprite.png" />
     <Content Include="kendo\styles\images\back.png" />

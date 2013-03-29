@@ -9,9 +9,9 @@
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
-		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
-		<script src="scripts/require.js" type="text/javascript"></script>
+        <script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
+    </head>    
 	<body>
 		<!-- Home-Layout -->
 		<div data-role="layout" data-id="home-layout" data-title="Top Line" data-init="selBtn">
@@ -31,6 +31,7 @@
 					</li>
 				</ul>
 			</header>
+
 			<div data-role="footer">
 				<div data-role="tabstrip">
 					<a href="#dentroFila-view" data-icon="action">Fila</a>
@@ -42,17 +43,18 @@
 		</div>
 
 		<!-- Fila da Vez -->
-		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel">
-			<ul data-bind="source: dsVendFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" data-style="inset"></ul>
-			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
+		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel" data-init="listViewInitFila">
+			<ul id="listviewFila" data-style="inset"></ul>
+<!--			<ul id="actAcaoVendedorFila" data-role="actionsheet" data-cancel="Cancelar" data-style="inset">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
 					<a data-action="showAtendimentoView">Resultado Atendimento</a>
 				</li>
 				<li>
-					<a data-action="showTiposMovtoView">Sair fila da Vez</a>
+					<a data-action="showSaidaFilaView">Sair fila da Vez</a>
 				</li>
 			</ul>
+ -->
 		</div>
 
 		<!-- Fora da Fila da Vez -->
@@ -74,7 +76,7 @@
 					<a data-role="button" data-align="right" data-bind="events: { click: salvarAtendimento }">Gravar</a>
 				</div>
 			</div>
-			<ul id="form" data-role="listview" data-style="inset" data-type="group">
+ 			<ul id="form" data-role="listview" data-style="inset" data-type="group">
 				<div class="mobile-fila-titulo">Atendimento</div>
 				<li>
 					<ul>
@@ -93,8 +95,7 @@
 						</li>
 					</ul>
 				</li>
-				<li>
-					Dados da Venda
+				<li>Dados da Venda
 					<ul>
 						<li>
 							<label>Valor da Venda</label>
@@ -107,45 +108,31 @@
 					</ul>
 				</li>
 			</ul>
-		</div>
-		<div id="sairdaFila_View" data-role="view" data-show="showTiposMovtoSaida" data-title="Top Line" data-init="editorViewInit" data-layout="home-layout" data-model="viewModel">
-			<header data-role="header">
-				<div data-role="navbar">
-					<a href="#dentroFila-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-			<ul id="form" data-role="listview" data-style="inset" data-type="group">
-				<div class="mobile-fila-titulo">Saída da Fila</div>
-				<li>
-					<ul>
-						<li style="height:65px">
-							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
-							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
-						</li>
-					</ul>
-				</li>
-				<li>
-					Tipos de Saída
-					<ul id="lstMotivosSaida" data-bind="source: dsTiposMovto" data-auto-bind="false" data-template="tpTiposMovto"></ul>
-				</li>
-			</ul>
-		</div>
-
-		<script>
+	    </div>
+        <div id="sairdaFila_View" data-role="view" data-show="showTiposMovtoSaida" data-title="Top Line" data-init="editorViewInit" data-layout="home-layout" data-model="viewModel">
+        	<header data-role="header">
+        		<div data-role="navbar">
+        			<a href="#dentroFila-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+        			<span data-role="view-title"></span>
+        		</div>
+        	</header>
+            <ul id="form" data-role="listview" data-style="inset" data-type="group">
+			    <div class="mobile-fila-titulo">Saída da Fila</div>
+    			<li>
+    				<ul>
+    					<li style="height:65px">
+    						<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+    						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+    						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+    					</li>
+    				</ul>
+    			</li>
+                <li>Tipos de Saída
+             	  <ul id="lstMotivosSaida" data-bind="source: dsTiposMovto" data-auto-bind="false" data-template="tpTiposMovto"></ul>
+                </li>
+            </ul>     
+        </div>
         
-			function switchChange(e) {
-				if (e.checked) {
-					alert("verdadeiro");
-				}
-				else {
-					alert("Falso");
-				}    
-			}    
-			
-		</script>
-
 		<!-- Toos-Layout -->
 		<div data-role="layout" data-id="tools-layout" data-title="Top Line">
 			<header data-role="header">
@@ -205,10 +192,9 @@
 			</ul>
 		</div>
 
-		<!--Add INdex Celso-->
 
 		<!-- Colaboradores -->
-		<div data-role="view" id="colaboradores-view" data-title="Colaboradores" data-show="showColaboradores" data-model="viewModel">
+		<div data-role="view" id="colaboradores-view" data-title="Top Line" data-show="showColaboradores" data-model="viewModel">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="views/ConfiguracoesView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -216,7 +202,9 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
+			<div class="mobile-fila-titulo">Colaboradores</div>
 			<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
+
 			<ul id="actionsColaboradores" data-role="actionsheet" data-cancel="Cancelar">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
@@ -230,13 +218,14 @@
 		</div>
 
 		<!--detalhes Colaboradores view-->
-		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Colaboradores" data-layout="default" >
+		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="default" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#colaboradores-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
+			<div class="mobile-fila-titulo">Colaboradores</div>
 			<ul id="info" data-role="listview" data-style="inset">
 				<li>
 					CPF: <span data-bind="text: ColCpf"></span>
@@ -258,7 +247,7 @@
 		</div>
 
 		<!--editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Colaboradores" data-layout="default">
+		<div id="editorColaborador-view" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Top Line" data-layout="default">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
@@ -266,30 +255,8 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul id="formColaborador" data-role="listview" data-style="inset">
-
-				<div class="content">
-					<div>
-						<button class="button" id="capturePhotoButton">Take Photo</button>
-					</div>
-					<div>
-						<button class="button" id="capturePhotoEditButton" >Take Editable Photo</button>
-					</div>
-					<div>
-						<button class="button" id="getPhotoFromLibraryButton">Select from Photo Library</button>
-						<button class="button" id="getPhotoFromAlbumButton">Select from Photo Album</button>
-					</div>
-				</div>
-
-				<li>
-					<ul>
-						<li style="height:65px">
-							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
-							<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
-						</li>
-					</ul>
-				</li>
-
+			<div class="mobile-fila-titulo">Colaboradores</div>
+			<ul id="form" data-role="listview" data-style="inset">
 				<li>
 					<label>
 						CPF:
@@ -324,28 +291,28 @@
 				<li>
 					<label>
 						Email:
-						<input id="email" name="Email" type="text" data-bind="value: colaboradorSelecionado.ColEmail"/>
+						<input id="email" name="Email" type="text" required="required" data-bind="value: colaboradorSelecionado.ColEmail"/>
 					</label>
 				</li>
 
 				<li>
 					<label>
 						Data Entrada:
-						<input id="dtEntrada" name="DataEntrada" type="text" required="required" data-bind="value: colaboradorSelecionado.ColDtentrada"/>
+						<input id="dtEntrada" name="DataEntrada" type="date" required="required" data-bind="value: colaboradorSelecionado.ColDtentrada"/>
 					</label>
 				</li>
 
 				<li>
 					<label>
 						Data Saída:
-						<input id="dtSaida" name="DataSaida" type="date"  data-bind="value: colaboradorSelecionado.ColDtsaida"/>
+						<input id="dtSaida" name="DataSaida" type="date" required="required" data-bind="value: colaboradorSelecionado.ColDtsaida"/>
 					</label>
 				</li>
 
 				<li>
 					<label>
 						Afastamento:
-						<input id="afastamento" name="Afastamento" type="checkbox" data-bind="value: colaboradorSelecionado.ColDtsaida" />
+						<input id="afastamento" name="Afastamento" type="checkbox" required="required" data-bind="value: colaboradorSelecionado.ColDtsaida"/>
 					</label>
 				</li>
 
@@ -356,39 +323,25 @@
 					</label>
 				</li>
 
-				<li>
-					<label>
-						Cargo Id:
-						<input id="cargoId" name="Cargo" type="text" required="required" data-bind="value: colaboradorSelecionado.CarId"/>
-					</label>
-				</li>
-
-				<li>
-					<label>
-						Turno Id:
-						<input id="turnoId" name="Turno" type="text" required="required" data-bind="value: colaboradorSelecionado.ColHfuId"/>
-					</label>
-				</li>
 			</ul>
 
 		</div>
 
 		<script type="text/x-kendo-template" id="tColaborador">
 			<a data-rel="actionsheet" href="\\#actionsColaboradores" data-actionsheet-context="#= ColId #">
-				<h1 class="fila-nome">${ColNome}</h1>
+				<h1>${ColNome}</h1>
 			</a>
 		</script>
 
-		<!--Add INdex Celso-->
 
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
-			<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= FilaLojId #">
-				<!--              <span class="cart-delete-button" data-role="button" data-bind="visible: deleteMode" data-click="app.cartView.onRemove">Sair</span> -->
+			<a>
 				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
 				<h1 class="fila-nome">${ColApelido}</h1>
 				<h2 class="fila-turno">${ColTurno}</h2>
 			</a>
+            <a id="btnSair" href="\\#" data-role="button" class="saida">Sair</a>
 		</script>
 
 		<script type="text/x-kendo-template" id="tforaFila">
@@ -407,17 +360,17 @@
 			</a>
 		</script>
 
-		<script type="text/x-kendo-template" id="tpTiposMovto">
-			<a class="details-link" data-role="listview-link">
-				${TmoDescricao}
-			</a>
-		</script>
+        <script type="text/x-kendo-template" id="tpTiposMovto">
+        	<a class="details-link" data-role="listview-link">
+                ${TmoDescricao}
+        	</a>
+        </script>
 
-		<script>
+        <script>
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
 				loading: '<h1 class="loading-message">Carregando...</h1>'
-			});
+ 			});
 			
 			function showAtendimentoView(e) {
 				var vendedor = viewModel.dsVendFila.get(e.context);
@@ -425,7 +378,7 @@
 				app.navigate("#resultadoAtendimento-view");
 			};
 			
-			function showTiposMovtoView(e) {       
+			function showSaidaFilaView(e) {       
 				var vendedor = viewModel.dsVendFila.get(e.context);
 				viewModel.set("vendedorSelecionado", vendedor); 				
 				app.navigate("#sairdaFila_View");
@@ -436,7 +389,17 @@
 					btnGrp.select(0);
 				}
 			}
+        
+			function switchChange(e) {
+				if (e.checked) {
+					alert("verdadeiro");
+				}
+				else {
+					alert("Falso");
+				}    
+			}    
 			
+	
 		</script>
 	</body>
 </html>

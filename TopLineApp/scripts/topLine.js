@@ -29,8 +29,8 @@
 		}
 	});
  
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -130,7 +130,7 @@
 		}
 	};
     
-	var schemaColaborador = {
+	var scColaborador = {
 		model:{
 			id: "ColId",
 			fields: {
@@ -384,34 +384,43 @@
 				dataType: "json"
 			},
 			parameterMap: function(data, operation) {
-				console.log(data.models, "data");
-				console.log(operation, "ope");
-                
 				if (operation !== "read" && data.models) {
 					return kendo.stringify([data.models[0]]);
 				}
 			}     
 		},
+        batch: true,
 		sort: { field: "ColApelido", dir: "desc" },
-		schema: schemaColaborador
+		schema: scColaborador
         
 	})
     
-	var viewModel = kendo.observable({
-		
+	var viewModel = kendo.observable({		
 		dsVendFila: dsVendFila,		
 		dsVendForaFila: dsVendForaFila,
 		dsVendForaTurno: dsVendForaTurno,
 		dsTiposMovto: dsTiposMovto,        
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
+		dsColaborador: dsColaborador,	
+		dsCargos: dsCargos,
+		dsTurnosFunc: dsTurnosFunc,	
         
 		vendedorSelecionado: {},		
 		atendimento: {},
 		lojaSelecionada: [],
-        
+		colaboradorSelecionado: {},
+		cargoSelecionado: {},
+		turnoSelecionado: {},
+		        
 		salvarAtendimento: salvarAtendimento,
 		cancelarAtendimento : cancelarAtendimento,
+        
+		adicionarColaborador: adicionarColaborador,
+		detalhesColaborador: detalhesColaborador,
+		salvarColaborador: salvarColaborador,
+		editarColaborador: editarColaborador,
+		cancelarColaborador: cancelarColaborador,
         
 		vendedoresFila : vendedoresFila,
 		vendedoresForaFila : vendedoresForaFila,
@@ -421,23 +430,6 @@
 		lojas: lojas
 		
 	});
- 
-	/*
-	var viewModelColaborador = kendo.observable({
-	dsColaborador: dsColaborador,	
-	dsCargos: dsCargos,
-	dsTurnosFunc: dsTurnosFunc,		
-	colaboradorSelecionado: {},
-	cargoSelecionado: {},
-	turnoSelecionado: {},
-		
-	adicionarColaborador: adicionarColaborador,
-	detalhesColaborador: detalhesColaborador,
-	salvarColaborador: salvarColaborador,
-	editarColaborador: editarColaborador,
-	cancelarColaborador: cancelarColaborador
-        
-	})*/
 
 	function adicionarAtendimento() {
 		var novoAtendimento = viewModel.dsAtendimento.add(); 
@@ -454,7 +446,7 @@
             
 			viewModel.atendimento.set("RLoId", RLoId);
 			viewModel.atendimento.set("LcoId", LcoId);
-   
+            
 			this.dsAtendimento.sync(); 	                
 			
 			//Atualiza a posicao do vendedor na fila
@@ -472,33 +464,32 @@
 	}
     
 	function adicionarColaborador() {
-		var novoColaborador = viewModelColaborador.dsColaborador.add();
-		viewModelColaborador.set("colaboradorSelecionado", novoColaborador);
+		var novoColaborador = viewModel.dsColaborador.add();
+		viewModel.set("colaboradorSelecionado", novoColaborador);
 		app.navigate("#editorColaborador-view");
 	}
        
 	function detalhesColaborador(e) {
-		var colaborador = viewModelColaborador.dsColaborador.get(e.context);                 
-		viewModelColaborador.set("colaboradorSelecionado", colaborador);  
+		var colaborador = viewModel.dsColaborador.get(e.context);                 
+		viewModel.set("colaboradorSelecionado", colaborador);  
 		app.navigate("#detalhesColaborador-view");
 	}
     
 	function editarColaborador(e) {
-		var colaborador = viewModelColaborador.dsColaborador.get(e.context);                 
-		viewModelColaborador.set("colaboradorSelecionado", colaborador);  
+		var colaborador = viewModel.dsColaborador.get(e.context);                 
+		viewModel.set("colaboradorSelecionado", colaborador);  
 		app.navigate("#editorColaborador-view"); 
 	}
     
-	function salvarColaborador() {   
-		console.log(viewModelColaborador.dsColaborador, "ViewModelCol")
-		viewModelColaborador.dsColaborador.sync();
+	function salvarColaborador() {   		
+		viewModel.dsColaborador.sync();
 		app.navigate("#colaboradores-view");
 	}
 	    
 	function cancelarColaborador() {
 		alert("Cancelar Atendimento");
         
-		viewModelColaborador.dsColaborador.cancelChanges();
+		viewModel.dsColaborador.cancelChanges();
 		app.navigate("#colaboradores-view");
 	}
     
@@ -507,7 +498,6 @@
 		}).data("kendoValidator");
 	}
 	
-   
 	function vendedoresFila() {
 		atualizaFilaNoSalao(dsVendFila, 1);
 	}
@@ -579,10 +569,8 @@
 		showAtendimento: adicionarAtendimento,
         
 		editorViewInit: editorViewInit,
-        
-		//ViewModel
-		viewModel: viewModel,
-		//viewModelColaborador: viewModelColaborador
+  
+		viewModel: viewModel
         
 	});
 })(jQuery);

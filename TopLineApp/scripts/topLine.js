@@ -330,7 +330,58 @@
 		schema: schemaAtendimento
 	});
 		
-	//dataSource    
+   //<!--Atendimento-->
+    
+     function listViewInitFila(e) {
+        e.view.element.find("#listviewFila").kendoMobileListView({
+            dataSource: dsVendFila,
+            template: $("#tdentroFila").html()
+        })
+        .kendoTouch({
+            filter: ">li",
+            enableSwipe: true,
+            touchstart: touchstart,
+            tap: navigate,
+            swipe: swipe
+        });
+    }
+
+    function navigate(e) {
+        console.log(e, "navigate");
+        var itemUID = $(e.touch.currentTarget).data("uid");
+        console.log(itemUID);
+        kendo.mobile.application.navigate("#resultadoAtendimento-view?uid=" + itemUID);
+    }
+
+    function swipe(e) {
+        console.log(e, "swipe");
+        var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
+        button.expand().duration(200).play();
+    }
+
+    function touchstart(e) {
+        console.log(e, "touchstart");
+        var target = $(e.touch.initialTouch),
+             listview = $("#listviewFila").data("kendoMobileListView"),
+             button = $(e.touch.target).find("[data-role=button]:visible");
+
+        if (target.closest("[data-role=button]")[0]) {
+            app.navigate("#sairdaFila_View");
+    
+            //prevent `swipe`
+            this.events.cancel();
+            e.event.stopPropagation();
+        } else if (button[0]) {
+            button.hide();
+
+            //prevent `swipe`
+            this.events.cancel();
+        } else {
+            listview.items().find("[data-role=button]:visible").hide();
+        }
+    }
+    
+    //dataSource    
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -426,7 +477,8 @@
 		vendedoresForaTurno : vendedoresForaTurno,
 		tiposMovtoSaida : tiposMovtoSaida,
 		tiposMovtoEntrada : tiposMovtoEntrada,        
-		lojas: lojas
+		lojas: lojas,
+        listViewInitFila: listViewInitFila
 		
 	});
 
@@ -680,7 +732,7 @@
 		showDetalhesColaborador: detalhesColaborador,     
         
 		showAtendimento: adicionarAtendimento,
-        
+        listViewInitFila: listViewInitFila,
 		editorViewInit: editorViewInit,
   
 		viewModel: viewModel

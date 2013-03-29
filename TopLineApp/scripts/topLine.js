@@ -29,8 +29,8 @@
 		}
 	});
  
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -63,7 +63,29 @@
 			} 
 		}
 	};
-	   
+	  
+	//Schema turnos de Turnos de funcionamento
+	var schemaTurnosFunc = { 
+		model: {
+			id: "TufId",
+			fields: {
+				TufId: { editable: false, nullable: false },
+				TufDescricao: { editable: false, nullable: false }
+			} 
+		}
+	};
+    
+	//Schema de cargos
+	var schemaCargos = { 
+		model: {
+			id: "CarId",
+			fields: {
+				CarId: { editable: false, nullable: false },
+				CarDescricao: { editable: false, nullable: false }
+			} 
+		}
+	};
+	
 	//Schema Atendimento
 	var schemaAtendimento = { 
 		model: {
@@ -79,8 +101,7 @@
 		}
 	};
 
-	//schema
-    
+	//schema    
 	var scLoja = { 
 		model: {
 			id: "LojId",
@@ -106,6 +127,30 @@
 				LojLatitude: { editable: false, nullable: false },
 				LojLongitude: { editable: false, nullable: false }
 			}     
+		}
+	};
+    
+	var schemaColaborador = {
+		model:{
+			id: "ColId",
+			fields: {
+				ColId: { editable: false, nullable: false},
+				CarId: { type: "int", validation: { required: false} },  
+				ColCpf: { validation: { required: true} },
+				ColApelido:  { validation: { required: true} },
+				ColNome:  { validation: { required: true} },
+				ColSobrenome:  { validation: { required: true} },
+				ColDtnascimento: { type: "date", validation: { required: false} },  
+				ColEmail: { validation: { required: false} },
+				ColFoto: { validation: { required: false} },
+				ColDtentrada:{ type: "date", validation: { required: true} },  
+				ColDtsaida: { type: "date", validation: { required: false} },  
+				ColAfasttemp: { type: "boolean",  defaultValue: false },                  
+				LojId: { type: "int", validation: { required: true} },  
+				ColSenha: { validation: { required: false} },
+				ColHfuId: { type: "int", validation: { required: false} },  
+				ColStatus: { type: "boolean",  defaultValue: false }                
+			}
 		}
 	};
     
@@ -203,7 +248,7 @@
 		sort: { field: "VendedorNome", dir: "asc" }	
 	});
 			
-	//dataSource
+	//dataSource tipos de movimentação
 	var dsTiposMovto = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -212,11 +257,54 @@
 				,contentType: "application/json"
 				,dataType: "json"
 			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}
 		},
 		batch: true,
 		schema: schemaTiposMovto
 	});
 			
+	//dataSource Turnos de funcionamento
+	var dsTurnosFunc = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmTurnoFunc",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}
+		},
+		batch: true,
+		schema: schemaTurnosFunc
+	});
+    
+	//dataSource de cargos
+	var dsCargos = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmCargo",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}
+		},
+		batch: true,
+		schema: schemaCargos
+	});
+    
 	//dataSource Atendimento
 	var dsAtendimento = new kendo.data.DataSource({                    
 		transport: {						
@@ -242,9 +330,7 @@
 		schema: schemaAtendimento
 	});
 		
-    
-	//dataSource
-    
+	//dataSource    
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -276,6 +362,41 @@
 		schema: scLoja
 	})
     
+	//DataSource Colaborador
+	var dsColaborador = new kendo.data.DataSource({
+		transport: {
+			read: {
+				url: baseUrl + "/RmColaborador",							
+				type:"GET",
+				contentType: "application/json",
+				dataType: "json"
+			},
+			create: {
+				url: baseUrl + "/RmColaborador",							
+				type:"POST",
+				contentType: "application/json",
+				dataType: "json"
+			},
+			update: {
+				url: baseUrl + "/RmColaborador",							
+				type:"PUT",
+				contentType: "application/json",
+				dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				console.log(data.models, "data");
+				console.log(operation, "ope");
+                
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}     
+		},
+		sort: { field: "ColApelido", dir: "desc" },
+		schema: schemaColaborador
+        
+	})
+    
 	var viewModel = kendo.observable({
 		
 		dsVendFila: dsVendFila,		
@@ -300,12 +421,29 @@
 		lojas: lojas
 		
 	});
-    
-	function atendimento() {
+ 
+	/*
+	var viewModelColaborador = kendo.observable({
+	dsColaborador: dsColaborador,	
+	dsCargos: dsCargos,
+	dsTurnosFunc: dsTurnosFunc,		
+	colaboradorSelecionado: {},
+	cargoSelecionado: {},
+	turnoSelecionado: {},
+		
+	adicionarColaborador: adicionarColaborador,
+	detalhesColaborador: detalhesColaborador,
+	salvarColaborador: salvarColaborador,
+	editarColaborador: editarColaborador,
+	cancelarColaborador: cancelarColaborador
+        
+	})*/
+
+	function adicionarAtendimento() {
 		var novoAtendimento = viewModel.dsAtendimento.add(); 
 		viewModel.set("atendimento", novoAtendimento); 
 	}
-			
+
 	function salvarAtendimento () {
 		if (validator.validate()) { //validates the input
 			//Busca o código da Rede da Loja
@@ -324,18 +462,46 @@
 			this.dsVendFila.remove(vend); 
 			this.dsVendFila.sync(); 
             
-            alert("Gravado com sucesso!");
-			         
-            app.navigate("#dentroFila-view");
+			app.navigate("#dentroFila-view");
 		}
 	}
 			
 	function cancelarAtendimento() {
-        
-		this.dsAtendimento.cancelChanges(); 
+		viewModel.dsAtendimento.cancelChanges(); 
 		app.navigate("#dentroFila-view");                 
 	}
-			
+    
+	function adicionarColaborador() {
+		var novoColaborador = viewModelColaborador.dsColaborador.add();
+		viewModelColaborador.set("colaboradorSelecionado", novoColaborador);
+		app.navigate("#editorColaborador-view");
+	}
+       
+	function detalhesColaborador(e) {
+		var colaborador = viewModelColaborador.dsColaborador.get(e.context);                 
+		viewModelColaborador.set("colaboradorSelecionado", colaborador);  
+		app.navigate("#detalhesColaborador-view");
+	}
+    
+	function editarColaborador(e) {
+		var colaborador = viewModelColaborador.dsColaborador.get(e.context);                 
+		viewModelColaborador.set("colaboradorSelecionado", colaborador);  
+		app.navigate("#editorColaborador-view"); 
+	}
+    
+	function salvarColaborador() {   
+		console.log(viewModelColaborador.dsColaborador, "ViewModelCol")
+		viewModelColaborador.dsColaborador.sync();
+		app.navigate("#colaboradores-view");
+	}
+	    
+	function cancelarColaborador() {
+		alert("Cancelar Atendimento");
+        
+		viewModelColaborador.dsColaborador.cancelChanges();
+		app.navigate("#colaboradores-view");
+	}
+    
 	function editorViewInit() {
 		validator = $("#form").kendoValidator({ //initialize the validator
 			messages: {
@@ -345,7 +511,7 @@
 			}
 		}).data("kendoValidator");
 	}
-			
+   
 	function vendedoresFila() {
 		atualizaFilaNoSalao(dsVendFila, 1);
 	}
@@ -358,7 +524,7 @@
 		atualizaFilaNoSalao(dsVendForaTurno, 3);
 	}
     
-	function tiposMovto() {
+	function tiposMovto(e) {
 		var vendedor = viewModel.dsVendFila.get(e.context);
 		viewModel.set("vendedorSelecionado", vendedor); 	
 	}
@@ -377,6 +543,21 @@
 		dsLoja.options.transport.read.url = baseUrl + "/RmLoja";
 		dsLoja.read(); 
 	}
+  
+	function turnoFunc() {	
+		dsTurnoFunc.options.transport.read.url = baseUrl + "/RmTurnosFunc";
+		dsTurnoFunc.read(); 
+	}
+    
+	function cargos() {	
+		dsCargo.options.transport.read.url = baseUrl + "/RmCargo";
+		dsCargo.read(); 
+	}
+    
+	function colaboradores() {
+		dsColaborador.options.transport.read.url = baseUrl + "/RmColaborador";
+		dsColaborador.read(); 
+	}
     
 	function atualizaFilaNoSalao(context, parametro) {
 		context.options.transport.read.url = baseUrl + "/RmFilaLoja/" + parametro;					
@@ -391,12 +572,21 @@
 		showTiposMovto: tiposMovto,
 		showTiposMovtoSaida: tiposMovtoSaida,
 		showTiposMovtoEntrada: tiposMovtoEntrada,
+  
+		showLojas: lojas,     
+		showTurnoFunc: turnoFunc,
+		showCargos: cargos,
+  
+		showColaboradores: colaboradores,
+		showDetalhesColaborador: detalhesColaborador,     
         
-		showAtendimento: atendimento,
+		showAtendimento: adicionarAtendimento,
+        
 		editorViewInit: editorViewInit,
         
-		showLojas: lojas,        
+		//ViewModel
 		viewModel: viewModel,
+		//viewModelColaborador: viewModelColaborador
         
 	});
 })(jQuery);

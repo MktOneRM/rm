@@ -66,7 +66,7 @@
 		</div>
 
 		<!-- Resultado Atendimento -->
-		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="editorViewInit" data-layout="home-layout" data-model="viewModel">
+		<div id="resultadoAtendimento-view" data-role="view" data-show="showAtendimento" data-title="Top Line" data-init="editorViewInit" data-layout="home-layout" data-model="viewModel">
 			<div data-role="header">
 				<div data-role="navbar">
 					<a data-role="button" data-align="left" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
@@ -107,7 +107,7 @@
 				</li>
 			</ul>
 	    </div>
-        <div id="sairdaFila_View" data-role="view" data-show="showTiposMovtoSaida" data-title="Top Line" data-layout="home-layout" data-model="viewModel">
+        <div id="sairdaFila_View" data-role="view" data-show="showTiposMovtoSaida" data-title="Top Line" data-init="editorViewInit" data-layout="home-layout" data-model="viewModel">
         	<header data-role="header">
         		<div data-role="navbar">
         			<a href="#dentroFila-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -115,7 +115,7 @@
         		</div>
         	</header>
             <ul id="form" data-role="listview" data-style="inset" data-type="group">
-			<div class="mobile-fila-titulo">Saída da Fila</div>
+			    <div class="mobile-fila-titulo">Saída da Fila</div>
     			<li>
     				<ul>
     					<li style="height:65px">
@@ -125,8 +125,8 @@
     					</li>
     				</ul>
     			</li>
-                <li>
-             	  <ul id="lstMotivosSaida" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-style="inset" data-template="tpTiposMovto"></ul>
+                <li>Tipos de Saída
+             	  <ul id="lstMotivosSaida" data-bind="source: dsTiposMovto" data-auto-bind="false" data-template="tpTiposMovto"></ul>
                 </li>
             </ul>     
         </div>
@@ -205,7 +205,7 @@
 
 
 		<!-- Colaboradores -->
-		<div data-role="view" id="colaboradores-view" data-title="Top Line" data-show="showColaboradores" data-model="viewModelColaborador">
+		<div data-role="view" id="colaboradores-view" data-title="Top Line" data-show="showColaboradores" data-model="viewModel">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="views/ConfiguracoesView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -219,17 +219,17 @@
 			<ul id="actionsColaboradores" data-role="actionsheet" data-cancel="Cancelar">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
-					<a href="#" data-action="viewModelColaborador.detalhesColaborador">Detalhes</a>
+					<a href="#" data-action="viewModel.detalhesColaborador">Detalhes</a>
 				</li>
 				<li>
-					<a href="#" data-action="viewModelColaborador.editarColaborador">Editar</a>
+					<a href="#" data-action="viewModel.editarColaborador">Editar</a>
 				</li>
 			</ul>
 
 		</div>
 
 		<!--detalhes Colaboradores view-->
-		<div id="detalhesColaborador-view" data-role="view" data-model="viewModelColaborador.colaboradorSelecionado" data-title="Top Line" data-layout="default" >
+		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="default" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#colaboradores-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -258,7 +258,7 @@
 		</div>
 
 		<!--editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-init="editorViewInit" data-model="viewModelColaborador" data-title="Top Line" data-layout="default">
+		<div id="editorColaborador-view" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Top Line" data-layout="default">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
@@ -348,6 +348,7 @@
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<a data-rel="actionsheet" href="\\#actAcaoVendedorFila" data-actionsheet-context="#= FilaLojId #">
+                <span class="cart-delete-button" data-role="button" data-bind="visible: deleteMode" data-click="app.cartView.onRemove">Sair</span>
 				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
 				<h1 class="fila-nome">${ColApelido}</h1>
 				<h2 class="fila-turno">${ColTurno}</h2>
@@ -372,7 +373,7 @@
 
         <script type="text/x-kendo-template" id="tpTiposMovto">
         	<a class="details-link" data-role="listview-link">
-        		#:TmoDescricao#
+                ${TmoDescricao}
         	</a>
         </script>
 

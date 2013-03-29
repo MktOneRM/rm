@@ -175,7 +175,7 @@
 					Configuração
 					<ul>
 						<li>
-							<a href="views/ConsultaLojaView.html">Cadastro de Loja</a>
+							<a href="##config-view">Cadastro de Loja</a>
 						</li>
 						<li>
 							<a href="#colaboradores-view">Cadastro de Colaboradores</a>
@@ -194,17 +194,15 @@
 
 
 		<!-- Colaboradores -->
-		<div data-role="view" id="colaboradores-view" data-title="Top Line" data-show="showColaboradores" data-model="viewModel">
+		<div data-role="view" id="colaboradores-view" data-title="Colaboradores" data-show="showColaboradores" data-model="viewModel">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="views/ConfiguracoesView.html" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#config-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a id="btnCreate" data-role="button" type="button" data-align="right" data-icon="add" data-bind="events: {click: adicionarColaborador}"></a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<div class="mobile-fila-titulo">Colaboradores</div>
 			<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
-
 			<ul id="actionsColaboradores" data-role="actionsheet" data-cancel="Cancelar">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
@@ -218,14 +216,13 @@
 		</div>
 
 		<!--detalhes Colaboradores view-->
-		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="default" >
+		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Colaboradores" data-layout="default" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#colaboradores-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<div class="mobile-fila-titulo">Colaboradores</div>
 			<ul id="info" data-role="listview" data-style="inset">
 				<li>
 					CPF: <span data-bind="text: ColCpf"></span>
@@ -247,7 +244,7 @@
 		</div>
 
 		<!--editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Top Line" data-layout="default">
+		<div id="editorColaborador-view" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Colaboradores" data-layout="default">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
@@ -255,8 +252,30 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<div class="mobile-fila-titulo">Colaboradores</div>
-			<ul id="form" data-role="listview" data-style="inset">
+			<ul id="formColaborador" data-role="listview" data-style="inset">
+
+				<div class="content">
+					<div>
+						<button class="button" id="capturePhotoButton">Take Photo</button>
+					</div>
+					<div>
+						<button class="button" id="capturePhotoEditButton" >Take Editable Photo</button>
+					</div>
+					<div>
+						<button class="button" id="getPhotoFromLibraryButton">Select from Photo Library</button>
+						<button class="button" id="getPhotoFromAlbumButton">Select from Photo Album</button>
+					</div>
+				</div>
+
+				<li>
+					<ul>
+						<li style="height:65px">
+							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
+							<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+						</li>
+					</ul>
+				</li>
+
 				<li>
 					<label>
 						CPF:
@@ -291,28 +310,28 @@
 				<li>
 					<label>
 						Email:
-						<input id="email" name="Email" type="text" required="required" data-bind="value: colaboradorSelecionado.ColEmail"/>
+						<input id="email" name="Email" type="text" data-bind="value: colaboradorSelecionado.ColEmail"/>
 					</label>
 				</li>
 
 				<li>
 					<label>
 						Data Entrada:
-						<input id="dtEntrada" name="DataEntrada" type="date" required="required" data-bind="value: colaboradorSelecionado.ColDtentrada"/>
+						<input id="dtEntrada" name="DataEntrada" type="text" required="required" data-bind="value: colaboradorSelecionado.ColDtentrada"/>
 					</label>
 				</li>
 
 				<li>
 					<label>
 						Data Saída:
-						<input id="dtSaida" name="DataSaida" type="date" required="required" data-bind="value: colaboradorSelecionado.ColDtsaida"/>
+						<input id="dtSaida" name="DataSaida" type="date"  data-bind="value: colaboradorSelecionado.ColDtsaida"/>
 					</label>
 				</li>
 
 				<li>
 					<label>
 						Afastamento:
-						<input id="afastamento" name="Afastamento" type="checkbox" required="required" data-bind="value: colaboradorSelecionado.ColDtsaida"/>
+						<input id="afastamento" name="Afastamento" type="checkbox" data-bind="value: colaboradorSelecionado.ColDtsaida" />
 					</label>
 				</li>
 
@@ -323,16 +342,28 @@
 					</label>
 				</li>
 
+				<li>
+					<label>
+						Cargo Id:
+						<input id="cargoId" name="Cargo" type="text" required="required" data-bind="value: colaboradorSelecionado.CarId"/>
+					</label>
+				</li>
+
+				<li>
+					<label>
+						Turno Id:
+						<input id="turnoId" name="Turno" type="text" required="required" data-bind="value: colaboradorSelecionado.ColHfuId"/>
+					</label>
+				</li>
 			</ul>
 
 		</div>
 
 		<script type="text/x-kendo-template" id="tColaborador">
 			<a data-rel="actionsheet" href="\\#actionsColaboradores" data-actionsheet-context="#= ColId #">
-				<h1>${ColNome}</h1>
+				<h1 class="fila-nome">${ColNome}</h1>
 			</a>
 		</script>
-
 
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">

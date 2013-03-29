@@ -389,7 +389,7 @@
 				}
 			}     
 		},
-        batch: true,
+		batch: true,
 		sort: { field: "ColApelido", dir: "desc" },
 		schema: scColaborador
         
@@ -492,12 +492,7 @@
 		viewModel.dsColaborador.cancelChanges();
 		app.navigate("#colaboradores-view");
 	}
-    
-	function editorViewInit() {
-		validator = $("#form").kendoValidator({ 
-		}).data("kendoValidator");
-	}
-	
+ 
 	function vendedoresFila() {
 		atualizaFilaNoSalao(dsVendFila, 1);
 	}
@@ -550,6 +545,12 @@
 		context.read();
 	}
     
+	function editorViewInit() {
+		validator = $("#form").kendoValidator({ 
+		}).data("kendoValidator");
+	}
+
+
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,
@@ -571,6 +572,7 @@
 		editorViewInit: editorViewInit,
   
 		viewModel: viewModel
+		
         
 	});
 })(jQuery);

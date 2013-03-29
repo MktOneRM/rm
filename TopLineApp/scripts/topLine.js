@@ -3,7 +3,7 @@
 		refresh: function() {
 			var value = this.bindings["srcPath"].get();
 
-			if (value) {
+			if (value) { 
 				$(this.element).attr("src", "data:image/png;base64," + value); 
 			}
 		}
@@ -29,8 +29,8 @@
 		}
 	});
  
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -106,7 +106,7 @@
 		model: {
 			id: "LojId",
 			fields: {
-				LojId: { editable: false, nullable: false },
+				LojId: { type: "int", editable: false, nullable: false , defaultValue:0},
 				TloId: { editable: false, nullable: false },
 				LojCnpj: { editable: false, nullable: false },
 				LojCodigo: { editable: false, nullable: false },
@@ -134,7 +134,7 @@
 		model:{
 			id: "ColId",
 			fields: {
-				ColId: { editable: false, nullable: false},
+				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				CarId: { type: "int", validation: { required: false} },  
 				ColCpf: { validation: { required: true} },
 				ColApelido:  { validation: { required: true} },
@@ -392,7 +392,6 @@
 		batch: true,
 		sort: { field: "ColApelido", dir: "desc" },
 		schema: scColaborador
-        
 	})
     
 	var viewModel = kendo.observable({		
@@ -481,14 +480,14 @@
 		app.navigate("#editorColaborador-view"); 
 	}
     
-	function salvarColaborador() {   		
-		viewModel.dsColaborador.sync();
-		app.navigate("#colaboradores-view");
+	function salvarColaborador() {   
+		if (validator.validate()) {
+			viewModel.dsColaborador.sync();
+			app.navigate("#colaboradores-view");          
+		}
 	}
 	    
 	function cancelarColaborador() {
-		alert("Cancelar Atendimento");
-        
 		viewModel.dsColaborador.cancelChanges();
 		app.navigate("#colaboradores-view");
 	}
@@ -536,8 +535,11 @@
 	}
     
 	function colaboradores() {
+		cameraApp = new cameraApp();
+		cameraApp.run();
+        
 		dsColaborador.options.transport.read.url = baseUrl + "/RmColaborador";
-		dsColaborador.read(); 
+		dsColaborador.read(); 		
 	}
     
 	function atualizaFilaNoSalao(context, parametro) {
@@ -546,11 +548,120 @@
 	}
     
 	function editorViewInit() {
-		validator = $("#form").kendoValidator({ 
-		}).data("kendoValidator");
+		validator = $("#form").kendoValidator({}).data("kendoValidator");
+		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
 
+	//Camera
+    
+	function id(element) {
+		return document.getElementById(element);
+	}
+    
+	function cameraApp() {
+	}
 
+	cameraApp.prototype = {
+		_pictureSource: null,    
+		_destinationType: null,
+    
+		run: function() {
+			var that = this;
+			that._pictureSource = navigator.camera.PictureSourceType;
+			that._destinationType = navigator.camera.DestinationType;
+			id("capturePhotoButton").addEventListener("click", function() {
+				that._capturePhoto.apply(that, arguments);
+			});
+			id("capturePhotoEditButton").addEventListener("click", function() {
+				that._capturePhotoEdit.apply(that, arguments)
+			});
+			id("getPhotoFromLibraryButton").addEventListener("click", function() {
+				that._getPhotoFromLibrary.apply(that, arguments)
+			});
+			id("getPhotoFromAlbumButton").addEventListener("click", function() {
+				that._getPhotoFromAlbum.apply(that, arguments);
+			});
+		},
+    
+		_capturePhoto: function() {
+			var that = this;
+        
+			// Take picture using device camera and retrieve image as base64-encoded string.
+			navigator.camera.getPicture(function() {
+				that._onPhotoDataSuccess.apply(that, arguments);
+			}, function() {
+				that._onFail.apply(that, arguments);
+			}, {
+				quality: 50,
+				destinationType: that._destinationType.DATA_URL
+			});
+		},
+    
+		_capturePhotoEdit: function() {
+			var that = this;
+			// Take picture using device camera, allow edit, and retrieve image as base64-encoded string. 
+			// The allowEdit property has no effect on Android devices.
+			navigator.camera.getPicture(function() {
+				that._onPhotoDataSuccess.apply(that, arguments);
+			}, function() {
+				that._onFail.apply(that, arguments);
+			}, {
+				quality: 20, allowEdit: true,
+				destinationType: cameraApp._destinationType.DATA_URL
+			});
+		},
+    
+		_getPhotoFromLibrary: function() {
+			var that = this;
+			// On Android devices, pictureSource.PHOTOLIBRARY and
+			// pictureSource.SAVEDPHOTOALBUM display the same photo album.
+			that._getPhoto(that._pictureSource.PHOTOLIBRARY);         
+		},
+    
+		_getPhotoFromAlbum: function() {
+			var that = this;
+			// On Android devices, pictureSource.PHOTOLIBRARY and
+			// pictureSource.SAVEDPHOTOALBUM display the same photo album.
+			that._getPhoto(that._pictureSource.SAVEDPHOTOALBUM)
+		},
+    
+		_getPhoto: function(source) {
+			var that = this;
+			// Retrieve image file location from specified source.
+			navigator.camera.getPicture(function() {
+				that._onPhotoURISuccess.apply(that, arguments);
+			}, function() {
+				cameraApp._onFail.apply(that, arguments);
+			}, {
+				quality: 50,
+				destinationType: cameraApp._destinationType.FILE_URI,
+				sourceType: source
+			});
+		},
+    
+		_onPhotoDataSuccess: function(imageData) {
+			var smallImage = document.getElementById('smallImage');
+			smallImage.style.display = 'block';
+    
+			// Show the captured photo.
+			smallImage.src = "data:image/jpeg;base64," + imageData;
+		},
+    
+		_onPhotoURISuccess: function(imageURI) {
+			var smallImage = document.getElementById('smallImage');
+			smallImage.style.display = 'block';
+         
+			// Show the captured photo.
+			smallImage.src = imageURI;
+		},
+    
+		_onFail: function(message) {
+			alert('Failed! Error: ' + message);
+		}
+	}
+    
+	//Camera
+    
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,

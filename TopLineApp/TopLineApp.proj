@@ -68,6 +68,7 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\default.png" />
     <Content Include="kendo\js\kendo.indexedlistview.js" />
     <Content Include="kendo\styles\kendo.indexedlistview.css" />
     <Content Include="scripts\app.js" />
@@ -80,11 +81,6 @@
     <Content Include="scripts\topLine.js" />
     <Content Include="Bkp\html\HtmlPage.html" />
     <Content Include="Bkp\html\HtmlPage1.html" />
-    <Content Include="Images\Foto1.jpg" />
-    <Content Include="Images\Foto2.jpg" />
-    <Content Include="Images\Foto3.jpg" />
-    <Content Include="Images\Foto4.jpg" />
-    <Content Include="Images\Foto5.jpg" />
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.maskedinput.min.js" />
     <Content Include="kendo\js\jquery.min.js" />

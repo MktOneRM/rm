@@ -41,7 +41,7 @@
     <Folder Include="kendo\styles\default" />
     <Folder Include="Bkp" />
     <Folder Include="Bkp\viewModels" />
-    <Folder Include="views" />
+    <Folder Include="Bkp\views" />
     <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
@@ -108,15 +108,15 @@
     </Content>
     <Content Include="styles\ModalViewLogin.css" />
     <Content Include="Bkp\viewModels\viewModels.js" />
-    <Content Include="views\AtendimentoView.html" />
-    <Content Include="views\CadastroLojaView.html" />
-    <Content Include="views\ConfiguracoesView.html" />
-    <Content Include="views\ConsultaColaboradorList.html" />
-    <Content Include="views\ConsultaLojaView.html" />
-    <Content Include="views\TiposMovView.html" />
-    <Content Include="views\VFilaView.html" />
-    <Content Include="views\VForaFilaView.html" />
-    <Content Include="views\VForaTurnoView.html" />
+    <Content Include="Bkp\views\AtendimentoView.html" />
+    <Content Include="Bkp\views\CadastroLojaView.html" />
+    <Content Include="Bkp\views\ConfiguracoesView.html" />
+    <Content Include="Bkp\views\ConsultaColaboradorList.html" />
+    <Content Include="Bkp\views\ConsultaLojaView.html" />
+    <Content Include="Bkp\views\TiposMovView.html" />
+    <Content Include="Bkp\views\VFilaView.html" />
+    <Content Include="Bkp\views\VForaFilaView.html" />
+    <Content Include="Bkp\views\VForaTurnoView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

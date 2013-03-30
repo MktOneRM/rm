@@ -330,59 +330,61 @@
 		schema: schemaAtendimento
 	});
 		
-   //<!--Atendimento-->
+	//<!--Atendimento-->
     
-     function listViewInitFila(e) {
-       e.view.element.find("#listviewFila").kendoMobileListView({
-            dataSource: dsVendFila,
-            template: $("#tdentroFila").html()
-        })
+	function listViewInitFila(e) {
+		e.view.element.find("#listviewFila").kendoMobileListView({
+			dataSource: dsVendFila,
+			template: $("#tdentroFila").html()
+		})
          
-        .kendoTouch({
-            filter: ">li",
-            enableSwipe: true,
-            touchstart: touchstart,
-            tap: navigate,
-            swipe: swipe
-        });
-    }
+		.kendoTouch({
+			filter: ">li",
+			enableSwipe: true,
+			touchstart: touchstart,
+			tap: navigate,
+			swipe: swipe
+		});
+	}
 
-    function navigate(e) {
-        var itemUID = $(e.touch.currentTarget).data("uid");
-        var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
-    	viewModel.set("vendedorSelecionado", schemaVendedores);
-        adicionarAtendimento();
-        validator = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
-        app.navigate("#resultadoAtendimento-view");
-    }
+	function navigate(e) {
+		var itemUID = $(e.touch.currentTarget).data("uid");
+		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
+		viewModel.set("vendedorSelecionado", schemaVendedores);
+		adicionarAtendimento();
+		validator = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
+		app.navigate("#resultadoAtendimento-view");
+	}
 
-    function swipe(e) {
-        var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
-        button.expand().duration(200).play();
-    }
+	function swipe(e) {
+		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
+		button.expand().duration(200).play();
+	}
 
-    function touchstart(e) {
-        var target = $(e.touch.initialTouch),
-             listviewFila = $("#listviewFila").data("kendoMobileListView"),
-             button = $(e.touch.target).find("[data-role=button]:visible");
+	function touchstart(e) {
+		var target = $(e.touch.initialTouch),
+		listviewFila = $("#listviewFila").data("kendoMobileListView"),
+		button = $(e.touch.target).find("[data-role=button]:visible");
 
-        if (target.closest("[data-role=button]")[0]) {
-            app.navigate("#sairdaFila_View");
+		if (target.closest("[data-role=button]")[0]) {
+			app.navigate("#sairdaFila_View");
     
-            //prevent `swipe`
-            this.events.cancel();
-            e.event.stopPropagation();
-        } else if (button[0]) {
-            button.hide();
+			//prevent `swipe`
+			this.events.cancel();
+			e.event.stopPropagation();
+		}
+		else if (button[0]) {
+			button.hide();
 
-            //prevent `swipe`
-            this.events.cancel();
-        } else {
-            listviewFila.items().find("[data-role=button]:visible").hide();
-        }
-    }
+			//prevent `swipe`
+			this.events.cancel();
+		}
+		else {
+			listviewFila.items().find("[data-role=button]:visible").hide();
+		}
+	}
     
-    //dataSource    
+	//dataSource    
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -459,7 +461,7 @@
         
 		vendedorSelecionado: {},		
 		atendimento: {},
-		lojaSelecionada: [],
+		lojaSelecionada: {},
 		colaboradorSelecionado: {},
 		cargoSelecionado: {},
 		turnoSelecionado: {},
@@ -479,7 +481,7 @@
 		tiposMovtoSaida : tiposMovtoSaida,
 		tiposMovtoEntrada : tiposMovtoEntrada,        
 		lojas: lojas,
-        listViewInitFila: listViewInitFila
+		listViewInitFila: listViewInitFila
 		
 	});
 
@@ -533,14 +535,17 @@
     
 	function salvarColaborador() {   
 		//if (validator.validate()) {
-			viewModel.dsColaborador.sync();
-			app.navigate("#colaboradores-view");          
+		viewModel.dsColaborador.sync();
+		//app.navigate("#colaboradores-view"); 
+        $("#colaboradores-view").data("kendoListView").refresh();
+		app.navigate("#:back");          
 		//}
 	}
 	    
 	function cancelarColaborador() {
 		viewModel.dsColaborador.cancelChanges();
-		app.navigate("#colaboradores-view");
+		//app.navigate("#colaboradores-view");
+        app.navigate("#:back");
 	}
  
 	function vendedoresFila() {
@@ -595,33 +600,33 @@
 		context.read();
 	}
     
-    function editorViewInit(e) {
-        var view = e.view;
-        view.element.find("#done").data("kendoMobileButton").bind("click", function() {
-            viewModel.dsAtendimento.one("change", function() {
-                view.loader.hide();
-                app.navigate("#:back");
-            });
+	function editorViewInit(e) {
+		var view = e.view;
+		view.element.find("#done").data("kendoMobileButton").bind("click", function() {
+			viewModel.dsAtendimento.one("change", function() {
+				view.loader.hide();
+				app.navigate("#:back");
+			});
 
-            view.loader.show();
-            salvarAtendimento();
-        });
+			view.loader.show();
+			salvarAtendimento();
+		});
 
-        view.element.find("#cancel").data("kendoMobileBackButton").bind("click", function(e) {
-            e.preventDefault();
-            viewModel.dsAtendimento.one("change", function() {
-                view.loader.hide();
-                app.navigate("#:back");
-            });
+		view.element.find("#cancel").data("kendoMobileBackButton").bind("click", function(e) {
+			e.preventDefault();
+			viewModel.dsAtendimento.one("change", function() {
+				view.loader.hide();
+				app.navigate("#:back");
+			});
 
-            view.loader.show();
-            viewModel.dsAtendimento.cancelChanges();
-        });
+			view.loader.show();
+			viewModel.dsAtendimento.cancelChanges();
+		});
 	}
 
-    function editorViewInitCol(){
-        validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
-    }
+	function editorViewInitCol() {
+		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
+	}
     
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
@@ -640,7 +645,7 @@
 		showDetalhesColaborador: detalhesColaborador,     
         
 		showAtendimento: adicionarAtendimento,
-        listViewInitFila: listViewInitFila,
+		listViewInitFila: listViewInitFila,
 		editorViewInit: editorViewInit,
 		viewModel: viewModel
 		

@@ -12,7 +12,7 @@
 		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
 		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
-        <script src="scripts/topLineCamera.js" type="text/javascript"></script>
+		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<!-- Home-Layout -->
@@ -169,27 +169,27 @@
 					Configuração
 					<ul>
 						<li>
-							<a href="\\#">Cadastro de Loja</a>
+							<a href="#detalhesLoja-view">Cadastro de Loja</a>
 						</li>
 						<li>
 							<a href="#colaboradores-view">Cadastro de Colaboradores</a>
 						</li>
 						<li>
-							<a href="\\#">Escala de Trabalho</a>
+							<a href="#">Escala de Trabalho</a>
 						</li>
 						<li>
-							<a href="\\#">Horário de Funcionamento</a>
+							<a href="#">Horário de Funcionamento</a>
 						</li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 
-		<!-- Colaboradores -->
+		<!--Colaboradores View-->
 		<div data-role="view" id="colaboradores-view" data-title="Colaboradores" data-show="showColaboradores" data-model="viewModel" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#config-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a id="btnCreate" data-role="button" type="button" data-align="right" data-icon="add" data-bind="events: {click: adicionarColaborador}"></a>
 					<span data-role="view-title"></span>
 				</div>
@@ -207,11 +207,11 @@
 
 		</div>
 
-		<!--detalhes Colaboradores view-->
+		<!--Detalhes Colaboradores view-->
 		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Colaboradores" data-layout="home-layout"  >
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#colaboradores-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -239,7 +239,7 @@
 			</ul>
 		</div>
 
-		<!--editor colaboradores view-->
+		<!--Editor colaboradores view-->
 		<div id="editorColaborador-view" data-role="view" data-init="editorViewInitCol" data-model="viewModel" data-title="Colaboradores" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
@@ -349,12 +349,47 @@
 
 		</div>
 
+		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
 			<a data-rel="actionsheet" href="\\#actionsColaboradores" data-actionsheet-context="#= ColId #">
-				<!--<a class="details-link" data-role="listview-link" href="\\#detalhesColaborador-view">-->
 				<h3>${ColNome} # # ${ColSobrenome}</h3>
 			</a>
 		</script>
+
+		<!--Detalhes Loja View-->
+		<div data-role="view" id="detalhesLoja-view" data-title="Top Line" data-show="detailShow" data-init="detailInit">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a class="nav-button" data-align="left" data-role="backbutton" id="cancel">Cancelar</a>
+					<span data-role="view-title"></span>
+					<a class="nav-button" data-align="right" data-role="button" id="done">OK</a>
+				</div>
+			</header>
+
+			<form>
+				<ul data-role="listview" data-style="inset" onclick="">
+					<li>
+						<label>
+							Cnpj
+							<input type="text" data-bind="value: LojCnpj"/>
+						</label>
+					</li>
+					<li>
+						<label>
+							Razao Social
+							<input type="text" data-bind="value: LojRazaoSocial"/>
+						</label>
+					</li>
+					<li>
+						<label>
+							Nome fantasia
+							<input type="text" data-bind="value: LojNomeFantasia"/>
+						</label>
+					</li>
+				</ul>
+			</form>
+
+		</div>
 
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">

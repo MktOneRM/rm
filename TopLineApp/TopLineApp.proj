@@ -106,7 +106,7 @@
       <Platform>Android</Platform>
       <TargetName>cordova.js</TargetName>
     </Content>
-    <Content Include="styles\ModalViewLogin.css" />
+    <Content Include="Bkp\ModalViewLogin.css" />
     <Content Include="Bkp\viewModels\viewModels.js" />
     <Content Include="Bkp\views\AtendimentoView.html" />
     <Content Include="Bkp\views\CadastroLojaView.html" />

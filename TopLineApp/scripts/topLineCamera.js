@@ -83,6 +83,6 @@ cameraApp.prototype={
     },
     
     _onFail: function(message) {
-        alert('Failed! Error: ' + message);
+        alert('Falha! Erro: ' + message);
     }
 }

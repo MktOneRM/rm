@@ -151,6 +151,11 @@ div a
     font-size: 16px;
 }
 
+.colaborador-nome
+{
+    font-size: 13px;
+}
+
 .fila-turno
 {
     font-size: 12px;
@@ -188,11 +193,7 @@ div a
     padding: 10px 0 0;
 }
 
-/* Cart */
-
 .km-android .cart-header { margin-bottom: 1em; }
-
-/* Shipping */
 
 .validate {
     padding: 10px 10%;
@@ -214,11 +215,15 @@ div a
     padding: 0;
 }
 
-/* Album Lists */
 .km-listview h1, .km-listview h2 {
     margin: 0;
-
     margin-left: 60px;
+}
+
+.km-listview h1, .km-listview h3 {
+    margin: 1px;
+    margin-left: 0px;
+    font-weight: bold;
 }
 
 .km-listview h2 { 

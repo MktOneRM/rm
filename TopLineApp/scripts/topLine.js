@@ -621,6 +621,10 @@
         });
 	}
 
+    function editorViewInitCol(){
+        validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
+    }
+    
 	//Camera
     
 	function id(element) {
@@ -638,8 +642,7 @@
 			var that = this;
 			that._pictureSource = navigator.camera.PictureSourceType;
 			that._destinationType = navigator.camera.DestinationType;
-			
-      
+			   
 			id("capturePhotoEditButton").addEventListener("click", function() {
 				that._capturePhotoEdit.apply(that, arguments)
 			});

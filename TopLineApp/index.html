@@ -10,7 +10,7 @@
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
 		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
-        <script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
+		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
 	</head>
 	<body>
@@ -235,7 +235,7 @@
 		</div>
 
 		<!--editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-init="editorViewInit" data-model="viewModel" data-title="Colaboradores" data-layout="home-layout" >
+		<div id="editorColaborador-view" data-role="view" data-init="editorViewInitCol" data-model="viewModel" data-title="Colaboradores" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
@@ -245,37 +245,20 @@
 			</header>
 			<ul id="formColaborador" data-role="listview" data-style="inset">
 
-				<!--
-				<div class="content">
-				<div>
-				<button class="button" id="capturePhotoButton">Take Photo</button>
-				</div>
-				<div>
-				<button class="button" id="capturePhotoEditButton" >Take Editable Photo</button>
-				</div>
-				<div>
-				<button class="button" id="getPhotoFromLibraryButton">Select from Photo Library</button>
-				<button class="button" id="getPhotoFromAlbumButton">Select from Photo Album</button>
-				</div>
-				</div>
-				-->
-
 				<ul data-role="buttongroup" class="select-group">
+
 					<li>
-						<button class="button" id="capturePhotoEditButton" >Tirar Foto</button>
+						<a id="capturePhotoEditButton" data-icon >Tirar Foto</a>
 					</li>
 					<li>
-						<button class="button" id="getPhotoFromLibraryButton">Selecionar galeria</button>
+						<a id="getPhotoFromLibraryButton">Galeria</a>
 					</li>
+
 				</ul>
 
-				<li>
-					<ul>
-						<li style="height:65px">
-							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
-							<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
-						</li>
-					</ul>
+				<li style="height:65px">
+					<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
+					<h1 data-bind="text: colaboradorSelecionado.ColNome"></h1>
 				</li>
 
 				<li>
@@ -363,11 +346,10 @@
 
 		<script type="text/x-kendo-template" id="tColaborador">
 			<a data-rel="actionsheet" href="\\#actionsColaboradores" data-actionsheet-context="#= ColId #">
-				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
-				<h1 class="fila-nome">${ColNome} # # ${ColSobrenome}</h1>				
+				<h3 >${ColNome} # # ${ColSobrenome}</h3>
 			</a>
 		</script>
-                                
+
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<a>

@@ -638,18 +638,23 @@
 			var that = this;
 			that._pictureSource = navigator.camera.PictureSourceType;
 			that._destinationType = navigator.camera.DestinationType;
-			id("capturePhotoButton").addEventListener("click", function() {
+			
+            /*
+            id("capturePhotoButton").addEventListener("click", function() {
 				that._capturePhoto.apply(that, arguments);
 			});
+            */
 			id("capturePhotoEditButton").addEventListener("click", function() {
 				that._capturePhotoEdit.apply(that, arguments)
 			});
 			id("getPhotoFromLibraryButton").addEventListener("click", function() {
 				that._getPhotoFromLibrary.apply(that, arguments)
 			});
+            /*
 			id("getPhotoFromAlbumButton").addEventListener("click", function() {
 				that._getPhotoFromAlbum.apply(that, arguments);
 			});
+            */
 		},
     
 		_capturePhoto: function() {

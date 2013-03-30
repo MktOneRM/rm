@@ -61,7 +61,7 @@
 				TmoId: { editable: false, nullable: false },
 				TmoDescricao: { editable: false, nullable: false }
 			} 
-		}
+		} 
 	};
 	  
 	//Schema turnos de Turnos de funcionamento
@@ -333,10 +333,11 @@
    //<!--Atendimento-->
     
      function listViewInitFila(e) {
-        e.view.element.find("#listviewFila").kendoMobileListView({
+       e.view.element.find("#listviewFila").kendoMobileListView({
             dataSource: dsVendFila,
             template: $("#tdentroFila").html()
         })
+         
         .kendoTouch({
             filter: ">li",
             enableSwipe: true,
@@ -348,7 +349,11 @@
 
     function navigate(e) {
         var itemUID = $(e.touch.currentTarget).data("uid");
-        kendo.mobile.application.navigate("#resultadoAtendimento-view?uid=" + itemUID);
+        var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
+    	viewModel.set("vendedorSelecionado", schemaVendedores);
+        adicionarAtendimento();
+        validator = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
+        app.navigate("#resultadoAtendimento-view");
     }
 
     function swipe(e) {
@@ -500,8 +505,6 @@
 			var vend = viewModel.vendedorSelecionado;			
 			this.dsVendFila.remove(vend); 
 			this.dsVendFila.sync(); 
-            
-			app.navigate("#dentroFila-view");
 		}
 	}
 			
@@ -594,9 +597,28 @@
 		context.read();
 	}
     
-	function editorViewInit() {
-		validator = $("#form").kendoValidator({}).data("kendoValidator");
-		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
+    function editorViewInit(e) {
+        var view = e.view;
+        view.element.find("#done").data("kendoMobileButton").bind("click", function() {
+            viewModel.dsAtendimento.one("change", function() {
+                view.loader.hide();
+                app.navigate("#:back");
+            });
+
+            view.loader.show();
+            salvarAtendimento();
+        });
+
+        view.element.find("#cancel").data("kendoMobileBackButton").bind("click", function(e) {
+            e.preventDefault();
+            viewModel.dsAtendimento.one("change", function() {
+                view.loader.hide();
+                app.navigate("#:back");
+            });
+
+            view.loader.show();
+            viewModel.dsAtendimento.cancelChanges();
+        });
 	}
 
 	//Camera
@@ -730,7 +752,6 @@
 		showAtendimento: adicionarAtendimento,
         listViewInitFila: listViewInitFila,
 		editorViewInit: editorViewInit,
-  
 		viewModel: viewModel
 		
         

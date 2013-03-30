@@ -215,6 +215,10 @@
 				</div>
 			</header>
 			<ul id="info" data-role="listview" data-style="inset">
+				<li style="height:65px">
+					<img id="smallImage" class="fila-art" data-bind="srcPath: ColFoto"/>
+					<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+				</li>
 				<li>
 					CPF: <span data-bind="text: ColCpf"></span>
 				</li>
@@ -258,7 +262,7 @@
 
 				<li style="height:65px">
 					<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
-					<h1 data-bind="text: colaboradorSelecionado.ColNome"></h1>
+					<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
 				</li>
 
 				<li>
@@ -346,7 +350,7 @@
 
 		<script type="text/x-kendo-template" id="tColaborador">
 			<a data-rel="actionsheet" href="\\#actionsColaboradores" data-actionsheet-context="#= ColId #">
-				<h3 >${ColNome} # # ${ColSobrenome}</h3>
+				<h3>${ColNome} # # ${ColSobrenome}</h3>
 			</a>
 		</script>
 

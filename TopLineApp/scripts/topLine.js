@@ -9,20 +9,19 @@
 		}
 	});
     
-
 	kendo.data.binders.cpf = kendo.data.Binder.extend({
-            refresh: function() {
-        			var value = this.bindings["cpf"].get();
+		refresh: function() {
+			var value = this.bindings["cpf"].get();
 			if (value) {
 				$(this.element).text(formatField(value, "999.999.999-99"));
-                viewModel.colaboradorSelecionado.set("ColCpf",formatField(value, "999.999.999-99"));
-                console.log(viewModel.colaboradorSelecionado);
+				viewModel.colaboradorSelecionado.set("ColCpf", formatField(value, "999.999.999-99"));
+				console.log(viewModel.colaboradorSelecionado);
 			}
 		}
         
 	});
 
-    kendo.data.binders.format = kendo.data.Binder.extend({
+	kendo.data.binders.format = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["format"].get();
 			if (value) {
@@ -36,9 +35,10 @@
 			var value = this.bindings["ShopRua"].get();            
 			if (value) {
 				$(this.element).text("Shopping");
-			}else{
-                $(this.element).text("Rua");
-            }
+			}
+			else {
+				$(this.element).text("Rua");
+			}
 		}
 	});
     
@@ -367,7 +367,7 @@
 		schema: schemaAtendimento,
 	});
 		
-    //Datasource - Loja
+	//Datasource - Loja
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -397,15 +397,20 @@
 		},
 		batch: true,
 		schema: scLoja,		
+		beforeSend: function(e) {
+			app.showLoading();  
+		},
 		requestEnd: function(e) {
 			viewModel.set("lojaSelecionada", e.response);					
 			app.navigate("#detalhesLoja-view");
 		},
 		error: function(e) {
-			
 			if (e.errorThrown == "Not Found") {
 				console.log(e, "Erro em view Model");             
 			}
+		},
+		complete: function() {
+			app.hideLoading();
 		}
 	})
     
@@ -476,7 +481,7 @@
 		lojas: lojas,
 		listViewInitFila: listViewInitFila,
 		initValidacao: initValidacao,
-        formatField:formatField,
+		formatField:formatField,
         
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
@@ -735,55 +740,56 @@
 		dsLoja.read(); 
 	}
     
-    function formatField(strField, sMask) {
-        var i, nCount, sValue, fldLen, mskLen,bolMask, sCod;
+	function formatField(strField, sMask) {
+		var i, nCount, sValue, fldLen, mskLen,bolMask, sCod;
         
-        sValue = strField;
-        // Limpa todos os caracteres de formatação que
-        // já estiverem no campo.
-        // toString().replace [transforma em sring e troca elementos por ""]
-        sValue = sValue.toString().replace( "-", "" );
-        sValue = sValue.toString().replace( "-", "" );
-        sValue = sValue.toString().replace( ".", "" );
-        sValue = sValue.toString().replace( ".", "" );
-        sValue = sValue.toString().replace( "/", "" );
-        sValue = sValue.toString().replace( "/", "" );
-        sValue = sValue.toString().replace( "/", "" );
-        sValue = sValue.toString().replace( "(", "" );
-        sValue = sValue.toString().replace( "(", "" );
-        sValue = sValue.toString().replace( ")", "" );
-        sValue = sValue.toString().replace( ")", "" );
-        sValue = sValue.toString().replace( " ", "" );
-        sValue = sValue.toString().replace( " ", "" );
-    	sValue = sValue.toString().replace( ":", "" );
-        fldLen = sValue.length;
-        mskLen = sMask.length;
+		sValue = strField;
+		// Limpa todos os caracteres de formatação que
+		// já estiverem no campo.
+		// toString().replace [transforma em sring e troca elementos por ""]
+		sValue = sValue.toString().replace("-", "");
+		sValue = sValue.toString().replace("-", "");
+		sValue = sValue.toString().replace(".", "");
+		sValue = sValue.toString().replace(".", "");
+		sValue = sValue.toString().replace("/", "");
+		sValue = sValue.toString().replace("/", "");
+		sValue = sValue.toString().replace("/", "");
+		sValue = sValue.toString().replace("(", "");
+		sValue = sValue.toString().replace("(", "");
+		sValue = sValue.toString().replace(")", "");
+		sValue = sValue.toString().replace(")", "");
+		sValue = sValue.toString().replace(" ", "");
+		sValue = sValue.toString().replace(" ", "");
+		sValue = sValue.toString().replace(":", "");
+		fldLen = sValue.length;
+		mskLen = sMask.length;
         
-        i = 0;
-        nCount = 0;
-        sCod = "";
-        mskLen = fldLen;
+		i = 0;
+		nCount = 0;
+		sCod = "";
+		mskLen = fldLen;
         
-        while (i <= mskLen) {
-        bolMask = ((sMask.charAt(i) == "-") || (sMask.charAt(i) == ":") || (sMask.charAt(i) == ".") || (sMask.charAt(i) == "/"))
-        bolMask = bolMask || ((sMask.charAt(i) == "(") || (sMask.charAt(i) == ")") || (sMask.charAt(i) == " ") || (sMask.charAt(i) == "."))
+		while (i <= mskLen) {
+			bolMask = ((sMask.charAt(i) == "-") || (sMask.charAt(i) == ":") || (sMask.charAt(i) == ".") || (sMask.charAt(i) == "/"))
+			bolMask = bolMask || ((sMask.charAt(i) == "(") || (sMask.charAt(i) == ")") || (sMask.charAt(i) == " ") || (sMask.charAt(i) == "."))
         
-        //Se for true utiliza elementos especiais aumenta a máscara
-        if (bolMask) {
-                sCod += sMask.charAt(i);
-                mskLen++;
-            //Caso false mostra o sValue(o q foi digitado)
-            } else {
-                sCod += sValue.charAt(nCount);
-                nCount++;
-            }
-            i++;
-        }
+			//Se for true utiliza elementos especiais aumenta a máscara
+			if (bolMask) {
+				sCod += sMask.charAt(i);
+				mskLen++;
+				//Caso false mostra o sValue(o q foi digitado)
+			}
+			else {
+				sCod += sValue.charAt(nCount);
+				nCount++;
+			}
+			i++;
+		}
         
-        return sCod;
-    }
+		return sCod;
+	}
     
-    $.extend(window, {
+	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,
 		showVendedoresForaTurno: vendedoresForaTurno,
@@ -803,7 +809,7 @@
 		atendimentoViewInit: atendimentoViewInit,
 		viewModel: viewModel,
 		initValidacao: initValidacao,
-        formatField:formatField,		
+		formatField:formatField,		
 		editorLojaViewInit: editorLojaViewInit
 		
         

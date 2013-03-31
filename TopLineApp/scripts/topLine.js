@@ -600,7 +600,6 @@
             tap: navigate,
             swipe: swipe
         });
-        validator = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
     }
 
     function navigate(e) {

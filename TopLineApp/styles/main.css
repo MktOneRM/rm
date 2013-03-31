@@ -285,6 +285,14 @@ div a
     font-weight: bold;
 }
 
+#info input
+{
+	font-size: 12px;
+	alignment-adjust: left;
+    color: #476BD6; 
+    font-weight: bold;
+}
+
 #info label
 { 
 	display: block; width: 100px; float: left; padding-top: 6px; color: #2e2e2e;

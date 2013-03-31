@@ -43,13 +43,9 @@
 			</div>
 		</div>
 
-		<!-- Fila da Vez
+		<!-- Fila da Vez -->
 		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-model="viewModel" data-init="listViewInitFila">
 			<ul id="listviewFila" data-role="listview" data-style="inset"></ul>
-		</div>
-         -->
-		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel">
-			<ul data-bind="source: dsVendFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" data-style="inset"></ul>
 		</div>
 
 		<!-- Fora da Fila da Vez -->
@@ -104,10 +100,10 @@
 					</ul>
 				</li>
 			</ul>
-            <script>
-                validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
-            </script>
-        </div>
+			<script>
+				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
+			</script>
+		</div>
 		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-init="sairFilaViewInit" data-layout="home-layout" data-model="viewModel">
 			<header data-role="header">
 				<div data-role="navbar">
@@ -239,130 +235,215 @@
 				</div>
 			</header>
 			<ul id="info" data-role="listview" data-style="inset" data-type="group">
-				<li style="height:65px">
-					<img id="smallImage" class="fila-art" data-bind="srcPath: ColFoto"/>
-					<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+
+				<li>
+					<ul>
+						<li style="height:65px">
+							<img id="smallImage" class="fila-art" data-bind="srcPath: ColFoto"/>
+							<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+						</li>
+					</ul>
 				</li>
 				<li>
-					CPF: <span data-bind="text: ColCpf"></span>
-				</li>
-				<li>
-					Nome: <span data-bind="text: ColNome"></span>
-				</li>
-				<li>
-					Sobrenome: <span data-bind="text: ColSobrenome"></span>
+					<ul>
+						<li>
+							<label>
+								CPF:
+							</label> <span data-bind="text: ColCpf"></span>
+						</li>
+						<li>
+							<label>
+								Apelido:
+							</label> <span data-bind="text: ColApelido"></span>
+						</li>
+						<li>
+							<label>
+								Nome:
+							</label> <span data-bind="text: ColNome"></span>
+						</li>
+						<li>
+							<label>
+								Sobrenome:
+							</label><span data-bind="text: ColSobrenome"></span>
+						</li>
+						<li>
+							<label>
+								Data nascimento:
+							</label><span data-bind="text: ColDtnascimento"></span>
+						</li>
+						<li>
+							<label>
+								Email:
+							</label><span data-bind="text: ColEmail"></span>
+						</li>
+					</ul>
 				</li>
 
 				<li>
-					Data nascimento: <span data-bind="text: ColDtnascimento"></span>
+					<ul>
+						<li>
+							<label>
+								Data Entrada:
+							</label>
+							<span data-bind="text: ColDtentrada"></span>
+						</li>
+
+						<li>
+							<label>
+								Data Saída: <span data-bind="text: ColDtsaida"></span>
+							</label>
+						</li>
+
+						<li>
+							<label>
+								Afastamento: <span data-bind="text: ColAfasttemp"></span>
+							</label>
+						</li>
+					</ul>
 				</li>
+
 				<li>
-					Email: <span data-bind="text: ColEmail"></span>
+					<label>
+						Loja Id: <span data-bind="text: ColLojId"></span>
+					</label>
 				</li>
+
+				<li>
+					<ul>
+						<li>
+							<label>
+								Cargo Id: <span data-bind="text: CarId"></span>
+							</label>
+						</li>
+
+						<li>
+							<label>
+								Turno Id: <span data-bind="text: ColHfuId"></span>
+							</label>
+						</li>
+					</ul>
+				</li>
+
 			</ul>
 		</div>
 
 		<!--Editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-init="editorViewInitCol" data-model="viewModel" data-title="Colaboradores" data-layout="home-layout" >
+		<div id="editorColaborador-view" data-role="view" data-init="editorViewInitCol" data-model="viewModel" data-title="Top Line" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarColaborador}">Ok</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarColaborador}">Confirmar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
 			<ul id="info" data-role="listview" data-style="inset">
-				<ul data-role="buttongroup" class="select-group">
-					<li>
-						<a id="capturePhotoEditButton" data-icon >Tirar Foto</a>
-					</li>
-					<li>
-						<a id="getPhotoFromLibraryButton">Galeria</a>
-					</li>
-				</ul>
-				<li style="height:65px">
-					<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
-					<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+				<li>
+					<ul>
+						<ul data-role="buttongroup" class="select-group">
+							<li>
+								<a id="capturePhotoEditButton" data-icon >Tirar Foto</a>
+							</li>
+							<li>
+								<a id="getPhotoFromLibraryButton">Galeria</a>
+							</li>
+						</ul>
+						<li style="height:65px">
+							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
+							<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+						</li>
+					</ul>
 				</li>
 				<li>
-					<label>
-						CPF:
-						<input id="cpf" name="Cpf" type="text" required="required" data-bind="value: colaboradorSelecionado.ColCpf" />
-					</label>
+					<ul>
+						<li>
+							<label>
+								CPF:
+								<input id="cpf" name="Cpf" type="text" required="required" data-bind="value: colaboradorSelecionado.ColCpf" />
+							</label>
+						</li>
+						<li>
+							<label>
+								Apelido:
+								<input id="nome" name="Nome" type="text" required="required" data-bind="value: colaboradorSelecionado.ColApelido" />
+							</label>
+						</li>
+						<li>
+							<label>
+								Nome:
+								<input id="nome" name="Nome" type="text" required="required" data-bind="value: colaboradorSelecionado.ColNome" />
+							</label>
+						</li>
+						<li>
+							<label>
+								Sobrenome:
+								<input id="sobrenome" name="SobreNome" type="text" required="required" data-bind="value: colaboradorSelecionado.ColSobrenome"/>
+							</label>
+						</li>
+						<li>
+							<label>
+								Data Nascimento:
+								<input id="dtNascimento" name="DataNascimento" type="text" required="required" data-bind="value: colaboradorSelecionado.ColDtnascimento"/>
+							</label>
+						</li>
+
+						<li>
+							<label>
+								Email:
+								<input id="email" name="Email" type="text" data-bind="value: colaboradorSelecionado.ColEmail"/>
+							</label>
+						</li>
+					</ul>
 				</li>
 				<li>
-					<label>
-						Apelido:
-						<input id="nome" name="Nome" type="text" required="required" data-bind="value: colaboradorSelecionado.ColApelido" />
-					</label>
-				</li>
-				<li>
-					<label>
-						Nome:
-						<input id="nome" name="Nome" type="text" required="required" data-bind="value: colaboradorSelecionado.ColNome" />
-					</label>
-				</li>
-				<li>
-					<label>
-						Sobrenome:
-						<input id="sobrenome" name="SobreNome" type="text" required="required" data-bind="value: colaboradorSelecionado.ColSobrenome"/>
-					</label>
-				</li>
-				<li>
-					<label>
-						Data Nascimento:
-						<input id="dtNascimento" name="DataNascimento" type="text" required="required" data-bind="value: colaboradorSelecionado.ColDtnascimento"/>
-					</label>
+					<ul>
+						<li>
+							<label>
+								Data Entrada:
+								<input id="dtEntrada" name="DataEntrada" type="text" required="required" data-bind="value: colaboradorSelecionado.ColDtentrada"/>
+							</label>
+						</li>
+
+						<li>
+							<label>
+								Data Saída:
+								<input id="dtSaida" name="DataSaida" type="date"  data-bind="value: colaboradorSelecionado.ColDtsaida"/>
+							</label>
+						</li>
+
+						<li>
+							<label>
+								Afastamento:
+								<input id="afastamento" name="Afastamento" type="checkbox" data-bind="value: colaboradorSelecionado.ColDtsaida" />
+							</label>
+						</li>
+					</ul>
 				</li>
 
 				<li>
-					<label>
-						Email:
-						<input id="email" name="Email" type="text" data-bind="value: colaboradorSelecionado.ColEmail"/>
-					</label>
+					<ul>
+						<li>
+							<label>
+								Loja Id:
+								<input id="lojaId" name="LojaId" type="text" required="required" data-bind="value: colaboradorSelecionado.LojId"/>
+							</label>
+						</li>
+
+						<li>
+							<label>
+								Cargo Id:
+								<input id="cargoId" name="Cargo" type="text" required="required" data-bind="value: colaboradorSelecionado.CarId"/>
+							</label>
+						</li>
+
+						<li>
+							<label>
+								Turno Id:
+								<input id="turnoId" name="Turno" type="text" required="required" data-bind="value: colaboradorSelecionado.ColHfuId"/>
+							</label>
+						</li>
+					</ul>
 				</li>
 
-				<li>
-					<label>
-						Data Entrada:
-						<input id="dtEntrada" name="DataEntrada" type="text" required="required" data-bind="value: colaboradorSelecionado.ColDtentrada"/>
-					</label>
-				</li>
-
-				<li>
-					<label>
-						Data Saída:
-						<input id="dtSaida" name="DataSaida" type="date"  data-bind="value: colaboradorSelecionado.ColDtsaida"/>
-					</label>
-				</li>
-
-				<li>
-					<label>
-						Afastamento:
-						<input id="afastamento" name="Afastamento" type="checkbox" data-bind="value: colaboradorSelecionado.ColDtsaida" />
-					</label>
-				</li>
-
-				<li>
-					<label>
-						Loja Id:
-						<input id="lojaId" name="LojaId" type="text" required="required" data-bind="value: colaboradorSelecionado.LojId"/>
-					</label>
-				</li>
-
-				<li>
-					<label>
-						Cargo Id:
-						<input id="cargoId" name="Cargo" type="text" required="required" data-bind="value: colaboradorSelecionado.CarId"/>
-					</label>
-				</li>
-
-				<li>
-					<label>
-						Turno Id:
-						<input id="turnoId" name="Turno" type="text" required="required" data-bind="value: colaboradorSelecionado.ColHfuId"/>
-					</label>
-				</li>
 			</ul>
 		</div>
 
@@ -487,9 +568,148 @@
 		<div id="EditorLoja-view" data-role="view" data-model="viewModel" data-title="Loja" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left" data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
+					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEdicaoLoja}">Confirmar</a>
 					<span data-role="view-title"></span>
-					<a data-role="button" type="button" data-align="rigth" data-bind="events: {click: salvarEdicaoLoja}">Editar</a>
+				</div>
+			</header>
+			<ul id="info" data-role="listview" data-style="inset" data-type="group">
+				<li>
+					<ul>
+						Dados
+						<li>
+							<label>
+								CNPJ:
+							</label>
+							<input id="LojCnpj" name="Cnpj" type="text" required="required" data-bind="value: lojaSelecionada.LojCnpj" />
+						</li>
+						<li>
+							<label>
+								Razão Social:
+							</label>
+							<input id="LojRazaosocial" name="Razão Social" type="text" required="required" data-bind="value: lojaSelecionada.LojRazaosocial" />
+						</li>
+						<li>
+							<label>
+								Nome Fantasia:
+							</label>
+							<input id="LojNomefantasia" name="Nome Fantasia" type="text" required="required" data-bind="value: lojaSelecionada.LojNomefantasia" />
+						</li>
+					</ul>
+				</li>
+				<li>
+					<ul>
+						Telefone
+						<li>
+							<label>
+								DDD:
+							</label>
+							<input id="LojDdd" name="DDD" type="text" required="required" data-bind="value: lojaSelecionada.LojDdd" />
+						</li>
+						<li>
+							<label>
+								Telefone:
+							</label>
+							<input id="LojTelefone" name="Telefone" type="text" required="required" data-bind="value: lojaSelecionada.LojTelefone" />
+						</li>
+
+					</ul>
+				</li>
+				<li>
+					<ul>
+						Endereço
+						<li>
+							<label>
+								Logradouro:
+							</label>
+							<input id="LojLogradouro" name="Logradouro" type="text" required="required" data-bind="value: lojaSelecionada.LojLogradouro" />
+						</li>
+						<li>
+							<label>
+								Nº:
+							</label>
+							<input id="LojNumero" name="Nº" type="number" required="required" data-bind="value: lojaSelecionada.LojNumero" />
+						</li>
+						<li>
+							<label>
+								Complemento:
+							</label>
+							<input id="LojComplemento" name="Complemento" type="text" required="required" data-bind="value: lojaSelecionada.LojComplemento" />
+						</li>
+						<li>
+							<label>
+								Bairro:
+							</label>
+							<input id="LojBairro" name="Bairro" type="text" required="required" data-bind="value: lojaSelecionada.LojBairro" />
+						</li>
+						<li>
+							<label>
+								Cidade:
+							</label>
+							<input id="LojCidade" name="Cidade" type="text" required="required" data-bind="value: lojaSelecionada.LojCidade" />
+						</li>
+						<li>
+							<label>
+								Uf:
+							</label>
+							<input id="LojUf" name="Uf" type="text" required="required" data-bind="value: lojaSelecionada.LojUf" />
+						</li>
+						<li>
+							<label>
+								Cep:
+							</label>
+							<input id="LojCep" name="Cep" type="text" required="required" data-bind="value: lojaSelecionada.LojCep" />
+						</li>
+					</ul>
+				</li>
+				<li>
+					<ul>
+						<li>
+							<label>
+								Loja de:
+								<select>
+									<option value="1">Shopping</option>
+									<option value="0">Rua</option>
+								</select>
+							</label>
+							<!--<input id="LojShopping_rua" name="Loja de" type="check" required="required" data-bind="value: lojaSelecionada.LojShopping_rua" />-->
+
+						</li>
+						<li>
+							<label>
+								Data Cadastro:
+							</label>
+							<input id="Data Cadastro" name="Cpf" type="date" required="required" data-bind="value: lojaSelecionada.LojDtcadastro" />
+						</li>
+					</ul>
+				</li>
+				<li>
+					<ul>
+						Coordenadas
+						<li>
+							<label>
+								Latitude:
+							</label>
+							<input id="LojLatitude" name="Latitude" type="text" required="required" data-bind="value: lojaSelecionada.LojLatitude" />
+						</li>
+						<li>
+							<label>
+								Longitude:
+							</label>
+							<input id="LojLongitude" name="Longitude" type="text" required="required" data-bind="value: lojaSelecionada.LojLongitude" />
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+                                
+        <!--Escala de trabalho View-->
+		<div id="Escala-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="home-layout" >
+			<header data-role="header">
+				<div data-role="navbar">
+					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEdicaoLoja}">Confirmar</a>
+					<span data-role="view-title"></span>
 				</div>
 			</header>
 			<ul id="info" data-role="listview" data-style="inset" data-type="group">
@@ -622,7 +842,7 @@
 				</li>
 			</ul>
 		</div>
-
+                                
 		<!--Validação dispositivo View-->
 		<div data-role="view" id="validacaoDispositivo-view" data-title="Top Line" data-model="viewModel" data-init="initValidacao">
 			<header data-role="header">
@@ -691,8 +911,8 @@
 		<script>
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
-				loading: '<h1 class="loading-message">Carregando...</h1>',
-				initial: "#validacaoDispositivo-view"
+				loading: '<h1 class="loading-message">Carregando...</h1>'
+				,initial: "#validacaoDispositivo-view"
 			});
 			
 			/*
@@ -716,6 +936,7 @@
 				}
 			}
             
+
 			function switchChange(e) {
 				if (e.checked) {
 					alert("verdadeiro");

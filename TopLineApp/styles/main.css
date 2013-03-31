@@ -270,3 +270,28 @@ div a
     font-size: 12px;
 }
 
+.km-listview h3
+{
+	margin: 1px;
+	margin-left: 0px;
+	font-weight: bold;
+}
+
+#info span
+{
+	font-size: 12px;
+	alignment-adjust: left;
+    color: #476BD6; 
+    font-weight: bold;
+}
+
+#info label
+{ 
+	display: block; width: 100px; float: left; padding-top: 6px; color: #2e2e2e;
+}
+
+.content
+{
+	margin: 80px 5px;
+	text-align: center;
+}

@@ -111,9 +111,9 @@
 				TloId: { editable: false, nullable: false },
 				LojCnpj: { editable: false, nullable: false },
 				LojCodigo: { editable: false, nullable: false },
-				LojRazaoSocial: { editable: false, nullable: false },           
-				LojNomeFantasia: { editable: false, nullable: false },
-				LojDDD: { editable: false, nullable: false },                        
+				LojRazaosocial: { editable: false, nullable: false },           
+				LojNomefantasia: { editable: false, nullable: false },
+				LojDdd: { editable: false, nullable: false },                        
 				LojTelefone: { editable: false, nullable: false },
 				LojLogradouro: { editable: false, nullable: false },                        
 				LojNumero: { editable: false, nullable: false },
@@ -124,7 +124,7 @@
 				LojCep: { editable: false, nullable: false },           				
 				LojShopping_rua: { editable: false, nullable: false },                        
 				LojFranquia: { editable: false, nullable: false },				
-				LojDtCadastro: { editable: false, nullable: false },
+				LojDtcadastro: { editable: false, nullable: false },
 				LojLatitude: { editable: false, nullable: false },
 				LojLongitude: { editable: false, nullable: false }
 			}     
@@ -331,11 +331,11 @@
 		schema: schemaAtendimento,
  	});
 		
-    //dataSource    
+	//dataSource    
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl + "/RmLoja",							
+				url: baseUrl + "/RmLoja",
 				type:"GET",
 				contentType: "application/json",
 				dataType: "json"
@@ -360,7 +360,16 @@
 			}                 
 		},
 		batch: true,
-		schema: scLoja
+		schema: scLoja,
+		change: function(e) {            
+			viewModel.set("lojaSelecionada", e.items[0]);
+			console.log(viewModel, "Sucesso");			
+			app.navigate("#detalhesLoja-view");
+		},
+		error: function(e) {
+			console.log(e);
+			alert("Erro em view Model")
+		}
 	})
     
 	//DataSource Colaborador
@@ -408,7 +417,7 @@
         
 		vendedorSelecionado: {},		
 		atendimento: {},
-		lojaSelecionada: [],
+		lojaSelecionada: {},
 		colaboradorSelecionado: {},
 		cargoSelecionado: {},
 		turnoSelecionado: {},
@@ -428,7 +437,8 @@
 		tiposMovtoSaida : tiposMovtoSaida,
 		tiposMovtoEntrada : tiposMovtoEntrada,        
 		lojas: lojas,
-        listViewInitFila: listViewInitFila
+        listViewInitFila: listViewInitFila,
+		initValidacao: initValidacao
 		
 	});
 
@@ -475,23 +485,28 @@
 	}
     
 	function editarColaborador(e) {
-		cameraApp = new cameraApp();
-		cameraApp.run();
 		var colaborador = viewModel.dsColaborador.get(e.context);                 
 		viewModel.set("colaboradorSelecionado", colaborador);  
 		app.navigate("#editorColaborador-view"); 
 	}
     
 	function salvarColaborador() {   
-		if (validator.validate()) {
-			viewModel.dsColaborador.sync();
-			app.navigate("#colaboradores-view");          
-		}
+		//if (validator.validate()) {
+		viewModel.dsColaborador.sync();
+		//app.navigate("#colaboradores-view"); 
+		$("#lColaborador").data("kendoListView").refresh();
+		app.navigate("#:back");          
+		//}
 	}
 	    
 	function cancelarColaborador() {
 		viewModel.dsColaborador.cancelChanges();
-		app.navigate("#colaboradores-view");
+		//app.navigate("#colaboradores-view");
+		app.navigate("#:back");
+	}
+ 
+	function editarLoja() {
+		app.navigate("#EditorLoja-view"); 
 	}
  
 	function vendedoresFila() {
@@ -642,116 +657,21 @@
         });
     }
  
-    //Camera
-	function id(element) {
-		return document.getElementById(element);
+	function editorViewInitCol() {
+		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
     
-	function cameraApp() {
+	function initValidacao() {
+		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {
+			validacaoDispositivo();			
+		});
 	}
-
-	cameraApp.prototype = {
-		_pictureSource: null,    
-		_destinationType: null,
     
-		run: function() {
-			var that = this;
-			that._pictureSource = navigator.camera.PictureSourceType;
-			that._destinationType = navigator.camera.DestinationType;
-			id("capturePhotoButton").addEventListener("click", function() {
-				that._capturePhoto.apply(that, arguments);
-			});
-			id("capturePhotoEditButton").addEventListener("click", function() {
-				that._capturePhotoEdit.apply(that, arguments)
-			});
-			id("getPhotoFromLibraryButton").addEventListener("click", function() {
-				that._getPhotoFromLibrary.apply(that, arguments)
-			});
-			id("getPhotoFromAlbumButton").addEventListener("click", function() {
-				that._getPhotoFromAlbum.apply(that, arguments);
-			});
-		},
-    
-		_capturePhoto: function() {
-			var that = this;
-        
-			// Take picture using device camera and retrieve image as base64-encoded string.
-			navigator.camera.getPicture(function() {
-				that._onPhotoDataSuccess.apply(that, arguments);
-			}, function() {
-				that._onFail.apply(that, arguments);
-			}, {
-				quality: 50,
-				destinationType: that._destinationType.DATA_URL
-			});
-		},
-    
-		_capturePhotoEdit: function() {
-			var that = this;
-			// Take picture using device camera, allow edit, and retrieve image as base64-encoded string. 
-			// The allowEdit property has no effect on Android devices.
-			navigator.camera.getPicture(function() {
-				that._onPhotoDataSuccess.apply(that, arguments);
-			}, function() {
-				that._onFail.apply(that, arguments);
-			}, {
-				quality: 20, allowEdit: true,
-				destinationType: cameraApp._destinationType.DATA_URL
-			});
-		},
-    
-		_getPhotoFromLibrary: function() {
-			var that = this;
-			// On Android devices, pictureSource.PHOTOLIBRARY and
-			// pictureSource.SAVEDPHOTOALBUM display the same photo album.
-			that._getPhoto(that._pictureSource.PHOTOLIBRARY);         
-		},
-    
-		_getPhotoFromAlbum: function() {
-			var that = this;
-			// On Android devices, pictureSource.PHOTOLIBRARY and
-			// pictureSource.SAVEDPHOTOALBUM display the same photo album.
-			that._getPhoto(that._pictureSource.SAVEDPHOTOALBUM)
-		},
-    
-		_getPhoto: function(source) {
-			var that = this;
-			// Retrieve image file location from specified source.
-			navigator.camera.getPicture(function() {
-				that._onPhotoURISuccess.apply(that, arguments);
-			}, function() {
-				cameraApp._onFail.apply(that, arguments);
-			}, {
-				quality: 50,
-				destinationType: cameraApp._destinationType.FILE_URI,
-				sourceType: source
-			});
-		},
-    
-		_onPhotoDataSuccess: function(imageData) {
-			var smallImage = document.getElementById('smallImage');
-			smallImage.style.display = 'block';
-    
-			// Show the captured photo.
-			smallImage.src = "data:image/jpeg;base64," + imageData;            
-            viewModel.colaboradorSelecionado.set("ColFoto", imageData);
-            
-		},
-    
-		_onPhotoURISuccess: function(imageURI) {
-			var smallImage = document.getElementById('smallImage');
-			smallImage.style.display = 'block';
-         
-			// Show the captured photo.
-			smallImage.src = imageURI;
-		},
-    
-		_onFail: function(message) {
-			alert('Failed! Error: ' + message);
-		}
+	function validacaoDispositivo() {
+		var iptCnpjInicial = document.getElementById("iptCnpjInicial");
+		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + iptCnpjInicial.value ;
+		dsLoja.read(); 
 	}
- 
-	//Camera
     
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
@@ -771,7 +691,8 @@
 		showAtendimento: adicionarAtendimento,
         listViewInitFila: listViewInitFila,
 		atendimentoViewInit: atendimentoViewInit,
-		viewModel: viewModel
+		viewModel: viewModel,
+		initValidacao: initValidacao
 		
         
 	});

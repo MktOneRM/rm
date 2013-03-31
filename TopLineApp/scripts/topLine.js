@@ -155,26 +155,25 @@
 		model: {
 			id: "LojId",
 			fields: {
-				LojId: { type: "int", editable: false, nullable: false , defaultValue:0},
-				TloId: { editable: false, nullable: false },
-				LojCnpj: { editable: false, nullable: false },
-				LojCodigo: { editable: false, nullable: false },
-				LojRazaosocial: { editable: false, nullable: false },           
-				LojNomefantasia: { editable: false, nullable: false },
-				LojDdd: { editable: false, nullable: false },                        
-				LojTelefone: { editable: false, nullable: false },
-				LojLogradouro: { editable: false, nullable: false },                        
-				LojNumero: { editable: false, nullable: false },
-				LojComplemento: { editable: false, nullable: false },
-				LojBairro: { editable: false, nullable: false },
-				LojCidade: { editable: false, nullable: false },
-				LojUF: { editable: false, nullable: false },
-				LojCep: { editable: false, nullable: false },           				
-				LojShopping_rua: { editable: false, nullable: false },                        
-				LojFranquia: { editable: false, nullable: false },				
-				LojDtcadastro: { editable: false, nullable: false },
-				LojLatitude: { editable: false, nullable: false },
-				LojLongitude: { editable: false, nullable: false }
+				LojId: { type: "int", editable: false, nullable: false},
+				TloId: { type: "int", validation: { required: false} },            
+				LojCnpj: { type: "text", validation: { required: true} },            
+				LojCodigo: { type: "text", validation: { required: true} },            
+				LojRazaosocial: { type: "text", validation: { required: true} },                       
+				LojNomefantasia: { type: "text", validation: { required: true} },            
+				LojDdd: { type: "text", validation: { required: false} },                                    
+				LojTelefone: { type: "text", validation: { required: false} },            
+				LojLogradouro: { type: "text", validation: { required: false} },                                    
+				LojNumero: { type: "text", validation: { required: false} },            
+				LojComplemento: { type: "text", validation: { required: false} },            
+				LojBairro: { type: "text", validation: { required: false} },            
+				LojCidade: { type: "text", validation: { required: false} },            
+				LojUF: { type: "text", validation: { required: false} },            
+				LojCep: { type: "text", validation: { required: false} },                       				
+				LojShopping_rua: { type: "boolean", validation: { required: false} },                                    				
+				LojDtcadastro: { type: "date", validation: { required: true} },            
+				LojLatitude: { type: "number", validation: { required: false} },            
+				LojLongitude: { type: "number", validation: { required: false} },            
 			}     
 		}
 	};
@@ -418,7 +417,7 @@
 		},
 		error: function(e) {
 			if (e.errorThrown == "Not Found") {
-				console.log(e, "Erro em view Model");             
+                adicionarLoja();                
 			}
 		},
 		complete: function() {
@@ -497,6 +496,7 @@
         
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
+        cancelarEdicaoLoja: cancelarEdicaoLoja
 		
 	});
 

@@ -1,4 +1,5 @@
 (function($, undefined) {
+	//var iptCnpj = document.getElementById("iptCnpjInicial");
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["srcPath"].get();
@@ -110,9 +111,9 @@
 				TloId: { editable: false, nullable: false },
 				LojCnpj: { editable: false, nullable: false },
 				LojCodigo: { editable: false, nullable: false },
-				LojRazaoSocial: { editable: false, nullable: false },           
-				LojNomeFantasia: { editable: false, nullable: false },
-				LojDDD: { editable: false, nullable: false },                        
+				LojRazaosocial: { editable: false, nullable: false },           
+				LojNomefantasia: { editable: false, nullable: false },
+				LojDdd: { editable: false, nullable: false },                        
 				LojTelefone: { editable: false, nullable: false },
 				LojLogradouro: { editable: false, nullable: false },                        
 				LojNumero: { editable: false, nullable: false },
@@ -123,7 +124,7 @@
 				LojCep: { editable: false, nullable: false },           				
 				LojShopping_rua: { editable: false, nullable: false },                        
 				LojFranquia: { editable: false, nullable: false },				
-				LojDtCadastro: { editable: false, nullable: false },
+				LojDtcadastro: { editable: false, nullable: false },
 				LojLatitude: { editable: false, nullable: false },
 				LojLongitude: { editable: false, nullable: false }
 			}     
@@ -388,7 +389,7 @@
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl + "/RmLoja",							
+				url: baseUrl + "/RmLoja",
 				type:"GET",
 				contentType: "application/json",
 				dataType: "json"
@@ -413,7 +414,16 @@
 			}                 
 		},
 		batch: true,
-		schema: scLoja
+		schema: scLoja,
+		change: function(e) {            
+			viewModel.set("lojaSelecionada", e.items[0]);
+			console.log(viewModel, "Sucesso");			
+			app.navigate("#detalhesLoja-view");
+		},
+		error: function(e) {
+			console.log(e);
+			alert("Erro em view Model")
+		}
 	})
     
 	//DataSource Colaborador
@@ -475,13 +485,16 @@
 		editarColaborador: editarColaborador,
 		cancelarColaborador: cancelarColaborador,
         
+        editarLoja: editarLoja,
+        
 		vendedoresFila : vendedoresFila,
 		vendedoresForaFila : vendedoresForaFila,
 		vendedoresForaTurno : vendedoresForaTurno,
 		tiposMovtoSaida : tiposMovtoSaida,
 		tiposMovtoEntrada : tiposMovtoEntrada,        
 		lojas: lojas,
-		listViewInitFila: listViewInitFila
+		listViewInitFila: listViewInitFila,
+		initValidacao: initValidacao
 		
 	});
 
@@ -537,7 +550,7 @@
 		//if (validator.validate()) {
 		viewModel.dsColaborador.sync();
 		//app.navigate("#colaboradores-view"); 
-        $("#lColaborador").data("kendoListView").refresh();
+		$("#lColaborador").data("kendoListView").refresh();
 		app.navigate("#:back");          
 		//}
 	}
@@ -545,9 +558,13 @@
 	function cancelarColaborador() {
 		viewModel.dsColaborador.cancelChanges();
 		//app.navigate("#colaboradores-view");
-        app.navigate("#:back");
+		app.navigate("#:back");
 	}
  
+	function editarLoja() {
+		app.navigate("#EditorLoja-view"); 
+	}
+    
 	function vendedoresFila() {
 		atualizaFilaNoSalao(dsVendFila, 1);
 	}
@@ -628,6 +645,18 @@
 		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
     
+	function initValidacao() {
+		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {
+			validacaoDispositivo();			
+		});
+	}
+    
+	function validacaoDispositivo() {
+		var iptCnpjInicial = document.getElementById("iptCnpjInicial");
+		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + iptCnpjInicial.value ;
+		dsLoja.read(); 
+	}
+    
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,
@@ -647,8 +676,8 @@
 		showAtendimento: adicionarAtendimento,
 		listViewInitFila: listViewInitFila,
 		editorViewInit: editorViewInit,
-		viewModel: viewModel
-		
+		viewModel: viewModel,
+		initValidacao: initValidacao
         
 	});
 })(jQuery);

@@ -72,6 +72,7 @@
     <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="kendo\js\kendo.indexedlistview.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />
+    <Content Include="kendo\styles\default\loading-image.gif" />
     <Content Include="kendo\styles\kendo.indexedlistview.css" />
     <Content Include="Bkp\app.js" />
     <Content Include="Bkp\data.js" />
@@ -97,6 +98,7 @@
     <Content Include="Bkp\main.js" />
     <Content Include="Bkp\utils.js" />
     <Content Include="scripts\topLineCamera.js" />
+    <Content Include="scripts\topLineLocalStorage.js" />
     <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">
       <Platform>iOS</Platform>

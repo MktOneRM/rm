@@ -14,8 +14,20 @@
 			var value = this.bindings["cpf"].get();
 			if (value) {
 				$(this.element).text(formatField(value, "999.999.999-99"));
-				viewModel.colaboradorSelecionado.set("ColCpf", formatField(value, "999.999.999-99"));
-				console.log(viewModel.colaboradorSelecionado);
+				viewModel.colaboradorSelecionado.set("ColCpf", formatField(value, "999.999.999-99"));				
+			}
+		}
+        
+	});
+            
+	kendo.data.binders.cnpj = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["cnpj"].get();
+            alert("Pqp");
+            
+			if (value) {
+				$(this.element).text(formatField(value, "99.999.999.9999-99"));
+				viewModel.lojaSelecionada.set("LojCnpj", formatField(value, "99.999.999.9999-99"));				
 			}
 		}
         

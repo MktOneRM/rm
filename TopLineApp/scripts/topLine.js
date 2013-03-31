@@ -1,5 +1,4 @@
 (function($, undefined) {
-    
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["srcPath"].get();
@@ -13,13 +12,23 @@
 	kendo.data.binders.format = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["format"].get();
-
 			if (value) {
 				$(this.element).text(kendo.toString(value, "c"));
 			}
 		}
 	});
 
+	kendo.data.binders.ShopRua = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["ShopRua"].get();            
+			if (value) {
+				$(this.element).text("Shopping");
+			}else{
+                $(this.element).text("Rua");
+            }
+		}
+	});
+    
 	kendo.data.binders.innerText = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["innerText"].get();
@@ -30,6 +39,20 @@
 		}
 	});
  
+	kendo.data.binders.date = kendo.data.Binder.extend({
+		init: function (element, bindings, options) {
+			kendo.data.Binder.fn.init.call(this, element, bindings, options); 
+			this.dateformat = $(element).data("dateformat");
+		},
+		refresh: function () {
+			var data = this.bindings["date"].get();
+			if (data) {
+				var dateObj = new Date(data);                
+				$(this.element).text(kendo.toString(dateObj, this.dateformat));
+			}
+		}
+	});
+    
 	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
 	//var baseUrl = "http://localhost:50000/api";
 
@@ -329,7 +352,7 @@
 		},
 		batch: true,
 		schema: schemaAtendimento,
- 	});
+	});
 		
 	//dataSource    
 	var dsLoja = new kendo.data.DataSource({                    
@@ -437,7 +460,7 @@
 		tiposMovtoSaida : tiposMovtoSaida,
 		tiposMovtoEntrada : tiposMovtoEntrada,        
 		lojas: lojas,
-        listViewInitFila: listViewInitFila,
+		listViewInitFila: listViewInitFila,
 		initValidacao: initValidacao
 		
 	});
@@ -559,100 +582,102 @@
 		context.read();
 	}
     
-    function atendimentoViewInit(e) {
-        var view = e.view;
-        view.element.find("#done").data("kendoMobileButton").bind("click", function() {
-            view.loader.show();
-            salvarAtendimento();
-            viewModel.dsVendFila.one("requestEnd", function() {
-                vendedoresFila();
-                view.loader.hide();
-                app.navigate("#dentroFila-view");
-             });
-          });
+	function atendimentoViewInit(e) {
+		var view = e.view;
+		view.element.find("#done").data("kendoMobileButton").bind("click", function() {
+			view.loader.show();
+			salvarAtendimento();
+			viewModel.dsVendFila.one("requestEnd", function() {
+				vendedoresFila();
+				view.loader.hide();
+				app.navigate("#dentroFila-view");
+			});
+		});
 
-        view.element.find("#cancelAtendimento").data("kendoMobileBackButton").bind("click", function(e) {
-                view.loader.show();
-                viewModel.dsAtendimento.cancelChanges();
-                viewModel.dsAtendimento.one("requestEnd", function() {
-                vendedoresFila();
-            });
-            view.loader.hide();
-            app.navigate("#dentroFila-view");
-        });
+		view.element.find("#cancelAtendimento").data("kendoMobileBackButton").bind("click", function(e) {
+			view.loader.show();
+			viewModel.dsAtendimento.cancelChanges();
+			viewModel.dsAtendimento.one("requestEnd", function() {
+				vendedoresFila();
+			});
+			view.loader.hide();
+			app.navigate("#dentroFila-view");
+		});
 	}
 
-   //<!--Atendimento-->
+	//<!--Atendimento-->
      
-    function listViewInitFila(e) {
-        tiposMovtoSaida();
-        e.view.element.find("#listviewFila").kendoMobileListView({
-            dataSource: dsVendFila,
-            template: $("#tdentroFila").html()
-        })    
+	function listViewInitFila(e) {
+		tiposMovtoSaida();
+		e.view.element.find("#listviewFila").kendoMobileListView({
+			dataSource: dsVendFila,
+			template: $("#tdentroFila").html()
+		})    
         
-        .kendoTouch({
-            filter: ">li",
-            enableSwipe: true,
-            touchstart: touchstart,
-            tap: navigate,
-            swipe: swipe
-        });
-    }
+		.kendoTouch({
+			filter: ">li",
+			enableSwipe: true,
+			touchstart: touchstart,
+			tap: navigate,
+			swipe: swipe
+		});
+	}
 
-    function navigate(e) {
-        var itemUID = $(e.touch.currentTarget).data("uid");
-        var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
-    	viewModel.set("vendedorSelecionado", schemaVendedores);
-        adicionarAtendimento();
-        app.navigate("#resultadoAtendimento-view");
-     }
+	function navigate(e) {
+		var itemUID = $(e.touch.currentTarget).data("uid");
+		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
+		viewModel.set("vendedorSelecionado", schemaVendedores);
+		adicionarAtendimento();
+		app.navigate("#resultadoAtendimento-view");
+	}
 
-    function swipe(e) {
-        var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
-        button.expand().duration(200).play();
-    }
+	function swipe(e) {
+		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
+		button.expand().duration(200).play();
+	}
 
-    function touchstart(e) {
-        var itemUID = $(e.touch.currentTarget).data("uid");
-        var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
-        var target = $(e.touch.initialTouch),
-             listviewFila = $("#listviewFila").data("kendoMobileListView"),
-             button = $(e.touch.target).find("[data-role=button]:visible");
+	function touchstart(e) {
+		var itemUID = $(e.touch.currentTarget).data("uid");
+		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
+		var target = $(e.touch.initialTouch),
+		listviewFila = $("#listviewFila").data("kendoMobileListView"),
+		button = $(e.touch.target).find("[data-role=button]:visible");
 
-        if (target.closest("[data-role=button]")[0]) {
-            viewModel.set("vendedorSelecionado", schemaVendedores);
-            app.navigate("#sairdaFila_View");
+		if (target.closest("[data-role=button]")[0]) {
+			viewModel.set("vendedorSelecionado", schemaVendedores);
+			app.navigate("#sairdaFila_View");
     
-            //prevent `swipe`
-            this.events.cancel();
-            e.event.stopPropagation();
-        } else if (button[0]) {
-            button.hide();
+			//prevent `swipe`
+			this.events.cancel();
+			e.event.stopPropagation();
+		}
+		else if (button[0]) {
+			button.hide();
 
-            //prevent `swipe`
-            this.events.cancel();
-        } else {
-            listviewFila.items().find("[data-role=button]:visible").hide();
-        }
-    }
+			//prevent `swipe`
+			this.events.cancel();
+		}
+		else {
+			listviewFila.items().find("[data-role=button]:visible").hide();
+		}
+	}
     
-    //Sair da Fila
-    function sairFilaViewInit(e) {
-        var view = e.view;
-        view.element.find("#listviewMotivosSaida").kendoMobileListView({
-            dataSource: dsTiposMovto,
-            template: $("#tpTiposMovto").html()
-        })
+	//Sair da Fila
+	function sairFilaViewInit(e) {
+		var view = e.view;
+		view.element.find("#listviewMotivosSaida").kendoMobileListView({
+			dataSource: dsTiposMovto,
+			template: $("#tpTiposMovto").html()
+		})
  
-        view.element.find("#cancelSair").data("kendoMobileBackButton").bind("click", function(e) {
-            view.loader.show();
-            $("#dentroFila-view").data("kendoMobileView").contentElement();
-            vendedoresFila();
-            view.loader.hide();
-            app.navigate("#dentroFila-view");
-        });
-    }
+		view.element.find("#cancelSair").data("kendoMobileBackButton").bind("click", function(e) {
+			view.loader.show();
+			$("#dentroFila-view").data("kendoMobileView").contentElement();
+			vendedoresFila();
+			view.loader.hide();
+			app.navigate("#dentroFila-view");
+		});
+	}
  
 	function editorViewInitCol() {
 		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
@@ -684,9 +709,9 @@
   
 		showColaboradores: colaboradores,
 		showDetalhesColaborador: detalhesColaborador,     
-        sairFilaViewInit : sairFilaViewInit,
+		sairFilaViewInit : sairFilaViewInit,
 		showAtendimento: adicionarAtendimento,
-        listViewInitFila: listViewInitFila,
+		listViewInitFila: listViewInitFila,
 		atendimentoViewInit: atendimentoViewInit,
 		viewModel: viewModel,
 		initValidacao: initValidacao

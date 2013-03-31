@@ -9,7 +9,7 @@
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
-		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
+		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
 	</head>
@@ -353,6 +353,7 @@
 						</li>
 					</ul>
 				</li>
+                
 				<li>
 					<ul>
 						<li>
@@ -537,12 +538,12 @@
 						<li>
 							<label>
 								Loja de:
-							</label><span data-bind="text: LojShopping_rua"></span>
+							</label><span data-bind="ShopRua: LojShopping_rua"></span>
 						</li>
 						<li>
 							<label>
 								Data Cadastro:
-							</label><span data-bind="text: LojDtcadastro"></span>
+							</label><span data-bind="date: LojDtcadastro" data-dateformat="dd-MM-yyyy"></span>
 						</li>
 					</ul>
 				</li>

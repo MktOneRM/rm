@@ -43,9 +43,13 @@
 			</div>
 		</div>
 
-		<!-- Fila da Vez -->
+		<!-- Fila da Vez
 		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-model="viewModel" data-init="listViewInitFila">
 			<ul id="listviewFila" data-role="listview" data-style="inset"></ul>
+		</div>
+         -->
+		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel">
+			<ul data-bind="source: dsVendFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" data-style="inset"></ul>
 		</div>
 
 		<!-- Fora da Fila da Vez -->
@@ -712,7 +716,6 @@
 				}
 			}
             
-
 			function switchChange(e) {
 				if (e.checked) {
 					alert("verdadeiro");

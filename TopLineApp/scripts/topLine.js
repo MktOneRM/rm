@@ -493,8 +493,6 @@
 	function salvarColaborador() {   
 		//if (validator.validate()) {
 		viewModel.dsColaborador.sync();
-		//app.navigate("#colaboradores-view"); 
-		$("#lColaborador").data("kendoListView").refresh();
 		app.navigate("#:back");          
 		//}
 	}

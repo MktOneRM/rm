@@ -23,9 +23,10 @@
 			var value = this.bindings["ShopRua"].get();            
 			if (value) {
 				$(this.element).text("Shopping");
-			}else{
-                $(this.element).text("Rua");
-            }
+			}
+			else {
+				$(this.element).text("Rua");
+			}
 		}
 	});
     
@@ -130,26 +131,25 @@
 		model: {
 			id: "LojId",
 			fields: {
-				LojId: { type: "int", editable: false, nullable: false , defaultValue:0},
-				TloId: { editable: false, nullable: false },
-				LojCnpj: { editable: false, nullable: false },
-				LojCodigo: { editable: false, nullable: false },
-				LojRazaosocial: { editable: false, nullable: false },           
-				LojNomefantasia: { editable: false, nullable: false },
-				LojDdd: { editable: false, nullable: false },                        
-				LojTelefone: { editable: false, nullable: false },
-				LojLogradouro: { editable: false, nullable: false },                        
-				LojNumero: { editable: false, nullable: false },
-				LojComplemento: { editable: false, nullable: false },
-				LojBairro: { editable: false, nullable: false },
-				LojCidade: { editable: false, nullable: false },
-				LojUF: { editable: false, nullable: false },
-				LojCep: { editable: false, nullable: false },           				
-				LojShopping_rua: { editable: false, nullable: false },                        
-				LojFranquia: { editable: false, nullable: false },				
-				LojDtcadastro: { editable: false, nullable: false },
-				LojLatitude: { editable: false, nullable: false },
-				LojLongitude: { editable: false, nullable: false }
+				LojId: { type: "int", editable: false, nullable: false},
+				TloId: { type: "int", validation: { required: false} },            
+				LojCnpj: { type: "text", validation: { required: true} },            
+				LojCodigo: { type: "text", validation: { required: true} },            
+				LojRazaosocial: { type: "text", validation: { required: true} },                       
+				LojNomefantasia: { type: "text", validation: { required: true} },            
+				LojDdd: { type: "text", validation: { required: false} },                                    
+				LojTelefone: { type: "text", validation: { required: false} },            
+				LojLogradouro: { type: "text", validation: { required: false} },                                    
+				LojNumero: { type: "text", validation: { required: false} },            
+				LojComplemento: { type: "text", validation: { required: false} },            
+				LojBairro: { type: "text", validation: { required: false} },            
+				LojCidade: { type: "text", validation: { required: false} },            
+				LojUF: { type: "text", validation: { required: false} },            
+				LojCep: { type: "text", validation: { required: false} },                       				
+				LojShopping_rua: { type: "boolean", validation: { required: false} },                                    				
+				LojDtcadastro: { type: "date", validation: { required: true} },            
+				LojLatitude: { type: "number", validation: { required: false} },            
+				LojLongitude: { type: "number", validation: { required: false} },            
 			}     
 		}
 	};
@@ -383,12 +383,11 @@
 			}                 
 		},
 		batch: true,
-		schema: scLoja,
-		change: function(e) {            
-			viewModel.set("lojaSelecionada", e.items[0]);
-			console.log(viewModel, "Sucesso");			
+		schema: scLoja,		
+        requestEnd: function(e){
+            viewModel.set("lojaSelecionada", e.response);					
 			app.navigate("#detalhesLoja-view");
-		},
+        },
 		error: function(e) {
 			console.log(e);
 			alert("Erro em view Model")
@@ -461,7 +460,9 @@
 		tiposMovtoEntrada : tiposMovtoEntrada,        
 		lojas: lojas,
 		listViewInitFila: listViewInitFila,
-		initValidacao: initValidacao
+		initValidacao: initValidacao,
+        
+		editorLojaViewInit: editorLojaViewInit
 		
 	});
 
@@ -497,6 +498,7 @@
     
 	function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
+		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);
 		app.navigate("#editorColaborador-view");
 	}
@@ -528,6 +530,19 @@
  
 	function editarLoja() {
 		app.navigate("#EditorLoja-view"); 
+	}
+    
+	function salvarEdicaoLoja() {
+		alert("Cheguei aqui!");
+		return;
+        
+		viewModel.dsLoja.sync();
+		app.navigate("#:back");
+	}
+    
+	function cancelarEdicaoLoja() {
+		viewModel.dsLoja.cancelChanges();
+		app.navigate("#:back");
 	}
  
 	function vendedoresFila() {
@@ -683,6 +698,10 @@
 		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
     
+	function editorLojaViewInit() {
+		validator = $("#editorLoja").kendoValidator({}).data("kendoValidator");
+	}
+    
 	function initValidacao() {
 		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {
 			validacaoDispositivo();			
@@ -714,8 +733,10 @@
 		listViewInitFila: listViewInitFila,
 		atendimentoViewInit: atendimentoViewInit,
 		viewModel: viewModel,
-		initValidacao: initValidacao
+		initValidacao: initValidacao,
 		
+		editorLojaViewInit: editorLojaViewInit
+        
         
 	});
 })(jQuery);

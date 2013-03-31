@@ -304,3 +304,32 @@ div a
 	margin: 80px 5px;
 	text-align: center;
 }
+
+
+#infoLoja span
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+}
+
+#infoLoja label
+{ 
+	display: block; width: 90px; float: left; padding-top: 6px; color: #2e2e2e;
+}
+
+
+#editorLoja input
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+    left: 100px;
+}
+
+#editorLoja label
+{ 
+	display: block; width: 90px; float: left; color: #2e2e2e; 
+}

@@ -225,7 +225,6 @@
 			</ul>
 
 		</div>
-
                                 
 		<!--Detalhes Colaboradores view-->
 		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Colaboradores" data-layout="home-layout"  >
@@ -439,7 +438,7 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul id="info" data-role="listview" data-style="inset" data-type="group">
+			<ul id="infoLoja" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul>
 						Dados
@@ -549,7 +548,7 @@
 		</div>
 
 		<!--Editor Loja View-->
-		<div id="EditorLoja-view" data-role="view" data-model="viewModel" data-title="Loja" data-layout="home-layout" >
+		<div id="EditorLoja-view" data-role="view" data-model="viewModel" data-title="Loja" data-layout="home-layout" data-init="editorLojaViewInit">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
@@ -557,27 +556,34 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul id="info" data-role="listview" data-style="inset" data-type="group">
+			<ul id="editorLoja" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul>
 						Dados
 						<li>
 							<label>
-								CNPJ:
+								CNPJ:               
+                                <input id="LojCnpj" name="Cnpj" type="text" placeholder="Cnpj" required="required" data-bind="value: lojaSelecionada.LojCnpj" required validationmessage="Requerido"/>                            
 							</label>
-							<input id="LojCnpj" name="Cnpj" type="text" required="required" data-bind="value: lojaSelecionada.LojCnpj" />
+                            
+						</li>
+                        <li>
+							<label>
+								Código da Loja:
+							</label>
+							<input id="LojCodigo" name="Código" type="text" placeholder="Código" required="required" data-bind="value: lojaSelecionada.LojCodigo" required validationmessage="Requerido"/>                            
 						</li>
 						<li>
 							<label>
 								Razão Social:
 							</label>
-							<input id="LojRazaosocial" name="Razão Social" type="text" required="required" data-bind="value: lojaSelecionada.LojRazaosocial" />
+							<input id="LojRazaosocial" name="RazaoSocial"  placeholder="Razão Social"  type="text" required="required" data-bind="value: lojaSelecionada.LojRazaosocial" required validationmessage="Requerido" />
 						</li>
 						<li>
 							<label>
 								Nome Fantasia:
 							</label>
-							<input id="LojNomefantasia" name="Nome Fantasia" type="text" required="required" data-bind="value: lojaSelecionada.LojNomefantasia" />
+							<input id="LojNomefantasia" name="NomeFantasia"  placeholder="Nome Fantasia" type="text" required="required" data-bind="value: lojaSelecionada.LojNomefantasia" required validationmessage="Requerido" />
 						</li>
 					</ul>
 				</li>
@@ -663,7 +669,7 @@
 							<label>
 								Data Cadastro:
 							</label>
-							<input id="Data Cadastro" name="Cpf" type="date" required="required" data-bind="value: lojaSelecionada.LojDtcadastro" />
+							<input id="Data Cadastro" name="Cpf" type="date" placeholder="Data Cadastro" required="required" data-bind="value: lojaSelecionada.LojDtcadastro" required validationmessage="Requerido"  />                            
 						</li>
 					</ul>
 				</li>
@@ -847,7 +853,7 @@
 				</div>
 			</div>
 		</div>
-
+                        
 		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
 			<a data-rel="actionsheet" href="\\#actionsColaboradores" data-actionsheet-context="#= ColId #">

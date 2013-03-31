@@ -367,7 +367,7 @@
 		schema: schemaAtendimento,
 	});
 		
-	//dataSource    
+    //Datasource - Loja
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -391,20 +391,21 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
-					return kendo.stringify([data.models[0]]);
+					return kendo.stringify(data.models[0]);
 				}
 			}                 
 		},
 		batch: true,
-		schema: scLoja,
-		change: function(e) {            
-			viewModel.set("lojaSelecionada", e.items[0]);
-			console.log(viewModel, "Sucesso");			
+		schema: scLoja,		
+		requestEnd: function(e) {
+			viewModel.set("lojaSelecionada", e.response);					
 			app.navigate("#detalhesLoja-view");
 		},
 		error: function(e) {
-			console.log(e);
-			alert("Erro em view Model")
+			
+			if (e.errorThrown == "Not Found") {
+				console.log(e, "Erro em view Model");             
+			}
 		}
 	})
     
@@ -475,7 +476,10 @@
 		lojas: lojas,
 		listViewInitFila: listViewInitFila,
 		initValidacao: initValidacao,
-        formatField:formatField
+        formatField:formatField,
+        
+		editorLojaViewInit: editorLojaViewInit,
+		salvarEdicaoLoja: salvarEdicaoLoja,
 		
 	});
 
@@ -535,13 +539,31 @@
 	}
 	    
 	function cancelarColaborador() {
-		viewModel.dsColaborador.cancelChanges();
-		//app.navigate("#colaboradores-view");
+		viewModel.dsColaborador.cancelChanges();		
 		app.navigate("#:back");
 	}
  
-	function editarLoja() {
+	function adicionarLoja() {
+		var loja = viewModel.dsLoja.add();		
+		viewModel.set("lojaSelecionada", loja);
+		app.navigate("#EditorLoja-view");
+	}
+    
+	function editarLoja() {     
 		app.navigate("#EditorLoja-view"); 
+	}
+    
+	function salvarEdicaoLoja() {
+		//if (validatorLoja.validate()) {
+		console.log(viewModel);
+		viewModel.dsLoja.sync();
+		app.navigate("#:back");
+		//}
+	}
+    
+	function cancelarEdicaoLoja() {
+		viewModel.dsLoja.cancelChanges();
+		app.navigate("#:back");
 	}
  
 	function vendedoresFila() {
@@ -697,6 +719,10 @@
 		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
     
+	function editorLojaViewInit() {
+		validatorLoja = $("#editorLoja").kendoValidator({}).data("kendoValidator");
+	}
+    
 	function initValidacao() {
 		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {
 			validacaoDispositivo();			
@@ -777,7 +803,8 @@
 		atendimentoViewInit: atendimentoViewInit,
 		viewModel: viewModel,
 		initValidacao: initValidacao,
-        formatField:formatField
+        formatField:formatField,		
+		editorLojaViewInit: editorLojaViewInit
 		
         
 	});

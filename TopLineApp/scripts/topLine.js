@@ -9,7 +9,19 @@
 		}
 	});
 
-	kendo.data.binders.format = kendo.data.Binder.extend({
+	kendo.data.binders.cpf = kendo.data.Binder.extend({
+            refresh: function() {
+        			var value = this.bindings["cpf"].get();
+			if (value) {
+				$(this.element).text(formatField(value, "999.999.999-99"));
+                viewModel.colaboradorSelecionado.set("ColCpf",formatField(value, "999.999.999-99"));
+                console.log(viewModel.colaboradorSelecionado);
+			}
+		}
+        
+	});
+
+    kendo.data.binders.format = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["format"].get();
 			if (value) {
@@ -23,10 +35,9 @@
 			var value = this.bindings["ShopRua"].get();            
 			if (value) {
 				$(this.element).text("Shopping");
-			}
-			else {
-				$(this.element).text("Rua");
-			}
+			}else{
+                $(this.element).text("Rua");
+            }
 		}
 	});
     
@@ -131,25 +142,26 @@
 		model: {
 			id: "LojId",
 			fields: {
-				LojId: { type: "int", editable: false, nullable: false},
-				TloId: { type: "int", validation: { required: false} },            
-				LojCnpj: { type: "text", validation: { required: true} },            
-				LojCodigo: { type: "text", validation: { required: true} },            
-				LojRazaosocial: { type: "text", validation: { required: true} },                       
-				LojNomefantasia: { type: "text", validation: { required: true} },            
-				LojDdd: { type: "text", validation: { required: false} },                                    
-				LojTelefone: { type: "text", validation: { required: false} },            
-				LojLogradouro: { type: "text", validation: { required: false} },                                    
-				LojNumero: { type: "text", validation: { required: false} },            
-				LojComplemento: { type: "text", validation: { required: false} },            
-				LojBairro: { type: "text", validation: { required: false} },            
-				LojCidade: { type: "text", validation: { required: false} },            
-				LojUF: { type: "text", validation: { required: false} },            
-				LojCep: { type: "text", validation: { required: false} },                       				
-				LojShopping_rua: { type: "boolean", validation: { required: false} },                                    				
-				LojDtcadastro: { type: "date", validation: { required: true} },            
-				LojLatitude: { type: "number", validation: { required: false} },            
-				LojLongitude: { type: "number", validation: { required: false} },            
+				LojId: { type: "int", editable: false, nullable: false , defaultValue:0},
+				TloId: { editable: false, nullable: false },
+				LojCnpj: { editable: false, nullable: false },
+				LojCodigo: { editable: false, nullable: false },
+				LojRazaosocial: { editable: false, nullable: false },           
+				LojNomefantasia: { editable: false, nullable: false },
+				LojDdd: { editable: false, nullable: false },                        
+				LojTelefone: { editable: false, nullable: false },
+				LojLogradouro: { editable: false, nullable: false },                        
+				LojNumero: { editable: false, nullable: false },
+				LojComplemento: { editable: false, nullable: false },
+				LojBairro: { editable: false, nullable: false },
+				LojCidade: { editable: false, nullable: false },
+				LojUF: { editable: false, nullable: false },
+				LojCep: { editable: false, nullable: false },           				
+				LojShopping_rua: { editable: false, nullable: false },                        
+				LojFranquia: { editable: false, nullable: false },				
+				LojDtcadastro: { editable: false, nullable: false },
+				LojLatitude: { editable: false, nullable: false },
+				LojLongitude: { editable: false, nullable: false }
 			}     
 		}
 	};
@@ -383,11 +395,12 @@
 			}                 
 		},
 		batch: true,
-		schema: scLoja,		
-        requestEnd: function(e){
-            viewModel.set("lojaSelecionada", e.response);					
+		schema: scLoja,
+		change: function(e) {            
+			viewModel.set("lojaSelecionada", e.items[0]);
+			console.log(viewModel, "Sucesso");			
 			app.navigate("#detalhesLoja-view");
-        },
+		},
 		error: function(e) {
 			console.log(e);
 			alert("Erro em view Model")
@@ -461,8 +474,7 @@
 		lojas: lojas,
 		listViewInitFila: listViewInitFila,
 		initValidacao: initValidacao,
-        
-		editorLojaViewInit: editorLojaViewInit
+        formatField:formatField
 		
 	});
 
@@ -498,7 +510,6 @@
     
 	function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
-		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);
 		app.navigate("#editorColaborador-view");
 	}
@@ -530,19 +541,6 @@
  
 	function editarLoja() {
 		app.navigate("#EditorLoja-view"); 
-	}
-    
-	function salvarEdicaoLoja() {
-		alert("Cheguei aqui!");
-		return;
-        
-		viewModel.dsLoja.sync();
-		app.navigate("#:back");
-	}
-    
-	function cancelarEdicaoLoja() {
-		viewModel.dsLoja.cancelChanges();
-		app.navigate("#:back");
 	}
  
 	function vendedoresFila() {
@@ -698,10 +696,6 @@
 		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
     
-	function editorLojaViewInit() {
-		validator = $("#editorLoja").kendoValidator({}).data("kendoValidator");
-	}
-    
 	function initValidacao() {
 		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {
 			validacaoDispositivo();			
@@ -714,7 +708,55 @@
 		dsLoja.read(); 
 	}
     
-	$.extend(window, {
+    function formatField(strField, sMask) {
+        var i, nCount, sValue, fldLen, mskLen,bolMask, sCod;
+        
+        sValue = strField;
+        // Limpa todos os caracteres de formatação que
+        // já estiverem no campo.
+        // toString().replace [transforma em sring e troca elementos por ""]
+        sValue = sValue.toString().replace( "-", "" );
+        sValue = sValue.toString().replace( "-", "" );
+        sValue = sValue.toString().replace( ".", "" );
+        sValue = sValue.toString().replace( ".", "" );
+        sValue = sValue.toString().replace( "/", "" );
+        sValue = sValue.toString().replace( "/", "" );
+        sValue = sValue.toString().replace( "/", "" );
+        sValue = sValue.toString().replace( "(", "" );
+        sValue = sValue.toString().replace( "(", "" );
+        sValue = sValue.toString().replace( ")", "" );
+        sValue = sValue.toString().replace( ")", "" );
+        sValue = sValue.toString().replace( " ", "" );
+        sValue = sValue.toString().replace( " ", "" );
+    	sValue = sValue.toString().replace( ":", "" );
+        fldLen = sValue.length;
+        mskLen = sMask.length;
+        
+        i = 0;
+        nCount = 0;
+        sCod = "";
+        mskLen = fldLen;
+        
+        while (i <= mskLen) {
+        bolMask = ((sMask.charAt(i) == "-") || (sMask.charAt(i) == ":") || (sMask.charAt(i) == ".") || (sMask.charAt(i) == "/"))
+        bolMask = bolMask || ((sMask.charAt(i) == "(") || (sMask.charAt(i) == ")") || (sMask.charAt(i) == " ") || (sMask.charAt(i) == "."))
+        
+        //Se for true utiliza elementos especiais aumenta a máscara
+        if (bolMask) {
+                sCod += sMask.charAt(i);
+                mskLen++;
+            //Caso false mostra o sValue(o q foi digitado)
+            } else {
+                sCod += sValue.charAt(nCount);
+                nCount++;
+            }
+            i++;
+        }
+        
+        return sCod;
+    }
+    
+    $.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,
 		showVendedoresForaTurno: vendedoresForaTurno,
@@ -734,9 +776,8 @@
 		atendimentoViewInit: atendimentoViewInit,
 		viewModel: viewModel,
 		initValidacao: initValidacao,
+        formatField:formatField
 		
-		editorLojaViewInit: editorLojaViewInit
-        
         
 	});
 })(jQuery);

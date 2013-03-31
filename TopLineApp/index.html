@@ -235,7 +235,6 @@
 				</div>
 			</header>
 			<ul id="info" data-role="listview" data-style="inset" data-type="group">
-
 				<li>
 					<ul>
 						<li style="height:65px">
@@ -245,36 +244,30 @@
 					</ul>
 				</li>
 				<li>
-					<ul>
+					<ul>Dados
 						<li>
-							<label>
-								CPF:
-							</label> <span data-bind="text: ColCpf"></span>
+							<label>CPF:</label>
+                            <span data-bind="cpf: ColCpf"></span>
 						</li>
 						<li>
-							<label>
-								Apelido:
-							</label> <span data-bind="text: ColApelido"></span>
+							<label>Nome:</label>
+                            <span data-bind="text: ColNome"></span>
 						</li>
 						<li>
-							<label>
-								Nome:
-							</label> <span data-bind="text: ColNome"></span>
+							<label>Sobrenome:</label>
+                            <span data-bind="text: ColSobrenome"></span>
 						</li>
 						<li>
-							<label>
-								Sobrenome:
-							</label><span data-bind="text: ColSobrenome"></span>
+							<label>Apelido:</label>
+                            <span data-bind="text: ColApelido"></span>
 						</li>
 						<li>
-							<label>
-								Data nascimento:
-							</label><span data-bind="text: ColDtnascimento"></span>
+							<label>Nascimento:</label>
+                            <span data-bind="date: ColDtnascimento" data-dateformat="dd-MM-yyyy"></span>
 						</li>
 						<li>
-							<label>
-								Email:
-							</label><span data-bind="text: ColEmail"></span>
+							<label>Email:</label>
+                            <span data-bind="text: ColEmail"></span>
 						</li>
 					</ul>
 				</li>
@@ -285,41 +278,31 @@
 							<label>
 								Data Entrada:
 							</label>
-							<span data-bind="text: ColDtentrada"></span>
+							<span data-bind="date: ColDtentrada" data-dateformat="dd-MM-yyyy"></span>
 						</li>
 
 						<li>
-							<label>
-								Data Saída: <span data-bind="text: ColDtsaida"></span>
-							</label>
+							<label>Data Saída:</label>
+                            <span data-bind="date: ColDtsaida" data-dateformat="dd-MM-yyyy"></span>
 						</li>
 
 						<li>
-							<label>
-								Afastamento: <span data-bind="text: ColAfasttemp"></span>
-							</label>
+							<label>Afastamento:</label>
+                            <span data-bind="text: ColAfasttemp"></span>
 						</li>
 					</ul>
 				</li>
 
 				<li>
-					<label>
-						Loja Id: <span data-bind="text: ColLojId"></span>
-					</label>
-				</li>
-
-				<li>
 					<ul>
 						<li>
-							<label>
-								Cargo Id: <span data-bind="text: CarId"></span>
-							</label>
+							<label>Cargo Id:</label>
+                            <span data-bind="text: CarId"></span>
 						</li>
 
 						<li>
-							<label>
-								Turno Id: <span data-bind="text: ColHfuId"></span>
-							</label>
+							<label>Turno Id:</label>
+                            <span data-bind="text: ColHfuId"></span>
 						</li>
 					</ul>
 				</li>
@@ -336,61 +319,60 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul id="info" data-role="listview" data-style="inset">
+			<ul id="info" data-role="listview" data-style="inset" data-type="group">
 				<li>
-					<ul>
-						<ul data-role="buttongroup" class="select-group">
-							<li>
-								<a id="capturePhotoEditButton" data-icon >Tirar Foto</a>
-							</li>
-							<li>
-								<a id="getPhotoFromLibraryButton">Galeria</a>
-							</li>
-						</ul>
-						<li style="height:65px">
-							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
-							<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
-						</li>
-					</ul>
-				</li>
+                    <ul>
+                        <li>
+        					<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
+        				    <ul data-role="buttongroup" class="select-group">
+            					<li>
+            						<a id="capturePhotoEditButton">Tirar Foto</a>
+            					</li>
+            					<li>
+            						<a id="getPhotoFromLibraryButton">Galeria</a>
+            					</li>
+                            </ul>    
+                        </li>
+    				</ul>
+ 				</li>
                 
-				<li>
+				<li>Dados
 					<ul>
 						<li>
 							<label>
 								CPF:
-								<input id="cpf" name="Cpf" type="text" required="required" data-bind="value: colaboradorSelecionado.ColCpf" />
-							</label>
-						</li>
-						<li>
-							<label>
-								Apelido:
-								<input id="nome" name="Nome" type="text" required="required" data-bind="value: colaboradorSelecionado.ColApelido" />
+								<input id="cpf" name="Cpf" type="text" data-bind="cpf: colaboradorSelecionado.ColCpf, value: colaboradorSelecionado.ColCpf" required validationmessage="Requerido"/>
 							</label>
 						</li>
 						<li>
 							<label>
 								Nome:
-								<input id="nome" name="Nome" type="text" required="required" data-bind="value: colaboradorSelecionado.ColNome" />
+								<input id="nome" name="Nome" type="text" data-bind="value: colaboradorSelecionado.ColNome" required validationmessage="Requerido" />
 							</label>
 						</li>
 						<li>
 							<label>
 								Sobrenome:
-								<input id="sobrenome" name="SobreNome" type="text" required="required" data-bind="value: colaboradorSelecionado.ColSobrenome"/>
+								<input id="sobrenome" name="DobreNome" type="text" data-bind="value: colaboradorSelecionado.ColSobrenome" required validationmessage="Requerido" />
 							</label>
 						</li>
 						<li>
 							<label>
-								Data Nascimento:
-								<input id="dtNascimento" name="DataNascimento" type="text" required="required" data-bind="value: colaboradorSelecionado.ColDtnascimento"/>
+								Apelido:
+								<input id="apelido" name="Apelido" type="text" required="required" data-bind="value: colaboradorSelecionado.ColApelido" required validationmessage="Requerido" />
+							</label>
+						</li>
+						<li>
+							<label>
+								Nascimento:
+								<input id="dtNascimento" name="DataNascimento" type="text" required="required" data-bind="date: colaboradorSelecionado.ColDtnascimento" data-dateformat="dd-MM-yyyy" required validationmessage="Requerido" />
 							</label>
 						</li>
 
 						<li>
 							<label>
 								Email:
-								<input id="email" name="Email" type="text" data-bind="value: colaboradorSelecionado.ColEmail"/>
+								<input id="email" name="Email" type="text" data-bind="value: colaboradorSelecionado.ColEmail" />
 							</label>
 						</li>
 					</ul>
@@ -913,7 +895,7 @@
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
 				loading: '<h1 class="loading-message">Carregando...</h1>'
-				,initial: "#validacaoDispositivo-view"
+				,initial: "#colaboradores-view"
 			});
 			
 			/*

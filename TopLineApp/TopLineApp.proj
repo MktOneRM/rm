@@ -42,6 +42,7 @@
     <Folder Include="Bkp" />
     <Folder Include="Bkp\viewModels" />
     <Folder Include="Bkp\views" />
+    <Folder Include="kendo\styles\textures" />
     <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +81,8 @@
     <Content Include="Bkp\homeLayout.js" />
     <Content Include="Bkp\require.js" />
     <Content Include="Bkp\toolslayout.js" />
+    <Content Include="kendo\styles\textures\highlight.png" />
+    <Content Include="scripts\topLineDeviceInfo.js" />
     <Content Include="scripts\topLine.js" />
     <Content Include="Bkp\html\HtmlPage.html" />
     <Content Include="Bkp\html\HtmlPage1.html" />

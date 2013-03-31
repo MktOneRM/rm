@@ -1,5 +1,5 @@
 (function($, undefined) {
-	//var iptCnpj = document.getElementById("iptCnpjInicial");
+    
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["srcPath"].get();
@@ -111,9 +111,9 @@
 				TloId: { editable: false, nullable: false },
 				LojCnpj: { editable: false, nullable: false },
 				LojCodigo: { editable: false, nullable: false },
-				LojRazaosocial: { editable: false, nullable: false },           
-				LojNomefantasia: { editable: false, nullable: false },
-				LojDdd: { editable: false, nullable: false },                        
+				LojRazaoSocial: { editable: false, nullable: false },           
+				LojNomeFantasia: { editable: false, nullable: false },
+				LojDDD: { editable: false, nullable: false },                        
 				LojTelefone: { editable: false, nullable: false },
 				LojLogradouro: { editable: false, nullable: false },                        
 				LojNumero: { editable: false, nullable: false },
@@ -124,7 +124,7 @@
 				LojCep: { editable: false, nullable: false },           				
 				LojShopping_rua: { editable: false, nullable: false },                        
 				LojFranquia: { editable: false, nullable: false },				
-				LojDtcadastro: { editable: false, nullable: false },
+				LojDtCadastro: { editable: false, nullable: false },
 				LojLatitude: { editable: false, nullable: false },
 				LojLongitude: { editable: false, nullable: false }
 			}     
@@ -328,68 +328,14 @@
 			}
 		},
 		batch: true,
-		schema: schemaAtendimento
-	});
+		schema: schemaAtendimento,
+ 	});
 		
-	//<!--Atendimento-->
-    
-	function listViewInitFila(e) {
-		e.view.element.find("#listviewFila").kendoMobileListView({
-			dataSource: dsVendFila,
-			template: $("#tdentroFila").html()
-		})
-         
-		.kendoTouch({
-			filter: ">li",
-			enableSwipe: true,
-			touchstart: touchstart,
-			tap: navigate,
-			swipe: swipe
-		});
-	}
-
-	function navigate(e) {
-		var itemUID = $(e.touch.currentTarget).data("uid");
-		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
-		viewModel.set("vendedorSelecionado", schemaVendedores);
-		adicionarAtendimento();
-		validator = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
-		app.navigate("#resultadoAtendimento-view");
-	}
-
-	function swipe(e) {
-		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
-		button.expand().duration(200).play();
-	}
-
-	function touchstart(e) {
-		var target = $(e.touch.initialTouch),
-		listviewFila = $("#listviewFila").data("kendoMobileListView"),
-		button = $(e.touch.target).find("[data-role=button]:visible");
-
-		if (target.closest("[data-role=button]")[0]) {
-			app.navigate("#sairdaFila_View");
-    
-			//prevent `swipe`
-			this.events.cancel();
-			e.event.stopPropagation();
-		}
-		else if (button[0]) {
-			button.hide();
-
-			//prevent `swipe`
-			this.events.cancel();
-		}
-		else {
-			listviewFila.items().find("[data-role=button]:visible").hide();
-		}
-	}
-    
-	//dataSource    
+    //dataSource    
 	var dsLoja = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl + "/RmLoja",
+				url: baseUrl + "/RmLoja",							
 				type:"GET",
 				contentType: "application/json",
 				dataType: "json"
@@ -414,16 +360,7 @@
 			}                 
 		},
 		batch: true,
-		schema: scLoja,
-		change: function(e) {            
-			viewModel.set("lojaSelecionada", e.items[0]);
-			console.log(viewModel, "Sucesso");			
-			app.navigate("#detalhesLoja-view");
-		},
-		error: function(e) {
-			console.log(e);
-			alert("Erro em view Model")
-		}
+		schema: scLoja
 	})
     
 	//DataSource Colaborador
@@ -471,7 +408,7 @@
         
 		vendedorSelecionado: {},		
 		atendimento: {},
-		lojaSelecionada: {},
+		lojaSelecionada: [],
 		colaboradorSelecionado: {},
 		cargoSelecionado: {},
 		turnoSelecionado: {},
@@ -485,16 +422,13 @@
 		editarColaborador: editarColaborador,
 		cancelarColaborador: cancelarColaborador,
         
-        editarLoja: editarLoja,
-        
 		vendedoresFila : vendedoresFila,
 		vendedoresForaFila : vendedoresForaFila,
 		vendedoresForaTurno : vendedoresForaTurno,
 		tiposMovtoSaida : tiposMovtoSaida,
 		tiposMovtoEntrada : tiposMovtoEntrada,        
 		lojas: lojas,
-		listViewInitFila: listViewInitFila,
-		initValidacao: initValidacao
+        listViewInitFila: listViewInitFila
 		
 	});
 
@@ -503,8 +437,8 @@
 		viewModel.set("atendimento", novoAtendimento); 
 	}
 
-	function salvarAtendimento () {
-		if (validator.validate()) { //validates the input
+	function salvarAtendimento() {
+	//	if (validator.validate()) { //validates the input
 			//Busca o código da Rede da Loja
 			var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");
             
@@ -514,13 +448,13 @@
 			viewModel.atendimento.set("RLoId", RLoId);
 			viewModel.atendimento.set("LcoId", LcoId);
             
-			this.dsAtendimento.sync(); 	                
+			viewModel.dsAtendimento.sync(); 	                
 			
 			//Atualiza a posicao do vendedor na fila
 			var vend = viewModel.vendedorSelecionado;			
-			this.dsVendFila.remove(vend); 
-			this.dsVendFila.sync(); 
-		}
+			viewModel.dsVendFila.remove(vend); 
+			viewModel.dsVendFila.sync(); 
+//		}
 	}
 			
 	function cancelarAtendimento() {
@@ -541,30 +475,25 @@
 	}
     
 	function editarColaborador(e) {
+		cameraApp = new cameraApp();
+		cameraApp.run();
 		var colaborador = viewModel.dsColaborador.get(e.context);                 
 		viewModel.set("colaboradorSelecionado", colaborador);  
 		app.navigate("#editorColaborador-view"); 
 	}
     
 	function salvarColaborador() {   
-		//if (validator.validate()) {
-		viewModel.dsColaborador.sync();
-		//app.navigate("#colaboradores-view"); 
-		$("#lColaborador").data("kendoListView").refresh();
-		app.navigate("#:back");          
-		//}
+		if (validator.validate()) {
+			viewModel.dsColaborador.sync();
+			app.navigate("#colaboradores-view");          
+		}
 	}
 	    
 	function cancelarColaborador() {
 		viewModel.dsColaborador.cancelChanges();
-		//app.navigate("#colaboradores-view");
-		app.navigate("#:back");
+		app.navigate("#colaboradores-view");
 	}
  
-	function editarLoja() {
-		app.navigate("#EditorLoja-view"); 
-	}
-    
 	function vendedoresFila() {
 		atualizaFilaNoSalao(dsVendFila, 1);
 	}
@@ -617,51 +546,217 @@
 		context.read();
 	}
     
-	function editorViewInit(e) {
-		var view = e.view;
-		view.element.find("#done").data("kendoMobileButton").bind("click", function() {
-			viewModel.dsAtendimento.one("change", function() {
-				view.loader.hide();
-				app.navigate("#:back");
-			});
+    function atendimentoViewInit(e) {
+        validator = $("#formAtendimento").kendoValidator({}).data("kendoValidator");       
+        var view = e.view;
+        view.element.find("#done").data("kendoMobileButton").bind("click", function() {
+            view.loader.show();
+            salvarAtendimento();
+            viewModel.dsVendFila.one("requestEnd", function() {
+                vendedoresFila();
+                view.loader.hide();
+                app.navigate("#dentroFila-view");
+             });
+          });
 
-			view.loader.show();
-			salvarAtendimento();
-		});
-
-		view.element.find("#cancel").data("kendoMobileBackButton").bind("click", function(e) {
-			e.preventDefault();
-			viewModel.dsAtendimento.one("change", function() {
-				view.loader.hide();
-				app.navigate("#:back");
-			});
-
-			view.loader.show();
-			viewModel.dsAtendimento.cancelChanges();
-		});
+        view.element.find("#cancelAtendimento").data("kendoMobileBackButton").bind("click", function(e) {
+                view.loader.show();
+                viewModel.dsAtendimento.cancelChanges();
+                viewModel.dsAtendimento.one("requestEnd", function() {
+                vendedoresFila();
+            });
+            view.loader.hide();
+            app.navigate("#dentroFila-view");
+        });
 	}
 
-	function editorViewInitCol() {
-		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
+   //<!--Atendimento-->
+     
+    function listViewInitFila(e) {
+            tiposMovtoSaida();
+            e.view.element.find("#listviewFila").kendoMobileListView({
+            dataSource: dsVendFila,
+            template: $("#tdentroFila").html()
+        })
+         
+        .kendoTouch({
+            filter: ">li",
+            enableSwipe: true,
+            touchstart: touchstart,
+            tap: navigate,
+            swipe: swipe
+        });
+    }
+
+    function navigate(e) {
+        var itemUID = $(e.touch.currentTarget).data("uid");
+        var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
+    	viewModel.set("vendedorSelecionado", schemaVendedores);
+        adicionarAtendimento();
+        app.navigate("#resultadoAtendimento-view");
+     }
+
+    function swipe(e) {
+        var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
+        button.expand().duration(200).play();
+    }
+
+    function touchstart(e) {
+        var itemUID = $(e.touch.currentTarget).data("uid");
+        var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
+        var target = $(e.touch.initialTouch),
+             listviewFila = $("#listviewFila").data("kendoMobileListView"),
+             button = $(e.touch.target).find("[data-role=button]:visible");
+
+        if (target.closest("[data-role=button]")[0]) {
+            viewModel.set("vendedorSelecionado", schemaVendedores);
+            app.navigate("#sairdaFila_View");
+    
+            //prevent `swipe`
+            this.events.cancel();
+            e.event.stopPropagation();
+        } else if (button[0]) {
+            button.hide();
+
+            //prevent `swipe`
+            this.events.cancel();
+        } else {
+            listviewFila.items().find("[data-role=button]:visible").hide();
+        }
+    }
+    
+    //Sair da Fila
+    function sairFilaViewInit(e) {
+        var view = e.view;
+        view.element.find("#listviewMotivosSaida").kendoMobileListView({
+            dataSource: dsTiposMovto,
+            template: $("#tpTiposMovto").html()
+        })
+ 
+        view.element.find("#cancelSair").data("kendoMobileBackButton").bind("click", function(e) {
+            view.loader.show();
+            $("#dentroFila-view").data("kendoMobileView").contentElement();
+            vendedoresFila();
+            view.loader.hide();
+            app.navigate("#dentroFila-view");
+        });
+    }
+ 
+    //Camera
+	function id(element) {
+		return document.getElementById(element);
 	}
     
-	function initValidacao() {
-		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {
-			validacaoDispositivo();			
-		});
+	function cameraApp() {
 	}
+
+	cameraApp.prototype = {
+		_pictureSource: null,    
+		_destinationType: null,
     
-	function validacaoDispositivo() {
-		var iptCnpjInicial = document.getElementById("iptCnpjInicial");
-		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + iptCnpjInicial.value ;
-		dsLoja.read(); 
+		run: function() {
+			var that = this;
+			that._pictureSource = navigator.camera.PictureSourceType;
+			that._destinationType = navigator.camera.DestinationType;
+			id("capturePhotoButton").addEventListener("click", function() {
+				that._capturePhoto.apply(that, arguments);
+			});
+			id("capturePhotoEditButton").addEventListener("click", function() {
+				that._capturePhotoEdit.apply(that, arguments)
+			});
+			id("getPhotoFromLibraryButton").addEventListener("click", function() {
+				that._getPhotoFromLibrary.apply(that, arguments)
+			});
+			id("getPhotoFromAlbumButton").addEventListener("click", function() {
+				that._getPhotoFromAlbum.apply(that, arguments);
+			});
+		},
+    
+		_capturePhoto: function() {
+			var that = this;
+        
+			// Take picture using device camera and retrieve image as base64-encoded string.
+			navigator.camera.getPicture(function() {
+				that._onPhotoDataSuccess.apply(that, arguments);
+			}, function() {
+				that._onFail.apply(that, arguments);
+			}, {
+				quality: 50,
+				destinationType: that._destinationType.DATA_URL
+			});
+		},
+    
+		_capturePhotoEdit: function() {
+			var that = this;
+			// Take picture using device camera, allow edit, and retrieve image as base64-encoded string. 
+			// The allowEdit property has no effect on Android devices.
+			navigator.camera.getPicture(function() {
+				that._onPhotoDataSuccess.apply(that, arguments);
+			}, function() {
+				that._onFail.apply(that, arguments);
+			}, {
+				quality: 20, allowEdit: true,
+				destinationType: cameraApp._destinationType.DATA_URL
+			});
+		},
+    
+		_getPhotoFromLibrary: function() {
+			var that = this;
+			// On Android devices, pictureSource.PHOTOLIBRARY and
+			// pictureSource.SAVEDPHOTOALBUM display the same photo album.
+			that._getPhoto(that._pictureSource.PHOTOLIBRARY);         
+		},
+    
+		_getPhotoFromAlbum: function() {
+			var that = this;
+			// On Android devices, pictureSource.PHOTOLIBRARY and
+			// pictureSource.SAVEDPHOTOALBUM display the same photo album.
+			that._getPhoto(that._pictureSource.SAVEDPHOTOALBUM)
+		},
+    
+		_getPhoto: function(source) {
+			var that = this;
+			// Retrieve image file location from specified source.
+			navigator.camera.getPicture(function() {
+				that._onPhotoURISuccess.apply(that, arguments);
+			}, function() {
+				cameraApp._onFail.apply(that, arguments);
+			}, {
+				quality: 50,
+				destinationType: cameraApp._destinationType.FILE_URI,
+				sourceType: source
+			});
+		},
+    
+		_onPhotoDataSuccess: function(imageData) {
+			var smallImage = document.getElementById('smallImage');
+			smallImage.style.display = 'block';
+    
+			// Show the captured photo.
+			smallImage.src = "data:image/jpeg;base64," + imageData;            
+            viewModel.colaboradorSelecionado.set("ColFoto", imageData);
+            
+		},
+    
+		_onPhotoURISuccess: function(imageURI) {
+			var smallImage = document.getElementById('smallImage');
+			smallImage.style.display = 'block';
+         
+			// Show the captured photo.
+			smallImage.src = imageURI;
+		},
+    
+		_onFail: function(message) {
+			alert('Failed! Error: ' + message);
+		}
 	}
+ 
+	//Camera
     
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,
 		showVendedoresForaTurno: vendedoresForaTurno,
-        
 		showTiposMovto: tiposMovto,
 		showTiposMovtoSaida: tiposMovtoSaida,
 		showTiposMovtoEntrada: tiposMovtoEntrada,
@@ -672,12 +767,12 @@
   
 		showColaboradores: colaboradores,
 		showDetalhesColaborador: detalhesColaborador,     
-        
+        sairFilaViewInit : sairFilaViewInit,
 		showAtendimento: adicionarAtendimento,
-		listViewInitFila: listViewInitFila,
-		editorViewInit: editorViewInit,
-		viewModel: viewModel,
-		initValidacao: initValidacao
+        listViewInitFila: listViewInitFila,
+		atendimentoViewInit: atendimentoViewInit,
+		viewModel: viewModel
+		
         
 	});
 })(jQuery);

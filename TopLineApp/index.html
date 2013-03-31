@@ -684,20 +684,23 @@
 		<script>
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
-				loading: '<h1 class="loading-message">Carregando...</h1>'
+				loading: '<h1 class="loading-message">Carregando...</h1>',
+				initial: "#validacaoDispositivo-view"
 			});
 			
+			/*
 			$(document).ready(function () {
-				var variable = "Lojaaa";			
-				//Verifica se o dispositivo está cadastrado para a Loja.
-				if (localStorage.getItem(variable) != undefined) {
-					app.navigate("#dentroFila-view");
-				}
-				else {
-					app.navigate("#validacaoDispositivo-view");
-					localStorage.setItem(variable, "1");
-				}
+			var variable = "Lojaaa";			
+			//Verifica se o dispositivo está cadastrado para a Loja.
+			if (localStorage.getItem(variable) != undefined) {
+			app.navigate("#dentroFila-view");
+			}
+			else {
+			app.navigate("#validacaoDispositivo-view");
+			localStorage.setItem(variable, "1");
+			}
 			});
+			*/
                     
 			function selBtn(e) {
 				var btnGrp = $(e.sender.element).find(".select-group").data("kendoMobileButtonGroup");

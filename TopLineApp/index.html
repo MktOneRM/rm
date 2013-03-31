@@ -9,10 +9,10 @@
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
-        <script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
+		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
-        <script src="scripts/topLineCamera.js" type="text/javascript"></script>
-    </head>    
+		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
+	</head>
 	<body>
 		<!-- Home-Layout -->
 		<div data-role="layout" data-id="home-layout" data-title="Top Line" data-init="selBtn">
@@ -62,12 +62,12 @@
 		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="atendimentoViewInit" data-layout="home-layout" data-model="viewModel">
 			<div data-role="header">
 				<div data-role="navbar">
-                    <a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento">Voltar</a>
-                    <span data-role="view-title"></span>
-                    <a class="nav-button" data-align="right" data-role="button" id="done">Gravar</a>
+					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento">Voltar</a>
+					<span data-role="view-title"></span>
+					<a class="nav-button" data-align="right" data-role="button" id="done">Gravar</a>
 				</div>
 			</div>
- 			<ul id="formAtendimento" data-role="listview" data-style="inset" data-type="group">
+			<ul id="formAtendimento" data-role="listview" data-style="inset" data-type="group">
 				<div class="mobile-fila-titulo">Atendimento</div>
 				<li>
 					<ul>
@@ -86,7 +86,8 @@
 						</li>
 					</ul>
 				</li>
-				<li>Dados da Venda
+				<li>
+					Dados da Venda
 					<ul>
 						<li>
 							<label>Valor da Venda</label>
@@ -99,31 +100,32 @@
 					</ul>
 				</li>
 			</ul>
-	    </div>
-        <div id="sairdaFila_View" data-role="view" data-title="Top Line" data-init="sairFilaViewInit" data-layout="home-layout" data-model="viewModel">
-        	<header data-role="header">
-        		<div data-role="navbar">
-        			<a class="nav-button" data-align="left" data-role="backbutton" id="cancelSair">Voltar</a>
-        			<span data-role="view-title"></span>
-        		</div>
-        	</header>
-            <ul id="formSaiFila" data-role="listview" data-style="inset" data-type="group">
-			    <div class="mobile-fila-titulo"></div>
-    			<li>
-    				<ul>
-    					<li style="height:65px">
-    						<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
-    						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-    						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
-    					</li>
-    				</ul>
-    			</li>
-                <li>Motivo da Saída
-             	  <ul id="listviewMotivosSaida"></ul>
-                </li>
-            </ul>     
-        </div>
-        
+		</div>
+		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-init="sairFilaViewInit" data-layout="home-layout" data-model="viewModel">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelSair">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<ul id="formSaiFila" data-role="listview" data-style="inset" data-type="group">
+				<div class="mobile-fila-titulo"></div>
+				<li>
+					<ul>
+						<li style="height:65px">
+							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+						</li>
+					</ul>
+				</li>
+				<li>
+					Motivo da Saída
+					<ul id="listviewMotivosSaida"></ul>
+				</li>
+			</ul>
+		</div>
+
 		<!-- Toos-Layout -->
 		<div data-role="layout" data-id="tools-layout" data-title="Top Line">
 			<header data-role="header">
@@ -162,10 +164,15 @@
 		<!-- Configuração -->
 		<div id="config-view" data-role="view" data-layout="tools-layout" data-title="Top Line" data-init="selBtn">
 			<ul data-role="listview" data-style="inset" data-type="group">
-				<li>Configuração
+				<li>
+					Configuração
 					<ul>
-						<li><a href="#detalhesLoja-view">Cadastro de Loja</a></li>
-						<li><a href="#colaboradores-view">Cadastro de Colaboradores</a></li>
+						<li>
+							<a href="#detalhesLoja-view">Cadastro de Loja</a>
+						</li>
+						<li>
+							<a href="#colaboradores-view">Cadastro de Colaboradores</a>
+						</li>
 						<li>
 							<a href="\\#">Escala de Trabalho</a>
 						</li>
@@ -180,9 +187,12 @@
 		<!-- Fechamento -->
 		<div id="Fechamento-view" data-role="view" data-layout="tools-layout" data-title="Top Line" data-init="selBtn">
 			<ul data-role="listview" data-style="inset" data-type="group">
-				<li>Fechamento
+				<li>
+					Fechamento
 					<ul>
-						<li><a href="\\#">Turno</a></li>
+						<li>
+							<a href="\\#">Turno</a>
+						</li>
 						<li>
 							<a href="\\#">Loja</a>
 						</li>
@@ -191,7 +201,7 @@
 			</ul>
 		</div>
 
-	<!--Colaboradores View-->
+		<!--Colaboradores View-->
 		<div data-role="view" id="colaboradores-view" data-title="Colaboradores" data-show="showColaboradores" data-model="viewModel" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
@@ -633,20 +643,20 @@
 				<h3>${ColNome} # # ${ColSobrenome}</h3>
 			</a>
 		</script>
-		
+
 		<script type="text/x-kendo-template" id="tpLojas" >
 			<a> #=LojNomefantasia# </a>
 			<a href="\\#" data-role="button" class="delete" >Delete</a>
 		</script>
-                        
+
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
- 		   <a>
+			<a>
 				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
 				<h1 class="fila-nome">${ColApelido}</h1>
 				<h2 class="fila-turno">${ColTurno}</h2>
 			</a>
-            <a id="btnSair" href="\\#" data-role="button" class="saida">Sair</a>
+			<a id="btnSair" href="\\#" data-role="button" class="saida">Sair</a>
 		</script>
 
 		<script type="text/x-kendo-template" id="tforaFila">
@@ -665,20 +675,20 @@
 			</a>
 		</script>
 
-        <script type="text/x-kendo-template" id="tpTiposMovto">
-        	<a class="details-link" data-role="listview-link">
-                ${TmoDescricao}
-        	</a>
-        </script>
+		<script type="text/x-kendo-template" id="tpTiposMovto">
+			<a class="details-link" data-role="listview-link">
+				${TmoDescricao}
+			</a>
+		</script>
 
-        <script>
+		<script>
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
 				loading: '<h1 class="loading-message">Carregando...</h1>'
- 			});
+			});
 			
-                    			$(document).ready(function () {
-				var variable = "Loja";			
+			$(document).ready(function () {
+				var variable = "Lojaaa";			
 				//Verifica se o dispositivo está cadastrado para a Loja.
 				if (localStorage.getItem(variable) != undefined) {
 					app.navigate("#dentroFila-view");
@@ -689,12 +699,12 @@
 				}
 			});
                     
-    		function selBtn(e) {
-    			var btnGrp = $(e.sender.element).find(".select-group").data("kendoMobileButtonGroup");
-    			if (btnGrp) {
-    				btnGrp.select(0);
-    			}
-    		}
+			function selBtn(e) {
+				var btnGrp = $(e.sender.element).find(".select-group").data("kendoMobileButtonGroup");
+				if (btnGrp) {
+					btnGrp.select(0);
+				}
+			}
             
 			function switchChange(e) {
 				if (e.checked) {
@@ -704,7 +714,7 @@
 					alert("Falso");
 				}    
 			}    
-	    </script>
+		</script>
 	</body>
 </html>
 	

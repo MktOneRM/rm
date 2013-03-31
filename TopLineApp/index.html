@@ -100,7 +100,10 @@
 					</ul>
 				</li>
 			</ul>
-		</div>
+            <script>
+                validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
+            </script>
+        </div>
 		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-init="sairFilaViewInit" data-layout="home-layout" data-model="viewModel">
 			<header data-role="header">
 				<div data-role="navbar">
@@ -709,6 +712,7 @@
 				}
 			}
             
+
 			function switchChange(e) {
 				if (e.checked) {
 					alert("verdadeiro");

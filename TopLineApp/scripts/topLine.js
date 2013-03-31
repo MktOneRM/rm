@@ -448,7 +448,7 @@
 	}
 
 	function salvarAtendimento() {
-	//	if (validator.validate()) { //validates the input
+		if (validatorAtendimento.validate()) { //validates the input
 			//Busca o código da Rede da Loja
 			var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");
             
@@ -464,7 +464,7 @@
 			var vend = viewModel.vendedorSelecionado;			
 			viewModel.dsVendFila.remove(vend); 
 			viewModel.dsVendFila.sync(); 
-//		}
+		}
 	}
 			
 	function cancelarAtendimento() {
@@ -562,7 +562,6 @@
 	}
     
     function atendimentoViewInit(e) {
-        validator = $("#formAtendimento").kendoValidator({}).data("kendoValidator");       
         var view = e.view;
         view.element.find("#done").data("kendoMobileButton").bind("click", function() {
             view.loader.show();
@@ -588,12 +587,12 @@
    //<!--Atendimento-->
      
     function listViewInitFila(e) {
-            tiposMovtoSaida();
-            e.view.element.find("#listviewFila").kendoMobileListView({
+        tiposMovtoSaida();
+        e.view.element.find("#listviewFila").kendoMobileListView({
             dataSource: dsVendFila,
             template: $("#tdentroFila").html()
-        })
-         
+        })    
+        
         .kendoTouch({
             filter: ">li",
             enableSwipe: true,
@@ -601,6 +600,7 @@
             tap: navigate,
             swipe: swipe
         });
+        validator = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
     }
 
     function navigate(e) {

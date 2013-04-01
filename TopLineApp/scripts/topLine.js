@@ -9,6 +9,17 @@
 		}
 	});
     
+	kendo.data.binders.cep = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["cep"].get();
+			if (value) {
+				$(this.element).text(formatField(value, "99999-999"));
+				viewModel.lojaSelecionada.set("LojCep", formatField(value, "99999-999"));				
+			}
+		}
+        
+	});
+
 	kendo.data.binders.cpf = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cpf"].get();
@@ -23,16 +34,45 @@
 	kendo.data.binders.cnpj = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cnpj"].get();
-            alert("Pqp");
-            
 			if (value) {
-				$(this.element).text(formatField(value, "99.999.999.9999-99"));
-				viewModel.lojaSelecionada.set("LojCnpj", formatField(value, "99.999.999.9999-99"));				
+				$(this.element).text(formatField(value, "99.999.999/9999-99"));
+				viewModel.lojaSelecionada.set("LojCnpj", formatField(value, "99.999.999/9999-99"));				
 			}
 		}
         
 	});
 
+	kendo.data.binders.telefone = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["telefone"].get();
+			if (value) {
+				if (value.trim().length == 11) {
+					$(this.element).text(formatField(value, "(99) 99999-9999"));
+					viewModel.lojaSelecionada.set("LojTelefone", value);				
+				}
+				else if (value.trim().length == 10) {
+					$(this.element).text(formatField(value, "(99) 9999-9999"));
+					viewModel.lojaSelecionada.set("LojTelefone", value);				
+				}
+			}
+		}
+	});
+
+	kendo.data.binders.telefoneinput = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["telefoneinput"].get();
+			if (value) {
+				if (value.trim().length == 11) {
+					$(this.element).text(formatField(value, "(99) 99999-9999"));
+					viewModel.lojaSelecionada.set("LojTelefone", formatField(value, "(99) 99999-9999"));				
+				}
+				else if (value.trim().length == 10) {
+					$(this.element).text(formatField(value, "(99) 9999-9999"));
+					viewModel.lojaSelecionada.set("LojTelefone", formatField(value, "(99) 9999-9999"));				
+				}
+			}
+		}
+	});
 	kendo.data.binders.format = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["format"].get();
@@ -53,7 +93,7 @@
 			}
 		}
 	});
-    
+
 	kendo.data.binders.innerText = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["innerText"].get();
@@ -102,6 +142,76 @@
 		}
 	};
 		    			
+	var dataUf = [
+		{ Uf: "AL",Desc:"Alagoas"},
+		{ Uf: "AP",Desc:"Amapá"},
+		{ Uf: "AM",Desc:"Amazonas"},
+		{ Uf: "BA",Desc:"Bahia"},
+		{ Uf: "CE",Desc:"Ceará"},
+		{ Uf: "DF",Desc:"Distrito Federal"},
+		{ Uf: "ES",Desc:"Espirito Santo"},
+		{ Uf: "GO",Desc:"Goiás"},
+		{ Uf: "MA",Desc:"Maranhão"},
+		{ Uf: "MT",Desc:"Mato Grosso"},
+		{ Uf: "MS",Desc:"Mato Grosso do Sul"},
+		{ Uf: "MG",Desc:"Minas Gerais"},
+		{ Uf: "PA",Desc:"Pará"},
+		{ Uf: "PB",Desc:"Paraíba"},
+		{ Uf: "PR",Desc:"Paraná"},
+		{ Uf: "PE",Desc:"Pernambuco"},
+		{ Uf: "PI",Desc:"Piauí"},
+		{ Uf: "RJ",Desc:"Rio de Janeiro"},
+		{ Uf: "RN",Desc:"Rio Grande do Norte"},
+		{ Uf: "RS",Desc:"Rio Grande do Sul"},
+		{ Uf: "RO",Desc:"Rondônia"},
+		{ Uf: "RR",Desc:"Roraima"},
+		{ Uf: "SC",Desc:"Santa Catarina"},
+		{ Uf: "SP",Desc:"São Paulo"},
+		{ Uf: "SE",Desc:"Sergipe"},
+		{ Uf: "TO",Desc:"Tocantins"}
+	];
+    
+	var scUf = {
+		model:{
+			id: "Uf",
+			fields: {
+				Uf: { type: "string"},
+                Desc: { type: "string"}  
+			}
+		}
+	};
+    
+	var dsUf = new kendo.data.DataSource({ 
+		data: dataUf,
+		schema: scUf,
+		change: function (e) {			
+			viewModel.set("UFs", this.view());
+		}
+	});
+
+	var dataTLoja = [
+		{ Id: 1,Desc:"Shopping"},
+		{ Id: 0,Desc:"Rua"}
+	];
+    
+	var scTLoja = {
+		model:{
+			id: "Id",
+			fields: {
+				Id: { type: "boolean"},
+                Desc: { type: "string"}  
+			}
+		}
+	};
+    
+	var dsTLoja = new kendo.data.DataSource({ 
+		data: dataTLoja,
+		schema: scTLoja,
+		change: function (e) {			
+			viewModel.set("TLojas", this.view());
+		}
+	});
+    
 	//schemaMotivosSaidaSalao
 	var schemaTiposMovto = { 
 		model: {
@@ -161,7 +271,6 @@
 				LojCodigo: { type: "text", validation: { required: true} },            
 				LojRazaosocial: { type: "text", validation: { required: true} },                       
 				LojNomefantasia: { type: "text", validation: { required: true} },            
-				LojDdd: { type: "text", validation: { required: false} },                                    
 				LojTelefone: { type: "text", validation: { required: false} },            
 				LojLogradouro: { type: "text", validation: { required: false} },                                    
 				LojNumero: { type: "text", validation: { required: false} },            
@@ -417,7 +526,7 @@
 		},
 		error: function(e) {
 			if (e.errorThrown == "Not Found") {
-                adicionarLoja();                
+				adicionarLoja();                
 			}
 		},
 		complete: function() {
@@ -467,7 +576,8 @@
 		dsColaborador: dsColaborador,	
 		dsCargos: dsCargos,
 		dsTurnosFunc: dsTurnosFunc,	
-        
+		UFs:[],dsUf: dsUf,
+        TLojas:[],dsTLoja: dsTLoja,
 		vendedorSelecionado: {},		
 		atendimento: {},
 		lojaSelecionada: {},
@@ -496,7 +606,7 @@
         
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
-        cancelarEdicaoLoja: cancelarEdicaoLoja
+		cancelarEdicaoLoja: cancelarEdicaoLoja
 		
 	});
 
@@ -738,6 +848,8 @@
     
 	function editorLojaViewInit() {
 		validatorLoja = $("#editorLoja").kendoValidator({}).data("kendoValidator");
+		viewModel.dsUf.read();
+        viewModel.dsTLoja.read();
 	}
     
 	function initValidacao() {

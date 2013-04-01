@@ -320,7 +320,7 @@ div a
 }
 
 
-#editorLoja input
+#editorLoja input[type="text"], #editorLoja select
 {
 	font-size: 12px;
 	alignment-adjust: left;

@@ -176,7 +176,7 @@
 			id: "Uf",
 			fields: {
 				Uf: { type: "string"},
-                Desc: { type: "string"}  
+				Desc: { type: "string"}  
 			}
 		}
 	};
@@ -199,7 +199,7 @@
 			id: "Id",
 			fields: {
 				Id: { type: "boolean"},
-                Desc: { type: "string"}  
+				Desc: { type: "string"}  
 			}
 		}
 	};
@@ -495,8 +495,7 @@
 				type:"GET",
 				contentType: "application/json",
 				dataType: "json"
-			} 
-			,
+			},
 			update: {
 				url:baseUrl + "/RmLoja",							
 				type:"PUT"
@@ -511,26 +510,25 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
+                    
+                    alert("ParameterMap");
+                    
 					return kendo.stringify(data.models[0]);
 				}
 			}                 
 		},
 		batch: true,
-		schema: scLoja,		
-		beforeSend: function(e) {
-			app.showLoading();  
-		},
+		schema: scLoja,
 		requestEnd: function(e) {
+			console.log(e, "requestEnd");  
 			viewModel.set("lojaSelecionada", e.response);					
 			app.navigate("#detalhesLoja-view");
 		},
 		error: function(e) {
+			console.log(e, "error");  
 			if (e.errorThrown == "Not Found") {
 				adicionarLoja();                
 			}
-		},
-		complete: function() {
-			app.hideLoading();
 		}
 	})
     
@@ -576,8 +574,10 @@
 		dsColaborador: dsColaborador,	
 		dsCargos: dsCargos,
 		dsTurnosFunc: dsTurnosFunc,	
-		UFs:[],dsUf: dsUf,
-        TLojas:[],dsTLoja: dsTLoja,
+		UFs:[],
+		dsUf: dsUf,
+		TLojas:[],
+		dsTLoja: dsTLoja,
 		vendedorSelecionado: {},		
 		atendimento: {},
 		lojaSelecionada: {},
@@ -605,6 +605,7 @@
 		formatField:formatField,
         
 		editorLojaViewInit: editorLojaViewInit,
+		
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja
 		
@@ -676,13 +677,15 @@
 		app.navigate("#EditorLoja-view");
 	}
     
-	function editarLoja() {     
-		app.navigate("#EditorLoja-view"); 
-	}
-    
 	function salvarEdicaoLoja() {
 		//if (validatorLoja.validate()) {
-		console.log(viewModel);
+		var item = viewModel.get("lojaSelecionada");
+		console.log(viewModel, "viewModel");
+		console.log(viewModel, "viewModel");
+        
+		console.log(item, "item");
+        
+		return;      
 		viewModel.dsLoja.sync();
 		app.navigate("#:back");
 		//}
@@ -848,10 +851,9 @@
     
 	function editorLojaViewInit() {
 		validatorLoja = $("#editorLoja").kendoValidator({}).data("kendoValidator");
-		viewModel.dsUf.read();
-        viewModel.dsTLoja.read();
+		viewModel.dsTLoja.read();
 	}
-    
+   
 	function initValidacao() {
 		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {
 			validacaoDispositivo();			
@@ -863,14 +865,14 @@
 		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + iptCnpjInicial.value ;
 		dsLoja.read(); 
 	}
-    
+
 	function formatField(strField, sMask) {
 		var i, nCount, sValue, fldLen, mskLen,bolMask, sCod;
         
 		sValue = strField;
 		// Limpa todos os caracteres de formatação que
 		// já estiverem no campo.
-		// toString().replace [transforma em sring e troca elementos por ""]
+		// toString().replace [transforma em string e troca elementos por ""]
 		sValue = sValue.toString().replace("-", "");
 		sValue = sValue.toString().replace("-", "");
 		sValue = sValue.toString().replace(".", "");
@@ -912,7 +914,7 @@
         
 		return sCod;
 	}
-    
+
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,

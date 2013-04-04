@@ -539,11 +539,7 @@
 				,dataType: "json"
 			},
 			parameterMap: function(data, operation) {
-				alert("Parameter");
-				
 				if (operation !== "read" && data.models) {
-					alert("ParameterMap");
-                    
 					return kendo.stringify(data.models[0]);
 				}
 			}                 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -62,7 +63,7 @@
 				<div data-role="navbar">
 					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento">Voltar</a>
 					<span data-role="view-title"></span>
-					<a class="nav-button" data-align="right" data-role="button" id="done">Gravar</a>
+					<a class="nav-button" data-align="right" data-role="button" id="done">Salvar</a>
 				</div>
 			</div>
 			<ul id="formAtendimento" data-role="listview" data-style="inset" data-type="group">
@@ -817,13 +818,9 @@
 				}
 			}
 			
-			
 			function switchChange(e) {
-				if (e.checked) {
-					alert("verdadeiro");
-				}
-				else {
-					alert("Falso");
+				if (!e.checked) {
+					app.navigate("#MotNaoVenda-view");
 				}    
 			}    
 						

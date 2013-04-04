@@ -263,12 +263,8 @@ div a
 {
 	background-color: rgb(0, 0, 0);
 }
- 
-.km-ios #resultadoAtendimento-view #done #btnCreate
-{
-	background-color: #D88E2E;
-}
-#btnCreate {
+
+#btnCreate #done {
     background-color: #D88E2E;
 }
 

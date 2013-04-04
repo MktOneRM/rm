@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,6 +10,7 @@
 		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
+        <script src="scripts/topLineLocalStorage.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<!-- Home-Layout -->
@@ -573,31 +573,31 @@
 							<label>
 								CNPJ:
 							</label>
-							<input id="cnpj" name="Cnpj" type="text" placeholder="Cnpj" data-bind="value: lojaSelecionada.LojCnpj" required validationmessage="Requerido"/>
+							<input id="cnpj" name="Cnpj" type="text" placeholder="Cnpj" maxlength=14 size=14 data-bind="value: lojaSelecionada.LojCnpj" required validationmessage="Requerido"/>
 						</li>
 						<li>
 							<label>
 								Código:
 							</label>
-							<input id="LojCodigo" name="Código" type="text" placeholder="Código" data-bind="value: lojaSelecionada.LojCodigo" required validationmessage="Requerido"/>
+							<input id="LojCodigo" name="Código" type="text" maxlength=10 size=10 placeholder="Código" data-bind="value: lojaSelecionada.LojCodigo" required validationmessage="Requerido"/>
 						</li>
 						<li>
 							<label>
 								Razão Social:
 							</label>
-							<input id="LojRazaosocial" name="RazaoSocial"  placeholder="Razão Social"  type="text" data-bind="value: lojaSelecionada.LojRazaosocial" required validationmessage="Requerido" />
+							<input id="LojRazaosocial" name="RazaoSocial" placeholder="Razão Social" type="text" maxlength=60 size=60 data-bind="value: lojaSelecionada.LojRazaosocial" required validationmessage="Requerido" />
 						</li>
 						<li>
 							<label>
 								Nome Fantasia:
 							</label>
-							<input id="LojNomefantasia" name="NomeFantasia"  placeholder="Nome Fantasia" type="text" data-bind="value: lojaSelecionada.LojNomefantasia" required validationmessage="Requerido" />
+							<input id="LojNomefantasia" name="NomeFantasia" placeholder="Nome Fantasia" maxlength=50 size=50 type="text" data-bind="value: lojaSelecionada.LojNomefantasia" required validationmessage="Requerido" />
 						</li>
 						<li>
 							<label>
 								Telefone:
 							</label>
-							<input id="LojTelefone" name="Telefone" type="text" data-bind="telefoneinput: lojaSelecionada.LojTelefone, value: lojaSelecionada.LojTelefone" />
+							<input id="LojTelefone" name="Telefone" type="text" maxlength=11 size=11 data-bind="telefoneinput: lojaSelecionada.LojTelefone, value: lojaSelecionada.LojTelefone" />
 						</li>
 						<li>
 							<label>
@@ -614,31 +614,31 @@
 							<label>
 								Logradouro:
 							</label>
-							<input id="LojLogradouro" name="Logradouro" type="text" data-bind="value: lojaSelecionada.LojLogradouro" />
+							<input id="LojLogradouro" name="Logradouro" type="text" maxlength=60 size=60 data-bind="value: lojaSelecionada.LojLogradouro" />
 						</li>
 						<li>
 							<label>
 								Número:
 							</label>
-							<input id="LojNumero" name="Nº" type="text" data-bind="value: lojaSelecionada.LojNumero" />
+							<input id="LojNumero" name="Nº" type="text" maxlength=10 size=10 data-bind="value: lojaSelecionada.LojNumero" />
 						</li>
 						<li>
 							<label>
 								Complemento:
 							</label>
-							<input id="LojComplemento" name="Complemento" type="text" data-bind="value: lojaSelecionada.LojComplemento" />
+							<input id="LojComplemento" name="Complemento" maxlength=40 size=40 type="text" data-bind="value: lojaSelecionada.LojComplemento" />
 						</li>
 						<li>
 							<label>
 								Bairro:
 							</label>
-							<input id="LojBairro" name="Bairro" type="text" data-bind="value: lojaSelecionada.LojBairro" />
+							<input id="LojBairro" name="Bairro" type="text" maxlength=50 size=50 data-bind="value: lojaSelecionada.LojBairro" />
 						</li>
 						<li>
 							<label>
 								Cidade:
 							</label>
-							<input id="LojCidade" name="Cidade" type="text" data-bind="value: lojaSelecionada.LojCidade" />
+							<input id="LojCidade" name="Cidade" type="text" maxlength=50 size=50 data-bind="value: lojaSelecionada.LojCidade" />
 						</li>
 						<li>
 							<label>
@@ -655,21 +655,24 @@
 					</ul>
 				</li>
 				<li>
-					<ul>
-						Coordenadas
-						<li>
+					<ul id="coordenadas">Coordenadas
+                         <li style="text-align: center;">
+                            <i></i><button id="lerCoordenadas" data-role="button" data-icon="globe">Ler Coordenadas</button>
+                         </li>
+ 						<li>
 							<label>
 								Latitude:
 							</label>
-							<input id="LojLatitude" name="Latitude" type="text" data-bind="value: lojaSelecionada.LojLatitude" />
+							<input id="LojLatitude" name="Latitude" type="text" data-bind="value: lojaSelecionada.LojLatitude" disabled />
 						</li>
 						<li>
 							<label>
 								Longitude:
 							</label>
-							<input id="LojLongitude" name="Longitude" type="text" data-bind="value: lojaSelecionada.LojLongitude" />
+							<input id="LojLongitude" name="Longitude" type="text" data-bind="value: lojaSelecionada.LojLongitude" disabled />
 						</li>
 					</ul>
+                    <p id="results"></p>
 				</li>
 			</ul>
 		</div>

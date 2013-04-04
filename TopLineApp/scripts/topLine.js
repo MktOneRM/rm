@@ -223,6 +223,17 @@
 		} 
 	};
 	  
+	//Schema Motivos não venda
+	var scMotivosNaoVenda = { 
+		model: {
+			id: "MnvId",
+			fields: {
+				MnvId: { editable: false, nullable: false },
+				MnvDescricao: { editable: false, nullable: false }
+			} 
+		} 
+	};
+    
 	//Schema turnos de Turnos de funcionamento
 	var schemaTurnosFunc = { 
 		model: {
@@ -423,7 +434,26 @@
 		batch: true,
 		schema: schemaTiposMovto
 	});
-			
+    
+	//dataSource motivos não venda
+	var dsMotivosNaoVenda = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmMotNaoVenda",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}
+		},
+		batch: true,
+		schema: scMotivosNaoVenda
+	});
+	
 	//dataSource Turnos de funcionamento
 	var dsTurnosFunc = new kendo.data.DataSource({                    
 		transport: {						
@@ -570,6 +600,7 @@
 		dsVendForaFila: dsVendForaFila,
 		dsVendForaTurno: dsVendForaTurno,
 		dsTiposMovto: dsTiposMovto,        
+		dsMotivosNaoVenda: dsMotivosNaoVenda,
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
 		dsColaborador: dsColaborador,	
@@ -608,7 +639,10 @@
 		editorLojaViewInit: editorLojaViewInit,
 		
 		salvarEdicaoLoja: salvarEdicaoLoja,
-		cancelarEdicaoLoja: cancelarEdicaoLoja
+		cancelarEdicaoLoja: cancelarEdicaoLoja,
+        
+		selectedMotNaoVendaValue: "1",
+		idMotivoNaoVenda:"radiogroup"
 		
 	});
 
@@ -722,6 +756,11 @@
 	function tiposMovtoSaida() {		
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
 		dsTiposMovto.read(); 
+	}
+    
+	function motivosNaoVenda() {		
+		dsMotivosNaoVenda.options.transport.read.url = baseUrl + "/RmMotNaoVenda";
+		dsMotivosNaoVenda.read(); 
 	}
     
 	function lojas() {	
@@ -853,12 +892,12 @@
 	function editorLojaViewInit() {
 		validatorLoja = $("#editorLoja").kendoValidator({}).data("kendoValidator");
 		viewModel.dsTLoja.read();
-        viewModel.dsUf.read();
-        var ufSel = viewModel.lojaSelecionada.get("LojUf");
-        var lojaDe = viewModel.lojaSelecionada.get("LojShopping_rua");
-        $("#LojUf").find("option[value='"+ufSel+"']").attr("selected", true)
-        $("#LojShopping_rua").find("option[value="+lojaDe+"]").attr("selected", true)
- 	}
+		viewModel.dsUf.read();
+		var ufSel = viewModel.lojaSelecionada.get("LojUf");
+		var lojaDe = viewModel.lojaSelecionada.get("LojShopping_rua");
+		$("#LojUf").find("option[value='" + ufSel + "']").attr("selected", true)
+		$("#LojShopping_rua").find("option[value=" + lojaDe + "]").attr("selected", true)
+	}
    
 	function initValidacao() {
 		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {
@@ -928,6 +967,7 @@
 		showTiposMovto: tiposMovto,
 		showTiposMovtoSaida: tiposMovtoSaida,
 		showTiposMovtoEntrada: tiposMovtoEntrada,
+        showMotivosNaoVenda: motivosNaoVenda,
 		showLojas: lojas,     
 		showTurnoFunc: turnoFunc,
 		showCargos: cargos,

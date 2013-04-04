@@ -223,6 +223,17 @@
 		} 
 	};
 	  
+	//Schema Motivos não venda
+	var scMotivosNaoVenda = { 
+		model: {
+			id: "MnvId",
+			fields: {
+				MnvId: { editable: false, nullable: false },
+				MnvDescricao: { editable: false, nullable: false }
+			} 
+		} 
+	};
+    
 	//Schema turnos de Turnos de funcionamento
 	var schemaTurnosFunc = { 
 		model: {
@@ -278,7 +289,7 @@
 				LojBairro: { type: "text", validation: { required: false} },            
 				LojCidade: { type: "text", validation: { required: false} },            
 				LojUF: { type: "text", validation: { required: false} },            
-				LojCep: { type: "text", validation: { required: false} },                       				
+				LojCep: { type: "text", validation: { required: false, min:0, max:9} },                       				
 				LojShopping_rua: { type: "boolean", validation: { required: false} },                                    				
 				LojDtcadastro: { type: "date", validation: { required: true} },            
 				LojLatitude: { type: "number", validation: { required: false} },            
@@ -423,7 +434,25 @@
 		batch: true,
 		schema: schemaTiposMovto
 	});
-			
+	//dataSource tipos de movimentação
+	var dsMotivosNaoVenda = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmMotNaoVenda",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}
+		},
+		batch: true,
+		schema: scMotivosNaoVenda
+	});
+    
 	//dataSource Turnos de funcionamento
 	var dsTurnosFunc = new kendo.data.DataSource({                    
 		transport: {						
@@ -510,9 +539,6 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
-                    
-                    alert("ParameterMap");
-                    
 					return kendo.stringify(data.models[0]);
 				}
 			}                 
@@ -568,12 +594,14 @@
 		dsVendFila: dsVendFila,		
 		dsVendForaFila: dsVendForaFila,
 		dsVendForaTurno: dsVendForaTurno,
-		dsTiposMovto: dsTiposMovto,        
+		dsTiposMovto: dsTiposMovto, 
+		dsMotivosNaoVenda: dsMotivosNaoVenda,
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
 		dsColaborador: dsColaborador,	
 		dsCargos: dsCargos,
 		dsTurnosFunc: dsTurnosFunc,	
+        
 		UFs:[],
 		dsUf: dsUf,
 		TLojas:[],
@@ -598,7 +626,9 @@
 		vendedoresForaFila : vendedoresForaFila,
 		vendedoresForaTurno : vendedoresForaTurno,
 		tiposMovtoSaida : tiposMovtoSaida,
-		tiposMovtoEntrada : tiposMovtoEntrada,        
+		tiposMovtoEntrada : tiposMovtoEntrada,    
+		motivosNaoVenda: motivosNaoVenda,
+        
 		lojas: lojas,
 		listViewInitFila: listViewInitFila,
 		initValidacao: initValidacao,
@@ -607,7 +637,11 @@
 		editorLojaViewInit: editorLojaViewInit,
 		
 		salvarEdicaoLoja: salvarEdicaoLoja,
-		cancelarEdicaoLoja: cancelarEdicaoLoja
+		cancelarEdicaoLoja: cancelarEdicaoLoja,
+        
+		//Teste
+		selectedMotNaoVendaValue: "1",
+		idMotivoNaoVenda:"radiogroup"
 		
 	});
 
@@ -679,13 +713,6 @@
     
 	function salvarEdicaoLoja() {
 		//if (validatorLoja.validate()) {
-		var item = viewModel.get("lojaSelecionada");
-		console.log(viewModel, "viewModel");
-		console.log(viewModel, "viewModel");
-        
-		console.log(item, "item");
-        
-		return;      
 		viewModel.dsLoja.sync();
 		app.navigate("#:back");
 		//}
@@ -721,6 +748,11 @@
 	function tiposMovtoSaida() {		
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
 		dsTiposMovto.read(); 
+	}
+  
+	function motivosNaoVenda() {		
+		dsMotivosNaoVenda.options.transport.read.url = baseUrl + "/RmMotNaoVenda";
+		dsMotivosNaoVenda.read(); 
 	}
     
 	function lojas() {	
@@ -922,6 +954,7 @@
 		showTiposMovto: tiposMovto,
 		showTiposMovtoSaida: tiposMovtoSaida,
 		showTiposMovtoEntrada: tiposMovtoEntrada,
+		showMotivosNaoVenda: motivosNaoVenda,
   
 		showLojas: lojas,     
 		showTurnoFunc: turnoFunc,

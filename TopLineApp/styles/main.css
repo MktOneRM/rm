@@ -36,13 +36,13 @@ input[type="text"], input[type="password"]
 
 .k-invalid-msg
 {
-	background: rgba(255, 0, 0, .2);
+	background: #D88E2E;
+    padding: 2px 5px 2px 4px;
 	border: 0;
 	right: 0;
-	float: right;
-	font-size: 8px;
+	position:absolute;
 	top: 0;
-	color: red;
+    font-size: .6rem;
 }
 
 /* Modals */
@@ -106,15 +106,6 @@ input[type="text"], input[type="password"]
 
 .km-horizontal #login-view .km-content, .km-horizontal #register-view .km-content { padding: 10px 0 0; }
 
-#login-view .km-content input[type="text"],
-#login-view .km-content input[type="password"],
-#register-view .km-content input[type="text"],
-#register-view .km-content input[type="password"]
-{
-	display: block;
-	margin: 10px auto;
-}
-
 /* Account View */
 #account-view header h2
 {
@@ -122,7 +113,6 @@ input[type="text"], input[type="password"]
 	text-align: center;
 	text-transform: capitalize;
 }
-.km-android #account-view header h2 { color: #fff; }
 
 /* Main View */
 
@@ -212,13 +202,6 @@ div a
 	margin-top: 10px;
 }
 
-.km-android .validate label
-{
-	color: #555;
-	margin-bottom: 10px;
-	float: right;
-}
-
 .validate input
 {
 	margin: 0 5px 10px 0;
@@ -280,9 +263,12 @@ div a
 	background-color: rgb(0, 0, 0);
 }
  
-.km-ios #resultadoAtendimento-view #done
+.km-ios #resultadoAtendimento-view #done #btnCreate
 {
 	background-color: #D88E2E;
+}
+#btnCreate {
+    background-color: #D88E2E;
 }
 
 #dentroFila-view .saida
@@ -325,7 +311,12 @@ div a
 
 #info label
 { 
-	display: block; width: 100px; float: left; padding-top: 6px; color: #2e2e2e;
+	display: block; 
+    width: 100px; 
+    float: left; 
+    padding: 6px 5px 0 0; 
+    color: #2e2e2e;
+    text-align:right;
 }
 
 .content
@@ -344,7 +335,13 @@ div a
 
 #infoLoja label
 { 
-	display: block; width: 90px; float: left; padding-top: 6px; color: #2e2e2e;
+	display: block; 
+    width: 90px; 
+    float: left; 
+    padding-top: 6px; 
+    padding-right:5px;
+    color: #2e2e2e;
+    text-align:right;
 }
 
 #editorLoja input[type="text"], #editorLoja select
@@ -358,7 +355,11 @@ div a
 
 #editorLoja label
 { 
-	display: block; width: 90px; float: left; color: #2e2e2e; 
+	display: block; 
+    width: 90px; 
+    float: left; 
+    color: #2e2e2e;
+    text-align:right;
 }
 
 /*Add*/

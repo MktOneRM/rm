@@ -2,8 +2,6 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
-		<link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 		<link href="kendo/styles/kendo.indexedlistview.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
@@ -328,7 +326,7 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarColaborador}">Confirmar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarColaborador}">Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -494,7 +492,7 @@
 						</li>
 						<li>
 							<label>
-								Nº:
+								Número:
 							</label><span data-bind="text: LojNumero"></span>
 						</li>
 						<li>
@@ -562,7 +560,7 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEdicaoLoja}">Confirmar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEdicaoLoja}">Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -651,7 +649,7 @@
 							<label>
 								CEP:
 							</label>
-							<input id="LojCep" name="Cep" type="text" data-bind="cep: lojaSelecionada.LojCep, value: lojaSelecionada.LojCep" />
+							<input id="LojCep" name="Cep" type="text" maxlength=9 size=9 data-bind="cep: lojaSelecionada.LojCep, value: lojaSelecionada.LojCep" />
 						</li>
 					</ul>
 				</li>
@@ -680,7 +678,7 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEdicaoLoja}">Confirmar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEdicaoLoja}">Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>

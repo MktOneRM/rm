@@ -692,7 +692,7 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarMotivoNaoVenda}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarMotivoNaoVenda}">Confirmar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarMotivoNaoVenda}">Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -782,11 +782,19 @@
 				${TmoDescricao}
 			</a>
 		</script>
-
-		<script type="text/x-kendo-template" id="tpTiposMovto">
-			<a class="details-link" data-role="listview-link">
-				${TmoDescricao}
-			</a>
+                        
+		<!--                      
+		<script type="text/x-kendo-template" id="tMotivosNaoVenda">
+		<a class="details-link" data-role="listview-link">
+		${MnvDescricao}
+		</a>
+		</script>
+		-->
+		<script id="tMotivosNaoVenda" type="text/x-kendo-template">
+			<div>
+				<input name="radio" type="radio" data-bind="attr:{name:idMotivoNaoVenda}, value:MnvId, checked:selectedMotNaoVendaValue" />
+				<label data-bind="text:MnvDescricao"></label>
+			</div>
 		</script>
 
 		<script>
@@ -819,10 +827,14 @@
 			}
 			
 			function switchChange(e) {
-				if (!e.checked) {
+				if (e.checked) {
+					console.log("Vendeu selecionado");
+				}
+				else {
+                    alert("teste");
 					app.navigate("#MotNaoVenda-view");
 				}    
-			}      
+			}     
 						
 		</script>
 	</body>

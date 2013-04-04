@@ -101,7 +101,7 @@
     <Content Include="Bkp\main.js" />
     <Content Include="Bkp\utils.js" />
     <Content Include="scripts\topLineCamera.js" />
-    <Content Include="scripts\topLineLocalStorage.js" />
+    <Content Include="scripts\topLineGeolocation.js" />
     <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">
       <Platform>iOS</Platform>

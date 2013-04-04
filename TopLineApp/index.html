@@ -41,6 +41,32 @@
 				</div>
 			</div>
 		</div>
+        
+		<!-- Toos-Layout -->
+		<div data-role="layout" data-id="tools-layout" data-title="Top Line">
+			<header data-role="header">
+				<div data-role="navbar">
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#dentroFila-view" data-icon="action">Fila</a>
+					<a href="#consulta-view" data-icon="search">Consulta</a>
+					<a href="#Fechamento-view" data-icon="recents">Fechamento</a>
+					<a href="#config-view" data-icon="settings">Configuração</a>
+				</div>
+			</div>
+		</div>
+
+        <!-- update-Layout -->
+		<div data-role="layout" data-id="update-layout" data-title="Top Line" data-init="selBtn">
+			<header data-role="header">
+				<div data-role="navbar">
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+		</div>
 
 		<!-- Fila da Vez -->
 		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-model="viewModel" data-init="listViewInitFila">
@@ -58,10 +84,10 @@
 		</div>
 
 		<!-- Resultado Atendimento -->
-		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="atendimentoViewInit" data-layout="home-layout" data-model="viewModel">
+		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="atendimentoViewInit" data-layout="update-layout" data-model="viewModel">
 			<div data-role="header">
 				<div data-role="navbar">
-					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento">Voltar</a>
+					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento">Cancelar</a>
 					<span data-role="view-title"></span>
 					<a class="nav-button" data-align="right" data-role="button" id="done">Salvar</a>
 				</div>
@@ -103,10 +129,10 @@
 				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
 			</script>
 		</div>
-		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-init="sairFilaViewInit" data-layout="home-layout" data-model="viewModel">
+		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-init="sairFilaViewInit" data-layout="update-layout" data-model="viewModel">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelSair">Voltar</a>
+					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelSair">Cancelar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -128,22 +154,6 @@
 			</ul>
 		</div>
 
-		<!-- Toos-Layout -->
-		<div data-role="layout" data-id="tools-layout" data-title="Top Line">
-			<header data-role="header">
-				<div data-role="navbar">
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-			<div data-role="footer">
-				<div data-role="tabstrip">
-					<a href="#dentroFila-view" data-icon="action">Fila</a>
-					<a href="#consulta-view" data-icon="search">Consulta</a>
-					<a href="#Fechamento-view" data-icon="recents">Fechamento</a>
-					<a href="#config-view" data-icon="settings">Configuração</a>
-				</div>
-			</div>
-		</div>
 
 		<!-- Consulta -->
 		<div id="consulta-view" data-role="view" data-layout="tools-layout" data-title="Top Line">
@@ -204,7 +214,7 @@
 		</div>
 
 		<!--Colaboradores View-->
-		<div data-role="view" id="colaboradores-view" data-title="Colaboradores" data-show="showColaboradores" data-model="viewModel" data-layout="home-layout" >
+		<div data-role="view" id="colaboradores-view" data-title="Colaboradores" data-show="showColaboradores" data-model="viewModel" data-layout="tools-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -238,7 +248,7 @@
 		</div>
 
 		<!--Detalhes Colaboradores view-->
-		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="home-layout"  >
+		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="tools-layout"  >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -323,7 +333,7 @@
 		</div>
 
 		<!--Editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-init="editorViewInitCol" data-model="viewModel" data-title="Top Line" data-layout="home-layout" >
+		<div id="editorColaborador-view" data-role="view" data-init="editorViewInitCol" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
@@ -444,10 +454,11 @@
 		</div>
 
 		<!--Detalhes Loja View-->
-		<div id="detalhesLoja-view" data-role="view" data-model="viewModel.lojaSelecionada" data-title="Top Line" data-layout="home-layout" >
+		<div id="detalhesLoja-view" data-role="view" data-model="viewModel.lojaSelecionada" data-title="Top Line" data-layout="tools-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnEdit" data-role="button" type="button" data-align="left"  data-role="backbutton" href="#EditorLoja-view" >Editar</a>
+                    <a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" href="#:back">Voltar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="backbutton" href="#EditorLoja-view" >Editar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -557,7 +568,7 @@
 		</div>
 
 		<!--Editor Loja View-->
-		<div id="EditorLoja-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="home-layout" data-init="editorLojaViewInit">
+		<div id="EditorLoja-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="update-layout" data-init="editorLojaViewInit">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
@@ -678,7 +689,7 @@
 		</div>
 
 		<!--Escala de trabalho View-->
-		<div id="Escala-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="home-layout" >
+		<div id="Escala-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
@@ -691,7 +702,7 @@
 		</div>
 
 		<!--Motivos não venda View-->
-		<div id="MotNaoVenda-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="checklayout" data-transition="slideup" data-show="showMotivosNaoVenda">
+		<div id="MotNaoVenda-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="update-layout" data-transition="slideup" data-show="showMotivosNaoVenda">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarMotivoNaoVenda}">Cancelar</a>
@@ -725,7 +736,7 @@
 		</div>
 
 		<!--Validação dispositivo View-->
-		<div data-role="view" id="validacaoDispositivo-view" data-title="Top Line" data-model="viewModel" data-init="initValidacao" data-hide="viewHide">
+		<div data-role="view" id="validacaoDispositivo-view" data-title="Top Line" data-model="viewModel" data-init="initValidacao" data-hide="viewHide" data-layout="updade-layout">
 			<header data-role="header">
 				<div data-role="navbar">
 					<span data-role="view-title"></span>

@@ -20,6 +20,7 @@
         
 	});
 
+    
 	kendo.data.binders.cpf = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cpf"].get();

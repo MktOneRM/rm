@@ -612,17 +612,14 @@
 		colaboradorSelecionado: {},
 		cargoSelecionado: {},
 		turnoSelecionado: {},
-		        
 		salvarAtendimento: salvarAtendimento,
 		cancelarAtendimento : cancelarAtendimento,
-        
 		adicionarColaborador: adicionarColaborador,
 		detalhesColaborador: detalhesColaborador,
 		salvarColaborador: salvarColaborador,
 		editarColaborador: editarColaborador,
 		cancelarColaborador: cancelarColaborador,
-        
-		vendedoresFila : vendedoresFila,
+        vendedoresFila : vendedoresFila,
 		vendedoresForaFila : vendedoresForaFila,
 		vendedoresForaTurno : vendedoresForaTurno,
 		tiposMovtoSaida : tiposMovtoSaida,

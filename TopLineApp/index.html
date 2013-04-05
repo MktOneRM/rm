@@ -9,8 +9,9 @@
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
 		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
+		<script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
-        <script src="scripts/topLineGeolocation.js" type="text/javascript"></script>
+		<script src="scripts/topLineGeolocation.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<!-- Home-Layout -->
@@ -41,32 +42,6 @@
 				</div>
 			</div>
 		</div>
-        
-		<!-- Toos-Layout -->
-		<div data-role="layout" data-id="tools-layout" data-title="Top Line">
-			<header data-role="header">
-				<div data-role="navbar">
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-			<div data-role="footer">
-				<div data-role="tabstrip">
-					<a href="#dentroFila-view" data-icon="action">Fila</a>
-					<a href="#consulta-view" data-icon="search">Consulta</a>
-					<a href="#Fechamento-view" data-icon="recents">Fechamento</a>
-					<a href="#config-view" data-icon="settings">Configuração</a>
-				</div>
-			</div>
-		</div>
-
-        <!-- update-Layout -->
-		<div data-role="layout" data-id="update-layout" data-title="Top Line" data-init="selBtn">
-			<header data-role="header">
-				<div data-role="navbar">
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-		</div>
 
 		<!-- Fila da Vez -->
 		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-model="viewModel" data-init="listViewInitFila">
@@ -84,10 +59,10 @@
 		</div>
 
 		<!-- Resultado Atendimento -->
-		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="atendimentoViewInit" data-layout="update-layout" data-model="viewModel">
+		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="atendimentoViewInit" data-layout="home-layout" data-model="viewModel">
 			<div data-role="header">
 				<div data-role="navbar">
-					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento">Cancelar</a>
+					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento">Voltar</a>
 					<span data-role="view-title"></span>
 					<a class="nav-button" data-align="right" data-role="button" id="done">Salvar</a>
 				</div>
@@ -129,10 +104,10 @@
 				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
 			</script>
 		</div>
-		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-init="sairFilaViewInit" data-layout="update-layout" data-model="viewModel">
+		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-init="sairFilaViewInit" data-layout="home-layout" data-model="viewModel">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelSair">Cancelar</a>
+					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelSair">Voltar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -154,6 +129,22 @@
 			</ul>
 		</div>
 
+		<!-- Toos-Layout -->
+		<div data-role="layout" data-id="tools-layout" data-title="Top Line">
+			<header data-role="header">
+				<div data-role="navbar">
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#dentroFila-view" data-icon="action">Fila</a>
+					<a href="#consulta-view" data-icon="search">Consulta</a>
+					<a href="#Fechamento-view" data-icon="recents">Fechamento</a>
+					<a href="#config-view" data-icon="settings">Configuração</a>
+				</div>
+			</div>
+		</div>
 
 		<!-- Consulta -->
 		<div id="consulta-view" data-role="view" data-layout="tools-layout" data-title="Top Line">
@@ -214,7 +205,7 @@
 		</div>
 
 		<!--Colaboradores View-->
-		<div data-role="view" id="colaboradores-view" data-title="Colaboradores" data-show="showColaboradores" data-model="viewModel" data-layout="tools-layout" >
+		<div data-role="view" id="colaboradores-view" data-title="Colaboradores" data-show="showColaboradores" data-model="viewModel" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -248,7 +239,7 @@
 		</div>
 
 		<!--Detalhes Colaboradores view-->
-		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="tools-layout"  >
+		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="home-layout"  >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -333,7 +324,7 @@
 		</div>
 
 		<!--Editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-init="editorViewInitCol" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
+		<div id="editorColaborador-view" data-role="view" data-init="editorViewInitCol" data-model="viewModel" data-title="Top Line" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
@@ -454,11 +445,10 @@
 		</div>
 
 		<!--Detalhes Loja View-->
-		<div id="detalhesLoja-view" data-role="view" data-model="viewModel.lojaSelecionada" data-title="Top Line" data-layout="tools-layout" >
+		<div id="detalhesLoja-view" data-role="view" data-model="viewModel.lojaSelecionada" data-title="Top Line" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
-                    <a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" href="#:back">Voltar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="backbutton" href="#EditorLoja-view" >Editar</a>
+					<a id="btnEdit" data-role="button" type="button" data-align="left"  data-role="backbutton" href="#EditorLoja-view" >Editar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -568,7 +558,7 @@
 		</div>
 
 		<!--Editor Loja View-->
-		<div id="EditorLoja-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="update-layout" data-init="editorLojaViewInit">
+		<div id="EditorLoja-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="home-layout" data-init="editorLojaViewInit">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
@@ -666,11 +656,13 @@
 					</ul>
 				</li>
 				<li>
-					<ul id="coordenadas">Coordenadas
-                         <li style="text-align: center;">
-                            <i></i><button id="lerCoordenadas" data-role="button" data-icon="globe">Ler Coordenadas</button>
-                         </li>
- 						<li>
+					<ul id="coordenadas">
+						Coordenadas
+						<li style="text-align: center;">
+							<i></i>
+							<button id="lerCoordenadas" data-role="button" data-icon="globe">Ler Coordenadas</button>
+						</li>
+						<li>
 							<label>
 								Latitude:
 							</label>
@@ -683,13 +675,13 @@
 							<input id="LojLongitude" name="Longitude" type="text" data-bind="value: lojaSelecionada.LojLongitude" disabled />
 						</li>
 					</ul>
-                    <p id="results"></p>
+					<p id="results"></p>
 				</li>
 			</ul>
 		</div>
 
 		<!--Escala de trabalho View-->
-		<div id="Escala-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
+		<div id="Escala-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="home-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
@@ -702,11 +694,11 @@
 		</div>
 
 		<!--Motivos não venda View-->
-		<div id="MotNaoVenda-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="update-layout" data-transition="slideup" data-show="showMotivosNaoVenda">
+		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="Top Line" data-layout="home-layout" data-transition="slideup" data-show="showMotivosNaoVenda" data-init="initMotivosNaoVenda">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarMotivoNaoVenda}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarMotivoNaoVenda}">Salvar</a>
+					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarNaoVenda}">Cancelar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarNaoVenda}">Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -736,7 +728,7 @@
 		</div>
 
 		<!--Validação dispositivo View-->
-		<div data-role="view" id="validacaoDispositivo-view" data-title="Top Line" data-model="viewModel" data-init="initValidacao" data-hide="viewHide" data-layout="updade-layout">
+		<div data-role="view" id="validacaoDispositivo-view" data-title="Top Line" data-model="viewModel" data-init="initValidacao" data-hide="viewHide">
 			<header data-role="header">
 				<div data-role="navbar">
 					<span data-role="view-title"></span>
@@ -796,7 +788,7 @@
 				${TmoDescricao}
 			</a>
 		</script>
-                        
+
 		<!--                      
 		<script type="text/x-kendo-template" id="tMotivosNaoVenda">
 		<a class="details-link" data-role="listview-link">
@@ -816,7 +808,7 @@
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
 				loading: '<h1 class="loading-message">Carregando...</h1>'
-				,initial: "#validacaoDispositivo-view"
+				,initial: "#dentroFila-view"
 			});
 			
 			/*
@@ -841,11 +833,7 @@
 			}
 			
 			function switchChange(e) {
-				if (e.checked) {
-					console.log("Vendeu selecionado");
-				}
-				else {
-                    alert("teste");
+				if (!e.checked) {          
 					app.navigate("#MotNaoVenda-view");
 				}    
 			}     

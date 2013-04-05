@@ -9,6 +9,7 @@
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
 		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
+        <script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
         <script src="scripts/topLineGeolocation.js" type="text/javascript"></script>
 	</head>
@@ -107,7 +108,7 @@
 					<ul>
 						<li>
 							<label>Vendeu</label>
-							<input id="chkVendeu" data-role="switch" data-on-label="Sim" data-off-label="Não" data-change="switchChange" checked>
+							<input id="chkVendeu" data-role="switch" data-on-label="Sim" data-off-label="Não" data-change="switchChange" checked="Checked">
 						</li>
 					</ul>
 				</li>
@@ -702,11 +703,11 @@
 		</div>
 
 		<!--Motivos não venda View-->
-		<div id="MotNaoVenda-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="update-layout" data-transition="slideup" data-show="showMotivosNaoVenda">
+		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="Top Line" data-layout="home-layout" data-transition="slideup" data-show="showMotivosNaoVenda">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarMotivoNaoVenda}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarMotivoNaoVenda}">Salvar</a>
+					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarNaoVenda}">Cancelar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarNaoVenda}">Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -722,13 +723,11 @@
 						</li>
 					</ul>
 				</li>
-				Selected Value: <span data-bind="text:selectedMotNaoVendaValue"></span>
 				<li>
 					Motivos não venda
 					<ul data-bind="source: dsMotivosNaoVenda" data-role="listview" data-auto-bind="false" data-template="tMotivosNaoVenda" data-style="inset"></ul>
 				</li>
 			</ul>
-
 			<div data-role="footer">
 				<div data-role="tabstrip">
 				</div>
@@ -796,14 +795,7 @@
 				${TmoDescricao}
 			</a>
 		</script>
-                        
-		<!--                      
-		<script type="text/x-kendo-template" id="tMotivosNaoVenda">
-		<a class="details-link" data-role="listview-link">
-		${MnvDescricao}
-		</a>
-		</script>
-		-->
+
 		<script id="tMotivosNaoVenda" type="text/x-kendo-template">
 			<div>
 				<input type="radio" data-bind="attr:{name:idMotivoNaoVenda}, value:MnvId, checked:selectedMotNaoVendaValue" />
@@ -837,17 +829,12 @@
 					btnGrp.select(0);
 				}
 			}
-			
-			function switchChange(e) {
-				if (e.checked) {
-					console.log("Vendeu selecionado");
-				}
-				else {
-                    alert("teste");
+                    
+		function switchChange(e) {
+				if (!e.checked) {          
 					app.navigate("#MotNaoVenda-view");
 				}    
-			}     
-						
+			} 			
 		</script>
 	</body>
 </html>

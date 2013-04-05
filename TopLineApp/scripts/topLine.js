@@ -223,18 +223,7 @@
 			} 
 		} 
 	};
-	  
-	//Schema Motivos não venda
-	var scMotivosNaoVenda = { 
-		model: {
-			id: "MnvId",
-			fields: {
-				MnvId: { editable: false, nullable: false },
-				MnvDescricao: { editable: false, nullable: false }
-			} 
-		} 
-	};
-    
+	   
 	//Schema turnos de Turnos de funcionamento
 	var schemaTurnosFunc = { 
 		model: {
@@ -435,26 +424,7 @@
 		batch: true,
 		schema: schemaTiposMovto
 	});
-    
-	//dataSource motivos não venda
-	var dsMotivosNaoVenda = new kendo.data.DataSource({                    
-		transport: {						
-			read:  {
-				url: baseUrl + "/RmMotNaoVenda",							
-				type:"GET"      
-				,contentType: "application/json"
-				,dataType: "json"
-			},
-			parameterMap: function(data, operation) {
-				if (operation !== "read" && data.models) {
-					return kendo.stringify([data.models[0]]);
-				}
-			}
-		},
-		batch: true,
-		schema: scMotivosNaoVenda
-	});
-	
+
 	//dataSource Turnos de funcionamento
 	var dsTurnosFunc = new kendo.data.DataSource({                    
 		transport: {						
@@ -596,8 +566,7 @@
 		dsVendFila: dsVendFila,		
 		dsVendForaFila: dsVendForaFila,
 		dsVendForaTurno: dsVendForaTurno,
-		dsTiposMovto: dsTiposMovto,        
-		dsMotivosNaoVenda: dsMotivosNaoVenda,
+		dsTiposMovto: dsTiposMovto,        		
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
 		dsColaborador: dsColaborador,	
@@ -624,8 +593,7 @@
 		vendedoresForaFila : vendedoresForaFila,
 		vendedoresForaTurno : vendedoresForaTurno,
 		tiposMovtoSaida : tiposMovtoSaida,
-		tiposMovtoEntrada : tiposMovtoEntrada,   
-        motivosNaoVenda: motivosNaoVenda,
+		tiposMovtoEntrada : tiposMovtoEntrada,           
 		lojas: lojas,
 		listViewInitFila: listViewInitFila,
 		initValidacao: initValidacao,
@@ -634,11 +602,7 @@
 		editorLojaViewInit: editorLojaViewInit,
 		
 		salvarEdicaoLoja: salvarEdicaoLoja,
-		cancelarEdicaoLoja: cancelarEdicaoLoja,
-        
-		selectedMotNaoVendaValue: "1",
-		idMotivoNaoVenda:"radiogroup"
-		
+		cancelarEdicaoLoja: cancelarEdicaoLoja
 	});
 
 	function adicionarAtendimento() {
@@ -753,11 +717,6 @@
 		dsTiposMovto.read(); 
 	}
     
-	function motivosNaoVenda() {		
-		dsMotivosNaoVenda.options.transport.read.url = baseUrl + "/RmMotNaoVenda";
-		dsMotivosNaoVenda.read(); 
-	}
-    
 	function lojas() {	
 		dsLoja.options.transport.read.url = baseUrl + "/RmLoja";
 		dsLoja.read(); 
@@ -828,6 +787,7 @@
 		var itemUID = $(e.touch.currentTarget).data("uid");
 		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
+        viewModelNaoVenda.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
 		app.navigate("#resultadoAtendimento-view");
 	}
@@ -961,8 +921,7 @@
 		showVendedoresForaTurno: vendedoresForaTurno,
 		showTiposMovto: tiposMovto,
 		showTiposMovtoSaida: tiposMovtoSaida,
-		showTiposMovtoEntrada: tiposMovtoEntrada,
-        showMotivosNaoVenda: motivosNaoVenda,
+		showTiposMovtoEntrada: tiposMovtoEntrada,        
 		showLojas: lojas,     
 		showTurnoFunc: turnoFunc,
 		showCargos: cargos,

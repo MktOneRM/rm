@@ -93,7 +93,7 @@
 		viewModelNaoVenda.dsNaoVenda.sync(); 	                
 		
         //Marca o checkbox como default
-        document.getElementById("chkVendeu").checked = true;
+        document.getElementById("chkVendeu").checked = "checked";
         
 		app.navigate("dentroFila-view");
 	}

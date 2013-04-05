@@ -100,7 +100,7 @@
 			
 	function cancelarNaoVenda() {
 		viewModelNaoVenda.dsNaoVenda.cancelChanges(); 
-		app.navigate(":#back");                 
+		app.navigate("#dentroFila-view");                 
 	}
     
 	function motivosNaoVenda() {		

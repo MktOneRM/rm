@@ -72,19 +72,13 @@
 		motivosNaoVenda: motivosNaoVenda,
 		motivoNaoVenda: {},
 		vendedorSelecionado: {},
-		
-		adicionarNaoVenda: adicionarNaoVenda,
-		salvarNaoVenda: salvarNaoVenda,
+
+        salvarNaoVenda: salvarNaoVenda,
 		cancelarNaoVenda: cancelarNaoVenda,
         
 		selectedMotNaoVendaValue: "1",
 		idMotivoNaoVenda:"radiogroup"
 	});
-
-	function adicionarNaoVenda() {
-		var naoVenda = viewModelNaoVenda.dsNaoVenda.add(); 
-		viewModelNaoVenda.set("motivoNaoVenda", naoVenda); 
-	}
 
 	function salvarNaoVenda() {
 		var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");
@@ -99,7 +93,7 @@
 		viewModelNaoVenda.dsNaoVenda.sync(); 	                
 		
         //Marca o checkbox como default
-        document.getElementById("chkVendeu").checked = checked;
+        document.getElementById("chkVendeu").checked = true;
         
 		app.navigate("dentroFila-view");
 	}
@@ -112,11 +106,14 @@
 	function motivosNaoVenda() {		
 		dsMotivosNaoVenda.options.transport.read.url = baseUrl + "/RmMotNaoVenda";
 		dsMotivosNaoVenda.read(); 
+        
+        var naoVenda = viewModelNaoVenda.dsNaoVenda.add(); 
+		viewModelNaoVenda.set("motivoNaoVenda", naoVenda); 
+        
 	}
 
 	$.extend(window, {
 		showMotivosNaoVenda: motivosNaoVenda,
-		viewModelNaoVenda: viewModelNaoVenda,
-		initMotivosNaoVenda: adicionarNaoVenda
+		viewModelNaoVenda: viewModelNaoVenda
 	});
 })(jQuery);

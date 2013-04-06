@@ -88,7 +88,7 @@
 		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel">
 			<div data-role="header">
 				<div data-role="navbar">
-					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento">Cancelar</a>
+					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
 					<span data-role="view-title"></span>
 					<a class="nav-button" data-align="right" data-role="button" id="done" data-bind="events: {click: salvarAtendimento}">Salvar</a>
 				</div>
@@ -766,12 +766,12 @@
 
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
-			<a onclick="atendimentoViewInit('${uid}')">
+            <div data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-hold="onTouchstart" data-tap="atendimentoViewInit">
 				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
 				<h1 class="fila-nome">${ColApelido}</h1>
 				<h2 class="fila-turno">${ColTurno}</h2>
-			</a>
-			<a id="btnSair" href="\\#" data-role="button" class="saida" onclick="sairFilaViewInit('${uid}')">Sair</a>
+                <button id="btnSair" data-role="button" class="saida" onclick="sairFilaViewInit('${uid}')">Sair</button>
+    		</div>
 		</script>
 
 		<script type="text/x-kendo-template" id="tforaFila">

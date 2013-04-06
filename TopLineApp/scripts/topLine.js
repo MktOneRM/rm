@@ -602,12 +602,11 @@
 		tiposMovtoSaida : tiposMovtoSaida,
 		tiposMovtoEntrada : tiposMovtoEntrada,           
 		lojas: lojas,
-		listViewInitFila: listViewInitFila,
 		initValidacao: initValidacao,
 		formatField:formatField,
-        
+        onSwipe:onSwipe,
+        onTouchstart:onTouchstart,
 		editorLojaViewInit: editorLojaViewInit,
-		
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
         
@@ -745,83 +744,28 @@
 	}
     
 	function atendimentoViewInit(e) {
-		var view = e.view;
-		view.element.find("#done").data("kendoMobileButton").bind("click", function() {
-			view.loader.show();
-			salvarAtendimento();
-			viewModel.dsVendFila.one("requestEnd", function() {
-				vendedoresFila();
-				view.loader.hide();
-				app.navigate("#dentroFila-view");
-			});
-		});
-
-		view.element.find("#cancelAtendimento").data("kendoMobileBackButton").bind("click", function(e) {
-			view.loader.show();
-			viewModel.dsAtendimento.cancelChanges();
-			viewModel.dsAtendimento.one("requestEnd", function() {
-				vendedoresFila();
-			});
-			view.loader.hide();
-			app.navigate("#dentroFila-view");
-		});
-	}
-
-	//<!--Atendimento-->
-     
-	function listViewInitFila(e) {
-		tiposMovtoSaida();
-		e.view.element.find("#listviewFila").kendoMobileListView({
-			dataSource: dsVendFila,
-			template: $("#tdentroFila").html()
-		})    
-        
-		.kendoTouch({
-			filter: ">li",
-			enableSwipe: true,
-			touchstart: touchstart,
-			tap: navigate,
-			swipe: swipe
-		});
-	}
-
-	function navigate(e) {
-		var itemUID = $(e.touch.currentTarget).data("uid");
+        console.log(e);
+        var itemUID = $(e.touch.currentTarget).data("uid");
 		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
-		viewModelNaoVenda.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
 		app.navigate("#resultadoAtendimento-view");
 	}
 
-	function swipe(e) {
+	//<!--Atendimento-->
+	function onSwipe(e) {
 		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
 		button.expand().duration(200).play();
 	}
 
-	function touchstart(e) {
-		var itemUID = $(e.touch.currentTarget).data("uid");
-		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
-		var target = $(e.touch.initialTouch),
+	function onTouchstart(e) {
 		listviewFila = $("#listviewFila").data("kendoMobileListView"),
 		button = $(e.touch.target).find("[data-role=button]:visible");
 
-		if (target.closest("[data-role=button]")[0]) {
-			viewModel.set("vendedorSelecionado", schemaVendedores);
-			app.navigate("#sairdaFila_View");
-    
-			//prevent `swipe`
-			this.events.cancel();
-			e.event.stopPropagation();
-		}
-		else if (button[0]) {
+		if (button[0]) {
 			button.hide();
-
 			//prevent `swipe`
 			this.events.cancel();
-		}
-		else {
-			listviewFila.items().find("[data-role=button]:visible").hide();
 		}
 	}
     
@@ -956,11 +900,12 @@
 		showDetalhesColaborador: detalhesColaborador,     
 		sairFilaViewInit : sairFilaViewInit,
 		showAtendimento: adicionarAtendimento,
-		listViewInitFila: listViewInitFila,
 		atendimentoViewInit: atendimentoViewInit,
 		viewModel: viewModel,
 		initValidacao: initValidacao,
-		formatField:formatField,		
+		formatField:formatField,
+        onSwipe:onSwipe,
+        onTouchstart:onTouchstart,
 		editorLojaViewInit: editorLojaViewInit
         
 	});

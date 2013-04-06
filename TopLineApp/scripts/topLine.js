@@ -20,7 +20,6 @@
         
 	});
 
-    
 	kendo.data.binders.cpf = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cpf"].get();
@@ -278,12 +277,11 @@
 				LojComplemento: { type: "text", validation: { required: false} },            
 				LojBairro: { type: "text", validation: { required: false} },            
 				LojCidade: { type: "text", validation: { required: false} },            
-				LojUF: { type: "text", validation: { required: false} },            
+				LojUf: { type: "text", validation: { required: false} },            
 				LojCep: { type: "text", validation: { required: false,min:0,max:9} },                       				
-				LojShopping_rua: { type: "boolean", validation: { required: false} },                                    				
-				LojDtcadastro: { type: "date", validation: { required: true} },            
-				LojLatitude: { type: "number", validation: { required: false} },            
-				LojLongitude: { type: "number", validation: { required: false} },            
+				LojShopping_rua: { type: "boolean", validation: { required: false} },                                    								
+				LojLatitude: { type: "text", validation: { required: false} },            
+				LojLongitude: { type: "text", validation: { required: false} },            
 			}     
 		}
 	};
@@ -517,17 +515,26 @@
 		},
 		batch: true,
 		schema: scLoja,
-		requestEnd: function(e) {
-			console.log(e, "requestEnd");  
-			viewModel.set("lojaSelecionada", e.response);					
-			app.navigate("#detalhesLoja-view");
-		},
-		error: function(e) {
-			console.log(e, "error");  
-			if (e.errorThrown == "Not Found") {
-				adicionarLoja();                
+		requestEnd: function(e) {                
+			if (e.type == "read") {                
+				viewModel.set("lojaSelecionada", e.response);	
+				app.hideLoading();
+				app.navigate("#detalhesLoja-view");
 			}
+		},
+		change: function(e) {						
+			console.log(viewModel.lojaSelecionada, "Change");
+			viewModel.set("lojaSelecionada", e.items[0]);					
 		}
+		/*
+		,
+		error: function(e) {
+		console.log(e, "error");  
+		if (e.errorThrown == "Not Found") {
+		adicionarLoja();                
+		}
+		}
+		*/
 	})
     
 	//DataSource Colaborador
@@ -589,7 +596,7 @@
 		salvarColaborador: salvarColaborador,
 		editarColaborador: editarColaborador,
 		cancelarColaborador: cancelarColaborador,
-        vendedoresFila : vendedoresFila,
+		vendedoresFila : vendedoresFila,
 		vendedoresForaFila : vendedoresForaFila,
 		vendedoresForaTurno : vendedoresForaTurno,
 		tiposMovtoSaida : tiposMovtoSaida,
@@ -602,7 +609,9 @@
 		editorLojaViewInit: editorLojaViewInit,
 		
 		salvarEdicaoLoja: salvarEdicaoLoja,
-		cancelarEdicaoLoja: cancelarEdicaoLoja
+		cancelarEdicaoLoja: cancelarEdicaoLoja,
+        
+		idLoja: null
 	});
 
 	function adicionarAtendimento() {
@@ -672,17 +681,8 @@
 	}
     
 	function salvarEdicaoLoja() {
-		//if (validatorLoja.validate()) {
-		var item = viewModel.get("lojaSelecionada");
-		console.log(viewModel, "viewModel");
-		console.log(viewModel, "viewModel");
-        
-		console.log(item, "item");
-        
-		return;      
 		viewModel.dsLoja.sync();
-		app.navigate("#:back");
-		//}
+		app.navigate("#:back");      
 	}
     
 	function cancelarEdicaoLoja() {
@@ -718,7 +718,9 @@
 	}
     
 	function lojas() {	
-		dsLoja.options.transport.read.url = baseUrl + "/RmLoja";
+		//dsLoja.options.transport.read.url = baseUrl + "/RmLoja";
+		//dsLoja.read(); 
+		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + viewModel.idLoja;
 		dsLoja.read(); 
 	}
   
@@ -787,7 +789,7 @@
 		var itemUID = $(e.touch.currentTarget).data("uid");
 		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
-        viewModelNaoVenda.set("vendedorSelecionado", schemaVendedores);
+		viewModelNaoVenda.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
 		app.navigate("#resultadoAtendimento-view");
 	}
@@ -844,7 +846,9 @@
 		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
     
-	function editorLojaViewInit() {
+	function editorLojaViewInit(e) {
+		var view = e.view;
+        
 		validatorLoja = $("#editorLoja").kendoValidator({}).data("kendoValidator");
 		viewModel.dsTLoja.read();
 		viewModel.dsUf.read();
@@ -852,18 +856,41 @@
 		var lojaDe = viewModel.lojaSelecionada.get("LojShopping_rua");
 		$("#LojUf").find("option[value='" + ufSel + "']").attr("selected", true)
 		$("#LojShopping_rua").find("option[value=" + lojaDe + "]").attr("selected", true)
+        
+		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
+			dsLoja.one("error", function() {				
+				view.loader.hide();
+				app.navigate("#detalhesLoja-view");
+			});
+         
+			view.loader.show();
+			dsLoja.sync();
+		});
+        
+		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
+			e.preventDefault();
+			dsLoja.one("change", function() {
+				view.loader.hide();
+				app.navigate("#detalhesLoja-view");
+			});
+
+			view.loader.show();
+			dsLoja.cancelChanges();
+		});
 	}
    
 	function initValidacao() {
-		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {
+		document.getElementById("btnPesquisaCnpj").addEventListener("click", function() {	
+			app.showLoading();
 			validacaoDispositivo();			
 		});
 	}
     
 	function validacaoDispositivo() {
-		var iptCnpjInicial = document.getElementById("iptCnpjInicial");
-		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + iptCnpjInicial.value ;
-		dsLoja.read(); 
+		var iptCnpjInicial = document.getElementById("iptCnpjInicial");		  
+		viewModel.idLoja = iptCnpjInicial.value;   
+		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + iptCnpjInicial.value;
+		dsLoja.read(); 		
 	}
 
 	function formatField(strField, sMask) {

@@ -70,11 +70,11 @@
 		</div>
 
 		<!-- Fila da Vez -->
-		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-model="viewModel" data-init="listViewInitFila">
-			<ul id="listviewFila" data-role="listview" data-style="inset"></ul>
+        <div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel">
+			<ul data-bind="source: dsVendFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" data-style="inset"></ul>
 		</div>
 
-		<!-- Fora da Fila da Vez -->
+        <!-- Fora da Fila da Vez -->
 		<div id="foraFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresForaFila" data-model="viewModel">
 			<ul data-bind="source: dsVendForaFila" data-role="listview" data-auto-bind="false" data-template="tforaFila" data-style="inset"></ul>
 		</div>
@@ -85,12 +85,12 @@
 		</div>
 
 		<!-- Resultado Atendimento -->
-		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-init="atendimentoViewInit" data-layout="update-layout" data-model="viewModel">
+		<div id="resultadoAtendimento-view" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel">
 			<div data-role="header">
 				<div data-role="navbar">
 					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelAtendimento">Cancelar</a>
 					<span data-role="view-title"></span>
-					<a class="nav-button" data-align="right" data-role="button" id="done">Salvar</a>
+					<a class="nav-button" data-align="right" data-role="button" id="done" data-bind="events: {click: salvarAtendimento}">Salvar</a>
 				</div>
 			</div>
 			<ul id="formAtendimento" data-role="listview" data-style="inset" data-type="group">
@@ -130,7 +130,7 @@
 				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
 			</script>
 		</div>
-		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-init="sairFilaViewInit" data-layout="update-layout" data-model="viewModel">
+		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelSair">Cancelar</a>
@@ -572,8 +572,8 @@
 		<div id="EditorLoja-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="update-layout" data-init="editorLojaViewInit">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEdicaoLoja}">Salvar</a>
+					<a id="btnCancel" data-role="backbutton" type="button" data-align="left" <!-- data-bind="events: {click: cancelarEdicaoLoja}"-->>Cancelar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" <!--data-bind="events: {click: salvarEdicaoLoja}"-->>Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -766,12 +766,12 @@
 
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
-			<a>
+			<a onclick="atendimentoViewInit('${uid}')">
 				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
 				<h1 class="fila-nome">${ColApelido}</h1>
 				<h2 class="fila-turno">${ColTurno}</h2>
 			</a>
-			<a id="btnSair" href="\\#" data-role="button" class="saida">Sair</a>
+			<a id="btnSair" href="\\#" data-role="button" class="saida" onclick="sairFilaViewInit('${uid}')">Sair</a>
 		</script>
 
 		<script type="text/x-kendo-template" id="tforaFila">

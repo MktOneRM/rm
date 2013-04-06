@@ -609,7 +609,6 @@
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
-        
 		idLoja: null
 	});
 
@@ -744,8 +743,8 @@
 	}
     
 	function atendimentoViewInit(e) {
-        console.log(e);
         var itemUID = $(e.touch.currentTarget).data("uid");
+        console.log(itemUID);
 		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();

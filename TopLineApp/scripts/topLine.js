@@ -73,6 +73,7 @@
 			}
 		}
 	});
+    
 	kendo.data.binders.format = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["format"].get();

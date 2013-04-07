@@ -627,8 +627,10 @@
 		initValidacao: initValidacao,
 		formatField:formatField,
 		onSwipe:onSwipe,
-		onHold:onHold,
+        onSwipeFora:onSwipeFora,
+
 		onTouchstart:onTouchstart,
+        onTouchstartFora:onTouchstartFora,
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
@@ -779,16 +781,6 @@
 		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
 		button.expand().duration(200).play();
 	}
-
-	function onHold(e) {
-		listviewFila = $("#sairdaFila_View").data("kendoMobileListView");
-		button = $(e.touch.target).find("[data-role=button]:visible");
-		if (button[0]) {
-			button.hide();
-			//prevent `swipe`
-			this.events.cancel();
-		}
-	}
     
 	function onTouchstart(e) {
 		button = $(e.touch.target).find("[data-role=button]:visible");
@@ -797,6 +789,29 @@
 			viewModel.set("vendedorSelecionado", schemaVendedores);
 			tiposMovtoSaida();
 			app.navigate("#sairdaFila_View");
+       
+			//prevent `swipe`
+			button.hide();
+			this.events.cancel();
+			e.event.stopPropagation();
+		}
+		else {
+			button.hide();
+		}
+	}
+
+    function onSwipeFora(e) {
+		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
+		button.expand().duration(200).play();
+	}
+
+	function onTouchstartFora(e) {
+		button = $(e.touch.target).find("[data-role=button]:visible");
+		if (button[0]) {
+			var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
+			viewModel.set("vendedorSelecionado", schemaVendedores);
+            //Entrar na fila
+			app.navigate("#dentroFila-view");
        
 			//prevent `swipe`
 			button.hide();
@@ -936,8 +951,10 @@
 		initValidacao: initValidacao,
 		formatField:formatField,
 		onSwipe:onSwipe,
-		onHold:onHold,
+        onSwipeFora:onSwipeFora,
+
 		onTouchstart:onTouchstart,
+        onTouchstartFora:onTouchstartFora,
 		cancelarSaida:cancelarSaida,
 		editorLojaViewInit: editorLojaViewInit
         

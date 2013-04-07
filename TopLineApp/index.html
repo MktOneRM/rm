@@ -134,7 +134,7 @@
 				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
 			</script>
 		</div>
-                                
+
 		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel">
 			<header data-role="header">
 				<div data-role="navbar">
@@ -554,7 +554,6 @@
 					</ul>
 				</li>
 			</ul>
-
 		</div>
 
 		<!--Editor Loja View-->
@@ -741,6 +740,18 @@
 				</div>
 				<!--<div><h4>Clear Local Storage</h4><button class="button" id="clearLocalStorage">Clear</button></div>-->
 			</div>
+		</div>
+
+		<!--Consulta Não Vendas Loja View-->
+		<div id="consultaNaoVenda-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="tools-layout">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" href="#:back">Voltar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="backbutton" href="#EditorLoja-view" >Editar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<ul data-bind="source: dsVendFila" data-role="listview" data-template="tdentroFila" data-style="inset"></ul>
 		</div>
 
 		<!--Template Colaborador-->

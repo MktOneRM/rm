@@ -159,22 +159,22 @@
 		model: {
 			id: "FilaLojId",
 			fields: {
-				RedeLojId: { editable: false, nullable: false },
-				LojaColId: { editable: false, nullable: false },
-				FilaLojOrdem: { editable: false, nullable: false },
-				ColApelido: { editable: false, nullable: false },
-				ColNome: { editable: false, nullable: false },           
-				ColSobreNome: { editable: false, nullable: false },
-				ColFoto: { editable: false, nullable: false },                        
-				ExpHInicial: { editable: false, nullable: false },
-				ExpHFinal: { editable: false, nullable: false },                        
-				EmFila: { editable: false, nullable: false },
-				EmFolga: { editable: false, nullable: false },
-				EmAfastamento: { editable: false, nullable: false },
+				RedeLojId: { type: "int" },
+				LojaColId: { type: "int" },
+				FilaLojOrdem: { type: "int" },
+				ColApelido: { type: "text" },
+				ColNome: { type: "text" },
+				ColSobreNome: { type: "text" },
+				ColFoto: { type: "text" },
+				ExpHInicial: { type: "time" },
+				ExpHFinal: { type: "time" },
+				EmFila: { type: "boolean" },
+				EmFolga: { type: "boolean" },
+				EmAfastamento: { type: "boolean" }
 			} 
 		}
 	};
-		    			
+    
 	var dataUf = [
 		{ Uf: "AL",Desc:"Alagoas"},
 		{ Uf: "AP",Desc:"Amapá"},
@@ -391,7 +391,7 @@
 			},
 			update: {
 				url: baseUrl + "/RmFilaLoja/2",							
-				type:"PUT"
+				type:"POST"
 				,contentType:"application/json"
 				,dataType: "json"
 			},
@@ -421,7 +421,7 @@
 			},
 			update: {
 				url: baseUrl + "/RmFilaLoja/3",							
-				type:"PUT"
+				type:"POST"
 				,contentType:"application/json"
 				,dataType: "json"
 			},
@@ -627,14 +627,17 @@
 		initValidacao: initValidacao,
 		formatField:formatField,
 		onSwipe:onSwipe,
-        onSwipeFora:onSwipeFora,
+		onSwipeFora:onSwipeFora,
 
 		onTouchstart:onTouchstart,
-        onTouchstartFora:onTouchstartFora,
+		onTouchstartFora:onTouchstartFora,
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
+		
+		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
+        
 		idLoja: null
 	});
 
@@ -660,7 +663,7 @@
 			var vend = viewModel.vendedorSelecionado;			
 			viewModel.dsVendFila.remove(vend); 
 			viewModel.dsVendFila.sync();
-            app.navigate("#dentroFila-view");
+			app.navigate("#dentroFila-view");
 		}
 	}
 			
@@ -668,11 +671,17 @@
 		viewModel.dsAtendimento.cancelChanges(); 
 		app.navigate("#dentroFila-view");                 
 	}
+
+	function salvarSaida(e) {
+		console.log(e);
+        alert("SalvarSaida");
+	}
     
 	function cancelarSaida() {
+		viewModel.dsVendFila.cancelChanges();
 		app.navigate("#dentroFila-view");                 
 	}
-
+    
 	function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);
@@ -800,7 +809,7 @@
 		}
 	}
 
-    function onSwipeFora(e) {
+	function onSwipeFora(e) {
 		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
 		button.expand().duration(200).play();
 	}
@@ -810,8 +819,8 @@
 		if (button[0]) {
 			var schemaVendedores = viewModel.dsVendForaFila.getByUid(e.touch.target.context.id);
 			viewModel.set("vendedorSelecionado", schemaVendedores);
-            //Entrar na fila			
-            app.navigate("#entrarNaFila_View");
+			//Entrar na fila			
+			app.navigate("#entrarNaFila_View");
        
 			//prevent `swipe`
 			button.hide();
@@ -827,7 +836,7 @@
 		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
 		console.log("atendimento= ", schemaVendedores);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
-        viewModelNaoVenda.set("vendedorSelecionado", schemaVendedores);
+		viewModelNaoVenda.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
 		app.navigate("#resultadoAtendimento-view");
 	}
@@ -951,10 +960,10 @@
 		initValidacao: initValidacao,
 		formatField:formatField,
 		onSwipe:onSwipe,
-        onSwipeFora:onSwipeFora,
+		onSwipeFora:onSwipeFora,
 
 		onTouchstart:onTouchstart,
-        onTouchstartFora:onTouchstartFora,
+		onTouchstartFora:onTouchstartFora,
 		cancelarSaida:cancelarSaida,
 		editorLojaViewInit: editorLojaViewInit
         

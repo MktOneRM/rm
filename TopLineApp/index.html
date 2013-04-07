@@ -139,9 +139,9 @@
 		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel" data-show="showTiposMovtoSaida">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a data-align="left" data-role="backbutton" id="btnCancel" data-bind="events: {click: cancelarSaida}">Cancelar</a>
-                    <a data-align="right" id="btnCreate" data-bind="events: {click: salvarSaida}">Salvar</a>
+					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarSaida}">Cancelar</a>
 					<span data-role="view-title"></span>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarSaida}">Salvar</a>
 				</div>
 			</header>
 			<ul id="formSaiFila" data-role="listview" data-style="inset" data-type="group">
@@ -166,9 +166,9 @@
 		<div id="entrarNaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel" data-show="showTiposMovtoEntrada">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a data-align="left" data-role="backbutton" id="btnCancel" data-bind="events: {click: cancelarEntrada}">Cancelar</a>
-                    <a data-align="right" id="btnCreate" data-bind="events: {click: salvarEntrada}">Salvar</a>
+					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEntrada}">Cancelar</a>
 					<span data-role="view-title"></span>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEntrada}">Salvar</a>
 				</div>
 			</header>
 			<ul id="formEntrarFila" data-role="listview" data-style="inset" data-type="group">
@@ -810,16 +810,17 @@
 				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
-				<button id="btnEntradar" data-role="button" class="entrar">Entrar</button>
+				<button id="btnEntrada" data-role="button" class="entrar">Entrar</button>
 			</div>
 		</script>
 
 		<script type="text/x-kendo-template" id="tforaTurno">
-			<a class="details-link" data-role="listview-link">
+			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipeTurno" data-touchstart="onTouchstartTurno">
 				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
-				<h1 class="fila-nome">${ColApelido}</h1>
-				<h2 class="fila-turno">${ColTurno}</h2>
-			</a>
+				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
+				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
+				<button id="btnEntrada" data-role="button" class="entrar">Entrar</button>
+			</div>
 		</script>
 
 		<script type="text/x-kendo-template" id="tpTiposMovto">

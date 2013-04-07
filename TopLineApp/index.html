@@ -80,12 +80,12 @@
 
 		<!-- Fora da Fila da Vez -->
 		<div id="foraFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresForaFila" data-model="viewModel">
-			<ul data-bind="source: dsVendForaFila" data-role="listview" data-auto-bind="false" data-template="tforaFila" data-style="inset"></ul>
+			<ul data-bind="source: dsVendForaFila" data-role="listview" data-template="tforaFila" data-style="inset"></ul>
 		</div>
 
 		<!-- Fora do Turno -->
 		<div id="foraTurno-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresForaTurno" data-model="viewModel">
-			<ul data-bind="source: dsVendForaTurno" data-role="listview" data-auto-bind="false" data-template="tforaTurno" data-style="inset"></ul>
+			<ul data-bind="source: dsVendForaTurno" data-role="listview" data-template="tforaTurno" data-style="inset"></ul>
 		</div>
 
 		<!-- Resultado Atendimento -->
@@ -135,10 +135,12 @@
 			</script>
 		</div>
 
-		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel">
+		<!--Saida da Fila da Vez-->
+		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel" data-show="showTiposMovtoSaida">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a class="nav-button" data-align="left" data-role="backbutton" id="cancelSair" data-bind="events: {click: cancelarSaida}">Cancelar</a>
+					<a data-align="left" data-role="backbutton" id="btnCancel" data-bind="events: {click: cancelarSaida}">Cancelar</a>
+                    <a data-align="right" data-role="backbutton" id="btnCreate" data-bind="events: {click: salvarSaida}">Cancelar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -154,8 +156,35 @@
 					</ul>
 				</li>
 				<li>
-					Motivo da Saída
+					Motivos de Saída
 					<ul id="listviewMotivosSaida" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-template="tpTiposMovto" data-style="inset"></ul>
+				</li>
+			</ul>
+		</div>
+
+		<!--Entrada na Fila da Vez-->
+		<div id="entrarNaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel" data-show="showTiposMovtoEntrada">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a data-align="left" data-role="backbutton" id="btnCancel" data-bind="events: {click: cancelarEntrada}">Cancelar</a>
+                    <a data-align="right" data-role="backbutton" id="btnCreate" data-bind="events: {click: salvarEntrada}">Cancelar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<ul id="formEntrarFila" data-role="listview" data-style="inset" data-type="group">
+				<div class="mobile-fila-titulo"></div>
+				<li>
+					<ul>
+						<li style="height:65px">
+							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+						</li>
+					</ul>
+				</li>
+				<li>
+					Motivos de Entrada
+					<ul id="listviewMotivosEntrada" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-template="tpTiposMovto" data-style="inset"></ul>
 				</li>
 			</ul>
 		</div>
@@ -769,7 +798,6 @@
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstart" data-tap="atendimentoViewInit">
-				<!--<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>-->
 				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
@@ -778,17 +806,17 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tforaFila">
-			<a class="details-link" data-role="listview-link">
-				<!--<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>-->
+			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipeFora" data-touchstart="onTouchstartFora">
 				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
-				<h1 class="fila-nome">${ColApelido}</h1>
-				<h2 class="fila-turno">${ColTurno}</h2>
-			</a>
+				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
+				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
+				<button id="btnEntradar" data-role="button" class="entrar">Entrar</button>
+			</div>
 		</script>
 
 		<script type="text/x-kendo-template" id="tforaTurno">
 			<a class="details-link" data-role="listview-link">
-				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
+				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="fila-nome">${ColApelido}</h1>
 				<h2 class="fila-turno">${ColTurno}</h2>
 			</a>
@@ -814,8 +842,7 @@
             
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
-				loading: '<h1 class="loading-message">Carregando...</h1>'
-				,initial: "#colaboradores-view"
+				loading: '<h1 class="loading-message">Carregando...</h1>'				
 			});
 
 			$(document).ready(function () {

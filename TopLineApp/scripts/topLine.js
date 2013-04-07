@@ -808,10 +808,10 @@
 	function onTouchstartFora(e) {
 		button = $(e.touch.target).find("[data-role=button]:visible");
 		if (button[0]) {
-			var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
+			var schemaVendedores = viewModel.dsVendForaFila.getByUid(e.touch.target.context.id);
 			viewModel.set("vendedorSelecionado", schemaVendedores);
-            //Entrar na fila
-			app.navigate("#dentroFila-view");
+            //Entrar na fila			
+            app.navigate("#entrarNaFila_View");
        
 			//prevent `swipe`
 			button.hide();

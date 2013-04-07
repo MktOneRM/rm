@@ -119,6 +119,7 @@
     <Content Include="kendo\styles\textures\stripe6.png" />
     <Content Include="kendo\styles\textures\transparency.png" />
     <Content Include="kendo\styles\textures\transtexture.png" />
+    <Content Include="scripts\topLineConsultaNaoVendas.js" />
     <Content Include="scripts\topLineDeviceInfo.js" />
     <Content Include="scripts\topLine.js" />
     <Content Include="Bkp\html\HtmlPage.html" />

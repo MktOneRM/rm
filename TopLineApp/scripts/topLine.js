@@ -151,8 +151,8 @@
 		}
 	});
     
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -170,7 +170,8 @@
 				ExpHFinal: { type: "time" },
 				EmFila: { type: "boolean" },
 				EmFolga: { type: "boolean" },
-				EmAfastamento: { type: "boolean" }
+				EmAfastamento: { type: "boolean" },
+                SaidaFila: { type: "boolean" }
 			} 
 		}
 	};
@@ -638,7 +639,12 @@
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
         
-		idLoja: null
+		idLoja: null,
+        
+		selectedMotSaidaValue: "1",
+		idMotivoSaida:"radiogroup",
+		selectedMotEntradaValue: "1",
+		idMotivoEntrada:"radiogroup",
 	});
 
 	function adicionarAtendimento() {
@@ -672,9 +678,11 @@
 		app.navigate("#dentroFila-view");                 
 	}
 
-	function salvarSaida(e) {
-		console.log(e);
-        alert("SalvarSaida");
+	function salvarSaida() {
+        viewModel.vendedorSelecionado.set("SaidaFila", true);
+		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
+		viewModel.dsVendFila.sync();
+        app.navigate("#dentroFila-view");
 	}
     
 	function cancelarSaida() {
@@ -689,8 +697,7 @@
 	}
        
 	function detalhesColaborador(e) {
-        console.log(e);
-		var colaborador = viewModel.dsColaborador.get(e);                 
+		var colaborador = viewModel.dsColaborador.get(e.context);                 
 		viewModel.set("colaboradorSelecionado", colaborador);  
 		app.navigate("#detalhesColaborador-view");
 	}

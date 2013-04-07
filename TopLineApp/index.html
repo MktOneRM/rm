@@ -12,10 +12,10 @@
 		<script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
 		<script src="scripts/topLineGeolocation.js" type="text/javascript"></script>
-		<script src="kendo/cultures/kendo.culture.pt-BR.min.js" type="text/javascript"></script>
-        <script type="text/javascript">   
+		<script src="kendo/js/kendo.culture.pt-BR.min.js" type="text/javascript">			
 			kendo.culture("pt-BR");
 		</script>
+
 	</head>
 	<body>
 		<!-- Home-Layout -->
@@ -156,7 +156,7 @@
 				</li>
 				<li>
 					Motivos de Saída
-					<ul id="listviewMotivosSaida" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-template="tpTiposMovto" data-style="inset"></ul>
+					<ul id="listviewMotivosSaida" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-template="tSaidaFila" data-style="inset"></ul>
 				</li>
 			</ul>
 		</div>
@@ -183,7 +183,7 @@
 				</li>
 				<li>
 					Motivos de Entrada
-					<ul id="listviewMotivosEntrada" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-template="tpTiposMovto" data-style="inset"></ul>
+					<ul id="listviewMotivosEntrada" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-template="tEntradaFila" data-style="inset"></ul>
 				</li>
 			</ul>
 		</div>
@@ -269,7 +269,7 @@
 				</div>
 			</header>
 			<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
-<!--			<ul id="actionsColaboradores" data-role="actionsheet" data-cancel="Cancelar">
+			<ul id="actionsColaboradores" data-role="actionsheet" data-cancel="Cancelar">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
 					<a href="#" data-action="viewModel.detalhesColaborador">Detalhes</a>
@@ -278,7 +278,7 @@
 					<a href="#" data-action="viewModel.editarColaborador">Editar</a>
 				</li>
 			</ul>
--->		</div>
+		</div>
 
 		<!--Detalhes Colaboradores view-->
 		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="tools-layout"  >
@@ -784,9 +784,8 @@
 
 		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
-			<a onclick="showDetalhesColaborador('${uid}')">
-				<img class="fila-art" data-bind="srcPath: ${ColFoto}" />
-				<h1 class="fila-nome">${ColNome} # # ${ColSobrenome}</h1>
+			<a data-rel="actionsheet" href="\\#actionsColaboradores" data-actionsheet-context="#= ColId #">
+				<h3>${ColNome} # # ${ColSobrenome}</h3>
 			</a>
 		</script>
 
@@ -827,6 +826,20 @@
 			<a class="details-link" data-role="listview-link">
 				${TmoDescricao}
 			</a>
+		</script>
+
+		<script id="tSaidaFila" type="text/x-kendo-template">
+			<div>
+				<input type="radio" data-bind="attr:{name:idMotivoSaida}, value:TmoId, checked:selectedMotSaidaValue" />
+				<span data-bind="text:TmoDescricao"></span>
+			</div>
+		</script>
+
+		<script id="tEntradaFila" type="text/x-kendo-template">
+			<div>
+				<input type="radio" data-bind="attr:{name:idMotivoEntrada}, value:TmoId, checked:selectedMotEntradaValue" />
+				<span data-bind="text:TmoDescricao"></span>
+			</div>
 		</script>
 
 		<script id="tMotivosNaoVenda" type="text/x-kendo-template">

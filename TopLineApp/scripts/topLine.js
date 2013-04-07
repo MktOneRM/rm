@@ -785,45 +785,31 @@
 	}
     
 	function onTouchstart(e) {
-		var target = $(e.touch.initialTouch),
 		button = $(e.touch.target).find("[data-role=button]:visible");
-
-		if (target.closest("[data-role=button]")[0]) {
-			var itemUID = $(e.touch.currentTarget).data("uid");
-			console.log(e, itemUID);
-			sairFilaViewInit(itemUID);
-   
+    	if (button[0]) {
+    		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
+    		viewModel.set("vendedorSelecionado", schemaVendedores);
+    		tiposMovtoSaida();
+    		app.navigate("#sairdaFila_View");
+       
 			//prevent `swipe`
+            button.hide();
 			this.events.cancel();
 			e.event.stopPropagation();
 		}
-		else if (button[0]) {
+		else {
 			button.hide();
-
-			//prevent `swipe`
-			this.events.cancel();
 		}
 	}
 
 	function atendimentoViewInit(e) {
-		var itemUID = $(e.touch.currentTarget).data("uid");
-		console.log("atendimento= ", itemUID, e);
-		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
+		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
+        console.log("atendimento= ", schemaVendedores);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
 		app.navigate("#resultadoAtendimento-view");
 	}
 
-	//Sair da Fila
-	function sairFilaViewInit(e) {
-		var itemUID = $(e.touch.currentTarget).data("uid");
-		console.log("Sai Fila= ", itemUID, e);
-		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
-		viewModel.set("vendedorSelecionado", schemaVendedores);
-		tiposMovtoSaida();
-		app.navigate("#sairdaFila_View");
-	}
- 
 	function editorViewInitCol() {
 		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
@@ -936,7 +922,6 @@
 		showCargos: cargos,
 		showColaboradores: colaboradores,
 		showDetalhesColaborador: detalhesColaborador,     
-		sairFilaViewInit : sairFilaViewInit,
 		showAtendimento: adicionarAtendimento,
 		atendimentoViewInit: atendimentoViewInit,
 		viewModel: viewModel,

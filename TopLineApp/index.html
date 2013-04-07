@@ -7,7 +7,7 @@
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
-		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
+		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
 		<script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
@@ -75,7 +75,7 @@
 
 		<!-- Fila da Vez -->
 		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel">
-			<ul data-bind="source: dsVendFila" data-role="listview" data-auto-bind="false" data-template="tdentroFila" data-style="inset"></ul>
+			<ul data-bind="source: dsVendFila" data-role="listview" data-template="tdentroFila" data-style="inset"></ul>
 		</div>
 
 		<!-- Fora da Fila da Vez -->
@@ -756,10 +756,10 @@
 
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
-			<div data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstart" data-tap="atendimentoViewInit">
+			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstart" data-tap="atendimentoViewInit">
 				<img class="fila-art" src="data:image/png;base64,${ColFoto}"/>
-				<h1 class="fila-nome">${ColApelido}</h1>
-				<h2 class="fila-turno">${ColTurno}</h2>
+				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
+				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnSair" data-role="button" class="saida">Sair</button>
 			</div>
 		</script>

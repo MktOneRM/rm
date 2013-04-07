@@ -131,7 +131,10 @@
 						break;
 				}  
 			}
-		}     
+		},
+		change: function() {
+            console.log("Change");
+		}
 	});
     
 	var baseUrl = "http://revenuemachine11.provisorio.ws/api"

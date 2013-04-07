@@ -410,3 +410,49 @@ div a
 {
 	font-size: 1.5rem;
 }
+
+#infoColaborador span
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+}
+
+#infoColaborador label
+{ 
+	display: block; 
+    width: 90px; 
+    float: left; 
+    padding-top: 6px; 
+    padding-right:5px;
+    color: #2e2e2e;
+    text-align:right;
+}
+
+#editorColaborador input[type="text"], #editorColaborador select
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
+#editorColaborador input[type="date"]
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
+#editorColaborador label
+{ 
+	display: block; 
+    width: 90px; 
+    float: left; 
+    color: #2e2e2e;
+    text-align:right;
+}

@@ -275,10 +275,11 @@ div a
 {
 	display: none;
 	position: absolute;
-	margin: 14px 0 0 0;
+	margin: 10px 0 0 0;
+    padding: 10px;
 	top: .25em;
 	right: .5em;
-	width: 60px;
+	width: 100px;
     color: #000;
 	background-color: #D88E2E;
 }
@@ -287,10 +288,11 @@ div a
 {
 	display: none;
 	position: absolute;
-	margin: 14px 0 0 0;
+	margin: 10px 0 0 0;
+    padding: 10px;
 	top: .25em;
 	right: .5em;
-	width: 60px;
+	width: 100px;
     color: #000;
 	background-color: #D88E2E;
 }

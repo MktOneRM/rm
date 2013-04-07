@@ -117,25 +117,35 @@
 			if (data) {  
 				var dateObj = new Date(data);       
 				switch (this.element.id) {
-					case "dtNascimento":     
-						console.log(viewModel.colaboradorSelecionado, kendo.toString(dateObj, this.dateformat));
+					case "dtNascimento":     						
 						$(this.element).text(kendo.toString(dateObj, this.dateformat));                        
-						viewModel.colaboradorSelecionado.set("ColDtnascimento", kendo.toString(dateObj, this.dateformat));						
-						console.log(viewModel.colaboradorSelecionado, kendo.toString(dateObj, this.dateformat));
+						viewModel.colaboradorSelecionado.set("ColDtnascimento", kendo.toString(dateObj, this.dateformat));												
 						break;
 					case "dtEntrada":                        
 						$(this.element).text(kendo.toString(dateObj, this.dateformat));
-						//viewModel.colaboradorSelecionado.set("ColDtentrada", kendo.toString(dateObj, this.dateformat));						
+						viewModel.colaboradorSelecionado.set("ColDtentrada", kendo.toString(dateObj, this.dateformat));						
 						break;
 					case "dtSaida":                        
 						$(this.element).text(kendo.toString(dateObj, this.dateformat));
-						//viewModel.colaboradorSelecionado.set("ColDtsaida", kendo.toString(dateObj, this.dateformat));						
+						viewModel.colaboradorSelecionado.set("ColDtsaida", kendo.toString(dateObj, this.dateformat));						
+						break;
+					case "dtCadastro":
+						$(this.element).text(kendo.toString(dateObj, this.dateformat));
+						break;
+					case "dtNascimentoView":
+						$(this.element).text(kendo.toString(dateObj, this.dateformat));
+						break;
+					case "dtEntradaView":
+						$(this.element).text(kendo.toString(dateObj, this.dateformat));
+						break;
+					case "dtSaidaView":
+						$(this.element).text(kendo.toString(dateObj, this.dateformat));
 						break;
 				}  
 			}
 		},
 		change: function() {
-            console.log("Change");
+			console.log("Change");
 		}
 	});
     
@@ -536,15 +546,7 @@
 		},
 		batch: true,
 		schema: scLoja,
-		requestEnd: function(e) {                
-			if (e.type == "read") {                
-				viewModel.set("lojaSelecionada", e.response);	
-				app.hideLoading();
-				app.navigate("#detalhesLoja-view");
-			}
-		},
-		change: function(e) {						
-			console.log(viewModel.lojaSelecionada, "Change");
+		change: function(e) {			
 			viewModel.set("lojaSelecionada", e.items[0]);					
 		},
 		error: function(e) {

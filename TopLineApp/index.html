@@ -17,7 +17,6 @@
 			kendo.culture("pt-BR");
 		</script>
 
-        
 	</head>
 	<body>
 		<!-- Home-Layout -->
@@ -290,7 +289,7 @@
 						</li>
 						<li>
 							<label>Nascimento:</label>
-							<span data-bind="date: ColDtnascimento" data-dateformat="dd-MM-yyyy"></span>
+							<span id="dtNascimentoView" data-bind="date: ColDtnascimento" data-dateformat="dd/MM/yyyy"></span>
 						</li>
 						<li>
 							<label>Email:</label>
@@ -304,12 +303,12 @@
 							<label>
 								Data Entrada:
 							</label>
-							<span data-bind="date: ColDtentrada" data-dateformat="dd-MM-yyyy"></span>
+							<span id="dtEntradaView" data-bind="date: ColDtentrada" data-dateformat="dd/MM/yyyy"></span>
 						</li>
 
 						<li>
 							<label>Data Saída:</label>
-							<span data-bind="date: ColDtsaida" data-dateformat="dd-MM-yyyy"></span>
+							<span id="dtSaidaView"data-bind="date: ColDtsaida" data-dateformat="dd/MM/yyyy"></span>
 						</li>
 
 						<li>
@@ -494,7 +493,7 @@
 						<li>
 							<label>
 								Data Cadastro:
-							</label><span data-bind="date: LojDtcadastro" data-dateformat="dd-MM-yyyy"></span>
+							</label><span id="dtCadastro" data-bind="date: LojDtcadastro" data-dateformat="dd/MM/yyyy"></span>
 						</li>
 					</ul>
 				</li>
@@ -796,37 +795,58 @@
 
 		<script>
 		
+			var baseUrl = "http://revenuemachine11.provisorio.ws/api";
+            
+            
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
 				loading: '<h1 class="loading-message">Carregando...</h1>'
 				,initial: "#colaboradores-view"
 			});
-			/*
+
 			$(document).ready(function () {
-			var variable = "Lojaaa";			
-			//Verifica se o dispositivo está cadastrado para a Loja.
-			if (localStorage.getItem(variable) != undefined) {
-			app.navigate("#dentroFila-view");
-			}
-			else {
-			app.navigate("#validacaoDispositivo-view");
-			localStorage.setItem(variable, "1");
-			}
+				app.showLoading();
+				LoadingApp();
+				app.hideLoading();
+				/*
+				var variable = "Lojaaa";			
+				//Verifica se o dispositivo está cadastrado para a Loja.
+				if (localStorage.getItem(variable) != undefined) {
+				app.navigate("#dentroFila-view");
+				}
+				else {
+				app.navigate("#validacaoDispositivo-view");
+				localStorage.setItem(variable, "1");
+				}
+				*/
 			});
-			*/			
+			
 			function selBtn(e) {
 				var btnGrp = $(e.sender.element).find(".select-group").data("kendoMobileButtonGroup");
 				if (btnGrp) {
 					btnGrp.select(0);
 				}
 			}
-                    
+			
 			function switchChange(e) {
 				if (!e.checked) {          
 					app.navigate("#MotNaoVenda-view");
 				}    
-			} 			
+			} 
+                    
+			function LoadingApp() {
+				//Carrega o Datasource de tipos de Loja
+				viewModel.dsTLoja.read();
+				//Carrega o Datasource de UFs
+				viewModel.dsUf.read();
+			
+				//Carrega os dados de Loja
+				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
+				viewModel.dsLoja.read(); 		
+			
+				app.navigate("#dentroFila-view");
+			}  
+			
 		</script>
 	</body>
 </html>
-	

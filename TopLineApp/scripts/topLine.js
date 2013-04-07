@@ -657,7 +657,8 @@
 			//Atualiza a posicao do vendedor na fila
 			var vend = viewModel.vendedorSelecionado;			
 			viewModel.dsVendFila.remove(vend); 
-			viewModel.dsVendFila.sync(); 
+			viewModel.dsVendFila.sync();
+            app.navigate("#dentroFila-view");
 		}
 	}
 			

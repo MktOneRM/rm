@@ -110,12 +110,28 @@
 			this.dateformat = $(element).data("dateformat");
 		},
 		refresh: function () {
-			var data = this.bindings["date"].get();
-			if (data) {
-				var dateObj = new Date(data);                
-				$(this.element).text(kendo.toString(dateObj, this.dateformat));
+			var data = this.bindings["date"].get();            
+			         
+			if (data) {  
+				var dateObj = new Date(data);       
+				switch (this.element.id) {
+					case "dtNascimento":     
+						console.log(viewModel.colaboradorSelecionado, kendo.toString(dateObj, this.dateformat));
+						$(this.element).text(kendo.toString(dateObj, this.dateformat));                        
+						viewModel.colaboradorSelecionado.set("ColDtnascimento", kendo.toString(dateObj, this.dateformat));						
+						console.log(viewModel.colaboradorSelecionado, kendo.toString(dateObj, this.dateformat));
+						break;
+					case "dtEntrada":                        
+						$(this.element).text(kendo.toString(dateObj, this.dateformat));
+						//viewModel.colaboradorSelecionado.set("ColDtentrada", kendo.toString(dateObj, this.dateformat));						
+						break;
+					case "dtSaida":                        
+						$(this.element).text(kendo.toString(dateObj, this.dateformat));
+						//viewModel.colaboradorSelecionado.set("ColDtsaida", kendo.toString(dateObj, this.dateformat));						
+						break;
+				}  
 			}
-		}
+		}     
 	});
     
 	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
@@ -296,11 +312,11 @@
 				ColApelido:  { validation: { required: true} },
 				ColNome:  { validation: { required: true} },
 				ColSobrenome:  { validation: { required: true} },
-				ColDtnascimento: { type: "date", validation: { required: false} },  
+				ColDtnascimento: { type: "date"},  
 				ColEmail: { validation: { required: false} },
 				ColFoto: { validation: { required: false} },
 				ColDtentrada:{ type: "date", validation: { required: true} },  
-				ColDtsaida: { type: "date", validation: { required: false} },  
+				ColDtsaida: { type: "date" },  
 				ColAfasttemp: { type: "boolean",  defaultValue: false },                  
 				LojId: { type: "int", validation: { required: true} },  
 				ColSenha: { validation: { required: false} },
@@ -604,11 +620,11 @@
 		formatField:formatField,
 		onSwipe:onSwipe,
 		onHold:onHold,
-        onTouchstart:onTouchstart,
+		onTouchstart:onTouchstart,
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
-        cancelarSaida:cancelarSaida,
+		cancelarSaida:cancelarSaida,
 		idLoja: null
 	});
 
@@ -646,7 +662,7 @@
 		app.navigate("#dentroFila-view");                 
 	}
 
-    function adicionarColaborador() {
+	function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);
 		app.navigate("#editorColaborador-view");
@@ -660,7 +676,10 @@
     
 	function editarColaborador(e) {
 		var colaborador = viewModel.dsColaborador.get(e.context);                 
-		viewModel.set("colaboradorSelecionado", colaborador);  
+		viewModel.set("colaboradorSelecionado", colaborador); 
+        
+		console.log(viewModel.colaboradorSelecionado, "EditarColaborador");
+        
 		app.navigate("#editorColaborador-view"); 
 	}
     
@@ -762,14 +781,14 @@
 		}
 	}
     
-    function onTouchstart(e) {
-        var target = $(e.touch.initialTouch),
-            button = $(e.touch.target).find("[data-role=button]:visible");
+	function onTouchstart(e) {
+		var target = $(e.touch.initialTouch),
+		button = $(e.touch.target).find("[data-role=button]:visible");
 
 		if (target.closest("[data-role=button]")[0]) {
-            var itemUID = $(e.touch.currentTarget).data("uid");
-            console.log(e,itemUID);
-            sairFilaViewInit(itemUID);
+			var itemUID = $(e.touch.currentTarget).data("uid");
+			console.log(e, itemUID);
+			sairFilaViewInit(itemUID);
    
 			//prevent `swipe`
 			this.events.cancel();
@@ -780,22 +799,22 @@
 
 			//prevent `swipe`
 			this.events.cancel();
-        }
+		}
 	}
 
-    function atendimentoViewInit(e) {
- 	   var itemUID = $(e.touch.currentTarget).data("uid");
-        console.log("atendimento= ",itemUID,e);
+	function atendimentoViewInit(e) {
+		var itemUID = $(e.touch.currentTarget).data("uid");
+		console.log("atendimento= ", itemUID, e);
 		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
 		app.navigate("#resultadoAtendimento-view");
 	}
 
-    //Sair da Fila
+	//Sair da Fila
 	function sairFilaViewInit(e) {
-        var itemUID = $(e.touch.currentTarget).data("uid");
-        console.log("Sai Fila= ",itemUID,e);
+		var itemUID = $(e.touch.currentTarget).data("uid");
+		console.log("Sai Fila= ", itemUID, e);
 		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
 		tiposMovtoSaida();
@@ -818,7 +837,7 @@
 		$("#LojShopping_rua").find("option[value=" + lojaDe + "]").attr("selected", true)
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
-			dsLoja.one("error", function() {				
+			dsLoja.one("change", function() {				
 				view.loader.hide();
 				app.navigate("#detalhesLoja-view");
 			});
@@ -921,9 +940,9 @@
 		initValidacao: initValidacao,
 		formatField:formatField,
 		onSwipe:onSwipe,
-        onHold:onHold,
+		onHold:onHold,
 		onTouchstart:onTouchstart,
-        cancelarSaida:cancelarSaida,
+		cancelarSaida:cancelarSaida,
 		editorLojaViewInit: editorLojaViewInit
         
 	});

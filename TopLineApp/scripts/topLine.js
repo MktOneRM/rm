@@ -6,10 +6,9 @@
 			if (value) { 
 				$(this.element).attr("src", "data:image/png;base64," + value); 
 			}
-            else
-            {
-                $(this.element).attr("src", "images/default.png"); 
-            }
+			else {
+				$(this.element).attr("src", "images/default.png"); 
+			}
 		}
 	});
 
@@ -24,7 +23,6 @@
         
 	});
     
-
 	kendo.data.binders.cpf = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cpf"].get();
@@ -550,7 +548,7 @@
 		},
 		batch: true,
 		schema: scLoja,
-		change: function(e) {			
+		change: function(e) {            
 			viewModel.set("lojaSelecionada", e.items[0]);					
 		},
 		error: function(e) {
@@ -559,7 +557,6 @@
 				adicionarLoja();                
 			}
 		}
-		
 	})
     
 	//DataSource Colaborador
@@ -718,7 +715,7 @@
 	}
     
 	function cancelarEdicaoLoja() {
-		viewModel.dsLoja.cancelChanges();
+		viewModel.dsLoja.cancelChanges();        
 		app.navigate("#:back");
 	}
  
@@ -794,14 +791,14 @@
     
 	function onTouchstart(e) {
 		button = $(e.touch.target).find("[data-role=button]:visible");
-    	if (button[0]) {
-    		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
-    		viewModel.set("vendedorSelecionado", schemaVendedores);
-    		tiposMovtoSaida();
-    		app.navigate("#sairdaFila_View");
+		if (button[0]) {
+			var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
+			viewModel.set("vendedorSelecionado", schemaVendedores);
+			tiposMovtoSaida();
+			app.navigate("#sairdaFila_View");
        
 			//prevent `swipe`
-            button.hide();
+			button.hide();
 			this.events.cancel();
 			e.event.stopPropagation();
 		}
@@ -812,7 +809,7 @@
 
 	function atendimentoViewInit(e) {
 		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
-        console.log("atendimento= ", schemaVendedores);
+		console.log("atendimento= ", schemaVendedores);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
 		app.navigate("#resultadoAtendimento-view");
@@ -851,6 +848,7 @@
 			});
 
 			view.loader.show();
+			viewModel.set("lojaSelecionada", dsLoja.view()[0]);
 			dsLoja.cancelChanges();
 		});
 	}

@@ -111,15 +111,32 @@
 		},
 		refresh: function () {
 			var data = this.bindings["date"].get();
+            
 			if (data) {
-				var dateObj = new Date(data);                
+				var dateObj = new Date(data);    
+                console.log(this.element, "this.element");
+                
+                var isDtNascimento = $('.dtNascimento').val();
+                console.log(isDtNascimento);
+                
+                if(isDtNascimento != -1)
+                    alert("achei");
+                else
+                    alert("nao");
+                    
+                
 				$(this.element).text(kendo.toString(dateObj, this.dateformat));
+                
+                
+                
+                //viewModel.colaboradorSelecionado.set("ColDtnascimento", kendo.toString(dateObj, this.dateformat) );
+                
 			}
 		}
 	});
     
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -515,26 +532,23 @@
 		},
 		batch: true,
 		schema: scLoja,
-		requestEnd: function(e) {                
-			if (e.type == "read") {                
+		requestEnd: function(e) {   			
+			if (e.type == "read" || e.type == "update") {                
 				viewModel.set("lojaSelecionada", e.response);	
 				app.hideLoading();
 				app.navigate("#detalhesLoja-view");
 			}
 		},
-		change: function(e) {						
-			console.log(viewModel.lojaSelecionada, "Change");
+		change: function(e) {									
 			viewModel.set("lojaSelecionada", e.items[0]);					
-		}
-		/*
-		,
+		},
 		error: function(e) {
-		console.log(e, "error");  
-		if (e.errorThrown == "Not Found") {
-		adicionarLoja();                
+			console.log(e, "error");  
+			if (e.errorThrown == "Not Found") {
+				adicionarLoja();                
+			}
 		}
-		}
-		*/
+		
 	})
     
 	//DataSource Colaborador
@@ -604,8 +618,8 @@
 		lojas: lojas,
 		initValidacao: initValidacao,
 		formatField:formatField,
-        onSwipe:onSwipe,
-        onTouchstart:onTouchstart,
+		onSwipe:onSwipe,
+		onTouchstart:onTouchstart,
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
@@ -716,8 +730,8 @@
 	}
     
 	function lojas() {	
-		//dsLoja.options.transport.read.url = baseUrl + "/RmLoja";
-		//dsLoja.read(); 
+		console.log("Estou em show Lojas");
+        
 		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + viewModel.idLoja;
 		dsLoja.read(); 
 	}
@@ -743,8 +757,8 @@
 	}
     
 	function atendimentoViewInit(e) {
-        var itemUID = $(e.touch.currentTarget).data("uid");
-        console.log(itemUID);
+		var itemUID = $(e.touch.currentTarget).data("uid");
+		console.log(itemUID);
 		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
@@ -801,7 +815,7 @@
 		$("#LojShopping_rua").find("option[value=" + lojaDe + "]").attr("selected", true)
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
-			dsLoja.one("error", function() {				
+			dsLoja.one("change", function() {				
 				view.loader.hide();
 				app.navigate("#detalhesLoja-view");
 			});
@@ -831,7 +845,7 @@
     
 	function validacaoDispositivo() {
 		var iptCnpjInicial = document.getElementById("iptCnpjInicial");		  
-		viewModel.idLoja = iptCnpjInicial.value;   
+		viewModel.idLoja = iptCnpjInicial.value;   		
 		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + iptCnpjInicial.value;
 		dsLoja.read(); 		
 	}
@@ -903,8 +917,8 @@
 		viewModel: viewModel,
 		initValidacao: initValidacao,
 		formatField:formatField,
-        onSwipe:onSwipe,
-        onTouchstart:onTouchstart,
+		onSwipe:onSwipe,
+		onTouchstart:onTouchstart,
 		editorLojaViewInit: editorLojaViewInit
         
 	});

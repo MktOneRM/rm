@@ -151,8 +151,8 @@
 		}
 	});
     
-	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -171,7 +171,8 @@
 				EmFila: { type: "boolean" },
 				EmFolga: { type: "boolean" },
 				EmAfastamento: { type: "boolean" },
-                SaidaFila: { type: "boolean" }
+                SaidaFila: { type: "boolean" },
+                TmoId: { type: "int" },
 			} 
 		}
 	};
@@ -680,6 +681,7 @@
 
 	function salvarSaida() {
         viewModel.vendedorSelecionado.set("SaidaFila", true);
+        viewModel.vendedorSelecionado.set("TmoID", parseInt(viewModel.selectedMotSaidaValue));
 		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
 		viewModel.dsVendFila.sync();
         app.navigate("#dentroFila-view");

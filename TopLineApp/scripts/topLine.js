@@ -812,6 +812,7 @@
 		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
 		console.log("atendimento= ", schemaVendedores);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
+        viewModelNaoVenda.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
 		app.navigate("#resultadoAtendimento-view");
 	}

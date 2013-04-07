@@ -12,10 +12,10 @@
 		<script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
 		<script src="scripts/topLineGeolocation.js" type="text/javascript"></script>
-		<script src="kendo/js/kendo.culture.pt-BR.min.js" type="text/javascript">			
+		<script src="kendo/cultures/kendo.culture.pt-BR.min.js" type="text/javascript"></script>
+        <script type="text/javascript">   
 			kendo.culture("pt-BR");
 		</script>
-
 	</head>
 	<body>
 		<!-- Home-Layout -->
@@ -269,7 +269,7 @@
 				</div>
 			</header>
 			<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
-			<ul id="actionsColaboradores" data-role="actionsheet" data-cancel="Cancelar">
+<!--			<ul id="actionsColaboradores" data-role="actionsheet" data-cancel="Cancelar">
 				<li class="km-actionsheet-title">Selecione operação:</li>
 				<li>
 					<a href="#" data-action="viewModel.detalhesColaborador">Detalhes</a>
@@ -278,7 +278,7 @@
 					<a href="#" data-action="viewModel.editarColaborador">Editar</a>
 				</li>
 			</ul>
-		</div>
+-->		</div>
 
 		<!--Detalhes Colaboradores view-->
 		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="tools-layout"  >
@@ -784,8 +784,9 @@
 
 		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
-			<a data-rel="actionsheet" href="\\#actionsColaboradores" data-actionsheet-context="#= ColId #">
-				<h3>${ColNome} # # ${ColSobrenome}</h3>
+			<a onclick="showDetalhesColaborador('${uid}')">
+				<img class="fila-art" data-bind="srcPath: ${ColFoto}" />
+				<h1 class="fila-nome">${ColNome} # # ${ColSobrenome}</h1>
 			</a>
 		</script>
 

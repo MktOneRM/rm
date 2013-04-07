@@ -38,6 +38,7 @@
     </Folder>
     <Folder Include="Images" />
     <Folder Include="Bkp\html" />
+    <Folder Include="kendo\cultures" />
     <Folder Include="kendo\styles\default" />
     <Folder Include="Bkp" />
     <Folder Include="Bkp\viewModels" />
@@ -70,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\default.png" />
+    <Content Include="kendo\cultures\kendo.culture.pt-BR.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="kendo\js\kendo.indexedlistview.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />

@@ -689,7 +689,8 @@
 	}
        
 	function detalhesColaborador(e) {
-		var colaborador = viewModel.dsColaborador.get(e.context);                 
+        console.log(e);
+		var colaborador = viewModel.dsColaborador.get(e);                 
 		viewModel.set("colaboradorSelecionado", colaborador);  
 		app.navigate("#detalhesColaborador-view");
 	}

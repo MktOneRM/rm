@@ -8,7 +8,7 @@
 			}
 		}
 	});
-    
+
 	kendo.data.binders.cep = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cep"].get();
@@ -111,32 +111,15 @@
 		},
 		refresh: function () {
 			var data = this.bindings["date"].get();
-            
 			if (data) {
-				var dateObj = new Date(data);    
-                console.log(this.element, "this.element");
-                
-                var isDtNascimento = $('.dtNascimento').val();
-                console.log(isDtNascimento);
-                
-                if(isDtNascimento != -1)
-                    alert("achei");
-                else
-                    alert("nao");
-                    
-                
+				var dateObj = new Date(data);                
 				$(this.element).text(kendo.toString(dateObj, this.dateformat));
-                
-                
-                
-                //viewModel.colaboradorSelecionado.set("ColDtnascimento", kendo.toString(dateObj, this.dateformat) );
-                
 			}
 		}
 	});
     
-	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -532,14 +515,15 @@
 		},
 		batch: true,
 		schema: scLoja,
-		requestEnd: function(e) {   			
-			if (e.type == "read" || e.type == "update") {                
+		requestEnd: function(e) {                
+			if (e.type == "read") {                
 				viewModel.set("lojaSelecionada", e.response);	
 				app.hideLoading();
 				app.navigate("#detalhesLoja-view");
 			}
 		},
-		change: function(e) {									
+		change: function(e) {						
+			console.log(viewModel.lojaSelecionada, "Change");
 			viewModel.set("lojaSelecionada", e.items[0]);					
 		},
 		error: function(e) {
@@ -619,10 +603,12 @@
 		initValidacao: initValidacao,
 		formatField:formatField,
 		onSwipe:onSwipe,
-		onTouchstart:onTouchstart,
+		onHold:onHold,
+        onTouchstart:onTouchstart,
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
+        cancelarSaida:cancelarSaida,
 		idLoja: null
 	});
 
@@ -656,7 +642,11 @@
 		app.navigate("#dentroFila-view");                 
 	}
     
-	function adicionarColaborador() {
+	function cancelarSaida() {
+		app.navigate("#dentroFila-view");                 
+	}
+
+    function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);
 		app.navigate("#editorColaborador-view");
@@ -730,8 +720,8 @@
 	}
     
 	function lojas() {	
-		console.log("Estou em show Lojas");
-        
+		//dsLoja.options.transport.read.url = baseUrl + "/RmLoja";
+		//dsLoja.read(); 
 		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + viewModel.idLoja;
 		dsLoja.read(); 
 	}
@@ -756,25 +746,15 @@
 		context.read();
 	}
     
-	function atendimentoViewInit(e) {
-		var itemUID = $(e.touch.currentTarget).data("uid");
-		console.log(itemUID);
-		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
-		viewModel.set("vendedorSelecionado", schemaVendedores);
-		adicionarAtendimento();
-		app.navigate("#resultadoAtendimento-view");
-	}
-
 	//<!--Atendimento-->
 	function onSwipe(e) {
 		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
 		button.expand().duration(200).play();
 	}
 
-	function onTouchstart(e) {
-		listviewFila = $("#listviewFila").data("kendoMobileListView"),
+	function onHold(e) {
+		listviewFila = $("#sairdaFila_View").data("kendoMobileListView");
 		button = $(e.touch.target).find("[data-role=button]:visible");
-
 		if (button[0]) {
 			button.hide();
 			//prevent `swipe`
@@ -782,21 +762,44 @@
 		}
 	}
     
-	//Sair da Fila
+    function onTouchstart(e) {
+        var target = $(e.touch.initialTouch),
+            button = $(e.touch.target).find("[data-role=button]:visible");
+
+		if (target.closest("[data-role=button]")[0]) {
+            var itemUID = $(e.touch.currentTarget).data("uid");
+            console.log(e,itemUID);
+            sairFilaViewInit(itemUID);
+   
+			//prevent `swipe`
+			this.events.cancel();
+			e.event.stopPropagation();
+		}
+		else if (button[0]) {
+			button.hide();
+
+			//prevent `swipe`
+			this.events.cancel();
+        }
+	}
+
+    function atendimentoViewInit(e) {
+ 	   var itemUID = $(e.touch.currentTarget).data("uid");
+        console.log("atendimento= ",itemUID,e);
+		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
+		viewModel.set("vendedorSelecionado", schemaVendedores);
+		adicionarAtendimento();
+		app.navigate("#resultadoAtendimento-view");
+	}
+
+    //Sair da Fila
 	function sairFilaViewInit(e) {
-		var view = e.view;
-		view.element.find("#listviewMotivosSaida").kendoMobileListView({
-			dataSource: dsTiposMovto,
-			template: $("#tpTiposMovto").html()
-		})
- 
-		view.element.find("#cancelSair").data("kendoMobileBackButton").bind("click", function(e) {
-			view.loader.show();
-			$("#dentroFila-view").data("kendoMobileView").contentElement();
-			vendedoresFila();
-			view.loader.hide();
-			app.navigate("#dentroFila-view");
-		});
+        var itemUID = $(e.touch.currentTarget).data("uid");
+        console.log("Sai Fila= ",itemUID,e);
+		var schemaVendedores = viewModel.dsVendFila.getByUid(itemUID);
+		viewModel.set("vendedorSelecionado", schemaVendedores);
+		tiposMovtoSaida();
+		app.navigate("#sairdaFila_View");
 	}
  
 	function editorViewInitCol() {
@@ -815,7 +818,7 @@
 		$("#LojShopping_rua").find("option[value=" + lojaDe + "]").attr("selected", true)
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
-			dsLoja.one("change", function() {				
+			dsLoja.one("error", function() {				
 				view.loader.hide();
 				app.navigate("#detalhesLoja-view");
 			});
@@ -845,7 +848,7 @@
     
 	function validacaoDispositivo() {
 		var iptCnpjInicial = document.getElementById("iptCnpjInicial");		  
-		viewModel.idLoja = iptCnpjInicial.value;   		
+		viewModel.idLoja = iptCnpjInicial.value;   
 		dsLoja.options.transport.read.url = baseUrl + "/RmLoja/" + iptCnpjInicial.value;
 		dsLoja.read(); 		
 	}
@@ -918,7 +921,9 @@
 		initValidacao: initValidacao,
 		formatField:formatField,
 		onSwipe:onSwipe,
+        onHold:onHold,
 		onTouchstart:onTouchstart,
+        cancelarSaida:cancelarSaida,
 		editorLojaViewInit: editorLojaViewInit
         
 	});

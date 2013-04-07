@@ -39,8 +39,12 @@ cameraApp.prototype={
         }, function(){
             that._onFail.apply(that,arguments);
         }, {
-            quality: 20, allowEdit: true,
-            destinationType: cameraApp._destinationType.DATA_URL
+            quality: 20, 
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 50,
+            targetHeight: 50,
+            destinationType: cameraApp._destinationType.FILE_URI
         });
     },
     
@@ -59,8 +63,11 @@ cameraApp.prototype={
         }, function(){
             cameraApp._onFail.apply(that,arguments);
         }, {
-            quality: 50,
+            quality: 20,
             destinationType: cameraApp._destinationType.FILE_URI,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 50,
+            targetHeight: 50,
             sourceType: source
         });
     },

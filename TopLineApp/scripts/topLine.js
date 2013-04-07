@@ -19,6 +19,7 @@
 		}
         
 	});
+    
 
 	kendo.data.binders.cpf = kendo.data.Binder.extend({
 		refresh: function() {

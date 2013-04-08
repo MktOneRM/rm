@@ -151,29 +151,32 @@
 		}
 	});
     
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
 		model: {
-			id: "LojaColId",
+			id: "FilaLojId",
 			fields: {
-				RedeLojId: { type: "int"},
+				RedeLojId: { type: "int", validation: { required: false}, defaultValue: 0 },
+				LojId: { type: "int"},
+				FilaLojId: { type: "int", validation: { required: false}, defaultValue: 0 },
 				LojaColId: { type: "int"},
-				FilaLojOrdem: { type: "int", defaultValue: 0 },
-				ColApelido: { type: "text"},
-				ColNome: { type: "text"},
-				ColSobreNome: { type: "text"},				
-                ColFoto: { validation: { required: false}, defaultValue: null },
-				ExpHInicial: { type: "datetime"},
-				ExpHFinal: { type: "datetime"},
+				FilaLojOrdem: { type: "int", validation: { required: false}, defaultValue: 0 },
+				ColApelido: { type: "text", validation: { required: false}, defaultValue: null },
+				ColNome: { type: "text", validation: { required: false}, defaultValue: null },
+				ColSobreNome: { type: "text" , validation: { required: false}, defaultValue: null },				
+				ColFoto: { type: "text", validation: { required: false}, defaultValue: null },
+				ColTurno: {type: "text", validation: { required: false}, defaultValue: null },
+				ExpHInicial: { type: "time", validation: { required: false}, defaultValue: null },
+				ExpHFinal: { type: "time", validation: { required: false}, defaultValue: null },
 				EmFila: { type: "boolean" },
 				EmFolga: { type: "boolean" },
 				EmAfastamento: { type: "boolean" },
 				SaidaFila: { type: "boolean" },
 				EntradaFila: { type: "boolean" },
-				TmoId: { type: "int" },
+				TmoId: {type: "int", validation: { required: false}, defaultValue: 0 }
 			} 
 		}
 	};
@@ -346,7 +349,6 @@
 		}
 	};
     
-	//dataSource
 	var dsVendFila = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
@@ -357,10 +359,16 @@
 			} 
 			,
 			update: {
-				url:baseUrl + "/RmFilaLoja/1",							
+				url:baseUrl + "/RmFilaLoja/1",
 				type:"PUT"
 				,contentType:"application/json"
 				,dataType: "json"
+			},
+			create: {
+				url:baseUrl + "/RmFilaLoja/1",							
+				type:"POST",
+				contentType: "application/json",
+				dataType: "json"
 			},
 			destroy: {
 				url:baseUrl + "/RmFilaLoja"                            
@@ -699,16 +707,12 @@
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
 		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");
         
-        console.log(viewModel.dsVendFila, "viewModel.dsVendFila");
-        
 		var entrada = viewModel.dsVendFila.add(); 		
         
-        console.log(entrada, "Entrei");
-        
-		viewModel.set("vendedorSelecionado", entrada);
+		viewModel.set("vendedorSelecionado", entrada);        
 		viewModel.vendedorSelecionado.set("LojId", LojId);
-		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);
-		viewModel.vendedorSelecionado.set("EntradaFila", true);
+		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);        
+		viewModel.vendedorSelecionado.set("EntradaFila", 1);
 		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.selectedMotEntradaValue));    
         
 		viewModel.dsVendFila.sync();
@@ -1002,8 +1006,7 @@
 		editorViewInitCol:editorViewInitCol,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
-		cancelarSaida:cancelarSaida,
-
+		
 		editorLojaViewInit: editorLojaViewInit
         
 	});

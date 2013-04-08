@@ -630,13 +630,13 @@
 		formatField:formatField,
 		onSwipe:onSwipe,
 		onSwipeFora:onSwipeFora,
-
+        editorViewInitCol:editorViewInitCol,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
-		
+
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
         
@@ -693,13 +693,14 @@
 	}
     
 	function adicionarColaborador() {
-		var novoColaborador = viewModel.dsColaborador.add();
-		viewModel.set("colaboradorSelecionado", novoColaborador);
+        console.log(viewModel.dsColaborador);
+//		var novoColaborador = viewModel.dsColaborador.add();
+		viewModel.set("colaboradorSelecionado", viewModel.dsColaborador.add());
 		app.navigate("#editorColaborador-view");
 	}
        
 	function detalhesColaborador(e) {
-		var colaborador = viewModel.dsColaborador.get(e.context);                 
+		var colaborador = viewModel.dsColaborador.getByUid(e.touch.target.context.id);
 		viewModel.set("colaboradorSelecionado", colaborador);  
 		app.navigate("#detalhesColaborador-view");
 	}
@@ -707,22 +708,21 @@
 	function editarColaborador(e) {
 		var colaborador = viewModel.dsColaborador.get(e.context);                 
 		viewModel.set("colaboradorSelecionado", colaborador); 
-        
-		console.log(viewModel.colaboradorSelecionado, "EditarColaborador");
-        
+    	console.log(viewModel.colaboradorSelecionado, "EditarColaborador");
+      
 		app.navigate("#editorColaborador-view"); 
 	}
     
 	function salvarColaborador() {   
 		//if (validator.validate()) {
 		viewModel.dsColaborador.sync();
-		app.navigate("#:back");          
+		app.navigate("#colaboradores-view");          
 		//}
 	}
 	    
 	function cancelarColaborador() {
 		viewModel.dsColaborador.cancelChanges();		
-		app.navigate("#:back");
+		app.navigate("#colaboradores-view");
 	}
  
 	function adicionarLoja() {
@@ -844,7 +844,6 @@
 
 	function atendimentoViewInit(e) {
 		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
-		console.log("atendimento= ", schemaVendedores);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
 		viewModelNaoVenda.set("vendedorSelecionado", schemaVendedores);
 		adicionarAtendimento();
@@ -852,7 +851,7 @@
 	}
 
 	function editorViewInitCol() {
-		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
+ 		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
     
 	function editorLojaViewInit(e) {
@@ -966,15 +965,17 @@
 		showDetalhesColaborador: detalhesColaborador,     
 		showAtendimento: adicionarAtendimento,
 		atendimentoViewInit: atendimentoViewInit,
+        adicionarColaborador: adicionarColaborador,
 		viewModel: viewModel,
 		initValidacao: initValidacao,
 		formatField:formatField,
 		onSwipe:onSwipe,
 		onSwipeFora:onSwipeFora,
-
+        editorViewInitCol:editorViewInitCol,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		cancelarSaida:cancelarSaida,
+
 		editorLojaViewInit: editorLojaViewInit
         
 	});

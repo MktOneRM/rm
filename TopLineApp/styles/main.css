@@ -151,6 +151,13 @@ div a
 	font-style: italic;
 }
 
+.col-nome
+{
+    position:relative;
+    padding-top: 10px;
+	font-size: 14px;
+}
+
 .km-ios .km-list .km-icon
 {
 	color: #fff;

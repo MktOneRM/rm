@@ -7,7 +7,7 @@
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
-		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
+		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
 		<script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
@@ -261,31 +261,23 @@
 		</div>
 
 		<!--Colaboradores View-->
-		<div data-role="view" id="colaboradores-view" data-title="Colaboradores" data-show="showColaboradores" data-model="viewModel" data-layout="tools-layout" >
+		<div data-role="view" id="colaboradores-view" data-title="Top Line" data-show="showColaboradores" data-model="viewModel" data-layout="tools-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-icon="add" data-bind="events: {click: adicionarColaborador}"></a>
+					<a href="#config-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: adicionarColaborador}">Novo</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
-			<ul id="actionsColaboradores" data-role="actionsheet" data-cancel="Cancelar">
-				<li class="km-actionsheet-title">Selecione operação:</li>
-				<li>
-					<a href="#" data-action="viewModel.detalhesColaborador">Detalhes</a>
-				</li>
-				<li>
-					<a href="#" data-action="viewModel.editarColaborador">Editar</a>
-				</li>
-			</ul>
-		</div>
+    		<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador" data-style="inset"></ul>
+    	</div>
 
 		<!--Detalhes Colaboradores view-->
-		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel.colaboradorSelecionado" data-title="Top Line" data-layout="tools-layout"  >
+		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="tools-layout">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a id="btnCancel" class="nav-button" data-align="left" data-role="backbutton" href="#colaboradores-view" >Voltar</a>
+                    <a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="button" href="#editorColaborador-view" >Editar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -294,7 +286,7 @@
 					<ul>
 						<li style="height:65px">
 							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
-							<h1 class="fila-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+							<h1 class="col-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
 						</li>
 					</ul>
 				</li>
@@ -303,27 +295,27 @@
 						Dados
 						<li>
 							<label>CPF:</label>
-							<span data-bind="cpf: ColCpf"></span>
+							<span data-bind="cpf: colaboradorSelecionado.ColCpf"></span>
 						</li>
 						<li>
 							<label>Nome:</label>
-							<span data-bind="text: ColNome"></span>
+							<span data-bind="text: colaboradorSelecionado.ColNome"></span>
 						</li>
 						<li>
 							<label>Sobrenome:</label>
-							<span data-bind="text: ColSobrenome"></span>
+							<span data-bind="text: colaboradorSelecionado.ColSobrenome"></span>
 						</li>
 						<li>
 							<label>Apelido:</label>
-							<span data-bind="text: ColApelido"></span>
+							<span data-bind="text: colaboradorSelecionado.ColApelido"></span>
 						</li>
 						<li>
 							<label>Nascimento:</label>
-							<span id="dtNascimentoView" data-bind="date: ColDtnascimento" data-dateformat="dd/MM/yyyy"></span>
+							<span id="dtNascimentoView" data-bind="date: colaboradorSelecionado.ColDtnascimento" data-dateformat="dd/MM/yyyy"></span>
 						</li>
 						<li>
 							<label>Email:</label>
-							<span data-bind="text: ColEmail"></span>
+							<span data-bind="text: colaboradorSelecionado.ColEmail"></span>
 						</li>
 					</ul>
 				</li>
@@ -333,17 +325,17 @@
 							<label>
 								Data Entrada:
 							</label>
-							<span id="dtEntradaView" data-bind="date: ColDtentrada" data-dateformat="dd/MM/yyyy"></span>
+							<span id="dtEntradaView" data-bind="date: colaboradorSelecionado.ColDtentrada" data-dateformat="dd/MM/yyyy"></span>
 						</li>
 
 						<li>
 							<label>Data Saída:</label>
-							<span id="dtSaidaView"data-bind="date: ColDtsaida" data-dateformat="dd/MM/yyyy"></span>
+							<span id="dtSaidaView"data-bind="date: colaboradorSelecionado.ColDtsaida" data-dateformat="dd/MM/yyyy"></span>
 						</li>
 
 						<li>
 							<label>Afastamento:</label>
-							<span data-bind="text: ColAfasttemp"></span>
+							<span data-bind="text: colaboradorSelecionado.ColAfasttemp"></span>
 						</li>
 					</ul>
 				</li>
@@ -351,12 +343,12 @@
 					<ul>
 						<li>
 							<label>Cargo Id:</label>
-							<span data-bind="text: CarId"></span>
+							<span data-bind="text: colaboradorSelecionado.CarId"></span>
 						</li>
 
 						<li>
 							<label>Turno Id:</label>
-							<span data-bind="text: ColHfuId"></span>
+							<span data-bind="text: colaboradorSelecionado.ColHfuId"></span>
 						</li>
 					</ul>
 				</li>
@@ -364,10 +356,10 @@
 		</div>
 
 		<!--Editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-init="editorViewInitCol" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
+		<div id="editorColaborador-view" data-role="view" data-show="editorViewInitCol" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
+					<a id="btnCancel" data-role="backbutton" type="button" data-align="left" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
 					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarColaborador}">Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
@@ -486,7 +478,7 @@
 		<div id="detalhesLoja-view" data-role="view" data-model="viewModel.lojaSelecionada" data-title="Top Line" data-layout="tools-layout">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" href="#:back">Voltar</a>
+					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#:back">Voltar</a>
 					<a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="backbutton" href="#EditorLoja-view" >Editar</a>
 					<span data-role="view-title"></span>
 				</div>
@@ -785,9 +777,10 @@
 
 		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
-			<a data-rel="actionsheet" href="\\#actionsColaboradores" data-actionsheet-context="#= ColId #">
-				<h3>${ColNome} # # ${ColSobrenome}</h3>
-			</a>
+			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showDetalhesColaborador">
+				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
+			    <h1 class="col-nome">${ColNome} # # ${ColSobrenome}</h1>
+			</div>
 		</script>
 
 		<script type="text/x-kendo-template" id="tpLojas" >

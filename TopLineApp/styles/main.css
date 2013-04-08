@@ -483,3 +483,8 @@ div a
     color: #2e2e2e;
     text-align:right;
 }
+
+#btFoto {
+    font-size: 14px;
+    font-weight:normal;
+}

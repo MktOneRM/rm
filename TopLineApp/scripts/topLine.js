@@ -331,9 +331,9 @@
 				ColApelido:  { validation: { required: true} },
 				ColNome:  { validation: { required: true} },
 				ColSobrenome:  { validation: { required: true} },
-				ColDtnascimento: { type: "date"},  
+				ColDtnascimento: { type: "date", defaultValue: null},  
 				ColEmail: { validation: { required: false} },
-				ColFoto: { validation: { required: false} },
+				ColFoto: { validation: { required: false}, defaultValue: null },
 				ColDtentrada:{ type: "date", validation: { required: true} },  
 				ColDtsaida: { type: "date" },  
 				ColAfasttemp: { type: "boolean",  defaultValue: false },                  
@@ -693,9 +693,8 @@
 	}
     
 	function adicionarColaborador() {
-        console.log(viewModel.dsColaborador);
-//		var novoColaborador = viewModel.dsColaborador.add();
-		viewModel.set("colaboradorSelecionado", viewModel.dsColaborador.add());
+		var novoColaborador = viewModel.dsColaborador.add();
+		viewModel.set("colaboradorSelecionado", novoColaborador);
 		app.navigate("#editorColaborador-view");
 	}
        

@@ -369,7 +369,7 @@
 					<ul>
 						<li>
 							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
-							<ul data-role="buttongroup" class="select-group">
+							<ul id="btFoto" data-role="buttongroup" class="select-group">
 								<li>
 									<a id="capturePhotoEditButton">Tirar Foto</a>
 								</li>
@@ -893,7 +893,7 @@
 				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
 				viewModel.dsLoja.read(); 		
 			
-				app.navigate("#dentroFila-view");
+				app.navigate("#colaboradores-view");
 			}  
 			
 		</script>

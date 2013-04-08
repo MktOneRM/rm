@@ -157,17 +157,17 @@
 	//schema
 	var schemaVendedores = { 
 		model: {
-			id: "FilaLojId",
+			id: "LojaColId",
 			fields: {
-				RedeLojId: { type: "int" },
-				LojaColId: { type: "int" },
-				FilaLojOrdem: { type: "int" },
-				ColApelido: { type: "text" },
-				ColNome: { type: "text" },
-				ColSobreNome: { type: "text" },
-				ColFoto: { type: "text", defaultValue: null },
-				ExpHInicial: { type: "time" },
-				ExpHFinal: { type: "time" },
+				RedeLojId: { type: "int"},
+				LojaColId: { type: "int"},
+				FilaLojOrdem: { type: "int", defaultValue: 0 },
+				ColApelido: { type: "text"},
+				ColNome: { type: "text"},
+				ColSobreNome: { type: "text"},				
+                ColFoto: { validation: { required: false}, defaultValue: null },
+				ExpHInicial: { type: "datetime"},
+				ExpHFinal: { type: "datetime"},
 				EmFila: { type: "boolean" },
 				EmFolga: { type: "boolean" },
 				EmAfastamento: { type: "boolean" },
@@ -631,7 +631,7 @@
 		formatField:formatField,
 		onSwipe:onSwipe,
 		onSwipeFora:onSwipeFora,
-        editorViewInitCol:editorViewInitCol,
+		editorViewInitCol:editorViewInitCol,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		editorLojaViewInit: editorLojaViewInit,
@@ -699,13 +699,17 @@
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
 		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");
         
+        console.log(viewModel.dsVendFila, "viewModel.dsVendFila");
+        
 		var entrada = viewModel.dsVendFila.add(); 		
+        
+        console.log(entrada, "Entrei");
         
 		viewModel.set("vendedorSelecionado", entrada);
 		viewModel.vendedorSelecionado.set("LojId", LojId);
 		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);
 		viewModel.vendedorSelecionado.set("EntradaFila", true);
-		viewModel.vendedorSelecionado.set("TmoID", parseInt(viewModel.selectedMotEntradaValue));    
+		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.selectedMotEntradaValue));    
         
 		viewModel.dsVendFila.sync();
         
@@ -732,7 +736,7 @@
 	function editarColaborador(e) {
 		var colaborador = viewModel.dsColaborador.get(e.context);                 
 		viewModel.set("colaboradorSelecionado", colaborador); 
-    	console.log(viewModel.colaboradorSelecionado, "EditarColaborador");
+		console.log(viewModel.colaboradorSelecionado, "EditarColaborador");
       
 		app.navigate("#editorColaborador-view"); 
 	}
@@ -875,7 +879,7 @@
 	}
 
 	function editorViewInitCol() {
- 		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
+		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
 	}
     
 	function editorLojaViewInit(e) {
@@ -989,13 +993,13 @@
 		showDetalhesColaborador: detalhesColaborador,     
 		showAtendimento: adicionarAtendimento,
 		atendimentoViewInit: atendimentoViewInit,
-        adicionarColaborador: adicionarColaborador,
+		adicionarColaborador: adicionarColaborador,
 		viewModel: viewModel,
 		initValidacao: initValidacao,
 		formatField:formatField,
 		onSwipe:onSwipe,
 		onSwipeFora:onSwipeFora,
-        editorViewInitCol:editorViewInitCol,
+		editorViewInitCol:editorViewInitCol,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		cancelarSaida:cancelarSaida,

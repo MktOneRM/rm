@@ -26,11 +26,11 @@
 	kendo.data.binders.cpf = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cpf"].get();
-			if (value) {
-				$(this.element).text(formatField(value, "999.999.999-99"));
-				viewModel.colaboradorSelecionado.set("ColCpf", formatField(value, "999.999.999-99"));				
-			}
-		}
+ 			if (value) {
+ 				    $(this.element).text(formatField(value, "999.999.999-99"));
+				    viewModel.colaboradorSelecionado.set("ColCpf", formatField(value, "999.999.999-99"));				
+             }
+    	}
         
 	});
             
@@ -151,8 +151,8 @@
 		}
 	});
     
-	//var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -331,8 +331,8 @@
 			fields: {
 				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				CarId: { type: "int", validation: { required: false} },  
-				ColCpf: { validation: { required: true} },
-				ColApelido:  { validation: { required: true} },
+				ColCpf: { validation: { required: true}},
+    			ColApelido:  { validation: { required: true} },
 				ColNome:  { validation: { required: true} },
 				ColSobrenome:  { validation: { required: true} },
 				ColDtnascimento: { type: "date", defaultValue: null},  
@@ -645,7 +645,7 @@
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
-
+        validarCPF:validarCPF,
 		selectedMotSaidaValue: "1",
 		idMotivoSaida:"radiogroup",
 		salvarSaida: salvarSaida,
@@ -982,7 +982,51 @@
         
 		return sCod;
 	}
-
+    
+    function validarCPF(cpf) {
+ 
+        cpf = cpf.replace(/[^\d]+/g,'');
+     
+        if(cpf == '') return false;
+     
+        // Elimina CPFs invalidos conhecidos
+        if (cpf.length != 11 || 
+            cpf == "00000000000" || 
+            cpf == "11111111111" || 
+            cpf == "22222222222" || 
+            cpf == "33333333333" || 
+            cpf == "44444444444" || 
+            cpf == "55555555555" || 
+            cpf == "66666666666" || 
+            cpf == "77777777777" || 
+            cpf == "88888888888" || 
+            cpf == "99999999999")
+            return false;
+         
+        // Valida 1o digito
+        add = 0;
+        for (i=0; i < 9; i ++)
+            add += parseInt(cpf.charAt(i)) * (10 - i);
+        rev = 11 - (add % 11);
+        if (rev == 10 || rev == 11)
+            rev = 0;
+        if (rev != parseInt(cpf.charAt(9)))
+            return false;
+         
+        // Valida 2o digito
+        add = 0;
+        for (i = 0; i < 10; i ++)
+            add += parseInt(cpf.charAt(i)) * (11 - i);
+        rev = 11 - (add % 11);
+        if (rev == 10 || rev == 11)
+            rev = 0;
+        if (rev != parseInt(cpf.charAt(10)))
+            return false;
+             
+        return true;
+        
+    }
+    
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,
@@ -1006,7 +1050,7 @@
 		editorViewInitCol:editorViewInitCol,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
-		
+		validarCPF:validarCPF,
 		editorLojaViewInit: editorLojaViewInit
         
 	});

@@ -165,14 +165,15 @@
 				ColApelido: { type: "text" },
 				ColNome: { type: "text" },
 				ColSobreNome: { type: "text" },
-				ColFoto: { type: "text" },
+				ColFoto: { type: "text", defaultValue: null },
 				ExpHInicial: { type: "time" },
 				ExpHFinal: { type: "time" },
 				EmFila: { type: "boolean" },
 				EmFolga: { type: "boolean" },
 				EmAfastamento: { type: "boolean" },
-                SaidaFila: { type: "boolean" },
-                TmoId: { type: "int" },
+				SaidaFila: { type: "boolean" },
+				EntradaFila: { type: "boolean" },
+				TmoId: { type: "int" },
 			} 
 		}
 	};
@@ -637,15 +638,17 @@
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
 
+		selectedMotSaidaValue: "1",
+		idMotivoSaida:"radiogroup",
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
         
-		idLoja: null,
-        
-		selectedMotSaidaValue: "1",
-		idMotivoSaida:"radiogroup",
 		selectedMotEntradaValue: "1",
 		idMotivoEntrada:"radiogroup",
+		salvarEntrada: salvarEntrada,
+		cancelarEntrada: cancelarEntrada,
+        
+		idLoja: null
 	});
 
 	function adicionarAtendimento() {
@@ -680,11 +683,11 @@
 	}
 
 	function salvarSaida() {
-        viewModel.vendedorSelecionado.set("SaidaFila", true);
-        viewModel.vendedorSelecionado.set("TmoID", parseInt(viewModel.selectedMotSaidaValue));
+		viewModel.vendedorSelecionado.set("SaidaFila", true);
+		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.selectedMotSaidaValue));
 		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
 		viewModel.dsVendFila.sync();
-        app.navigate("#dentroFila-view");
+		app.navigate("#dentroFila-view");
 	}
     
 	function cancelarSaida() {
@@ -692,6 +695,28 @@
 		app.navigate("#dentroFila-view");                 
 	}
     
+	function salvarEntrada() {
+		var LojId = viewModel.vendedorSelecionado.get("LojId");
+		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");
+        
+		var entrada = viewModel.dsVendFila.add(); 		
+        
+		viewModel.set("vendedorSelecionado", entrada);
+		viewModel.vendedorSelecionado.set("LojId", LojId);
+		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);
+		viewModel.vendedorSelecionado.set("EntradaFila", true);
+		viewModel.vendedorSelecionado.set("TmoID", parseInt(viewModel.selectedMotEntradaValue));    
+        
+		viewModel.dsVendFila.sync();
+        
+		app.navigate("#dentroFila-view");
+	}
+    
+	function cancelarEntrada() {
+		viewModel.dsVendForaFila.cancelChanges();
+		app.navigate("#dentroFila-view");                 
+	}
+ 
 	function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);

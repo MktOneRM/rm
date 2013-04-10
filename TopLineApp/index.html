@@ -7,24 +7,24 @@
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
-		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
+		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
 		<script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
 		<script src="scripts/topLineGeolocation.js" type="text/javascript"></script>
 		<script src="kendo/cultures/kendo.culture.pt-BR.min.js" type="text/javascript"></script>
-        <script type="text/javascript">   
+		<script type="text/javascript">   
 			kendo.culture("pt-BR");
 		</script>
 	</head>
 	<body>
 		<!-- Home-Layout -->
-		<div data-role="layout" data-id="home-layout" data-title="Top Line" data-init="selBtn">
+		<div data-role="layout" data-id="home-layout" data-title="Top Line">
 			<header data-role="header">
 				<div data-role="navbar">
 					<span data-role="view-title"></span>
 				</div>
-				<ul data-role="buttongroup" class="select-group">
+				<ul data-role="buttongroup" class="select-group" data-index="0">
 					<li>
 						<a href="#dentroFila-view">Fila</a>
 					</li>
@@ -268,15 +268,15 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-    		<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador" data-style="inset"></ul>
-    	</div>
+			<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador" data-style="inset"></ul>
+		</div>
 
 		<!--Detalhes Colaboradores view-->
 		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="tools-layout">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" class="nav-button" data-align="left" data-role="backbutton" href="#colaboradores-view" >Voltar</a>
-                    <a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="button" href="#editorColaborador-view" >Editar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="button" href="#editorColaborador-view" >Editar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -355,11 +355,11 @@
 		</div>
 
 		<!--Editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-show="editorViewInitCol" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
+		<div id="editorColaborador-view" data-role="view" data-show="editorColViewInit" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnCancel" data-role="backbutton" type="button" data-align="left" data-bind="events: {click: cancelarColaborador}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarColaborador}">Salvar</a>
+					<a id="btnCancel" data-role="backbutton" type="button" data-align="left">Cancelar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right">Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -385,38 +385,38 @@
 						<li>
 							<label>
 								CPF:
-								<input id="cpf" name="Cpf" type="text" maxlength=11 size=11 data-bind="cpf: colaboradorSelecionado.ColCpf, value: colaboradorSelecionado.ColCpf" required validationmessage="Requerido"/>
+								<input id="cpf" name="Cpf" type="text" placeholder="CPF" maxlength=11 size=11 data-bind="cpf: colaboradorSelecionado.ColCpf, value: colaboradorSelecionado.ColCpf" required validationmessage="Requerido"/>
 							</label>
 						</li>
 						<li>
 							<label>
 								Nome:
-								<input id="nome" name="Nome" type="text" data-bind="value: colaboradorSelecionado.ColNome" required validationmessage="Requerido" />
+								<input id="nome" name="Nome" type="text" placeholder="Nome" data-bind="value: colaboradorSelecionado.ColNome" required validationmessage="Requerido" />
 							</label>
 						</li>
 						<li>
 							<label>
 								Sobrenome:
-								<input id="sobrenome" name="DobreNome" type="text" data-bind="value: colaboradorSelecionado.ColSobrenome" required validationmessage="Requerido" />
+								<input id="sobrenome" name="DobreNome" type="text" placeholder="Sobrenome" data-bind="value: colaboradorSelecionado.ColSobrenome" required validationmessage="Requerido" />
 							</label>
 						</li>
 						<li>
 							<label>
 								Apelido:
-								<input id="apelido" name="Apelido" type="text" required="required" data-bind="value: colaboradorSelecionado.ColApelido" required validationmessage="Requerido" />
+								<input id="apelido" name="Apelido" type="text"  placeholder="Apelido" data-bind="value: colaboradorSelecionado.ColApelido" required validationmessage="Requerido" />
 							</label>
 						</li>
 						<li>
 							<label>
 								Nascimento:
-								<input id="dtNascimento" name="DataNascimento" type="date" required="required" data-bind="date: colaboradorSelecionado.ColDtnascimento, value: colaboradorSelecionado.ColDtnascimento" data-dateformat="dd-MM-yyyy" required validationmessage="Requerido" />
+								<input id="dtNascimento" name="DataNascimento" type="date" placeholder="Data de nascimento" data-bind="dateValue: colaboradorSelecionado.ColDtnascimento" required validationmessage="Requerido"/>
 							</label>
 						</li>
 
 						<li>
 							<label>
 								Email:
-								<input id="email" name="Email" type="text" data-bind="value: colaboradorSelecionado.ColEmail" />
+								<input id="email" name="Email" type="text" placeholder="e.g. meunome@exemplo.com.br" maxlength=60 size=60 data-bind="value: colaboradorSelecionado.ColEmail" />
 							</label>
 						</li>
 					</ul>
@@ -426,14 +426,14 @@
 						<li>
 							<label>
 								Data Entrada:
-								<input id="dtEntrada" name="DataEntrada" type="date" required="required" data-bind="date: colaboradorSelecionado.ColDtentrada, value:colaboradorSelecionado.ColDtentrada" data-dateformat="dd-MM-yyyy"/>
+								<input id="dtEntrada" name="DataEntrada" type="date" placeholder="Data de Entrada" data-bind="dateValue: colaboradorSelecionado.ColDtentrada" required validationmessage="Requerido"/>
 							</label>
 						</li>
 
 						<li>
 							<label>
 								Data Saída:
-								<input id="dtSaida" name="DataSaida" type="date"  data-bind="date: colaboradorSelecionado.ColDtsaida, value: colaboradorSelecionado.ColDtsaida" data-dateformat="dd-MM-yyyy"/>
+								<input id="dtSaida" name="DataSaida" type="date"  data-bind="dateValue: colaboradorSelecionado.ColDtsaida"/>
 							</label>
 						</li>
 
@@ -447,24 +447,25 @@
 				</li>
 				<li>
 					<ul>
+						<!--
 						<li>
-							<label>
-								Loja Id:
-								<input id="lojaId" name="LojaId" type="text" required="required" data-bind="value: colaboradorSelecionado.LojId"/>
-							</label>
+						<label>
+						Loja Id:
+						<input id="lojaId" name="LojaId" type="text" data-bind="value: colaboradorSelecionado.LojId" required validationmessage="Requerido"/>
+						</label>
 						</li>
-
+						-->
 						<li>
 							<label>
 								Cargo Id:
-								<input id="cargoId" name="Cargo" type="text" required="required" data-bind="value: colaboradorSelecionado.CarId"/>
+								<input id="cargoId" name="Cargo" type="text" data-bind="value: colaboradorSelecionado.CarId" required validationmessage="Requerido"/>
 							</label>
 						</li>
 
 						<li>
 							<label>
 								Turno Id:
-								<input id="turnoId" name="Turno" type="text" required="required" data-bind="value: colaboradorSelecionado.ColHfuId"/>
+								<input id="turnoId" name="Turno" type="text" data-bind="value: colaboradorSelecionado.ColHfuId" required validationmessage="Requerido"/>
 							</label>
 						</li>
 					</ul>
@@ -778,7 +779,7 @@
 		<script type="text/x-kendo-template" id="tColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showDetalhesColaborador">
 				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
-			    <h1 class="col-nome">${ColNome} # # ${ColSobrenome}</h1>
+				<h1 class="col-nome">${ColNome} # # ${ColSobrenome}</h1>
 			</div>
 		</script>
 
@@ -835,10 +836,11 @@
 		
 			var baseUrl = "http://revenuemachine11.provisorio.ws/api";
             
-            
+			var botaoSelecionado = 0;
+                        
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
-				loading: '<h1 class="loading-message">Carregando...</h1>'				
+				loading: '<h1 class="loading-message">Carregando...</h1>'
 			});
 
 			$(document).ready(function () {
@@ -858,12 +860,6 @@
 				*/
 			});
 			
-			function selBtn(e) {
-				var btnGrp = $(e.sender.element).find(".select-group").data("kendoMobileButtonGroup");
-				if (btnGrp) {
-					btnGrp.select(0);
-				}
-			}
 			
 			function switchChange(e) {
 				if (!e.checked) {          
@@ -881,7 +877,8 @@
 				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
 				viewModel.dsLoja.read(); 		
 			
-				app.navigate("#dentroFila-view");
+				//app.navigate("#dentroFila-view");
+				app.navigate("#colaboradores-view");
 			}  
 			
 		</script>

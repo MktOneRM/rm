@@ -26,11 +26,11 @@
 	kendo.data.binders.cpf = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cpf"].get();
- 			if (value) {
- 				    $(this.element).text(formatField(value, "999.999.999-99"));
-				    viewModel.colaboradorSelecionado.set("ColCpf", formatField(value, "999.999.999-99"));				
-             }
-    	}
+			if (value) {
+				$(this.element).text(formatField(value, "999.999.999-99"));
+				viewModel.colaboradorSelecionado.set("ColCpf", formatField(value, "999.999.999-99"));				
+			}
+		}
         
 	});
             
@@ -151,8 +151,34 @@
 		}
 	});
     
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api"
-	//var baseUrl = "http://localhost:50000/api";
+	kendo.data.binders.dateValue = kendo.data.Binder.extend({
+		init: function(element, bindings, options) {
+			//call the base constructor
+			kendo.data.Binder.fn.init.call(this, element, bindings, options);
+			var that = this;
+			//listen for the change event of the element
+			$(that.element).on("change", function() {
+				that.change(); //call the change function
+			});
+		},
+		refresh: function() {
+			var that = this,
+			value = that.bindings["dateValue"].get(), //get the value from the View-Model
+			formatedValue = kendo.toString(value, "dd-MM-yyyy"); //format
+			$(that.element).val(formatedValue); //update the HTML input element
+		},
+		change: function() {
+			var formatedValue = this.element.value,
+			value = kendo.parseDate(formatedValue, "dd-MM-yyyy", "pt-BR"); 
+			if (value) {
+				this.bindings["dateValue"].set(value);
+				console.log(viewModel.colaboradorSelecionado);
+			}
+		}
+	});
+    
+	//var baseUrl = "http://revenuemachine11.provisorio.ws/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -332,10 +358,10 @@
 				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				CarId: { type: "int", validation: { required: false} },  
 				ColCpf: { validation: { required: true}},
-    			ColApelido:  { validation: { required: true} },
+				ColApelido:  { validation: { required: true} },
 				ColNome:  { validation: { required: true} },
 				ColSobrenome:  { validation: { required: true} },
-				ColDtnascimento: { type: "date", defaultValue: null},  
+				ColDtnascimento: { type: "date", validation: { required: true} },  
 				ColEmail: { validation: { required: false} },
 				ColFoto: { validation: { required: false}, defaultValue: null },
 				ColDtentrada:{ type: "date", validation: { required: true} },  
@@ -625,10 +651,7 @@
 		salvarAtendimento: salvarAtendimento,
 		cancelarAtendimento : cancelarAtendimento,
 		adicionarColaborador: adicionarColaborador,
-		detalhesColaborador: detalhesColaborador,
-		salvarColaborador: salvarColaborador,
-		editarColaborador: editarColaborador,
-		cancelarColaborador: cancelarColaborador,
+		detalhesColaborador: detalhesColaborador,				
 		vendedoresFila : vendedoresFila,
 		vendedoresForaFila : vendedoresForaFila,
 		vendedoresForaTurno : vendedoresForaTurno,
@@ -639,13 +662,13 @@
 		formatField:formatField,
 		onSwipe:onSwipe,
 		onSwipeFora:onSwipeFora,
-		editorViewInitCol:editorViewInitCol,
+		editorColViewInit:editorColViewInit,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
-        validarCPF:validarCPF,
+		validarCPF:validarCPF,
 		selectedMotSaidaValue: "1",
 		idMotivoSaida:"radiogroup",
 		salvarSaida: salvarSaida,
@@ -728,6 +751,7 @@
 	function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);
+		viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
 		app.navigate("#editorColaborador-view");
 	}
        
@@ -735,26 +759,6 @@
 		var colaborador = viewModel.dsColaborador.getByUid(e.touch.target.context.id);
 		viewModel.set("colaboradorSelecionado", colaborador);  
 		app.navigate("#detalhesColaborador-view");
-	}
-    
-	function editarColaborador(e) {
-		var colaborador = viewModel.dsColaborador.get(e.context);                 
-		viewModel.set("colaboradorSelecionado", colaborador); 
-		console.log(viewModel.colaboradorSelecionado, "EditarColaborador");
-      
-		app.navigate("#editorColaborador-view"); 
-	}
-    
-	function salvarColaborador() {   
-		//if (validator.validate()) {
-		viewModel.dsColaborador.sync();
-		app.navigate("#colaboradores-view");          
-		//}
-	}
-	    
-	function cancelarColaborador() {
-		viewModel.dsColaborador.cancelChanges();		
-		app.navigate("#colaboradores-view");
 	}
  
 	function adicionarLoja() {
@@ -774,7 +778,12 @@
 	}
  
 	function vendedoresFila() {
-		atualizaFilaNoSalao(dsVendFila, 1);
+		atualizaFilaNoSalao(dsVendFila, 1);        
+		/*
+		var sltBtn = this.header.find(".select-group").data("kendoMobileButtonGroup");        
+		if (sltBtn)
+		sltBtn.select(0);
+		*/
 	}
 			
 	function vendedoresForaFila() {	
@@ -818,6 +827,8 @@
 	}
     
 	function colaboradores() {
+        alert("Waitingg");
+        
 		dsColaborador.options.transport.read.url = baseUrl + "/RmColaborador";
 		dsColaborador.read(); 		
 	}
@@ -882,14 +893,38 @@
 		app.navigate("#resultadoAtendimento-view");
 	}
 
-	function editorViewInitCol() {
-		validator = $("#formColaborador").kendoValidator({}).data("kendoValidator");
+	function editorColViewInit(e) {
+        var view = e.view;
+        
+		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
+        
+		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
+			dsColaborador.one("change", function() {				
+				view.loader.hide();
+				app.navigate("#colaboradores-view");
+			});
+         
+			view.loader.show();
+			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
+			dsColaborador.sync();
+		});
+        
+		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
+			e.preventDefault();
+			dsColaborador.one("change", function() {
+				view.loader.hide();
+				app.navigate("#colaboradores-view");
+			});
+
+			view.loader.show();			
+			dsColaborador.cancelChanges();
+		});
 	}
     
 	function editorLojaViewInit(e) {
 		var view = e.view;
         
-		validatorLoja = $("#editorLoja").kendoValidator({}).data("kendoValidator");
+		validatorLoja = $("#editorLoja").kendoValidator().data("kendoValidator");
 		viewModel.dsTLoja.read();
 		viewModel.dsUf.read();
 		var ufSel = viewModel.lojaSelecionada.get("LojUf");
@@ -983,49 +1018,48 @@
 		return sCod;
 	}
     
-    function validarCPF(cpf) {
- 
-        cpf = cpf.replace(/[^\d]+/g,'');
+	function validarCPF(cpf) {
+		cpf = cpf.replace(/[^\d]+/g, '');
      
-        if(cpf == '') return false;
+		if (cpf == '')
+			return false;
      
-        // Elimina CPFs invalidos conhecidos
-        if (cpf.length != 11 || 
-            cpf == "00000000000" || 
-            cpf == "11111111111" || 
-            cpf == "22222222222" || 
-            cpf == "33333333333" || 
-            cpf == "44444444444" || 
-            cpf == "55555555555" || 
-            cpf == "66666666666" || 
-            cpf == "77777777777" || 
-            cpf == "88888888888" || 
-            cpf == "99999999999")
-            return false;
+		// Elimina CPFs invalidos conhecidos
+		if (cpf.length != 11 || 
+			cpf == "00000000000" || 
+			cpf == "11111111111" || 
+			cpf == "22222222222" || 
+			cpf == "33333333333" || 
+			cpf == "44444444444" || 
+			cpf == "55555555555" || 
+			cpf == "66666666666" || 
+			cpf == "77777777777" || 
+			cpf == "88888888888" || 
+			cpf == "99999999999")
+			return false;
          
-        // Valida 1o digito
-        add = 0;
-        for (i=0; i < 9; i ++)
-            add += parseInt(cpf.charAt(i)) * (10 - i);
-        rev = 11 - (add % 11);
-        if (rev == 10 || rev == 11)
-            rev = 0;
-        if (rev != parseInt(cpf.charAt(9)))
-            return false;
+		// Valida 1o digito
+		add = 0;
+		for (i=0; i < 9; i ++)
+			add += parseInt(cpf.charAt(i)) * (10 - i);
+		rev = 11 - (add % 11);
+		if (rev == 10 || rev == 11)
+			rev = 0;
+		if (rev != parseInt(cpf.charAt(9)))
+			return false;
          
-        // Valida 2o digito
-        add = 0;
-        for (i = 0; i < 10; i ++)
-            add += parseInt(cpf.charAt(i)) * (11 - i);
-        rev = 11 - (add % 11);
-        if (rev == 10 || rev == 11)
-            rev = 0;
-        if (rev != parseInt(cpf.charAt(10)))
-            return false;
+		// Valida 2o digito
+		add = 0;
+		for (i = 0; i < 10; i ++)
+			add += parseInt(cpf.charAt(i)) * (11 - i);
+		rev = 11 - (add % 11);
+		if (rev == 10 || rev == 11)
+			rev = 0;
+		if (rev != parseInt(cpf.charAt(10)))
+			return false;
              
-        return true;
-        
-    }
+		return true;
+	}
     
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
@@ -1047,7 +1081,7 @@
 		formatField:formatField,
 		onSwipe:onSwipe,
 		onSwipeFora:onSwipeFora,
-		editorViewInitCol:editorViewInitCol,
+		editorColViewInit:editorColViewInit,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		validarCPF:validarCPF,

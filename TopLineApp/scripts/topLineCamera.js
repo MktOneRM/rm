@@ -44,7 +44,7 @@ cameraApp.prototype={
             encodingType: Camera.EncodingType.JPEG,
             targetWidth: 50,
             targetHeight: 50,
-            destinationType: cameraApp._destinationType.FILE_URI
+            destinationType: cameraApp._destinationType.DATA_URL
         });
     },
     
@@ -78,6 +78,9 @@ cameraApp.prototype={
     
         // Show the captured photo.
         smallImage.src = "data:image/jpeg;base64," + imageData;
+        
+        alert(kendo.parseString(smallImage.src));
+        
         viewModel.colaboradorSelecionado.set("ColFoto", imageData);
     },
     

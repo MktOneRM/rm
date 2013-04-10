@@ -145,9 +145,6 @@
 						break;
 				}  
 			}
-		},
-		change: function() {
-			console.log("Change");
 		}
 	});
     
@@ -172,13 +169,12 @@
 			value = kendo.parseDate(formatedValue, "dd-MM-yyyy", "pt-BR"); 
 			if (value) {
 				this.bindings["dateValue"].set(value);
-				console.log(viewModel.colaboradorSelecionado);
 			}
 		}
 	});
     
-	//var baseUrl = "http://revenuemachine11.provisorio.ws/api";
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://revenuemachine11.provisorio.ws/api";
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -588,8 +584,7 @@
 		change: function(e) {            
 			viewModel.set("lojaSelecionada", e.items[0]);					
 		},
-		error: function(e) {
-			console.log(e, "error");  
+		error: function(e) {			
 			if (e.errorThrown == "Not Found") {
 				adicionarLoja();                
 			}
@@ -827,8 +822,6 @@
 	}
     
 	function colaboradores() {
-        alert("Waitingg");
-        
 		dsColaborador.options.transport.read.url = baseUrl + "/RmColaborador";
 		dsColaborador.read(); 		
 	}
@@ -894,7 +887,7 @@
 	}
 
 	function editorColViewInit(e) {
-        var view = e.view;
+		var view = e.view;
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
         

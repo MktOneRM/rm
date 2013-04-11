@@ -173,7 +173,7 @@
 		}
 	});
     
-	var baseUrl = "http://revenuemachine11.provisorio.ws/api";
+	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
 
 	//schema

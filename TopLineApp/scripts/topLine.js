@@ -300,8 +300,8 @@
 		model: {
 			id: "CarId",
 			fields: {
-				CarId: { editable: false, nullable: false },
-				CarDescricao: { editable: false, nullable: false }
+				CarId: { type: "int", validation: { required: true} },
+				CarDescricao: { type: "string", validation: { required: true} },
 			} 
 		}
 	};
@@ -361,7 +361,7 @@
 				ColEmail: { validation: { required: false} },
 				ColFoto: { validation: { required: false}, defaultValue: null },
 				ColDtentrada:{ type: "date", validation: { required: true} },  
-				ColDtsaida: { type: "date" },  
+				ColDtsaida: { type: "date",  validation: { required: false}, defaultValue: null },
 				ColAfasttemp: { type: "boolean",  defaultValue: false },                  
 				LojId: { type: "int", validation: { required: true} },  
 				ColSenha: { validation: { required: false} },
@@ -524,7 +524,10 @@
 			}
 		},
 		batch: true,
-		schema: schemaCargos
+		schema: schemaCargos,
+        change: function (e) {						
+            viewModel.set("cargos", this.view());
+		}
 	});
     
 	//dataSource Atendimento
@@ -631,10 +634,15 @@
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
 		dsColaborador: dsColaborador,	
+        
+        cargos: [],
 		dsCargos: dsCargos,
-		dsTurnosFunc: dsTurnosFunc,	
-		UFs:[],
+        
+        UFs:[],
 		dsUf: dsUf,
+        
+        dsTurnosFunc: dsTurnosFunc,	
+		
 		TLojas:[],
 		dsTLoja: dsTLoja,
 		vendedorSelecionado: {},		
@@ -890,6 +898,10 @@
 		var view = e.view;
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
+        
+        viewModel.dsCargos.read();
+        var carSel = viewModel.colaboradorSelecionado.get("CarId");
+        $("#cargoId").find("option[value='" + carSel + "']").attr("selected", true)
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsColaborador.one("change", function() {				

@@ -7,7 +7,7 @@
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
-		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
+		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
 		<script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
@@ -341,8 +341,8 @@
 				<li>
 					<ul>
 						<li>
-							<label>Cargo Id:</label>
-							<span data-bind="text: colaboradorSelecionado.CarId"></span>
+							<label>Cargo:</label>
+							<span data-bind="text: colaboradorSelecionado.CarDescricao"></span>
 						</li>
 
 						<li>
@@ -447,21 +447,13 @@
 				</li>
 				<li>
 					<ul>
-						<!--
-						<li>
-						<label>
-						Loja Id:
-						<input id="lojaId" name="LojaId" type="text" data-bind="value: colaboradorSelecionado.LojId" required validationmessage="Requerido"/>
-						</label>
-						</li>
-						-->
 						<li>
 							<label>
-								Cargo Id:
-								<input id="cargoId" name="Cargo" type="text" data-bind="value: colaboradorSelecionado.CarId" required validationmessage="Requerido"/>
+								Cargo:
 							</label>
+							<select id="cargoId" name="Cargo" data-bind="source: cargos, value: colaboradorSelecionado.CarId" data-text-field="CarDescricao" data-value-field="CarId"></select>
+                            <!--<select id="LojUf" name="Uf" data-bind="source: UFs, value: lojaSelecionada.LojUF" data-text-field="Uf" data-value-field="Uf"></select>-->
 						</li>
-
 						<li>
 							<label>
 								Turno Id:
@@ -836,7 +828,7 @@
 		
 			
 			var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-            //var baseUrl = "http://localhost:50000/api";
+			//var baseUrl = "http://localhost:50000/api";
             
 			var botaoSelecionado = 0;
                         

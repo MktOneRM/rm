@@ -44,6 +44,7 @@
     <Folder Include="Bkp\viewModels" />
     <Folder Include="Bkp\views" />
     <Folder Include="kendo\styles\textures" />
+    <Folder Include="views" />
     <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,7 @@
     <Content Include="Bkp\main.js" />
     <Content Include="Bkp\utils.js" />
     <Content Include="scripts\topLineCamera.js" />
+    <Content Include="scripts\topLineFechamento.js" />
     <Content Include="scripts\topLineGeolocation.js" />
     <Content Include="scripts\topLineMtvNaoVenda.js" />
     <Content Include="styles\main.css" />
@@ -163,6 +165,7 @@
     <Content Include="Bkp\views\VFilaView.html" />
     <Content Include="Bkp\views\VForaFilaView.html" />
     <Content Include="Bkp\views\VForaTurnoView.html" />
+    <Content Include="views\FechamentoView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

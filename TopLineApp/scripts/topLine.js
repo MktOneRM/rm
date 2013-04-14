@@ -173,8 +173,8 @@
 		}
 	});
     
-    var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+ //   var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -547,7 +547,7 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {							
-					return kendo.stringify([data.models[0]]);
+					return kendo.stringify(data.models[0]);
 				}
 			}
 		},

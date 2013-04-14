@@ -1,7 +1,6 @@
 (function($, undefined) {
-	
-	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	//Schema Motivos não venda
 	var scMotivosNaoVenda = { 
@@ -56,7 +55,7 @@
 				type:"POST"      
 				,contentType: "application/json"
 				,dataType: "json"
-			},
+			},			
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
 					return kendo.stringify(data.models[0]);
@@ -74,7 +73,7 @@
 		motivoNaoVenda: {},
 		vendedorSelecionado: {},
 
-        salvarNaoVenda: salvarNaoVenda,
+		salvarNaoVenda: salvarNaoVenda,
 		cancelarNaoVenda: cancelarNaoVenda,
         
 		selectedMotNaoVendaValue: "1",
@@ -92,15 +91,16 @@
 		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.selectedMotNaoVendaValue));
         
 		viewModelNaoVenda.dsNaoVenda.sync(); 	                
-		
-        //Marca o checkbox como default
-        document.getElementById("chkVendeu").checked = "checked";
+        
+		//Marca o checkbox como default
+		document.getElementById("chkVendeu").checked = "checked";
         
 		app.navigate("dentroFila-view");
 	}
 			
 	function cancelarNaoVenda() {
-		viewModelNaoVenda.dsNaoVenda.cancelChanges(); 
+		viewModelNaoVenda.dsNaoVenda.cancelChanges();         
+		document.getElementById("chkVendeu").checked = "checked";
 		app.navigate("#dentroFila-view");                 
 	}
     
@@ -108,9 +108,8 @@
 		dsMotivosNaoVenda.options.transport.read.url = baseUrl + "/RmMotNaoVenda";
 		dsMotivosNaoVenda.read(); 
         
-        var naoVenda = viewModelNaoVenda.dsNaoVenda.add(); 
+		var naoVenda = viewModelNaoVenda.dsNaoVenda.add(); 
 		viewModelNaoVenda.set("motivoNaoVenda", naoVenda); 
-        
 	}
 
 	$.extend(window, {

@@ -115,11 +115,11 @@
 					<ul>
 						<li>
 							<label>Valor Venda:</label>
-							<input id="RepValor" name="RepValor" type="number" placeholder="Valor" maxlength="8" size="8" min="0.01" step="0.01" data-bind="valor: atendimento.RepValor" pattern="\d+(\.\d{2})?" required validationmessage="Requerido" />
-						</li>
+							<input id="RepValor" name="RepValor" type="number" placeholder="Valor" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: atendimento.RepValor" data-bind="text: atendimento.RepValor" required validationmessage="Requerido" />
+        				</li>
 						<li>
 							<label>Qtde. Peças:</label>
-							<input id="RepQtde" name="RepQtde" type="number" placeholder="Qtde." maxlength="4" size="4" min="1" step="1" data-bind="qtde: atendimento.RepQtde" pattern="[0-9]*" required validationmessage="Requerido" />
+							<input id="RepQtde" name="RepQtde" type="number" placeholder="Qtde." maxlength="4" size="4" min="1" step="1" data-bind="qtde: atendimento.RepQtde" required validationmessage="Requerido" />
 						</li>
 					</ul>
 				</li>           

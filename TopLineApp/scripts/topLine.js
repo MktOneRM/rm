@@ -112,15 +112,14 @@
 		},
 		refresh: function() {
 			var that = this,
-			value = that.bindings["qtde"].get(), //get the value from the View-Model
-			formatedValue = kendo.toString(value, "n0", "pt-BR"); //format
+			valor = that.bindings["qtde"].get(), //get the value from the View-Model
+			formatedValue = kendo.toString(valor, "c0", "pt-BR"); //format
 			$(that.element).val(formatedValue); //update the HTML input element
 		},
 		change: function() {
-			var formatedValue = this.element.value,
-			value = kendo.parseDate(formatedValue, "n0", "pt-BR"); 
-			if (value) {
-				this.bindings["qtde"].set(value);
+			var value = this.element.value;
+			if (!isNaN(value)) {
+   			this.bindings["qtde"].set(value);
 			}
 		}
 	});
@@ -142,9 +141,8 @@
 			$(that.element).val(formatedValue); //update the HTML input element
 		},
 		change: function() {
-			var formatedValue = this.element.value,
-			value = kendo.parseDate(formatedValue, "c", "pt-BR"); 
-			if (value) {
+			var value = this.element.value;
+			if (!isNaN(value)) {
 				this.bindings["valor"].set(value);
 			}
 		}
@@ -317,8 +315,8 @@
 				RLoId: { type: "int", validation: { required: true} },            
 				LCoId: { type: "int", validation: { required: true} },            
 				DtHrTransacao: { type: "date", validation: { required: true} },            
-				RepQtde: { type: "number", validation: { required: true, min: 0} },						
-				RepValor: { type: "number", validation: { required: true, min: 0} }
+				RepQtde: { type: "int", validation: { required: true, min: 1} },						
+				RepValor: { type: "float", validation: { required: true, min: 0.01}}
 			} 
 		}
 	};
@@ -639,7 +637,6 @@
         
         cargos: [],
 		dsCargos: dsCargos,
-        
         UFs:[],
 		dsUf: dsUf,
         
@@ -702,7 +699,6 @@
             
 			viewModel.atendimento.set("RLoId", RLoId);
 			viewModel.atendimento.set("LcoId", LcoId);
-            
 			viewModel.dsAtendimento.sync(); 	                
 			
 			//Atualiza a posicao do vendedor na fila

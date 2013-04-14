@@ -1,6 +1,5 @@
 (function($, undefined) {
-    
-     kendo.data.binders.srcPath = kendo.data.Binder.extend({
+	kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["srcPath"].get();
 
@@ -78,7 +77,7 @@
 		}
 	});
     
-    kendo.data.binders.ShopRua = kendo.data.Binder.extend({
+	kendo.data.binders.ShopRua = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["ShopRua"].get();            
 			if (value) {
@@ -119,7 +118,7 @@
 		change: function() {
 			var value = this.element.value;
 			if (!isNaN(value)) {
-   			this.bindings["qtde"].set(value);
+				this.bindings["qtde"].set(value);
 			}
 		}
 	});
@@ -148,7 +147,7 @@
 		}
 	});
 
-    kendo.data.binders.dateValue = kendo.data.Binder.extend({
+	kendo.data.binders.dateValue = kendo.data.Binder.extend({
 		init: function(element, bindings, options) {
 			//call the base constructor
 			kendo.data.Binder.fn.init.call(this, element, bindings, options);
@@ -173,8 +172,8 @@
 		}
 	});
     
- //   var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -305,7 +304,7 @@
 			} 
 		}
 	};
-    	//Schema Atendimento
+	//Schema Atendimento
 	var schemaAtendimento = { 
 		model: {
 			id: "RepId",
@@ -525,8 +524,8 @@
 		},
 		batch: true,
 		schema: schemaCargos,
-        change: function (e) {						
-            viewModel.set("cargos", this.view());
+		change: function (e) {						
+			viewModel.set("cargos", this.view());
 		}
 	});
     
@@ -635,12 +634,12 @@
 		dsLoja: dsLoja,
 		dsColaborador: dsColaborador,	
         
-        cargos: [],
+		cargos: [],
 		dsCargos: dsCargos,
-        UFs:[],
+		UFs:[],
 		dsUf: dsUf,
         
-        dsTurnosFunc: dsTurnosFunc,	
+		dsTurnosFunc: dsTurnosFunc,	
 		
 		TLojas:[],
 		dsTLoja: dsTLoja,
@@ -892,9 +891,9 @@
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
         
-        viewModel.dsCargos.read();
-        var carSel = viewModel.colaboradorSelecionado.get("CarId");
-        $("#cargoId").find("option[value='" + carSel + "']").attr("selected", true)
+		viewModel.dsCargos.read();
+		var carSel = viewModel.colaboradorSelecionado.get("CarId");
+		$("#cargoId").find("option[value='" + carSel + "']").attr("selected", true)
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsColaborador.one("change", function() {				
@@ -1016,7 +1015,6 @@
 		return sCod;
 	}
 
-   
 	function validarCPF(cpf) {
 		cpf = cpf.replace(/[^\d]+/g, '');
      

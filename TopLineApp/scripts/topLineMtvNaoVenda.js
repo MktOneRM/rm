@@ -1,14 +1,14 @@
 (function($, undefined) {
-	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	//Schema Motivos não venda
 	var scMotivosNaoVenda = { 
 		model: {
 			id: "MnvId",
 			fields: {
-				MnvId: { editable: false, nullable: false },
-				MnvDescricao: { editable: false, nullable: false }
+				MnvId: { editable: false, nullable: false, defaultValue: 0 },
+				MnvDescricao: { editable: false, nullable: false, defaultValue: "" }
 			} 
 		} 
 	};
@@ -44,7 +44,11 @@
 			}
 		},
 		batch: true,
-		schema: scMotivosNaoVenda
+		schema: scMotivosNaoVenda,
+        change: function(e){
+             viewModelNaoVenda.set("motivos", this.view());   
+        }        
+        
 	});
     
 	//dataSource Não Venda
@@ -70,25 +74,24 @@
 		dsMotivosNaoVenda: dsMotivosNaoVenda,
 		dsNaoVenda: dsNaoVenda,
 		motivosNaoVenda: motivosNaoVenda,
-		motivoNaoVenda: {},
+		motivoNaoVenda: {},        
+        motivos: [],
+        motivo: [],
 		vendedorSelecionado: {},
-
 		salvarNaoVenda: salvarNaoVenda,
-		cancelarNaoVenda: cancelarNaoVenda,
-        
-		selectedMotNaoVendaValue: "1",
-		idMotivoNaoVenda:"radiogroup"
+		cancelarNaoVenda: cancelarNaoVenda
 	});
 
 	function salvarNaoVenda() {
+        
 		var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");
 		var LcoId = viewModel.vendedorSelecionado.get("LojaColId");
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
-  
+                
 		viewModelNaoVenda.motivoNaoVenda.set("RLojId", RLoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LcoId", LcoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);
-		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.selectedMotNaoVendaValue));
+		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivo[0].MnvId));
         
 		viewModelNaoVenda.dsNaoVenda.sync(); 	                
         
@@ -107,7 +110,6 @@
 	function motivosNaoVenda() {		
 		dsMotivosNaoVenda.options.transport.read.url = baseUrl + "/RmMotNaoVenda";
 		dsMotivosNaoVenda.read(); 
-        
 		var naoVenda = viewModelNaoVenda.dsNaoVenda.add(); 
 		viewModelNaoVenda.set("motivoNaoVenda", naoVenda); 
 	}

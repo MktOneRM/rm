@@ -14,7 +14,7 @@
 		<script src="kendo/cultures/kendo.culture.pt-BR.min.js" type="text/javascript"></script>
 		<script type="text/javascript">   
 			kendo.culture("pt-BR");
-        </script>
+		</script>
 	</head>
 	<body>
 		<!-- Home-Layout -->
@@ -111,18 +111,19 @@
 						</li>
 					</ul>
 				</li>
-				<li>Dados da Venda
+				<li>
+					Dados da Venda
 					<ul>
 						<li>
 							<label>Valor Venda:</label>
 							<input id="RepValor" name="RepValor" type="number" placeholder="Valor" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: atendimento.RepValor" data-bind="text: atendimento.RepValor" required validationmessage="Requerido" />
-        				</li>
+						</li>
 						<li>
 							<label>Qtde. Peças:</label>
 							<input id="RepQtde" name="RepQtde" type="number" placeholder="Qtde." maxlength="4" size="4" min="1" step="1" data-bind="qtde: atendimento.RepQtde" required validationmessage="Requerido" />
 						</li>
 					</ul>
-				</li>           
+				</li>
 			</ul>
 			<script type="text/javascript">
 				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
@@ -447,7 +448,7 @@
 								Cargo:
 							</label>
 							<select id="cargoId" name="Cargo" data-bind="source: cargos, value: colaboradorSelecionado.CarId" data-text-field="CarDescricao" data-value-field="CarId"></select>
-                            <!--<select id="LojUf" name="Uf" data-bind="source: UFs, value: lojaSelecionada.LojUF" data-text-field="Uf" data-value-field="Uf"></select>-->
+							<!--<select id="LojUf" name="Uf" data-bind="source: UFs, value: lojaSelecionada.LojUF" data-text-field="Uf" data-value-field="Uf"></select>-->
 						</li>
 						<li>
 							<label>
@@ -721,14 +722,13 @@
 						</li>
 					</ul>
 				</li>
-				<ul>
-					<li>
-						<label>
-							Motivo:
-						</label>
-						<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
-					</li>
-				</ul>
+				<li>
+					<label>
+						Motivo:
+					</label>
+					<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+				</li>
+
 			</ul>
 			<div data-role="footer">
 				<div data-role="tabstrip">

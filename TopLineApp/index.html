@@ -33,9 +33,6 @@
 					<li>
 						<a href="#foraFila-view">Fora</a>
 					</li>
-					<li>
-						<a href="#foraTurno-view">Turno</a>
-					</li>
 				</ul>
 			</header>
 			<div data-role="footer">
@@ -117,21 +114,21 @@
 						</li>
 					</ul>
 				</li>
-				<li>
-					Dados da Venda
+				<li>Dados da Venda
 					<ul>
 						<li>
 							<label>Valor da Venda</label>
-							<input type="number" id="RepValor" name="RepValor" placeholder="Valor" data-bind="value: atendimento.RepValor" pattern="\d+(\.\d{2})?" required validationmessage="Requerido" />
+							<input type="number" id="RepValor" name="RepValor" placeholder="Valor" maxlength=8 size=8 data-bind="value: atendimento.RepValor" pattern="\d+(\.\d{2})?" required validationmessage="Requerido" />
 						</li>
 						<li>
-							<label>Qtde Total de Peças</label>
-							<input type="number" id="RepQtde" name="RepQtde" placeholder="Qtde." data-bind="value: atendimento.RepQtde" pattern="[0-9]*" required validationmessage="Requerido" />
+							<label>Qtde de Peças</label>
+							<input type="number" id="RepQtde" name="RepQtde" placeholder="Qtde." maxlength=4 size=4 data-bind="value: atendimento.RepQtde" pattern="[0-9]*" required validationmessage="Requerido" />
 						</li>
 					</ul>
-				</li>
+				</li>           
 			</ul>
-			<script>
+			<script type="text/javascript">
+                
 				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
 			</script>
 		</div>
@@ -826,8 +823,7 @@
 			</div>
 		</script>
 
-		<script>
-		
+		<script type="text/javascript">
 			
 			var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
 			//var baseUrl = "http://localhost:50000/api";

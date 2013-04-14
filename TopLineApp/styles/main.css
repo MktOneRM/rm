@@ -438,6 +438,26 @@ div a
 	font-size: 1.5rem;
 }
 
+#formAtendimento label {
+	display: block; 
+    width: 90px; 
+    float: left; 
+    padding-top: 6px; 
+    padding-right:5px;
+    color: #2e2e2e;
+    text-align:right;
+}
+
+#formAtendimento input[type="number"]
+{
+	font-size: 12px;
+	alignment-adjust: left;
+    text-align: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
 #infoColaborador span
 {
 	font-size: 12px;

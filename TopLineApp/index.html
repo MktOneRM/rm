@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="utf-8" />
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-		<link href="kendo/styles/kendo.indexedlistview.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
@@ -15,7 +14,10 @@
 		<script src="kendo/cultures/kendo.culture.pt-BR.min.js" type="text/javascript"></script>
 		<script type="text/javascript">   
 			kendo.culture("pt-BR");
-		</script>
+            var dateFormat = kendo.culture().calendar.patterns.d,
+                timeFormat = kendo.culture().calendar.patterns.t,
+                value;
+        </script>
 	</head>
 	<body>
 		<!-- Home-Layout -->

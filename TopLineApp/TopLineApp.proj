@@ -74,7 +74,7 @@
     <Content Include="Images\default.png" />
     <Content Include="kendo\cultures\kendo.culture.pt-BR.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />
-    <Content Include="kendo\js\kendo.indexedlistview.js" />
+    <Content Include="Bkp\kendo.indexedlistview.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />
     <Content Include="kendo\styles\default\editor.png" />
     <Content Include="kendo\styles\default\imagebrowser.png" />
@@ -85,7 +85,7 @@
     <Content Include="kendo\styles\default\sprite_2x.png" />
     <Content Include="kendo\styles\images\wp8_icons.png" />
     <Content Include="kendo\styles\images\wp8_inverseicons.png" />
-    <Content Include="kendo\styles\kendo.indexedlistview.css" />
+    <Content Include="Bkp\kendo.indexedlistview.css" />
     <Content Include="Bkp\app.js" />
     <Content Include="Bkp\data.js" />
     <Content Include="Bkp\fila-view.js" />

@@ -1,5 +1,6 @@
 (function($, undefined) {
-	kendo.data.binders.srcPath = kendo.data.Binder.extend({
+    
+     kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["srcPath"].get();
 
@@ -119,7 +120,7 @@
 			if (data) {  
 				var dateObj = new Date(data);       
 				switch (this.element.id) {
-					case "dtNascimento":     						
+					case "dtNascimento":
 						$(this.element).text(kendo.toString(dateObj, this.dateformat));                        
 						viewModel.colaboradorSelecionado.set("ColDtnascimento", kendo.toString(dateObj, this.dateformat));												
 						break;
@@ -1022,7 +1023,8 @@
         
 		return sCod;
 	}
-    
+
+   
 	function validarCPF(cpf) {
 		cpf = cpf.replace(/[^\d]+/g, '');
      

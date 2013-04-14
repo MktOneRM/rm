@@ -485,7 +485,10 @@
 			}
 		},
 		batch: true,
-		schema: schemaTiposMovto
+		schema: schemaTiposMovto,
+        change: function(e){
+             viewModel.set("motivos", this.view());   
+        }       
 	});
 
 	//dataSource Turnos de funcionamento
@@ -670,17 +673,16 @@
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
 		validarCPF:validarCPF,
-		selectedMotSaidaValue: "1",
-		idMotivoSaida:"radiogroup",
+        
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
-        
-		selectedMotEntradaValue: "1",
-		idMotivoEntrada:"radiogroup",
+  
 		salvarEntrada: salvarEntrada,
 		cancelarEntrada: cancelarEntrada,
         
-		idLoja: null
+		idLoja: null,        
+		motivos: [],
+		motivo: []
 	});
 
 	function adicionarAtendimento() {
@@ -709,8 +711,9 @@
 	}
 
 	function salvarSaida() {
+        
 		viewModel.vendedorSelecionado.set("SaidaFila", true);
-		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.selectedMotSaidaValue));
+		viewModel.vendedorSelecionado.set("TmoId",  parseInt(viewModel.motivo[0].TmoId));
 		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
 		viewModel.dsVendFila.sync();
 		app.navigate("#dentroFila-view");
@@ -730,8 +733,8 @@
 		viewModel.set("vendedorSelecionado", entrada);        
 		viewModel.vendedorSelecionado.set("LojId", LojId);
 		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);        
-		viewModel.vendedorSelecionado.set("EntradaFila", 1);
-		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.selectedMotEntradaValue));    
+		viewModel.vendedorSelecionado.set("EntradaFila", 1);		
+        viewModel.vendedorSelecionado.set("TmoId",  parseInt(viewModel.motivo[0].TmoId));
         
 		viewModel.dsVendFila.sync();
         

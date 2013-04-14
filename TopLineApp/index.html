@@ -151,9 +151,12 @@
 					</ul>
 				</li>
 				<li>
-					Motivos de Saída
-					<ul id="listviewMotivosSaida" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-template="tSaidaFila" data-style="inset"></ul>
+					<label>
+						Motivo:
+					</label>
+					<select id="MotivosSaida" name="MotivoSaida" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
 				</li>
+
 			</ul>
 		</div>
 
@@ -178,8 +181,10 @@
 					</ul>
 				</li>
 				<li>
-					Motivos de Entrada
-					<ul id="listviewMotivosEntrada" data-bind="source: dsTiposMovto" data-role="listview" data-auto-bind="false" data-template="tEntradaFila" data-style="inset"></ul>
+					<label>
+						Motivo:
+					</label>
+					<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
 				</li>
 			</ul>
 		</div>
@@ -728,7 +733,6 @@
 					</label>
 					<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
 				</li>
-
 			</ul>
 			<div data-role="footer">
 				<div data-role="tabstrip">
@@ -799,20 +803,6 @@
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnEntrada" data-role="button" class="entrar">Entrar</button>
-			</div>
-		</script>
-
-		<script id="tSaidaFila" type="text/x-kendo-template">
-			<div>
-				<input type="radio" data-bind="attr:{name:idMotivoSaida}, value:TmoId, checked:selectedMotSaidaValue" />
-				<span data-bind="text:TmoDescricao"></span>
-			</div>
-		</script>
-
-		<script id="tEntradaFila" type="text/x-kendo-template">
-			<div>
-				<input type="radio" data-bind="attr:{name:idMotivoEntrada}, value:TmoId, checked:selectedMotEntradaValue" />
-				<span data-bind="text:TmoDescricao"></span>
 			</div>
 		</script>
 

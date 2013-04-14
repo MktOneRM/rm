@@ -14,9 +14,6 @@
 		<script src="kendo/cultures/kendo.culture.pt-BR.min.js" type="text/javascript"></script>
 		<script type="text/javascript">   
 			kendo.culture("pt-BR");
-            var dateFormat = kendo.culture().calendar.patterns.d,
-                timeFormat = kendo.culture().calendar.patterns.t,
-                value;
         </script>
 	</head>
 	<body>
@@ -117,18 +114,17 @@
 				<li>Dados da Venda
 					<ul>
 						<li>
-							<label>Valor da Venda</label>
-							<input type="number" id="RepValor" name="RepValor" placeholder="Valor" maxlength=8 size=8 data-bind="value: atendimento.RepValor" pattern="\d+(\.\d{2})?" required validationmessage="Requerido" />
+							<label>Valor Venda:</label>
+							<input id="RepValor" name="RepValor" type="number" placeholder="Valor" maxlength="8" size="8" min="0.01" step="0.01" data-bind="valor: atendimento.RepValor" pattern="\d+(\.\d{2})?" required validationmessage="Requerido" />
 						</li>
 						<li>
-							<label>Qtde de Peças</label>
-							<input type="number" id="RepQtde" name="RepQtde" placeholder="Qtde." maxlength=4 size=4 data-bind="value: atendimento.RepQtde" pattern="[0-9]*" required validationmessage="Requerido" />
+							<label>Qtde. Peças:</label>
+							<input id="RepQtde" name="RepQtde" type="number" placeholder="Qtde." maxlength="4" size="4" min="1" step="1" data-bind="qtde: atendimento.RepQtde" pattern="[0-9]*" required validationmessage="Requerido" />
 						</li>
 					</ul>
 				</li>           
 			</ul>
 			<script type="text/javascript">
-                
 				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
 			</script>
 		</div>
@@ -408,7 +404,7 @@
 						<li>
 							<label>
 								Nascimento:
-								<input id="dtNascimento" name="DataNascimento" type="date" placeholder="Data de nascimento" data-bind="dateValue: colaboradorSelecionado.ColDtnascimento" required validationmessage="Requerido"/>
+								<input id="dtNascimento" name="DataNascimento" type="date" placeholder="Data de nascimento" data-bind="date: colaboradorSelecionado.ColDtnascimento" required validationmessage="Requerido"/>
 							</label>
 						</li>
 

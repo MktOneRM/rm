@@ -78,16 +78,7 @@
 		}
 	});
     
-	kendo.data.binders.format = kendo.data.Binder.extend({
-		refresh: function() {
-			var value = this.bindings["format"].get();
-			if (value) {
-				$(this.element).text(kendo.toString(value, "c"));
-			}
-		}
-	});
-
-	kendo.data.binders.ShopRua = kendo.data.Binder.extend({
+    kendo.data.binders.ShopRua = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["ShopRua"].get();            
 			if (value) {
@@ -109,47 +100,57 @@
 		}
 	});
  
-	kendo.data.binders.date = kendo.data.Binder.extend({
-		init: function (element, bindings, options) {
-			kendo.data.Binder.fn.init.call(this, element, bindings, options); 
-			this.dateformat = $(element).data("dateformat");
+	kendo.data.binders.qtde = kendo.data.Binder.extend({
+		init: function(element, bindings, options) {
+			//call the base constructor
+			kendo.data.Binder.fn.init.call(this, element, bindings, options);
+			var that = this;
+			//listen for the change event of the element
+			$(that.element).on("change", function() {
+				that.change(); //call the change function
+			});
 		},
-		refresh: function () {
-			var data = this.bindings["date"].get();            
-			         
-			if (data) {  
-				var dateObj = new Date(data);       
-				switch (this.element.id) {
-					case "dtNascimento":
-						$(this.element).text(kendo.toString(dateObj, this.dateformat));                        
-						viewModel.colaboradorSelecionado.set("ColDtnascimento", kendo.toString(dateObj, this.dateformat));												
-						break;
-					case "dtEntrada":                        
-						$(this.element).text(kendo.toString(dateObj, this.dateformat));
-						viewModel.colaboradorSelecionado.set("ColDtentrada", kendo.toString(dateObj, this.dateformat));						
-						break;
-					case "dtSaida":                        
-						$(this.element).text(kendo.toString(dateObj, this.dateformat));
-						viewModel.colaboradorSelecionado.set("ColDtsaida", kendo.toString(dateObj, this.dateformat));						
-						break;
-					case "dtCadastro":
-						$(this.element).text(kendo.toString(dateObj, this.dateformat));
-						break;
-					case "dtNascimentoView":
-						$(this.element).text(kendo.toString(dateObj, this.dateformat));
-						break;
-					case "dtEntradaView":
-						$(this.element).text(kendo.toString(dateObj, this.dateformat));
-						break;
-					case "dtSaidaView":
-						$(this.element).text(kendo.toString(dateObj, this.dateformat));
-						break;
-				}  
+		refresh: function() {
+			var that = this,
+			value = that.bindings["qtde"].get(), //get the value from the View-Model
+			formatedValue = kendo.toString(value, "n0", "pt-BR"); //format
+			$(that.element).val(formatedValue); //update the HTML input element
+		},
+		change: function() {
+			var formatedValue = this.element.value,
+			value = kendo.parseDate(formatedValue, "n0", "pt-BR"); 
+			if (value) {
+				this.bindings["qtde"].set(value);
 			}
 		}
 	});
-    
-	kendo.data.binders.dateValue = kendo.data.Binder.extend({
+
+	kendo.data.binders.valor = kendo.data.Binder.extend({
+		init: function(element, bindings, options) {
+			//call the base constructor
+			kendo.data.Binder.fn.init.call(this, element, bindings, options);
+			var that = this;
+			//listen for the change event of the element
+			$(that.element).on("change", function() {
+				that.change(); //call the change function
+			});
+		},
+		refresh: function() {
+			var that = this,
+			value = that.bindings["valor"].get(), //get the value from the View-Model
+			formatedValue = kendo.toString(value, "c", "pt-BR"); //format
+			$(that.element).val(formatedValue); //update the HTML input element
+		},
+		change: function() {
+			var formatedValue = this.element.value,
+			value = kendo.parseDate(formatedValue, "c", "pt-BR"); 
+			if (value) {
+				this.bindings["valor"].set(value);
+			}
+		}
+	});
+
+    kendo.data.binders.dateValue = kendo.data.Binder.extend({
 		init: function(element, bindings, options) {
 			//call the base constructor
 			kendo.data.Binder.fn.init.call(this, element, bindings, options);
@@ -162,19 +163,19 @@
 		refresh: function() {
 			var that = this,
 			value = that.bindings["dateValue"].get(), //get the value from the View-Model
-			formatedValue = kendo.toString(value, "dd-MM-yyyy"); //format
+			formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
 			$(that.element).val(formatedValue); //update the HTML input element
 		},
 		change: function() {
 			var formatedValue = this.element.value,
-			value = kendo.parseDate(formatedValue, "dd-MM-yyyy", "pt-BR"); 
+			value = kendo.parseDate(formatedValue, "dd/MM/yyyy", "pt-BR"); 
 			if (value) {
 				this.bindings["dateValue"].set(value);
 			}
 		}
 	});
     
-	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+    var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
 
 	//schema

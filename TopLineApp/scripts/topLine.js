@@ -113,7 +113,7 @@
 		refresh: function() {
 			var that = this,
 			valor = that.bindings["qtde"].get(), //get the value from the View-Model
-			formatedValue = kendo.toString(valor, "c0", "pt-BR"); //format
+			formatedValue = kendo.toString(valor, "n0", "pt-BR"); //format
 			$(that.element).val(formatedValue); //update the HTML input element
 		},
 		change: function() {

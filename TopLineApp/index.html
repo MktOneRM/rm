@@ -721,10 +721,14 @@
 						</li>
 					</ul>
 				</li>
-				<li>
-					Motivos não venda
-					<ul data-bind="source: dsMotivosNaoVenda" data-role="listview" data-auto-bind="false" data-template="tMotivosNaoVenda" data-style="inset"></ul>
-				</li>
+				<ul>
+					<li>
+						<label>
+							Motivo:
+						</label>
+						<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+					</li>
+				</ul>
 			</ul>
 			<div data-role="footer">
 				<div data-role="tabstrip">
@@ -809,13 +813,6 @@
 			<div>
 				<input type="radio" data-bind="attr:{name:idMotivoEntrada}, value:TmoId, checked:selectedMotEntradaValue" />
 				<span data-bind="text:TmoDescricao"></span>
-			</div>
-		</script>
-
-		<script id="tMotivosNaoVenda" type="text/x-kendo-template">
-			<div>
-				<input type="radio" data-bind="attr:{name:idMotivoNaoVenda}, value:MnvId, checked:selectedMotNaoVendaValue" />
-				<span data-bind="text:MnvDescricao"></span>
 			</div>
 		</script>
 

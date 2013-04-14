@@ -305,22 +305,22 @@
 			} 
 		}
 	};
-	
-	//Schema Atendimento
+    	//Schema Atendimento
 	var schemaAtendimento = { 
 		model: {
 			id: "RepId",
 			fields:{
-				RepId:  { editable: false, nullable: false, defaultValue:0 },
-				RLoId: { type: "int", validation: { required: true} },            
-				LCoId: { type: "int", validation: { required: true} },            
-				DtHrTransacao: { type: "date", validation: { required: true} },            
+				RepId:  { type: "int", nullable: false, defaultValue:0 },
+				LojId:  { type: "int", nullable: false, defaultValue:0 },
+				RLoId: { type: "int", validation: { required: true}, defaultValue:0 },            
+				LCoId: { type: "int", validation: { required: true}, defaultValue:0  },            
+				DtHrTransacao: { type: "date", validation: { required: true}},            
 				RepQtde: { type: "int", validation: { required: true, min: 1} },						
 				RepValor: { type: "float", validation: { required: true, min: 0.01}}
 			} 
 		}
 	};
-
+    
 	//schema    
 	var scLoja = { 
 		model: {
@@ -685,26 +685,21 @@
 	});
 
 	function adicionarAtendimento() {
-		var novoAtendimento = viewModel.dsAtendimento.add(); 
-		viewModel.set("atendimento", novoAtendimento); 
+		var novoAtendimento = viewModel.dsAtendimento.add();        
+		viewModel.set("atendimento", novoAtendimento);         
 	}
 
 	function salvarAtendimento() {
-		if (validatorAtendimento.validate()) { //validates the input
-			//Busca o código da Rede da Loja
-			var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");
-            
-			//Busca o código da Loja do Colaborador
+		if (validatorAtendimento.validate()) { 
+			var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");            
 			var LcoId = viewModel.vendedorSelecionado.get("LojaColId");
+			var LojId = viewModel.vendedorSelecionado.get("LojId");
             
 			viewModel.atendimento.set("RLoId", RLoId);
 			viewModel.atendimento.set("LcoId", LcoId);
+			viewModel.atendimento.set("LojId", LojId);            
 			viewModel.dsAtendimento.sync(); 	                
-			
-			//Atualiza a posicao do vendedor na fila
-			var vend = viewModel.vendedorSelecionado;			
-			viewModel.dsVendFila.remove(vend); 
-			viewModel.dsVendFila.sync();
+			         
 			app.navigate("#dentroFila-view");
 		}
 	}

@@ -18,7 +18,7 @@
 		model: {
 			id: "NveId",
 			fields: {
-				NveId: { type:"int", nullable: false },
+				NveId: { type:"int", nullable: false, defaultValue: 0 },
 				RLojId: { type:"int", nullable: false },
 				LojId: { type:"int", nullable: false },
 				MnvId: { type:"int", nullable: false },

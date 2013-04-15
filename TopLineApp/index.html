@@ -302,6 +302,10 @@
 							<span data-bind="text: colaboradorSelecionado.ColNome"></span>
 						</li>
 						<li>
+							<label>Sexo:</label>
+							<span data-bind="sexoText: colaboradorSelecionado.ColSexo"></span>
+						</li>
+						<li>
 							<label>Sobrenome:</label>
 							<span data-bind="text: colaboradorSelecionado.ColSobrenome"></span>
 						</li>
@@ -335,7 +339,7 @@
 
 						<li>
 							<label>Afastamento:</label>
-							<span data-bind="text: colaboradorSelecionado.ColAfasttemp"></span>
+							<span data-bind="afastText: colaboradorSelecionado.ColAfasttemp"></span>
 						</li>
 					</ul>
 				</li>
@@ -400,6 +404,12 @@
 								Sobrenome:
 								<input id="sobrenome" name="DobreNome" type="text" placeholder="Sobrenome" data-bind="value: colaboradorSelecionado.ColSobrenome" required validationmessage="Requerido" />
 							</label>
+						</li>
+						<li>
+							<label>
+								Sexo:
+							</label>
+							<select id="sexoId" name="Sexo" data-bind="source: sexos, value: colaboradorSelecionado.ColSexo" data-text-field="Desc" data-value-field="Id"></select>
 						</li>
 						<li>
 							<label>

@@ -88,6 +88,30 @@
 			}
 		}
 	});
+    
+	kendo.data.binders.sexoText = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["sexoText"].get();            
+			if (value == "M") {
+				$(this.element).text("Masculino");
+			}
+			else if(value == "F") {
+				$(this.element).text("Feminino");
+			}
+		}
+	});
+    
+	kendo.data.binders.afastText = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["afastText"].get();            
+			if (value) {
+				$(this.element).text("Sim");
+			}
+			else {
+				$(this.element).text("Não");
+			}
+		}
+	});
 
 	kendo.data.binders.innerText = kendo.data.Binder.extend({
 		refresh: function() {
@@ -149,31 +173,30 @@
 
 	kendo.data.binders.dateText = kendo.data.Binder.extend({
 		refresh: function() {
-            var that = this,
+			var that = this,
 			value = that.bindings["dateText"].get(); //get the value from the View-Model
-            if(value) {
-			    formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
-			    $(that.element).text(formatedValue); //update the HTML input element
-           }     
+			if (value) {
+				formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
+				$(that.element).text(formatedValue); //update the HTML input element
+			}     
 		}
 	});
 
-    kendo.data.binders.dateValue = kendo.data.Binder.extend({
+	kendo.data.binders.dateValue = kendo.data.Binder.extend({
 		init: function(element, bindings, options) {
 			//call the base constructor
 			kendo.data.Binder.fn.init.call(this, element, bindings, options);
 			var that = this;
 			//listen for the change event of the element
-    		$(that.element).on("change", function() {
+			$(that.element).on("change", function() {
 				that.change(); //call the change function
 			});
 		},
 		refresh: function() {
-			
-            var that = this,
+			var that = this,
 			value = that.bindings["dateValue"].get(); //get the value from the View-Model
 			formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
- 			$(that.element).val(formatedValue); //update the HTML input element
+			$(that.element).val(formatedValue); //update the HTML input element
 		},
 		change: function() {
 			var formatedValue = this.element.value,
@@ -284,6 +307,29 @@
 		}
 	});
     
+	var dataSexo = [
+		{ Id:"M",Desc:"Masculino"},
+		{ Id:"F",Desc:"Feminino"}
+	];
+    
+	var scSexo = {
+		model:{
+			id: "Id",
+			fields: {
+				Id: { type: "string"},
+				Desc: { type: "string"}  
+			}
+		}
+	};
+    
+	var dsSexo = new kendo.data.DataSource({ 
+		data: dataSexo,
+		schema: scSexo,
+		change: function (e) {			
+			viewModel.set("TLojas", this.view());
+		}
+	});
+    
 	//schemaMotivosSaidaSalao
 	var schemaTiposMovto = { 
 		model: {
@@ -365,6 +411,7 @@
 				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				CarId: { type: "int", validation: { required: false} },  
 				ColCpf: { validation: { required: true}},
+                ColSexo: { validation: { required: true}, defaultvalue: "M"},
 				ColApelido:  { validation: { required: true} },
 				ColNome:  { validation: { required: true} },
 				ColSobrenome:  { validation: { required: true} },
@@ -498,9 +545,9 @@
 		},
 		batch: true,
 		schema: schemaTiposMovto,
-        change: function(e){
-             viewModel.set("motivos", this.view());   
-        }       
+		change: function(e) {
+			viewModel.set("motivos", this.view());   
+		}       
 	});
 
 	//dataSource Turnos de funcionamento
@@ -654,6 +701,9 @@
 		UFs:[],
 		dsUf: dsUf,
         
+        Sexos:[],
+		dsSexo: dsSexo,
+        
 		dsTurnosFunc: dsTurnosFunc,	
 		
 		TLojas:[],
@@ -723,9 +773,8 @@
 	}
 
 	function salvarSaida() {
-        
 		viewModel.vendedorSelecionado.set("SaidaFila", true);
-		viewModel.vendedorSelecionado.set("TmoId",  parseInt(viewModel.motivo[0].TmoId));
+		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivo[0].TmoId));
 		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
 		viewModel.dsVendFila.sync();
 		app.navigate("#dentroFila-view");
@@ -746,7 +795,7 @@
 		viewModel.vendedorSelecionado.set("LojId", LojId);
 		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);        
 		viewModel.vendedorSelecionado.set("EntradaFila", 1);		
-        viewModel.vendedorSelecionado.set("TmoId",  parseInt(viewModel.motivo[0].TmoId));
+		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivo[0].TmoId));
         
 		viewModel.dsVendFila.sync();
         
@@ -761,7 +810,7 @@
 	function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);
- 	   viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
+		viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
 		app.navigate("#editorColaborador-view");
 	}
        
@@ -907,8 +956,13 @@
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
         
 		viewModel.dsCargos.read();
+        //viewModel.dsSexo.read();
+        
 		var carSel = viewModel.colaboradorSelecionado.get("CarId");
 		$("#cargoId").find("option[value='" + carSel + "']").attr("selected", true)
+        
+        //var sexoSel = viewModel.colaboradorSelecionado.get("ColSexo");
+		//$("#sexoId").find("option[value='" + sexoSel + "']").attr("selected", true)
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsColaborador.one("change", function() {				

@@ -176,7 +176,7 @@
 			var that = this,
 			value = that.bindings["dateText"].get(); //get the value from the View-Model
 			if (value) {
-				formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
+				formatedValue = kendo.toString(value, "dd-MM-yyyy", "pt-BR"); //format
 				$(that.element).text(formatedValue); //update the HTML input element
 			}     
 		}
@@ -200,13 +200,13 @@
 		},
 		change: function() {
 			var formatedValue = this.element.value,
-			value = kendo.parseDate(formatedValue, "dd/MM/yyyy", "pt-BR"); 
+			value = kendo.parseDate(formatedValue, "dd/MM/yyyy", "pt-BR");             
 			this.bindings["dateValue"].set(value);
 		}
 	});
     
-	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -397,7 +397,8 @@
 				LojCep: { type: "text", validation: { required: false,min:0,max:9} },                       				
 				LojShopping_rua: { type: "boolean", validation: { required: false} },                                    								
 				LojLatitude: { type: "text", validation: { required: false} },            
-				LojLongitude: { type: "text", validation: { required: false} },            
+				LojLongitude: { type: "text", validation: { required: false} }, 
+                LojDtcadastro:{ type: "date" },  
 			}     
 		}
 	};
@@ -591,7 +592,7 @@
 		},                       
 		sort: {
 			field:"CarDescricao", 
-            dir: "desc"
+			dir: "desc"
 		}
 	});
     

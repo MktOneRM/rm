@@ -150,12 +150,17 @@
 						</li>
 					</ul>
 				</li>
-				<li>
-					<label>
-						Motivo:
-					</label>
-					<select id="MotivosSaida" name="MotivoSaida" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
-				</li>
+				<li></li>
+				<div>
+					<ul>
+						<li>
+							<label>
+								Motivo:
+							</label>
+							<select id="MotivosSaida" name="MotivoSaida" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+						</li>
+					</ul>
+				</div>
 
 			</ul>
 		</div>
@@ -180,12 +185,17 @@
 						</li>
 					</ul>
 				</li>
-				<li>
-					<label>
-						Motivo:
-					</label>
-					<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
-				</li>
+				<li></li>
+				<div>
+					<ul>
+						<li>
+							<label>
+								Motivo:
+							</label>
+							<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+						</li>
+					</ul>
+				</div>
 			</ul>
 		</div>
 
@@ -450,8 +460,8 @@
 
 						<li>
 							<label>
-								Afastamento:								
-                                <input id="afastamento" name="Afastamento" data-role="switch" data-on-label="Sim" data-off-label="Não" checked="unchecked" data-bind="checked: colaboradorSelecionado.ColAfasttemp">
+								Afastamento:
+								<input id="afastamento" name="Afastamento" data-role="switch" data-on-label="Sim" data-off-label="Não" checked="unchecked" data-bind="checked: colaboradorSelecionado.ColAfasttemp">
 							</label>
 						</li>
 					</ul>
@@ -517,7 +527,7 @@
 						<li>
 							<label>
 								Data Cadastro:
-							</label><span id="dtCadastro" data-bind="date: LojDtcadastro" data-dateformat="dd/MM/yyyy"></span>
+							</label><span id="dtCadastro" data-bind="dateText: LojDtcadastro"></span>
 						</li>
 					</ul>
 				</li>
@@ -817,8 +827,8 @@
 
 		<script type="text/javascript">
 			
-			var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-			//var baseUrl = "http://localhost:50000/api";
+			//var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+			var baseUrl = "http://localhost:50000/api";
             
 			var botaoSelecionado = 0;
                         
@@ -851,7 +861,6 @@
 			} 
 			
 			function LoadingApp() {
-				
 				viewModel.dsTLoja.read();
 				viewModel.dsUf.read();
 				viewModel.dsCargos.read();
@@ -871,4 +880,3 @@
 		</script>
 	</body>
 </html>
-	

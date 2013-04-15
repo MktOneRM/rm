@@ -451,7 +451,7 @@
 						<li>
 							<label>
 								Afastamento:
-								<input id="afastamento" name="Afastamento" type="checkbox" data-bind="value: colaboradorSelecionado.ColDtsaida" />
+								<input id="afastamento" name="Afastamento" type="checkbox" data-bind="value: colaboradorSelecionado.ColAfasttemp" />
 							</label>
 						</li>
 					</ul>
@@ -466,9 +466,9 @@
 						</li>
 						<li>
 							<label>
-								Turno Id:
-								<input id="turnoId" name="Turno" type="text" data-bind="value: colaboradorSelecionado.ColHfuId" required validationmessage="Requerido"/>
+								Turno:
 							</label>
+							<select id="turnoId" name="Turno" data-bind="source: turnos, value: colaboradorSelecionado.ColHfuId" data-text-field="TufDescricao" data-value-field="HfuId"></select>
 						</li>
 					</ul>
 				</li>
@@ -830,7 +830,6 @@
 			$(document).ready(function () {
 				app.showLoading();
 				LoadingApp();
-				app.hideLoading();
 				/*
 				var variable = "Lojaaa";			
 				//Verifica se o dispositivo está cadastrado para a Loja.
@@ -850,21 +849,26 @@
 					app.navigate("#MotNaoVenda-view");
 				}    
 			} 
-                    
+			
 			function LoadingApp() {
-				//Carrega o Datasource de tipos de Loja
+				
 				viewModel.dsTLoja.read();
-				//Carrega o Datasource de UFs
 				viewModel.dsUf.read();
+				viewModel.dsCargos.read();
+				viewModel.dsSexo.read();
+				viewModel.dsTurnosFunc.read();
 			
 				//Carrega os dados de Loja
 				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
 				viewModel.dsLoja.read(); 		
 			
-				app.navigate("#dentroFila-view");
-				//app.navigate("#colaboradores-view");
+				app.hideLoading();
+			
+				//app.navigate("#dentroFila-view");
+				app.navigate("#colaboradores-view");
 			}  
 			
 		</script>
 	</body>
 </html>
+	

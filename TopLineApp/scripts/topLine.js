@@ -95,7 +95,7 @@
 			if (value == "M") {
 				$(this.element).text("Masculino");
 			}
-			else if(value == "F") {
+			else if (value == "F") {
 				$(this.element).text("Feminino");
 			}
 		}
@@ -201,14 +201,12 @@
 		change: function() {
 			var formatedValue = this.element.value,
 			value = kendo.parseDate(formatedValue, "dd/MM/yyyy", "pt-BR"); 
-			if (value) {
-				this.bindings["dateValue"].set(value);
-			}
+			this.bindings["dateValue"].set(value);
 		}
 	});
     
-	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -326,7 +324,7 @@
 		data: dataSexo,
 		schema: scSexo,
 		change: function (e) {			
-			viewModel.set("TLojas", this.view());
+			viewModel.set("sexos", this.view());
 		}
 	});
     
@@ -342,11 +340,11 @@
 	};
 	   
 	//Schema turnos de Turnos de funcionamento
-	var schemaTurnosFunc = { 
+	var scTurnosFunc = { 
 		model: {
-			id: "TufId",
+			id: "HfuId",
 			fields: {
-				TufId: { editable: false, nullable: false },
+				HfuId: { editable: false, nullable: false },
 				TufDescricao: { editable: false, nullable: false }
 			} 
 		}
@@ -411,7 +409,7 @@
 				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				CarId: { type: "int", validation: { required: false} },  
 				ColCpf: { validation: { required: true}},
-                ColSexo: { validation: { required: true}, defaultvalue: "M"},
+				ColSexo: { validation: { required: true}, defaultvalue: "M"},
 				ColApelido:  { validation: { required: true} },
 				ColNome:  { validation: { required: true} },
 				ColSobrenome:  { validation: { required: true} },
@@ -565,7 +563,10 @@
 			}
 		},
 		batch: true,
-		schema: schemaTurnosFunc
+		schema: scTurnosFunc,
+		change: function(e) {
+			viewModel.set("turnos", this.view());
+		}
 	});
     
 	//dataSource de cargos
@@ -697,13 +698,15 @@
         
 		cargos: [],
 		dsCargos: dsCargos,
+        
 		UFs:[],
 		dsUf: dsUf,
         
-        Sexos:[],
+		sexos:[],
 		dsSexo: dsSexo,
         
-		dsTurnosFunc: dsTurnosFunc,	
+		turnos: [],
+		dsTurnosFunc: dsTurnosFunc,        
 		
 		TLojas:[],
 		dsTLoja: dsTLoja,
@@ -953,15 +956,10 @@
 		var view = e.view;
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
-        
-		viewModel.dsCargos.read();
-        //viewModel.dsSexo.read();
-        
-		var carSel = viewModel.colaboradorSelecionado.get("CarId");
-		$("#cargoId").find("option[value='" + carSel + "']").attr("selected", true)
-        
-        //var sexoSel = viewModel.colaboradorSelecionado.get("ColSexo");
-		//$("#sexoId").find("option[value='" + sexoSel + "']").attr("selected", true)
+  
+		$("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
+		$("#cargoId").find("option[value=" + viewModel.colaboradorSelecionado.get("CarId") + "]").attr("selected", true);
+		$("#turnoId").find("option[value=" + viewModel.colaboradorSelecionado.get("ColHfuId") + "]").attr("selected", true);
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsColaborador.one("change", function() {				
@@ -990,8 +988,7 @@
 		var view = e.view;
         
 		validatorLoja = $("#editorLoja").kendoValidator().data("kendoValidator");
-		viewModel.dsTLoja.read();
-		viewModel.dsUf.read();
+		
 		var ufSel = viewModel.lojaSelecionada.get("LojUf");
 		var lojaDe = viewModel.lojaSelecionada.get("LojShopping_rua");
 		$("#LojUf").find("option[value='" + ufSel + "']").attr("selected", true)

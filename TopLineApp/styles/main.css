@@ -496,6 +496,16 @@ div a
 	left: 100px;
 }
 
+#editorColaborador input[type="checkbox"]
+{
+	font-size: 12px;
+	alignment-adjust: right;
+    text-align: right;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
 #editorColaborador label
 { 
 	display: block; 

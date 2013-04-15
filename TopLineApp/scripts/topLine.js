@@ -964,7 +964,7 @@
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsColaborador.one("change", function() {				
 				view.loader.hide();
-				app.navigate("#colaboradores-view");
+				app.navigate("#colaboradores-view");                
 			});
          
 			view.loader.show();

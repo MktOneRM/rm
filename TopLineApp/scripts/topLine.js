@@ -398,7 +398,7 @@
 				LojShopping_rua: { type: "boolean", validation: { required: false} },                                    								
 				LojLatitude: { type: "text", validation: { required: false} },            
 				LojLongitude: { type: "text", validation: { required: false} }, 
-                LojDtcadastro:{ type: "date" },  
+				LojDtcadastro:{ type: "date" },  
 			}     
 		}
 	};
@@ -542,7 +542,7 @@
 			}
 		},
 		batch: true,
-		schema: schemaTiposMovto,
+		schema: schemaTiposMovto,        
 		change: function(e) {
 			viewModel.set("motivos", this.view());   
 		}       

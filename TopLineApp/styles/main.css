@@ -496,7 +496,7 @@ div a
 	left: 100px;
 }
 
-#editorColaborador input[type="checkbox"]
+#editorColaborador input[type="radio"]
 {
 	font-size: 12px;
 	alignment-adjust: left;

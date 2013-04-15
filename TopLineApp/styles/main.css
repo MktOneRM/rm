@@ -520,3 +520,42 @@ div a
     font-size: 14px;
     font-weight:normal;
 }
+
+#formSaiFila label
+{ 
+	display: block; 
+    width: 0px; 
+    float: left; 
+    color: #2e2e2e;
+    text-align:right;
+}
+
+#formSaiFila input[type="text"], #formSaiFila select
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 50px;
+    width: 240px; 
+}
+
+#formEntrarFila label
+{ 
+	display: block; 
+    width: 0px; 
+    float: left; 
+    color: #2e2e2e;
+    text-align:right;
+}
+
+#formEntrarFila input[type="text"], #formEntrarFila select
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 50px;
+    width: 240px; 
+}
+

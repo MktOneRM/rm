@@ -504,6 +504,7 @@ div a
 	color: #476BD6; 
 	font-weight: bold;
 	left: 100px;
+    z-index:0;
 }
 
 #editorColaborador label

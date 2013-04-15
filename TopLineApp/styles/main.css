@@ -499,11 +499,11 @@ div a
 #editorColaborador input[type="checkbox"]
 {
 	font-size: 12px;
-	alignment-adjust: right;
-    text-align: right;
+	alignment-adjust: left;
+    text-align: left;
 	color: #476BD6; 
 	font-weight: bold;
-	right: 100px;
+	left: 100px;
 }
 
 #editorColaborador label

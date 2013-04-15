@@ -147,21 +147,33 @@
 		}
 	});
 
-	kendo.data.binders.dateValue = kendo.data.Binder.extend({
+	kendo.data.binders.dateText = kendo.data.Binder.extend({
+		refresh: function() {
+            var that = this,
+			value = that.bindings["dateText"].get(); //get the value from the View-Model
+            if(value) {
+			    formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
+			    $(that.element).text(formatedValue); //update the HTML input element
+           }     
+		}
+	});
+
+    kendo.data.binders.dateValue = kendo.data.Binder.extend({
 		init: function(element, bindings, options) {
 			//call the base constructor
 			kendo.data.Binder.fn.init.call(this, element, bindings, options);
 			var that = this;
 			//listen for the change event of the element
-			$(that.element).on("change", function() {
+    		$(that.element).on("change", function() {
 				that.change(); //call the change function
 			});
 		},
 		refresh: function() {
-			var that = this,
-			value = that.bindings["dateValue"].get(), //get the value from the View-Model
+			
+            var that = this,
+			value = that.bindings["dateValue"].get(); //get the value from the View-Model
 			formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
-			$(that.element).val(formatedValue); //update the HTML input element
+ 			$(that.element).val(formatedValue); //update the HTML input element
 		},
 		change: function() {
 			var formatedValue = this.element.value,
@@ -749,13 +761,13 @@
 	function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);
-		viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
+ 	   viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
 		app.navigate("#editorColaborador-view");
 	}
        
 	function detalhesColaborador(e) {
 		var colaborador = viewModel.dsColaborador.getByUid(e.touch.target.context.id);
-		viewModel.set("colaboradorSelecionado", colaborador);  
+		viewModel.set("colaboradorSelecionado", colaborador);
 		app.navigate("#detalhesColaborador-view");
 	}
  

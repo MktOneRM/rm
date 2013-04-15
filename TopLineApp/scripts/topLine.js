@@ -423,8 +423,7 @@
 				ColAfasttemp: { type: "boolean",  defaultValue: false },                  
 				LojId: { type: "int", validation: { required: true} },  
 				ColSenha: { validation: { required: false} },
-				ColHfuId: { type: "int", validation: { required: false} },  
-				ColStatus: { type: "boolean",  defaultValue: false }                
+				ColHfuId: { type: "int", validation: { required: false} }           
 			}
 		}
 	};

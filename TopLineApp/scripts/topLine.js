@@ -421,10 +421,27 @@
 				ColAfasttemp: { type: "boolean",  defaultValue: false },                  
 				LojId: { type: "int", validation: { required: true} },  
 				ColSenha: { validation: { required: false} },
-				ColHfuId: { type: "int", validation: { required: false} }           
+				ColHfuId: { type: "int", validation: { required: false} }
 			}
 		}
 	};
+    
+	var scColTelefones = {
+		model: {
+			id: "ColId",
+			fields: {
+				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
+				TteId: { type: "int", validation: { required: false} },  
+				TteDescricao: { type: "string", validation: { required: false} },
+				TelDdd: { type: "string", validation: { required: false} },  
+				TelNumero: { type: "string", validation: { required: false} },                                
+				OpeId: { type: "int", validation: { required: false}},  
+				OpeDescricao: { type: "string", validation: { required: false} },                                
+				TceId: { type: "int" , nullable: true, validation: { required: false}},  
+				TceDescricao: { type: "string" , nullable: true }
+			}
+		}
+	}
     
 	var dsVendFila = new kendo.data.DataSource({                    
 		transport: {						
@@ -893,7 +910,9 @@
     
 	function colaboradores() {
 		dsColaborador.options.transport.read.url = baseUrl + "/RmColaborador";
-		dsColaborador.read(); 		
+		dsColaborador.read(); 	
+        
+		console.log(viewModel.dsColaborador, viewModel, "Colaborador");
 	}
     
 	function atualizaFilaNoSalao(context, parametro) {

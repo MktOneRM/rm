@@ -19,8 +19,7 @@
 				$(this.element).text(formatField(value, "99999-999"));
 				viewModel.lojaSelecionada.set("LojCep", formatField(value, "99999-999"));
 			}
-		}
-        
+		}        
 	});
     
 	kendo.data.binders.cpf = kendo.data.Binder.extend({

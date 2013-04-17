@@ -204,8 +204,8 @@
 		}
 	});
     
-	//var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -426,15 +426,14 @@
 		}
 	};
     
-	var scColTelefones = {
+	var scTelColaborador = {
 		model: {
 			id: "ColId",
 			fields: {
 				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				TteId: { type: "int", validation: { required: false} },  
 				TteDescricao: { type: "string", validation: { required: false} },
-				TelDdd: { type: "string", validation: { required: false} },  
-				TelNumero: { type: "string", validation: { required: false} },                                
+				TelNumero: { type: "string", validation: { required: false} },  
 				OpeId: { type: "int", validation: { required: false}},  
 				OpeDescricao: { type: "string", validation: { required: false} },                                
 				TceId: { type: "int" , nullable: true, validation: { required: false}},  
@@ -704,11 +703,46 @@
 			}     
 		},
 		batch: true,
-		sort: { field: "ColApelido", dir: "desc" },
+		sort: { field: "ColApelido", dir: "asc" },
 		schema: scColaborador
 	})
     
-	var viewModel = kendo.observable({		
+	//DataSource Colaborador
+	var dsTelColaborador = new kendo.data.DataSource({
+		transport: {
+			read: {
+				url: baseUrl + "/RmTelColaborador",							
+				type:"GET",
+				contentType: "application/json",
+				dataType: "json"
+			},
+			create: {
+				url: baseUrl + "/RmTelColaborador",							
+				type:"POST",
+				contentType: "application/json",
+				dataType: "json"
+			},
+			update: {
+				url: baseUrl + "/RmTelColaborador",							
+				type:"PUT",
+				contentType: "application/json",
+				dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}     
+		},
+		batch: true,
+		sort: { field: "ColId", dir: "asc", 
+                field: "TteId", dir: "asc" },
+		schema: scTelColaborador, change:function(e) {
+            viewModel.set("telefonesColaborador", this.view());
+        }
+	})
+    
+    var viewModel = kendo.observable({		
 		dsVendFila: dsVendFila,		
 		dsVendForaFila: dsVendForaFila,
 		dsVendForaTurno: dsVendForaTurno,
@@ -716,7 +750,7 @@
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
 		dsColaborador: dsColaborador,	
-        
+        dsTelColaborador:dsTelColaborador,
 		cargos: [],
 		dsCargos: dsCargos,
         
@@ -735,6 +769,7 @@
 		atendimento: {},
 		lojaSelecionada: {},
 		colaboradorSelecionado: {},
+        telefonesColaborador: [],
 		cargoSelecionado: {},
 		turnoSelecionado: {},
 		salvarAtendimento: salvarAtendimento,
@@ -840,7 +875,9 @@
 	function detalhesColaborador(e) {
 		var colaborador = viewModel.dsColaborador.getByUid(e.touch.target.context.id);
 		viewModel.set("colaboradorSelecionado", colaborador);
-		app.navigate("#detalhesColaborador-view");
+		dsTelColaborador.options.transport.read.url = baseUrl + "/RmTelColaborador/" + viewModel.colaboradorSelecionado.get("ColId");
+		dsTelColaborador.read(); 
+ 	   app.navigate("#detalhesColaborador-view");
 	}
  
 	function adicionarLoja() {
@@ -911,8 +948,6 @@
 	function colaboradores() {
 		dsColaborador.options.transport.read.url = baseUrl + "/RmColaborador";
 		dsColaborador.read(); 	
-        
-		console.log(viewModel.dsColaborador, viewModel, "Colaborador");
 	}
     
 	function atualizaFilaNoSalao(context, parametro) {

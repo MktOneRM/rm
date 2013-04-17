@@ -370,9 +370,9 @@
 						</li>
 					</ul>
 				</li>
-           </ul>
+			</ul>
 
-           <ul id="infoTelColaborador" data-bind="source: dsTelColaborador" data-role="listview" data-style="inset" data-type="group"  data-template="tTelColaborador"></ul>
+			<ul id="infoColaborador" data-bind="source: dsTelColaborador" data-role="listview" data-style="inset" data-template="tTelColaborador"></ul>
 
 		</div>
 
@@ -833,15 +833,13 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tTelColaborador">
-            <label data-bind="text: ${TteDescricao}"></label>
-            <span class="fila-nome">${TelNumero}</span>
-            <label>${OpeDescricao}:</label>
-            <span class="fila-nome">${TceDescricao}</span>
-	    </script> 
-                        
+			<label> ${TteDescricao}: </label><span data-bind="telefone: TelNumero"/><span>  </span><span data-bind="text: TceDescricao"/><br> 
+			<label> Operadora: </label><span data-bind="text: OpeDescricao"/>
+		</script>
+
 		<script type="text/javascript">
 			var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	//		var baseUrl = "http://localhost:50000/api";
+			//		var baseUrl = "http://localhost:50000/api";
             
 			var botaoSelecionado = 0;
                         

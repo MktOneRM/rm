@@ -56,7 +56,7 @@
 					$(this.element).text(formatField(value, "(99) 9999-9999"));
 				}
 			}		
-        }
+		}
 	});
 
 	kendo.data.binders.telefoneValue = kendo.data.Binder.extend({
@@ -71,8 +71,7 @@
 		},
 		refresh: function() {
 			var that = this,
-			value = that.bindings["telefoneValue"].get(); //get the value from the View-Model
-            console.log(value);
+			value = that.bindings["telefoneValue"].get(); //get the value from the View-Model			
 			if (value) {
 				if (value.trim().length == 11) {
 					$(that.element).val(formatField(value, "(99) 99999-9999"));					
@@ -81,11 +80,11 @@
 					$(that.element).val(formatField(value, "(99) 9999-9999"));
 				}
 			}		
-        },
+		},
 		change: function() {
 			var formatedValue = this.element.value;
 			console.log(formatedValue);
-            if (value.trim().length == 11) {
+			if (value.trim().length == 11) {
 				value = formatField(formatedValue, "(99) 99999-9999");					
 			}
 			else if (value.trim().length == 10) {
@@ -95,7 +94,7 @@
 		}
 	});
 
-    kendo.data.binders.ShopRua = kendo.data.Binder.extend({
+	kendo.data.binders.ShopRua = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["ShopRua"].get();            
 			if (value) {
@@ -223,8 +222,8 @@
 		}
 	});
     
-	//var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -1039,26 +1038,22 @@
 		for (var i = 0; i < length; i++) {
 			element = viewModel.telefonesColaborador[i];
 			
-            var divWr = $("<li></li>");
-            
-            var removeButton = $("<a class=\"remove\" data-role=\"detailbutton\" data-style=\"rowdelete\" />");
+			var divWr = $("<li></li>");
+   
+            var removeButton = $("<input type=\"button\" class=\"remove\" data-icon=\"organize\"/>");
             
 			var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/></label>");
 			
-            
 			removeButton.click(function() {
 				$(this).parent().remove();
 			});
             
             divWr.append(removeButton);
 			divWr.append(fieldWrapper);
-			$("#editorTelColaborador").append(divWr);
- 		console.log(element, "Item", divWr);
+ 			$("#editorTelColaborador").append(divWr);
+			console.log(element, "Item", divWr);
            
-            kendo.bind($("#editorColaborador-view"), viewModel);
-            
-            
-            
+			kendo.bind($("#editorColaborador-view"), viewModel);
 		}
         
 		console.log(viewModel.telefonesColaborador);
@@ -1078,8 +1073,8 @@
 			view.loader.show();
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
             
-            console.log(viewModel.telefonesColaborador);
-            return;
+			console.log(viewModel.telefonesColaborador);
+			return;
 			dsColaborador.sync();
 		});
         

@@ -489,8 +489,9 @@
 						</li>
 					</ul>
 				</li>
-
 			</ul>
+			<ul id="infoColaborador" data-bind="source: dsTelColaborador" data-role="listview" data-style="inset" data-template="tTelColaborador"></ul>
+
 		</div>
 
 		<!--Detalhes Loja View-->
@@ -833,8 +834,13 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tTelColaborador">
-			<label> ${TteDescricao}: </label><span data-bind="telefone: TelNumero"/><span>  </span><span data-bind="text: TceDescricao"/><br> 
+			<label> ${TteDescricao}: </label><span data-bind="telefone: TelNumero"/><span> </span><span data-bind="text: TceDescricao"/><br>
 			<label> Operadora: </label><span data-bind="text: OpeDescricao"/>
+		</script>
+
+		<script type="text/x-kendo-template" id="tEditorTelColaborador">
+			<label> ${TteDescricao}: </label><input data-bind="value: TelNumero"/><input data-bind="value: TceDescricao"/><br>
+			<label> Operadora: </label><input data-bind="text: OpeDescricao"/>
 		</script>
 
 		<script type="text/javascript">

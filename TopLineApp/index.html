@@ -490,7 +490,7 @@
 					</ul>
 				</li>
 			</ul>
-			<ul id="infoColaborador" data-bind="source: dsTelColaborador" data-role="listview" data-style="inset" data-template="tTelColaborador"></ul>
+			<ul id="editorTelColaborador" data-role="listview" data-style="inset"></ul>
 
 		</div>
 
@@ -525,7 +525,7 @@
 						<li>
 							<label>
 								Telefone:
-							</label><span data-bind="telefone: LojTelefone"></span>
+							</label><span data-bind="telefoneText: LojTelefone"></span>
 						</li>
 						<li>
 							<label>
@@ -638,7 +638,7 @@
 							<label>
 								Telefone:
 							</label>
-							<input id="LojTelefone" name="Telefone" type="text" maxlength=11 size=11 data-bind="telefoneinput: lojaSelecionada.LojTelefone, value: lojaSelecionada.LojTelefone" />
+							<input id="LojTelefone" name="Telefone" type="text" maxlength=11 size=11 data-bind="telefoneValue: lojaSelecionada.LojTelefone" />
 						</li>
 						<li>
 							<label>
@@ -834,18 +834,13 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tTelColaborador">
-			<label> ${TteDescricao}: </label><span data-bind="telefone: TelNumero"/><span> </span><span data-bind="text: TceDescricao"/><br>
+			<label> ${TteDescricao}: </label><span data-bind="telefoneText: TelNumero"/><span> </span><span data-bind="text: TceDescricao"/><br>
 			<label> Operadora: </label><span data-bind="text: OpeDescricao"/>
 		</script>
 
-		<script type="text/x-kendo-template" id="tEditorTelColaborador">
-			<label> ${TteDescricao}: </label><input data-bind="value: TelNumero"/><input data-bind="value: TceDescricao"/><br>
-			<label> Operadora: </label><input data-bind="text: OpeDescricao"/>
-		</script>
-
 		<script type="text/javascript">
-			var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-			//		var baseUrl = "http://localhost:50000/api";
+			//var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+					var baseUrl = "http://localhost:50000/api";
             
 			var botaoSelecionado = 0;
                         
@@ -890,8 +885,8 @@
 			
 				app.hideLoading();
 			
-				app.navigate("#dentroFila-view");
-				//app.navigate("#colaboradores-view");
+				//app.navigate("#dentroFila-view");
+				app.navigate("#colaboradores-view");
 			}  
 			
 		</script>

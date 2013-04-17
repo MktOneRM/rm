@@ -477,7 +477,7 @@ div a
     text-align:right;
 }
 
-#editorColaborador input[type="text"], #editorColaborador select
+#editorColaborador input[type="text"], #editorColaborador select, #editorTelColaborador input[type="text"]
 {
 	font-size: 12px;
 	alignment-adjust: left;
@@ -507,13 +507,20 @@ div a
     z-index:0;
 }
 
-#editorColaborador label
+#editorColaborador label,  #editorTelColaborador label
 { 
 	display: block; 
     width: 90px; 
     float: left; 
     color: #2e2e2e;
     text-align:right;
+}
+
+input.remove
+{
+    float:left;
+    display:block;
+    margin:5px;
 }
 
 #btFoto {

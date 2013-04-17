@@ -44,39 +44,58 @@
         
 	});
 
-	kendo.data.binders.telefone = kendo.data.Binder.extend({
+	kendo.data.binders.telefoneText = kendo.data.Binder.extend({
 		refresh: function() {
-			var value = this.bindings["telefone"].get();
+			var that = this,
+			value = that.bindings["telefoneText"].get(); //get the value from the View-Model
 			if (value) {
 				if (value.trim().length == 11) {
-					$(this.element).text(formatField(value, "(99) 99999-9999"));
-					viewModel.lojaSelecionada.set("LojTelefone", value);				
+					$(this.element).text(formatField(value, "(99) 99999-9999"));					
 				}
 				else if (value.trim().length == 10) {
 					$(this.element).text(formatField(value, "(99) 9999-9999"));
-					viewModel.lojaSelecionada.set("LojTelefone", value);				
 				}
+			}		
+        }
+	});
+
+	kendo.data.binders.telefoneValue = kendo.data.Binder.extend({
+		init: function(element, bindings, options) {
+			//call the base constructor
+			kendo.data.Binder.fn.init.call(this, element, bindings, options);
+			var that = this;
+			//listen for the change event of the element
+			$(that.element).on("change", function() {
+				that.change(); //call the change function
+			});
+		},
+		refresh: function() {
+			var that = this,
+			value = that.bindings["telefoneValue"].get(); //get the value from the View-Model
+            console.log(value);
+			if (value) {
+				if (value.trim().length == 11) {
+					$(that.element).val(formatField(value, "(99) 99999-9999"));					
+				}
+				else if (value.trim().length == 10) {
+					$(that.element).val(formatField(value, "(99) 9999-9999"));
+				}
+			}		
+        },
+		change: function() {
+			var formatedValue = this.element.value;
+			console.log(formatedValue);
+            if (value.trim().length == 11) {
+				value = formatField(formatedValue, "(99) 99999-9999");					
 			}
+			else if (value.trim().length == 10) {
+				value = formatField(formatedValue, "(99) 9999-9999");
+			}
+			this.bindings["telefoneValue"].set(value);
 		}
 	});
 
-	kendo.data.binders.telefoneinput = kendo.data.Binder.extend({
-		refresh: function() {
-			var value = this.bindings["telefoneinput"].get();
-			if (value) {
-				if (value.trim().length == 11) {
-					$(this.element).text(formatField(value, "(99) 99999-9999"));
-					viewModel.lojaSelecionada.set("LojTelefone", formatField(value, "(99) 99999-9999"));				
-				}
-				else if (value.trim().length == 10) {
-					$(this.element).text(formatField(value, "(99) 9999-9999"));
-					viewModel.lojaSelecionada.set("LojTelefone", formatField(value, "(99) 9999-9999"));				
-				}
-			}
-		}
-	});
-    
-	kendo.data.binders.ShopRua = kendo.data.Binder.extend({
+    kendo.data.binders.ShopRua = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["ShopRua"].get();            
 			if (value) {
@@ -204,8 +223,8 @@
 		}
 	});
     
-	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -703,7 +722,7 @@
 			}     
 		},
 		batch: true,
-		sort: { field: "ColApelido", dir: "asc" },
+		sort: { field: "ColApelido", dir: "desc" },
 		schema: scColaborador
 	})
     
@@ -735,14 +754,16 @@
 			}     
 		},
 		batch: true,
-		sort: { field: "ColId", dir: "asc", 
-                field: "TteId", dir: "asc" },
+		sort: {
+			field: "ColId", dir: "asc", 
+			field: "TteId", dir: "asc"
+		},
 		schema: scTelColaborador, change:function(e) {
-            viewModel.set("telefonesColaborador", this.view());
-        }
+			viewModel.set("telefonesColaborador", this.view());
+		}
 	})
     
-    var viewModel = kendo.observable({		
+	var viewModel = kendo.observable({		
 		dsVendFila: dsVendFila,		
 		dsVendForaFila: dsVendForaFila,
 		dsVendForaTurno: dsVendForaTurno,
@@ -750,7 +771,7 @@
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
 		dsColaborador: dsColaborador,	
-        dsTelColaborador:dsTelColaborador,
+		dsTelColaborador:dsTelColaborador,
 		cargos: [],
 		dsCargos: dsCargos,
         
@@ -769,7 +790,7 @@
 		atendimento: {},
 		lojaSelecionada: {},
 		colaboradorSelecionado: {},
-        telefonesColaborador: [],
+		telefonesColaborador: [],
 		cargoSelecionado: {},
 		turnoSelecionado: {},
 		salvarAtendimento: salvarAtendimento,
@@ -877,7 +898,7 @@
 		viewModel.set("colaboradorSelecionado", colaborador);
 		dsTelColaborador.options.transport.read.url = baseUrl + "/RmTelColaborador/" + viewModel.colaboradorSelecionado.get("ColId");
 		dsTelColaborador.read(); 
- 	   app.navigate("#detalhesColaborador-view");
+		app.navigate("#detalhesColaborador-view");
 	}
  
 	function adicionarLoja() {
@@ -1013,6 +1034,35 @@
 	function editorColViewInit(e) {
 		var view = e.view;
         
+		var length = viewModel.telefonesColaborador.length,
+		element = null;
+		for (var i = 0; i < length; i++) {
+			element = viewModel.telefonesColaborador[i];
+			
+            var divWr = $("<li></li>");
+            
+            var removeButton = $("<a class=\"remove\" data-role=\"detailbutton\" data-style=\"rowdelete\" />");
+            
+			var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/></label>");
+			
+            
+			removeButton.click(function() {
+				$(this).parent().remove();
+			});
+            
+            divWr.append(removeButton);
+			divWr.append(fieldWrapper);
+			$("#editorTelColaborador").append(divWr);
+ 		console.log(element, "Item", divWr);
+           
+            kendo.bind($("#editorColaborador-view"), viewModel);
+            
+            
+            
+		}
+        
+		console.log(viewModel.telefonesColaborador);
+        
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
   
 		$("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
@@ -1027,6 +1077,9 @@
          
 			view.loader.show();
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
+            
+            console.log(viewModel.telefonesColaborador);
+            return;
 			dsColaborador.sync();
 		});
         

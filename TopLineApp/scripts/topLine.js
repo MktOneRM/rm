@@ -1051,9 +1051,9 @@
  		   $("#editorTelColaborador").append(liWr);
 			console.log($(this).parent(), "Item", liWr);
            
-			kendo.bind($("#editorColaborador-view"), viewModel);
+			
 		}
-        
+        kendo.bind($("#editorColaborador-view"), viewModel);
 		console.log(viewModel.telefonesColaborador);
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");

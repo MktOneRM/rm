@@ -192,7 +192,7 @@
 			var that = this,
 			value = that.bindings["dateText"].get(); //get the value from the View-Model
 			if (value) {
-				formatedValue = kendo.toString(value, "dd-MM-yyyy", "pt-BR"); //format
+				formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
 				$(that.element).text(formatedValue); //update the HTML input element
 			}     
 		}

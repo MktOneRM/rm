@@ -1047,7 +1047,6 @@
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsColaborador.one("change", function() {				
 				view.loader.hide();
-				app.navigate("#colaboradores-view");                
         		for (var i = 0; i < length; i++) {
         			element = viewModel.telefonesColaborador[i];
                     
@@ -1065,6 +1064,7 @@
         			console.log($(this).parent(), "Item", liWr);
                     kendo.bind($("#editorColaborador-view"), viewModel);
         		}
+                app.navigate("#colaboradores-view");                
         	});
          
 			view.loader.show();

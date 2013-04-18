@@ -477,7 +477,7 @@ div a
     text-align:right;
 }
 
-#editorColaborador input[type="text"], #editorColaborador select, #editorTelColaborador input[type="text"]
+#editorColaborador input[type="text"], #editorColaborador select 
 {
 	font-size: 12px;
 	alignment-adjust: left;
@@ -485,6 +485,16 @@ div a
 	font-weight: bold;
 	left: 100px;
 }
+
+#editorTelColaborador input[type="text"] {
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+    
+}
+
 
 #editorColaborador input[type="date"]
 {
@@ -507,7 +517,7 @@ div a
     z-index:0;
 }
 
-#editorColaborador label,  #editorTelColaborador label
+#editorColaborador label
 { 
 	display: block; 
     width: 90px; 
@@ -516,9 +526,18 @@ div a
     text-align:right;
 }
 
-input.remove
+#editorTelColaborador label
+{ 
+	display: block; 
+    width: 90px; 
+    float: left;
+    color: #2e2e2e;
+    text-align:right;
+}
+
+#editorTelColaborador .button
 {
-    float:left;
+    float:right;
     display:block;
     margin:5px;
 }

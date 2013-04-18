@@ -1037,21 +1037,19 @@
 		element = null;
 		for (var i = 0; i < length; i++) {
 			element = viewModel.telefonesColaborador[i];
-			
-			var divWr = $("<li></li>");
-   
-            var removeButton = $("<input type=\"button\" class=\"remove\" data-icon=\"organize\"/>");
             
-			var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/></label>");
+			var liWr = $("<li></li>");
+            var removeButton = $("<input type=\"button\" class=\"button\" data-icon=\"battery\" />");
+    		var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
 			
 			removeButton.click(function() {
 				$(this).parent().remove();
-			});
+			}); 
             
-            divWr.append(removeButton);
-			divWr.append(fieldWrapper);
- 			$("#editorTelColaborador").append(divWr);
-			console.log(element, "Item", divWr);
+			liWr.append(fieldWrapper);
+            liWr.append(removeButton);
+ 		   $("#editorTelColaborador").append(liWr);
+			console.log($(this).parent(), "Item", liWr);
            
 			kendo.bind($("#editorColaborador-view"), viewModel);
 		}

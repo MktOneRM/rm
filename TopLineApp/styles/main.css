@@ -492,7 +492,6 @@ div a
 	color: #476BD6; 
 	font-weight: bold;
 	left: 100px;
-    
 }
 
 
@@ -529,6 +528,7 @@ div a
 #editorTelColaborador label
 { 
 	display: block; 
+    margin-top:10px;
     width: 90px; 
     float: left;
     color: #2e2e2e;
@@ -538,8 +538,16 @@ div a
 #editorTelColaborador .button
 {
     float:right;
+    background-color: #f00;
     display:block;
     margin:5px;
+    z-index:99;
+    color:#fff;
+    width:20px;
+    height:20px;
+    font-weight: bold;
+    alignment-adjust:center;
+    text-align:center;
 }
 
 #btFoto {

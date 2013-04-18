@@ -1039,8 +1039,8 @@
 			element = viewModel.telefonesColaborador[i];
             
 			var liWr = $("<li></li>");
-            var removeButton = $("<input type=\"button\" class=\"button\" data-icon=\"battery\" />");
-    		var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
+            var removeButton = $("<input type=\"button\" class=\"button\" value=\"-\">");
+    		var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" maxlength=11 size=11 type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
 			
 			removeButton.click(function() {
 				$(this).parent().remove();

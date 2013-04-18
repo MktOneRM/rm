@@ -1222,7 +1222,6 @@
 			rev = 0;
 		if (rev != parseInt(cpf.charAt(10)))
 			return false;
-             
 		return true;
 	}
     

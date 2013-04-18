@@ -6,9 +6,9 @@
 			if (value) { 
 				$(this.element).attr("src", "data:image/png;base64," + value); 
 			}
-			else {
-				$(this.element).attr("src", "images/default.png"); 
-			}
+//			else {
+//				$(this.element).attr("src", "images/default.png"); 
+//			}
 		}
 	});
 

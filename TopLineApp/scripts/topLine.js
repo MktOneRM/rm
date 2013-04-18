@@ -82,8 +82,7 @@
 			}		
 		},
 		change: function() {
-			var formatedValue = this.element.value;
-			console.log(formatedValue);
+			var value = this.element.value;			
 			if (value.trim().length == 11) {
 				value = formatField(formatedValue, "(99) 99999-9999");					
 			}
@@ -1033,8 +1032,9 @@
 	function editorColViewInit(e) {
 		var view = e.view;
         
-		var length = viewModel.telefonesColaborador.length,
+		var length = viewModel.telefonesColaborador.length;
 		element = null;
+        
 		for (var i = 0; i < length; i++) {
 			element = viewModel.telefonesColaborador[i];
             

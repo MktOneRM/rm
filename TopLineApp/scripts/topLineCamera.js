@@ -39,9 +39,7 @@ cameraApp.prototype={
         }, function(){
             that._onFail.apply(that,arguments);
         }, {
-            quality: 20, 
-            allowEdit: true,
-            encodingType: Camera.EncodingType.JPEG,
+            quality: 20, allowEdit: true,
             targetWidth: 50,
             targetHeight: 50,
             destinationType: cameraApp._destinationType.DATA_URL
@@ -65,7 +63,6 @@ cameraApp.prototype={
         }, {
             quality: 20,
             destinationType: cameraApp._destinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
             targetWidth: 50,
             targetHeight: 50,
             sourceType: source

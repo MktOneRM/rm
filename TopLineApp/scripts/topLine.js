@@ -1033,28 +1033,30 @@
 	function editorColViewInit(e) {
 		var view = e.view;
         
-		var length = viewModel.telefonesColaborador.length,
+		var length = viewModel.telefonesColaborador.length;
 		element = null;
+        
 		for (var i = 0; i < length; i++) {
 			element = viewModel.telefonesColaborador[i];
             
+            /*
 			var liWr = $("<li></li>");
-            var removeButton = $("<input type=\"button\" class=\"button\" value=\"-\">");
-    		var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" maxlength=11 size=11 type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
-			
+			var removeButton = $("<input type=\"button\" class=\"button\" value=\"-\">");
+			var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" maxlength=11 size=11 type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
+			         
 			removeButton.click(function() {
 				$(this).parent().remove();
 			}); 
             
-			liWr.append(fieldWrapper);
-            liWr.append(removeButton);
- 		   $("#editorTelColaborador").append(liWr);
+			liWr.append(fieldWrapper);            
+			liWr.append(removeButton);
+			$("#editorTelColaborador").append(liWr);
+            
 			console.log($(this).parent(), "Item", liWr);
+            */
            
-			
+			kendo.bind($("#editorColaborador-view"), viewModel);
 		}
-        kendo.bind($("#editorColaborador-view"), viewModel);
-		console.log(viewModel.telefonesColaborador);
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
   

@@ -40,9 +40,7 @@ cameraApp.prototype={
             that._onFail.apply(that,arguments);
         }, {
             quality: 20, allowEdit: true,
-            targetWidth: 50,
-            targetHeight: 50,
-            destinationType: cameraApp._destinationType.DATA_URL
+             destinationType: cameraApp._destinationType.DATA_URL
         });
     },
     
@@ -61,10 +59,8 @@ cameraApp.prototype={
         }, function(){
             cameraApp._onFail.apply(that,arguments);
         }, {
-            quality: 20,
+            quality: 50,
             destinationType: cameraApp._destinationType.FILE_URI,
-            targetWidth: 50,
-            targetHeight: 50,
             sourceType: source
         });
     },

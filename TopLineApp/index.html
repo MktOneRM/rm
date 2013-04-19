@@ -301,7 +301,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img id="smallImage" class="fila-art" data-bind="value: colaboradorSelecionado.ColFoto"/>
+							<img id="smallImage" class="fila-art" data-bind="src: colaboradorSelecionado.ColFoto"/>
 							<h1 class="col-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
 						</li>
 					</ul>
@@ -399,7 +399,7 @@
 				<li>
 					<ul>
 						<li>
-							<img id="smallImage" class="fila-art" data-bind="value: colaboradorSelecionado.ColFoto"/>
+							<img id="smallImage" class="fila-art" data-bind="src: colaboradorSelecionado.ColFoto"/>
 							<ul id="btFoto" data-role="buttongroup" class="select-group">
 								<li>
 									<a id="capturePhotoEditButton">Tirar Foto</a>
@@ -856,6 +856,7 @@
 		</script>
 		
 		<script type="text/javascript">
+            
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 			//		var baseUrl = "http://localhost:50000/api";
 			

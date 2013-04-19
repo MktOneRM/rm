@@ -224,8 +224,8 @@
 		}
 	});
     
-	//var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -453,7 +453,7 @@
 				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				TteId: { type: "int", validation: { required: false} },  
 				TteDescricao: { type: "string", validation: { required: false} },
-				TelNumero: { type: "string", validation: { required: false} },  
+				TelNumero: { type: "string", validation: { required: true} },  
 				OpeId: { type: "int", validation: { required: false}},  
 				OpeDescricao: { type: "string", validation: { required: false} },                                
 				TceId: { type: "int" , nullable: true, validation: { required: false}},  
@@ -756,21 +756,16 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
-                    
-                    /*
-                    if(operation == "create")
-                    {
-                        
-                        $.each(data.models, function(index, item){
-                           console.log(""); 
-                        });
-                        
-                        //console.log("Qtde");
-                        
-                    }
-                    */
+					/*
+					if(operation == "create")
+					{
+					$.each(data.models, function(index, item){
+					console.log(""); 
+					});
+					//console.log("Qtde");
+					}
+					*/
 					return kendo.stringify(data.models);
-                    
 				}
 			}     
 		},
@@ -941,7 +936,6 @@
  
 	function vendedoresFila() {
 		atualizaFilaNoSalao(dsVendFila, 1);
-        
 		/*
 		var sltBtn = this.header.find(".select-group").data("kendoMobileButtonGroup");        
 		if (sltBtn)
@@ -1098,6 +1092,8 @@
 			view.loader.show();
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
    
+            console.log(viewModel.telefonesColaborador);
+            
 			dsTelColaborador.sync();
 			//dsColaborador.sync();
 		});
@@ -1218,21 +1214,8 @@
 		e.preventDefault();
 	}
     
-	function novoTelColaborador(e) {
-		var button = e.button,
-		item = dsTelColaborador.get(button.data("itemId"));
-		
-        dsTelColaborador.add(item);
-        
-        dsTelColaborador.get(0).set("ColId", viewModel.colaboradorSelecionado.get("ColId"));
-        
-        //var novoTelefone = dsTelColaborador.get(0);
-        //novoTelefone.set("ColId", viewModel.colaboradorSelecionado.get("ColId"));
-  
-        viewModel.telefonesColaborador[0].set("ColId", viewModel.colaboradorSelecionado.get("ColId"));
-        
-        console.log(viewModel.telefonesColaborador[0], dsTelColaborador.get(0));
-        
+	function novoTelColaborador(e) {				
+		viewModel.dsTelColaborador.add({ColId: viewModel.colaboradorSelecionado.get("ColId"), TteId: null, TteDescricao: null,  TelNumero: null, OpeId: null, OpeDescricao: null, TceId: null, TceDescricao: null  });
 		e.preventDefault();
 	}
     

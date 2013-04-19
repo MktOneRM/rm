@@ -922,7 +922,7 @@
 		dsTelColaborador.read(); 
 		app.navigate("#detalhesColaborador-view");
 	}
- 
+     
 	function adicionarLoja() {
 		var loja = viewModel.dsLoja.add();		
 		viewModel.set("lojaSelecionada", loja);
@@ -940,7 +940,8 @@
 	}
  
 	function vendedoresFila() {
-		atualizaFilaNoSalao(dsVendFila, 1);        
+		atualizaFilaNoSalao(dsVendFila, 1);
+        
 		/*
 		var sltBtn = this.header.find(".select-group").data("kendoMobileButtonGroup");        
 		if (sltBtn)

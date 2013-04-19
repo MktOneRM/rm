@@ -6,9 +6,9 @@
 			if (value) { 
 				$(this.element).attr("src", "data:image/png;base64," + value); 
 			}
-//			else {
-//				$(this.element).attr("src", "images/default.png"); 
-//			}
+			//			else {
+			//				$(this.element).attr("src", "images/default.png"); 
+			//			}
 		}
 	});
 
@@ -73,7 +73,7 @@
 			var that = this,
             
 			value = that.bindings["telefoneValue"].get(); //get the value from the View-Model	
-            console.log("refresh = ",value);
+			console.log("refresh = ", value);
 			if (value) {
 				if (value.trim().length == 11) {
 					$(that.element).val(formatField(value, "(99) 99999-9999"));					
@@ -84,7 +84,7 @@
 			}		
 		},
 		change: function() {
-            console.log("change = ",this.element.value);
+			console.log("change = ", this.element.value);
 			var value = this.element.value;			
 			if (value.trim().length == 11) {
 				value = formatField(value, "(99) 99999-9999");					
@@ -224,8 +224,8 @@
 		}
 	});
     
-	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -491,7 +491,7 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
-					return kendo.stringify(data.models);
+					return kendo.stringify([data.models[0]]);
 				}
 			}                 
 		},
@@ -748,9 +748,15 @@
 				contentType: "application/json",
 				dataType: "json"
 			},
+			destroy: {
+				url: baseUrl + "/RmTelColaborador",							
+				type:"DELETE",
+				contentType: "application/json",
+				dataType: "json"
+			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
-					return kendo.stringify([data.models[0]]);
+					return kendo.stringify(data.models);
 				}
 			}     
 		},
@@ -815,8 +821,8 @@
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
 		validarCPF:validarCPF,
-        delTelColaborador:delTelColaborador,
-        novoTelColaborador:novoTelColaborador,
+		delTelColaborador:delTelColaborador,
+		novoTelColaborador:novoTelColaborador,
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
   
@@ -1036,30 +1042,30 @@
 	function editorColViewInit(e) {
 		var view = e.view;
         
-        /*
+		/*
 		var length = viewModel.telefonesColaborador.length;
 		element = null;
-        */
+		*/
         
-        /*        
+		/*        
 		for (var i = 0; i < length; i++) {
-			element = viewModel.telefonesColaborador[i];
+		element = viewModel.telefonesColaborador[i];
             
-			var liWr = $("<li></li>");
-            var removeButton = $("<input type=\"button\" class=\"button\" value=\"-\">");
-    		var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" maxlength=11 size=11 type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
+		var liWr = $("<li></li>");
+		var removeButton = $("<input type=\"button\" class=\"button\" value=\"-\">");
+		var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" maxlength=11 size=11 type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
 			
-			removeButton.click(function() {
-				$(this).parent().remove();
-			}); 
+		removeButton.click(function() {
+		$(this).parent().remove();
+		}); 
             
-			liWr.append(fieldWrapper);
-            liWr.append(removeButton);
- 		   $("#editorTelColaborador").append(liWr);
-			console.log($(this).parent(), "Item", liWr);
-            kendo.bind($("#editorColaborador-view"), viewModel);
+		liWr.append(fieldWrapper);
+		liWr.append(removeButton);
+		$("#editorTelColaborador").append(liWr);
+		console.log($(this).parent(), "Item", liWr);
+		kendo.bind($("#editorColaborador-view"), viewModel);
 		}
-*/        
+		*/        
 		//console.log(viewModel.telefonesColaborador);
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
@@ -1076,10 +1082,9 @@
          
 			view.loader.show();
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
-            
-			console.log(viewModel.telefonesColaborador);
-			return;
-			dsColaborador.sync();
+   
+			dsTelColaborador.sync();
+			//dsColaborador.sync();
 		});
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
@@ -1190,20 +1195,23 @@
 		return sCod;
 	}
     
-    function delTelColaborador(e) {
-       var item = dsTelColaborador.get(e.button.data("itemId")),
-            currentView = app.view();
-        dsTelColaborador.remove(item);
-        currentView.scroller.reset();
-        e.preventDefault();
-    }
+	function delTelColaborador(e) {
+		var item = dsTelColaborador.get(e.button.data("itemId"));
+		
+		console.log(item, "Rafa");
+        
+		currentView = app.view();
+		dsTelColaborador.remove(item);
+		currentView.scroller.reset();
+		e.preventDefault();
+	}
     
-    function novoTelColaborador(e) {
-        var button = e.button,
-            item = dsTelColaborador.get(button.data("itemId"));
-        dsTelColaborador.add(item);
-        e.preventDefault();
-    }
+	function novoTelColaborador(e) {
+		var button = e.button,
+		item = dsTelColaborador.get(button.data("itemId"));
+		dsTelColaborador.add(item);
+		e.preventDefault();
+	}
     
 	function validarCPF(cpf) {
 		cpf = cpf.replace(/[^\d]+/g, '');
@@ -1271,8 +1279,8 @@
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		validarCPF:validarCPF,
-        delTelColaborador:delTelColaborador,
-        novoTelColaborador:novoTelColaborador,
+		delTelColaborador:delTelColaborador,
+		novoTelColaborador:novoTelColaborador,
 		editorLojaViewInit: editorLojaViewInit
         
 	});

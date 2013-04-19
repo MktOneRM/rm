@@ -6,17 +6,18 @@
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
-		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
 		<script src="kendo/js/kendo.mobile.min.js" type="text/javascript"></script>
 		<script src="scripts/topLine.js" type="text/javascript"></script>
 		<script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
+		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
 		<script src="scripts/topLineGeolocation.js" type="text/javascript"></script>
 		<script src="kendo/cultures/kendo.culture.pt-BR.min.js" type="text/javascript"></script>
 		<script type="text/javascript">   
 			kendo.culture("pt-BR");
 		</script>
 	</head>
+
 	<body>
 		<!-- Home-Layout -->
 		<div data-role="layout" data-id="home-layout" data-title="Top Line">
@@ -98,7 +99,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="value: vendedorSelecionado.ColFoto"/>
+							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -145,7 +146,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="value: vendedorSelecionado.ColFoto"/>
+							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -182,7 +183,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="value: vendedorSelecionado.ColFoto"/>
+							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -300,7 +301,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img id="smallImage" class="fila-art" data-bind="src: colaboradorSelecionado.ColFoto"/>
+							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
 							<h1 class="col-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
 						</li>
 					</ul>
@@ -398,7 +399,7 @@
 				<li>
 					<ul>
 						<li>
-							<img id="smallImage" class="fila-art" data-bind="src: colaboradorSelecionado.ColFoto"/>
+							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
 							<ul id="btFoto" data-role="buttongroup" class="select-group">
 								<li>
 									<a id="capturePhotoEditButton">Tirar Foto</a>
@@ -756,7 +757,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="value: vendedorSelecionado.ColFoto"/>
+							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -808,7 +809,7 @@
 		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showDetalhesColaborador">
-				<img class="fila-art" data-bind="value: ${ColFoto}"/>
+				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="col-nome">${ColNome} # # ${ColSobrenome}</h1>
 			</div>
 		</script>
@@ -816,7 +817,7 @@
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstart" data-tap="atendimentoViewInit">
-				<img class="fila-art" data-bind="value: ${ColFoto}"/>
+				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnSair" data-role="button" class="saida">Sair</button>
@@ -825,7 +826,7 @@
 
 		<script type="text/x-kendo-template" id="tforaFila">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipeFora" data-touchstart="onTouchstartFora">
-				<img class="fila-art" data-bind="value: ${ColFoto}"/>
+				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnEntrada" data-role="button" class="entrar">Entrar</button>
@@ -834,7 +835,7 @@
 
 		<script type="text/x-kendo-template" id="tforaTurno">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipeTurno" data-touchstart="onTouchstartTurno">
-				<img class="fila-art" data-bind="value: ${ColFoto}"/>
+				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnEntrada" data-role="button" class="entrar">Entrar</button>
@@ -855,7 +856,6 @@
 		</script>
 		
 		<script type="text/javascript">
-            
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 			//		var baseUrl = "http://localhost:50000/api";
 			

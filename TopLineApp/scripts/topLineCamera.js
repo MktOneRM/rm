@@ -75,8 +75,8 @@ cameraApp.prototype = {
         
 		// Show the captured photo.
 		smallImage.src = "data:image/jpeg;base64," + imageData;
-
-		viewModel.colaboradorSelecionado.set("ColFoto", smallImage.src);
+        
+		viewModel.colaboradorSelecionado.set("ColFoto", imageData);
         
         console.log(viewModel.colaboradorSelecionado);
         

@@ -71,7 +71,6 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="cordova.js" />
     <Content Include="Images\default.png" />
     <Content Include="kendo\cultures\kendo.culture.pt-BR.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />

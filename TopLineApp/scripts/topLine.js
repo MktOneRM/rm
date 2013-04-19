@@ -756,7 +756,21 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
+                    
+                    /*
+                    if(operation == "create")
+                    {
+                        
+                        $.each(data.models, function(index, item){
+                           console.log(""); 
+                        });
+                        
+                        //console.log("Qtde");
+                        
+                    }
+                    */
 					return kendo.stringify(data.models);
+                    
 				}
 			}     
 		},
@@ -1196,10 +1210,7 @@
 	}
     
 	function delTelColaborador(e) {
-		var item = dsTelColaborador.get(e.button.data("itemId"));
-		
-		console.log(item, "Rafa");
-        
+		var item = dsTelColaborador.get(e.button.data("itemId"));		      
 		currentView = app.view();
 		dsTelColaborador.remove(item);
 		currentView.scroller.reset();
@@ -1209,7 +1220,18 @@
 	function novoTelColaborador(e) {
 		var button = e.button,
 		item = dsTelColaborador.get(button.data("itemId"));
-		dsTelColaborador.add(item);
+		
+        dsTelColaborador.add(item);
+        
+        dsTelColaborador.get(0).set("ColId", viewModel.colaboradorSelecionado.get("ColId"));
+        
+        //var novoTelefone = dsTelColaborador.get(0);
+        //novoTelefone.set("ColId", viewModel.colaboradorSelecionado.get("ColId"));
+  
+        viewModel.telefonesColaborador[0].set("ColId", viewModel.colaboradorSelecionado.get("ColId"));
+        
+        console.log(viewModel.telefonesColaborador[0], dsTelColaborador.get(0));
+        
 		e.preventDefault();
 	}
     

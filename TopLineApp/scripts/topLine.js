@@ -71,7 +71,9 @@
 		},
 		refresh: function() {
 			var that = this,
-			value = that.bindings["telefoneValue"].get(); //get the value from the View-Model			
+            
+			value = that.bindings["telefoneValue"].get(); //get the value from the View-Model	
+            console.log("refresh = ",value);
 			if (value) {
 				if (value.trim().length == 11) {
 					$(that.element).val(formatField(value, "(99) 99999-9999"));					
@@ -82,12 +84,13 @@
 			}		
 		},
 		change: function() {
+            console.log("change = ",this.element.value);
 			var value = this.element.value;			
 			if (value.trim().length == 11) {
-				value = formatField(formatedValue, "(99) 99999-9999");					
+				value = formatField(value, "(99) 99999-9999");					
 			}
 			else if (value.trim().length == 10) {
-				value = formatField(formatedValue, "(99) 9999-9999");
+				value = formatField(value, "(99) 9999-9999");
 			}
 			this.bindings["telefoneValue"].set(value);
 		}
@@ -221,7 +224,7 @@
 		}
 	});
     
-	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
@@ -812,7 +815,8 @@
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
 		validarCPF:validarCPF,
-        
+        delTelColaborador:delTelColaborador,
+        novoTelColaborador:novoTelColaborador,
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
   
@@ -1032,9 +1036,12 @@
 	function editorColViewInit(e) {
 		var view = e.view;
         
+        /*
 		var length = viewModel.telefonesColaborador.length;
 		element = null;
+        */
         
+        /*        
 		for (var i = 0; i < length; i++) {
 			element = viewModel.telefonesColaborador[i];
             
@@ -1052,7 +1059,7 @@
 			console.log($(this).parent(), "Item", liWr);
             kendo.bind($("#editorColaborador-view"), viewModel);
 		}
-        
+*/        
 		//console.log(viewModel.telefonesColaborador);
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
@@ -1182,7 +1189,23 @@
         
 		return sCod;
 	}
-
+    
+    function delTelColaborador(e) {
+       var item = dsTelColaborador.get(e.button.data("itemId")),
+            currentView = app.view();
+        console.log(item);
+        dsTelColaborador.remove(item);
+        currentView.scroller.reset();
+        e.preventDefault();
+    }
+    
+    function novoTelColaborador(e) {
+        var button = e.button,
+            item = dsTelColaborador.get(button.data("itemId"));
+        dsTelColaborador.add(item);
+        e.preventDefault();
+    }
+    
 	function validarCPF(cpf) {
 		cpf = cpf.replace(/[^\d]+/g, '');
      
@@ -1249,6 +1272,8 @@
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		validarCPF:validarCPF,
+        delTelColaborador:delTelColaborador,
+        novoTelColaborador:novoTelColaborador,
 		editorLojaViewInit: editorLojaViewInit
         
 	});

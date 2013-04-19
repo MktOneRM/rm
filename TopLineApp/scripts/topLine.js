@@ -6,9 +6,9 @@
 			if (value) { 
 				$(this.element).attr("src", "data:image/png;base64," + value); 
 			}
-			//			else {
-			//				$(this.element).attr("src", "images/default.png"); 
-			//			}
+//			else {
+//				$(this.element).attr("src", "images/default.png"); 
+//			}
 		}
 	});
 
@@ -70,34 +70,29 @@
 			});
 		},
 		refresh: function() {
-			var that = this,            
-			value = that.bindings["telefoneValue"].get(); //get the value from the View-Model	            
+			var that = this,
+            
+			value = that.bindings["telefoneValue"].get(); //get the value from the View-Model	
+            console.log("refresh = ",value);
 			if (value) {
-				if (value.trim().length == 11) {                    
+				if (value.trim().length == 11) {
 					$(that.element).val(formatField(value, "(99) 99999-9999"));					
 				}
-				else if (value.trim().length == 10) {                    
+				else if (value.trim().length == 10) {
 					$(that.element).val(formatField(value, "(99) 9999-9999"));
 				}
 			}		
 		},
-		change: function() {         
+		change: function() {
+            console.log("change = ",this.element.value);
 			var value = this.element.value;			
-			if (value.trim().length == 11) {                
+			if (value.trim().length == 11) {
 				value = formatField(value, "(99) 99999-9999");					
-				console.log("Entrei no 11");
 			}
-			else if (value.trim().length == 10) {                
-				value = formatField(value, "(99) 9999-9999");                
-				console.log("Entrei no 10");
+			else if (value.trim().length == 10) {
+				value = formatField(value, "(99) 9999-9999");
 			}
-			else {
-				console.log("PQP");    
-			}
-            
 			this.bindings["telefoneValue"].set(value);
-            
-			console.log(viewModel.telefonesColaborador, viewModel.dsTelColaborador);
 		}
 	});
 
@@ -229,9 +224,8 @@
 		}
 	});
     
-	//var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-	
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+	//var baseUrl = "http://localhost:50000/api";
 
 	//schema
 	var schemaVendedores = { 
@@ -497,7 +491,7 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
-					return kendo.stringify([data.models[0]]);
+					return kendo.stringify(data.models);
 				}
 			}                 
 		},
@@ -733,7 +727,7 @@
 		schema: scColaborador
 	})
     
-	//DataSource Telefones Colaborador
+	//DataSource Colaborador
 	var dsTelColaborador = new kendo.data.DataSource({
 		transport: {
 			read: {
@@ -754,12 +748,6 @@
 				contentType: "application/json",
 				dataType: "json"
 			},
-			destroy: {
-				url: baseUrl + "/RmTelColaborador",							
-				type:"DELETE",
-				contentType: "application/json",
-				dataType: "json"
-			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
 					return kendo.stringify([data.models[0]]);
@@ -771,8 +759,7 @@
 			field: "ColId", dir: "asc", 
 			field: "TteId", dir: "asc"
 		},
-		schema: scTelColaborador, 
-		change:function(e) {
+		schema: scTelColaborador, change:function(e) {
 			viewModel.set("telefonesColaborador", this.view());
 		}
 	})
@@ -828,8 +815,8 @@
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
 		validarCPF:validarCPF,
-		delTelColaborador:delTelColaborador,
-		novoTelColaborador:novoTelColaborador,
+        delTelColaborador:delTelColaborador,
+        novoTelColaborador:novoTelColaborador,
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
   
@@ -1049,30 +1036,30 @@
 	function editorColViewInit(e) {
 		var view = e.view;
         
-		/*
+        /*
 		var length = viewModel.telefonesColaborador.length;
 		element = null;
-		*/
+        */
         
-		/*        
+        /*        
 		for (var i = 0; i < length; i++) {
-		element = viewModel.telefonesColaborador[i];
+			element = viewModel.telefonesColaborador[i];
             
-		var liWr = $("<li></li>");
-		var removeButton = $("<input type=\"button\" class=\"button\" value=\"-\">");
-		var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" maxlength=11 size=11 type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
+			var liWr = $("<li></li>");
+            var removeButton = $("<input type=\"button\" class=\"button\" value=\"-\">");
+    		var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" maxlength=11 size=11 type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
 			
-		removeButton.click(function() {
-		$(this).parent().remove();
-		}); 
+			removeButton.click(function() {
+				$(this).parent().remove();
+			}); 
             
-		liWr.append(fieldWrapper);
-		liWr.append(removeButton);
-		$("#editorTelColaborador").append(liWr);
-		console.log($(this).parent(), "Item", liWr);
-		kendo.bind($("#editorColaborador-view"), viewModel);
+			liWr.append(fieldWrapper);
+            liWr.append(removeButton);
+ 		   $("#editorTelColaborador").append(liWr);
+			console.log($(this).parent(), "Item", liWr);
+            kendo.bind($("#editorColaborador-view"), viewModel);
 		}
-		*/        
+*/        
 		//console.log(viewModel.telefonesColaborador);
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
@@ -1083,26 +1070,16 @@
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsColaborador.one("change", function() {				
-				view.loader.hide();                
+				view.loader.hide();
 				app.navigate("#colaboradores-view");                
 			});
-            
+         
 			view.loader.show();
-			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));			            
-			
-            viewModel.dsTelColaborador.fetch(function(e) {
-                var numero = dsTelColaborador.at(1);
-                numero.set("TelNumero", "111111111");
-                
-                var numero2 = dsTelColaborador.at(2);
-                numero2.set("TelNumero", "2222222222");
-                
-                console.log("Passei aqui", e);
-               viewModel.dsTelColaborador.sync();
-            }); 
+			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
             
-            
-            //dsColaborador.sync();
+			console.log(viewModel.telefonesColaborador);
+			return;
+			dsColaborador.sync();
 		});
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
@@ -1213,22 +1190,20 @@
 		return sCod;
 	}
     
-	function delTelColaborador(e) {
-		var item = dsTelColaborador.get(e.button.data("itemId")),
-		currentView = app.view();
-		console.log(item);
-		dsTelColaborador.remove(item);
-		currentView.scroller.reset();
-		e.preventDefault();
-	}
+    function delTelColaborador(e) {
+       var item = dsTelColaborador.get(e.button.data("itemId")),
+            currentView = app.view();
+        dsTelColaborador.remove(item);
+        currentView.scroller.reset();
+        e.preventDefault();
+    }
     
-	function novoTelColaborador(e) {
-		var button = e.button,
-		item = dsTelColaborador.get(button.data("itemId"));
-		item.set("ColId", viewModel.colaboradorSelecionado.get("ColId"));		      
-		dsTelColaborador.add(item);
-		e.preventDefault();
-	}
+    function novoTelColaborador(e) {
+        var button = e.button,
+            item = dsTelColaborador.get(button.data("itemId"));
+        dsTelColaborador.add(item);
+        e.preventDefault();
+    }
     
 	function validarCPF(cpf) {
 		cpf = cpf.replace(/[^\d]+/g, '');
@@ -1296,8 +1271,8 @@
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		validarCPF:validarCPF,
-		delTelColaborador:delTelColaborador,
-		novoTelColaborador:novoTelColaborador,
+        delTelColaborador:delTelColaborador,
+        novoTelColaborador:novoTelColaborador,
 		editorLojaViewInit: editorLojaViewInit
         
 	});

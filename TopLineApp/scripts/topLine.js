@@ -8,7 +8,7 @@
 			}
 			//			else {
 			//				$(this.element).attr("src", "images/default.png"); 
-			//			}
+//			//			}
 		}
 	});
 

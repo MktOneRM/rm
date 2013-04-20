@@ -379,6 +379,7 @@
 			} 
 		}
 	};
+    
 	//Schema Atendimento
 	var schemaAtendimento = { 
 		model: {
@@ -461,6 +462,18 @@
 			}
 		}
 	}
+    
+	//Schema de cargos
+	var scTelCompl = { 
+		model: {
+			id: "TipoConsulta",
+			fields: {
+				TipoConsulta: { editable: false, nullable: false },                
+				IdTipo: { editable: false, nullable: false },
+				DescricaoTipo: { editable: false, nullable: false },
+			} 
+		}
+	};
     
 	var dsVendFila = new kendo.data.DataSource({                    
 		transport: {						
@@ -756,15 +769,6 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation !== "read" && data.models) {
-					/*
-					if(operation == "create")
-					{
-					$.each(data.models, function(index, item){
-					console.log(""); 
-					});
-					//console.log("Qtde");
-					}
-					*/
 					return kendo.stringify(data.models);
 				}
 			}     
@@ -778,6 +782,44 @@
 			viewModel.set("telefonesColaborador", this.view());
 		}
 	})
+ 
+	//dataSource de cargos
+	var dsTelCompl = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmTelComplementos",
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {                
+				if (operation == "read") {
+					return {id: viewModel.tipoCompl}
+				}                
+			}
+		},
+		batch: true,
+		schema: scTelCompl,
+		change: function (e) {	
+			if (viewModel.tipoCompl == 1) {
+				viewModel.set("tiposTels", this.view()); 
+				viewModel.set("tipoCompl", 2);
+				viewModel.dsTelCompl.read(); 
+			} 
+			else if (viewModel.tipoCompl == 2) {
+				viewModel.set("tiposOper", this.view()); 
+				viewModel.set("tipoCompl", 3);
+				viewModel.dsTelCompl.read(); 
+			}           
+			else if (viewModel.tipoCompl == 3) {
+				viewModel.set("tiposCel", this.view()); 
+			}           
+		},                       
+		sort: {
+			field:"DescricaoTipo", 
+			dir: "desc"
+		}
+	});
     
 	var viewModel = kendo.observable({		
 		dsVendFila: dsVendFila,		
@@ -788,6 +830,14 @@
 		dsLoja: dsLoja,
 		dsColaborador: dsColaborador,	
 		dsTelColaborador:dsTelColaborador,
+                
+		dsTelCompl: dsTelCompl,
+		tiposTels: [],
+		tiposOper: [],
+		tiposCel: [],
+        
+		tipoCompl: 0,
+        
 		cargos: [],
 		dsCargos: dsCargos,
         
@@ -799,9 +849,10 @@
         
 		turnos: [],
 		dsTurnosFunc: dsTurnosFunc,        
-		
+		      
 		TLojas:[],
 		dsTLoja: dsTLoja,
+		
 		vendedorSelecionado: {},		
 		atendimento: {},
 		lojaSelecionada: {},
@@ -826,6 +877,7 @@
 		editorColViewInit:editorColViewInit,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
+		onTouchstartTelefone:onTouchstartTelefone,
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
@@ -1039,7 +1091,24 @@
 			button.hide();
 		}
 	}
-
+    
+	function onTouchstartTelefone(e) {
+		button = $(e.touch.target).find("[data-role=button]:visible");        
+		if (button[0]) {
+			var telefone = viewModel.dsTelColaborador.getByUid(e.touch.target.context.id);			    
+			currentView = app.view();
+			dsTelColaborador.remove(telefone);
+			currentView.scroller.reset();		
+			//prevent `swipe`
+			button.hide();
+			this.events.cancel();
+			e.event.stopPropagation();
+		}
+		else {
+			button.hide();
+		}
+	}
+    
 	function atendimentoViewInit(e) {
 		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
@@ -1078,7 +1147,7 @@
 		//console.log(viewModel.telefonesColaborador);
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
-  
+        
 		$("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
 		$("#cargoId").find("option[value=" + viewModel.colaboradorSelecionado.get("CarId") + "]").attr("selected", true);
 		$("#turnoId").find("option[value=" + viewModel.colaboradorSelecionado.get("ColHfuId") + "]").attr("selected", true);
@@ -1092,7 +1161,7 @@
 			view.loader.show();
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
    
-            console.log(viewModel.telefonesColaborador);
+			console.log(viewModel.telefonesColaborador);
             
 			dsTelColaborador.sync();
 			//dsColaborador.sync();
@@ -1107,6 +1176,7 @@
 
 			view.loader.show();			
 			dsColaborador.cancelChanges();
+			dsTelColaborador.cancelChanges();
 		});
 	}
     
@@ -1284,6 +1354,7 @@
 		editorColViewInit:editorColViewInit,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
+		onTouchstartTelefone:onTouchstartTelefone,
 		validarCPF:validarCPF,
 		delTelColaborador:delTelColaborador,
 		novoTelColaborador:novoTelColaborador,

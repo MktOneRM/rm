@@ -373,9 +373,7 @@
 					</ul>
 				</li>
 			</ul>
-
 			<ul id="infoColaborador" data-bind="source: dsTelColaborador" data-role="listview" data-style="inset" data-template="tTelColaborador"></ul>
-
 		</div>
 
 		<!--Editor colaboradores view-->
@@ -387,14 +385,6 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul data-role="listview" data-style="inset">
-				<li>
-					Novo Telefone
-					<a data-item-id="#:id#" data-role="detailbutton" data-style="rowinsert" data-click="novoTelColaborador"></a>
-				</li>
-			</ul>
-			<ul id="editorTelColaborador" data-bind="source: telefonesColaborador" data-role="listview" data-template="tAtuTelColaborador" data-style="inset"></ul>
-
 			<ul id="editorColaborador" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul>
@@ -500,7 +490,13 @@
 					</ul>
 				</li>
 			</ul>
-
+			<ul data-role="listview" data-style="inset">
+				<li>
+					<a>Novo Telefone</a>
+					<a data-role="detailbutton" data-style="rowinsert" data-item-id="#:id#" data-click="novoTelColaborador"></a>
+				</li>
+			</ul>
+			<ul id="editorTelColaborador" data-bind="source: telefonesColaborador" data-role="listview" data-template="tAtuTelColaborador" data-style="inset"></ul>
 		</div>
 
 		<!--Detalhes Loja View-->
@@ -848,16 +844,41 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tAtuTelColaborador">
-			<label>
-				Telefone:
-				<input id="#= uid #" name="Telefone" type="text" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
-			</label>
-			<a data-item-id="#:id#" data-role="detailbutton" data-style="rowdelete" data-click="delTelColaborador"></a>
+			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstartTelefone">
+				<ul id="editorTelColaborador" data-role="listview" data-style="inset">
+					<li>
+						<label>
+							Tipo Telefone
+						</label>
+						<select id="TteId" class="TteId" name="TteId" type="text" data-bind="source: tiposTels, value: TteId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Tipo de Telefone" required validationmessage="Requerido"></select>
+					</li>
+					<li>
+						<label>
+							Telefone
+							<input id="#= uid #" name="Telefone" type="text" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
+						</label>
+					</li>
+					<li>
+						<label>
+							Operadora
+						</label>
+						<select id="OpeId" name="OpeId" type="text" data-bind="source: tiposOper, value: OpeId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Operadora" required validationmessage="Requerido"></select>
+					</li>
+					<li>
+						<label>
+							Tipo Celular
+						</label>
+						<select id="TceId" name="TceId" type="text" data-bind="source: tiposCel, value: TceId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Tipo Celular" required validationmessage="Requerido"></select>
+					</li>
+				</ul>
+				<button id="btnEntrada" data-role="button" class="excluir" data-icon="delete"></button>
+			</div>
 		</script>
-		
+
 		<script type="text/javascript">
+            
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-			//		var baseUrl = "http://localhost:50000/api";
+			//var baseUrl = "http://localhost:50000/api";
 			
 			var botaoSelecionado = 0;
 			
@@ -895,7 +916,10 @@
 				viewModel.dsCargos.read();
 				viewModel.dsSexo.read();
 				viewModel.dsTurnosFunc.read();
-			
+			                
+				viewModel.set("tipoCompl", 1);
+				viewModel.dsTelCompl.read();
+                    
 				//Carrega os dados de Loja
 				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
 				viewModel.dsLoja.read(); 		
@@ -905,7 +929,7 @@
 				//app.navigate("#dentroFila-view");
 				app.navigate("#colaboradores-view");
 			}  
-		
+			
 		</script>
 	</body>
 </html>

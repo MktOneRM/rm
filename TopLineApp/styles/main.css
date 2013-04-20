@@ -307,6 +307,22 @@ div a
 	background-color: #D88E2E;
 }
 
+#editorColaborador-view .excluir
+{
+	display: none;
+	position: absolute;
+	margin: 10px 0 0 0;
+    padding: 10px;
+	top: .25em;
+	right: .5em;
+	width: 100px;
+    color: #000;
+    font-size:14px;
+    font-weight: bold;
+	background-color: Red;
+}
+
+
 .details-link
 {
 	font-size: 12px;
@@ -485,7 +501,8 @@ div a
 	left: 100px;
 }
 
-#editorTelColaborador input[type="text"] {
+#editorTelColaborador input[type="text"], #editorTelColaborador select 
+{
 	font-size: 12px;
 	alignment-adjust: left;
 	color: #476BD6; 
@@ -589,4 +606,18 @@ div a
 	font-weight: bold;
 	left: 50px;
     width: 240px; 
+}
+
+.km-ios .km-detail 
+{
+    line-height: 1.3rem;
+    margin-top: -.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.km-ios .km-detail:active
+{
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
+    box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
 }

@@ -1,4 +1,8 @@
 (function($, undefined) {
+	
+    var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+	//var baseUrl = "http://localhost:50000/api";
+    
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["srcPath"].get();
@@ -8,7 +12,7 @@
 			}
 			//			else {
 			//				$(this.element).attr("src", "images/default.png"); 
-//			//			}
+			//			}
 		}
 	});
 
@@ -73,7 +77,7 @@
 			var that = this,
             
 			value = that.bindings["telefoneValue"].get(); //get the value from the View-Model	
-			console.log("refresh = ", value);
+			
 			if (value) {
 				if (value.trim().length == 11) {
 					$(that.element).val(formatField(value, "(99) 99999-9999"));					
@@ -83,8 +87,7 @@
 				}
 			}		
 		},
-		change: function() {
-			console.log("change = ", this.element.value);
+		change: function() {			
 			var value = this.element.value;			
 			if (value.trim().length == 11) {
 				value = formatField(value, "(99) 99999-9999");					
@@ -223,10 +226,7 @@
 			this.bindings["dateValue"].set(value);
 		}
 	});
-    
-	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
-
+ 
 	//schema
 	var schemaVendedores = { 
 		model: {
@@ -449,15 +449,16 @@
     
 	var scTelColaborador = {
 		model: {
-			id: "ColId",
-			fields: {
-				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
-				TteId: { type: "int", validation: { required: false} },  
-				TteDescricao: { type: "string", validation: { required: false} },
+			id: "TelId",
+			fields: {                
+				TelId: { type: "int", editable: false, nullable: false, defaultValue:0},
+				ColId: { type: "int", nullable: false},
+				TteId: { type: "int", validation: { required: true} },  
+				TteDescricao: { type: "string", validation: { required: true} },
 				TelNumero: { type: "string", validation: { required: true} },  
-				OpeId: { type: "int", validation: { required: false}},  
-				OpeDescricao: { type: "string", validation: { required: false} },                                
-				TceId: { type: "int" , nullable: true, validation: { required: false}},  
+				OpeId: { type: "int", validation: { required: true}},  
+				OpeDescricao: { type: "string", validation: { required: true} },                                
+				TceId: { type: "int" , nullable: true},  
 				TceDescricao: { type: "string" , nullable: true }
 			}
 		}
@@ -774,11 +775,12 @@
 			}     
 		},
 		batch: true,
-		sort: {
-			field: "ColId", dir: "asc", 
-			field: "TteId", dir: "asc"
+		schema: scTelColaborador, 
+        sort: {
+			field:"TelId", 
+			dir: "desc"
 		},
-		schema: scTelColaborador, change:function(e) {
+		change:function(e) {
 			viewModel.set("telefonesColaborador", this.view());
 		}
 	})
@@ -881,8 +883,7 @@
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
-		validarCPF:validarCPF,
-		delTelColaborador:delTelColaborador,
+		validarCPF:validarCPF,		
 		novoTelColaborador:novoTelColaborador,
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
@@ -1094,11 +1095,11 @@
     
 	function onTouchstartTelefone(e) {
 		button = $(e.touch.target).find("[data-role=button]:visible");        
+        
 		if (button[0]) {
 			var telefone = viewModel.dsTelColaborador.getByUid(e.touch.target.context.id);			    
-			currentView = app.view();
 			dsTelColaborador.remove(telefone);
-			currentView.scroller.reset();		
+			
 			//prevent `swipe`
 			button.hide();
 			this.events.cancel();
@@ -1109,6 +1110,11 @@
 		}
 	}
     
+	function novoTelColaborador(e) {				
+		viewModel.dsTelColaborador.add({ColId: viewModel.colaboradorSelecionado.get("ColId"), TteId: null, TteDescricao: null,  TelNumero: null, OpeId: null, OpeDescricao: null, TceId: null, TceDescricao: null  });
+		e.preventDefault();
+	}
+	   
 	function atendimentoViewInit(e) {
 		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
@@ -1119,33 +1125,7 @@
 
 	function editorColViewInit(e) {
 		var view = e.view;
-        
-		/*
-		var length = viewModel.telefonesColaborador.length;
-		element = null;
-		*/
-        
-		/*        
-		for (var i = 0; i < length; i++) {
-		element = viewModel.telefonesColaborador[i];
-            
-		var liWr = $("<li></li>");
-		var removeButton = $("<input type=\"button\" class=\"button\" value=\"-\">");
-		var fieldWrapper = $("<label>Telefone:<input id=\"telefone\" name=\"telefone\" maxlength=11 size=11 type=\"text\" placeholder=\"Telefone\" data-bind=\"telefoneValue: telefonesColaborador[" + i + "].TelNumero\" required validationmessage=\"Requerido\"/><\label>");
-			
-		removeButton.click(function() {
-		$(this).parent().remove();
-		}); 
-            
-		liWr.append(fieldWrapper);
-		liWr.append(removeButton);
-		$("#editorTelColaborador").append(liWr);
-		console.log($(this).parent(), "Item", liWr);
-		kendo.bind($("#editorColaborador-view"), viewModel);
-		}
-		*/        
-		//console.log(viewModel.telefonesColaborador);
-        
+
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
         
 		$("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
@@ -1160,8 +1140,6 @@
          
 			view.loader.show();
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
-   
-			console.log(viewModel.telefonesColaborador);
             
 			dsTelColaborador.sync();
 			//dsColaborador.sync();
@@ -1276,19 +1254,6 @@
 		return sCod;
 	}
     
-	function delTelColaborador(e) {
-		var item = dsTelColaborador.get(e.button.data("itemId"));		      
-		currentView = app.view();
-		dsTelColaborador.remove(item);
-		currentView.scroller.reset();
-		e.preventDefault();
-	}
-    
-	function novoTelColaborador(e) {				
-		viewModel.dsTelColaborador.add({ColId: viewModel.colaboradorSelecionado.get("ColId"), TteId: null, TteDescricao: null,  TelNumero: null, OpeId: null, OpeDescricao: null, TceId: null, TceDescricao: null  });
-		e.preventDefault();
-	}
-    
 	function validarCPF(cpf) {
 		cpf = cpf.replace(/[^\d]+/g, '');
      
@@ -1355,8 +1320,7 @@
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		onTouchstartTelefone:onTouchstartTelefone,
-		validarCPF:validarCPF,
-		delTelColaborador:delTelColaborador,
+		validarCPF:validarCPF,		
 		novoTelColaborador:novoTelColaborador,
 		editorLojaViewInit: editorLojaViewInit
         

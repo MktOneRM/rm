@@ -526,9 +526,46 @@ div a
 	alignment-adjust: left;
 	color: #476BD6; 
 	font-weight: bold;
+	left: 101px;
+}
+
+#editorTurnosLoja input[type="text"]
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
 	left: 100px;
 }
 
+#editorTurnosLoja input[type="time"]
+{
+	font-size: 12px;
+	alignment-adjust: left;
+    text-align: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 102px;
+}
+
+#editorTurnosLoja select 
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
+#editorTurnosLoja label
+{ 
+    font-size: 12px;
+	display: block; 
+    width: 90px; 
+    float: left; 
+    color: #2e2e2e;
+    text-align:right;
+}
 
 #editorColaborador input[type="date"]
 {

@@ -1,5 +1,4 @@
 (function($, undefined) {
-    
 	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
     
@@ -358,13 +357,24 @@
 		} 
 	};
 	   
-	//Schema turnos de Turnos de funcionamento
+	//Schema Turnos de funcionamento
 	var scTurnosFunc = { 
 		model: {
-			id: "HfuId",
+			id: "TufId",
 			fields: {
-				HfuId: { editable: false, nullable: false },
+				TufId: { editable: false, nullable: false },
 				TufDescricao: { editable: false, nullable: false }
+			} 
+		}
+	};
+    
+	//Schema Dias da semana de funcionamento
+	var scDiasFunc = { 
+		model: {
+			id: "DsfId",
+			fields: {
+				DsfId: { editable: false, nullable: false },
+				DsfDescricao: { editable: false, nullable: false }
 			} 
 		}
 	};
@@ -372,10 +382,10 @@
 	//Schema de cargos
 	var schemaCargos = { 
 		model: {
-			id: "CarId",
+			id: "DsfId",
 			fields: {
-				CarId: { type: "int", validation: { required: true} },
-				CarDescricao: { type: "string", validation: { required: true} },
+				DsfId: { type: "int", validation: { required: true} },
+				DsfDescricao: { type: "string", validation: { required: true} },
 			} 
 		}
 	};
@@ -597,25 +607,37 @@
 		}       
 	});
 
+	//Dados para Turnos de Funcionamento.
+	var dataTurnosFunc = [
+		{ TufId:1, TufDescricao:"1º Turno"},
+		{ TufId:2, TufDescricao:"2º Turno"},
+		{ TufId:3, TufDescricao:"3º Turno"},
+		{ TufId:3, TufDescricao:"4º Turno"},
+		{ TufId:3, TufDescricao:"Turno Único"}
+	];
+    
 	//dataSource Turnos de funcionamento
 	var dsTurnosFunc = new kendo.data.DataSource({                    
-		transport: {						
-			read:  {
-				url: baseUrl + "/RmTurnoFunc",							
-				type:"GET"      
-				,contentType: "application/json"
-				,dataType: "json"
-			},
-			parameterMap: function(data, operation) {
-				if (operation !== "read" && data.models) {
-					return kendo.stringify([data.models[0]]);
-				}
-			}
-		},
-		batch: true,
+		data: dataTurnosFunc,
 		schema: scTurnosFunc,
 		change: function(e) {
 			viewModel.set("turnos", this.view());
+		}
+	});
+    
+	//Dados para Dias da Semana de Funcionamento
+	var dataDiasFunc = [
+		{ DsfId:1, DsfDescricao:"Segunda a Sexta"},
+		{ DsfId:2, DsfDescricao:"Sábado"},
+		{ DsfId:3, DsfDescricao:"Domingo/Feriado"}
+	];
+    
+	//dataSource Dias da Semana de Funcionamento
+	var dsDiasFunc = new kendo.data.DataSource({                    
+		data: dataDiasFunc,
+		schema: scDiasFunc,
+		change: function(e) {
+			viewModel.set("diasFunc", this.view());
 		}
 	});
     
@@ -831,9 +853,12 @@
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
 		dsColaborador: dsColaborador,	
-		dsTelColaborador:dsTelColaborador,
-                
+		dsTelColaborador:dsTelColaborador,                
 		dsTelCompl: dsTelCompl,
+        
+		diasFunc: [],
+		dsDiasFunc: dsDiasFunc,
+        
 		tiposTels: [],
 		tiposOper: [],
 		tiposCel: [],
@@ -1120,7 +1145,7 @@
 	function editorColViewInit(e) {
 		var view = e.view;
         
-        validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
+		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
         
 		$('#novoTelefone').click(function() {
 			viewModel.dsTelColaborador.add(
@@ -1134,7 +1159,7 @@
 				TceId: null, 
 				TceDescricao: null  
 			});  
-            return false;
+			return false;
 		});
       
 		$("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
@@ -1172,6 +1197,16 @@
         
 		validatorLoja = $("#editorLoja").kendoValidator().data("kendoValidator");
 		
+		$('#novoTurno').click(function() {
+			dsTurnosFunc.add(
+				{
+				TufId: 0, 
+				TufDescricao: ""
+			});
+            
+			return false;
+		});
+        
 		var ufSel = viewModel.lojaSelecionada.get("LojUf");
 		var lojaDe = viewModel.lojaSelecionada.get("LojShopping_rua");
 		$("#LojUf").find("option[value='" + ufSel + "']").attr("selected", true)

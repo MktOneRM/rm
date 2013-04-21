@@ -71,7 +71,7 @@
 		</div>
 
 		<!-- Fila da Vez -->
-		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel">
+		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" <!--data-show="showVendedoresFila"--> data-model="viewModel">
 			<ul data-bind="source: dsVendFila" data-role="listview" data-template="tdentroFila" data-style="inset"></ul>
 		</div>
 
@@ -700,6 +700,16 @@
 						</li>
 					</ul>
 				</li>
+			</ul>
+			<ul data-role="listview" data-style="inset">
+				<li>
+					<a id="novoTurno">Novo Turno</a>
+					<a data-role="detailbutton" data-style="rowinsert"></a>
+				</li>
+			</ul>
+			<ul id="editorTurnosLoja" data-bind="source: turnos" data-role="listview" data-template="tAtuTurnosLoja" data-style="inset"></ul>
+            
+			<ul id="editorLoja" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul id="coordenadas">
 						Coordenadas
@@ -838,6 +848,40 @@
 			</div>
 		</script>
 
+		<script type="text/x-kendo-template" id="tAtuTurnosLoja">
+			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstartTelefone">
+				<ul id="editorTurnosLoja" data-role="listview" data-style="inset">
+					<li>
+						<label>
+							Dias Funcionamento:
+						</label>
+						<select id="DsfId" name="DsfId" data-bind="source: diasFunc, value: DsfId" data-text-field="DsfDescricao" data-value-field="DsfId"></select>
+					</li>
+					<li>
+						<label>
+							Turnos Funcionamento:
+						</label>
+						<select id="TufId" name="TufId" data-bind="source: turnos, value: TufId" data-text-field="TufDescricao" data-value-field="TufId"></select>
+					</li>
+
+					<li>
+						<label>
+							Horario Inicial:
+							<input id="#= uid #" name="EscHrInicial" type="time" data-bind="value: EscHrInicial"/>
+						</label>
+					</li>
+					<li>
+						<label>
+							Horario Final:
+							<input id="#= uid #" name="EscHrFinal" type="time" data-bind="value: EscHrFinal"/>
+						</label>
+					</li>
+
+				</ul>
+				<!--<button id="btnEntrada" data-role="button" class="excluir" data-icon="delete"></button>-->
+			</div>
+		</script>
+
 		<script type="text/x-kendo-template" id="tTelColaborador">
 			<label> ${TteDescricao}: </label><span data-bind="telefoneText: TelNumero"/><span> </span><span data-bind="text: TceDescricao"/><br>
 			<label> Operadora: </label><span data-bind="text: OpeDescricao"/>
@@ -876,7 +920,7 @@
 		</script>
 
 		<script type="text/javascript">
-            
+		
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 			//var baseUrl = "http://localhost:50000/api";
 			
@@ -915,21 +959,24 @@
 				viewModel.dsUf.read();
 				viewModel.dsCargos.read();
 				viewModel.dsSexo.read();
+			
 				viewModel.dsTurnosFunc.read();
-			                
+				viewModel.dsDiasFunc.read();
+			
 				viewModel.set("tipoCompl", 1);
 				viewModel.dsTelCompl.read();
-                    
+			
 				//Carrega os dados de Loja
 				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
 				viewModel.dsLoja.read(); 
-                    
+			
 				viewModelConsultas.dsData.read();
-                    
+			
 				app.hideLoading();
 			
 				//app.navigate("#dentroFila-view");
-				app.navigate("#colaboradores-view");
+				//app.navigate("#colaboradores-view");
+				app.navigate("#config-view");
 			}  
 			
 		</script>

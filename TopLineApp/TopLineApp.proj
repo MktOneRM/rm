@@ -122,7 +122,6 @@
     <Content Include="kendo\styles\textures\stripe6.png" />
     <Content Include="kendo\styles\textures\transparency.png" />
     <Content Include="kendo\styles\textures\transtexture.png" />
-    <Content Include="scripts\topLineConsultaNaoVendas.js" />
     <Content Include="scripts\topLineDeviceInfo.js" />
     <Content Include="scripts\topLine.js" />
     <Content Include="Bkp\html\HtmlPage.html" />
@@ -142,7 +141,8 @@
     <Content Include="Bkp\main.js" />
     <Content Include="Bkp\utils.js" />
     <Content Include="scripts\topLineCamera.js" />
-    <Content Include="scripts\topLineFechamento.js" />
+    <Content Include="scripts\topLineConsultas.js" />
+    <Content Include="scripts\topLineFechamentos.js" />
     <Content Include="scripts\topLineGeolocation.js" />
     <Content Include="scripts\topLineMtvNaoVenda.js" />
     <Content Include="styles\main.css" />
@@ -165,7 +165,8 @@
     <Content Include="Bkp\views\VFilaView.html" />
     <Content Include="Bkp\views\VForaFilaView.html" />
     <Content Include="Bkp\views\VForaTurnoView.html" />
-    <Content Include="views\FechamentoView.html" />
+    <Content Include="views\ConsultasView.html" />
+    <Content Include="views\FechamentosView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

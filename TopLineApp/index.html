@@ -12,6 +12,7 @@
 		<script src="scripts/topLineMtvNaoVenda.js" type="text/javascript"></script>
 		<script src="scripts/topLineCamera.js" type="text/javascript"></script>
 		<script src="scripts/topLineGeolocation.js" type="text/javascript"></script>
+		<script src="scripts/topLineConsultas.js" type="text/javascript"></script>
 		<script src="kendo/cultures/kendo.culture.pt-BR.min.js" type="text/javascript"></script>
 		<script type="text/javascript">   
 			kendo.culture("pt-BR");
@@ -212,7 +213,7 @@
 					Consulta
 					<ul>
 						<li>
-							<a href="#desenvView">Loja</a>
+							<a href="views/ConsultasView.html">Loja</a>
 						</li>
 						<li>
 							<a href="#desenvView">Vendedor</a>
@@ -492,8 +493,8 @@
 			</ul>
 			<ul data-role="listview" data-style="inset">
 				<li>
-					<a>Novo Telefone</a>
-					<a data-role="detailbutton" data-style="rowinsert" data-item-id="#:id#" data-click="novoTelColaborador"></a>
+					<a id="novoTelefone">Novo Telefone</a>
+					<a data-role="detailbutton" data-style="rowinsert"></a>
 				</li>
 			</ul>
 			<ul id="editorTelColaborador" data-bind="source: telefonesColaborador" data-role="listview" data-template="tAtuTelColaborador" data-style="inset"></ul>
@@ -848,27 +849,27 @@
 				<ul id="editorTelColaborador" data-role="listview" data-style="inset">
 					<li>
 						<label>
-							Tipo Telefone: 
+							Tipo Telefone:
 						</label>
 						<select id="TteId" class="TteId" name="TteId" data-bind="source: tiposTels, value: TteId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Tipo de Telefone" required validationmessage="Requerido"></select>
 					</li>
 					<li>
 						<label>
-							Telefone: 
-							<input id="#= uid #" name="Telefone" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
+							Telefone:
+							<input id="#= uid #" name="Telefone" type="text" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
 						</label>
 					</li>
 					<li>
 						<label>
-							Operadora: 
+							Operadora:
 						</label>
 						<select id="OpeId" name="OpeId" data-bind="source: tiposOper, value: OpeId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Operadora" required validationmessage="Requerido"></select>
 					</li>
 					<li>
 						<label>
-							Tipo Celular: 
+							Tipo Celular:
 						</label>
-						<select id="TceId" name="TceId" type="text" data-bind="source: tiposCel, value: TceId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Tipo Celular" required validationmessage="Requerido"></select>
+						<select id="TceId" name="TceId" data-bind="source: tiposCel, value: TceId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Tipo Celular" required validationmessage="Requerido"></select>
 					</li>
 				</ul>
 				<button id="btnEntrada" data-role="button" class="excluir" data-icon="delete"></button>
@@ -922,8 +923,10 @@
                     
 				//Carrega os dados de Loja
 				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
-				viewModel.dsLoja.read(); 		
-			
+				viewModel.dsLoja.read(); 
+                    
+				viewModelConsultas.dsData.read();
+                    
 				app.hideLoading();
 			
 				//app.navigate("#dentroFila-view");

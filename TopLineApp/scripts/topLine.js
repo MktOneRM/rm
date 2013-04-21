@@ -1,6 +1,5 @@
 (function($, undefined) {
-	
-    var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
     
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
@@ -776,7 +775,7 @@
 		},
 		batch: true,
 		schema: scTelColaborador, 
-        sort: {
+		sort: {
 			field:"TelId", 
 			dir: "desc"
 		},
@@ -883,8 +882,7 @@
 		editorLojaViewInit: editorLojaViewInit,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
-		validarCPF:validarCPF,		
-		novoTelColaborador:novoTelColaborador,
+		validarCPF:validarCPF,	
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
   
@@ -1110,11 +1108,6 @@
 		}
 	}
     
-	function novoTelColaborador(e) {				
-		viewModel.dsTelColaborador.add({ColId: viewModel.colaboradorSelecionado.get("ColId"), TteId: null, TteDescricao: null,  TelNumero: null, OpeId: null, OpeDescricao: null, TceId: null, TceDescricao: null  });
-		e.preventDefault();
-	}
-	   
 	function atendimentoViewInit(e) {
 		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
@@ -1125,9 +1118,24 @@
 
 	function editorColViewInit(e) {
 		var view = e.view;
-
-		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
         
+        validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
+        
+		$('#novoTelefone').click(function() {
+			viewModel.dsTelColaborador.add(
+				{
+				ColId: viewModel.colaboradorSelecionado.get("ColId"), 
+				TteId: null, 
+				TteDescricao: null,  
+				TelNumero: null, 
+				OpeId: null, 
+				OpeDescricao: null, 
+				TceId: null, 
+				TceDescricao: null  
+			});  
+            return false;
+		});
+      
 		$("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
 		$("#cargoId").find("option[value=" + viewModel.colaboradorSelecionado.get("CarId") + "]").attr("selected", true);
 		$("#turnoId").find("option[value=" + viewModel.colaboradorSelecionado.get("ColHfuId") + "]").attr("selected", true);
@@ -1320,8 +1328,7 @@
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		onTouchstartTelefone:onTouchstartTelefone,
-		validarCPF:validarCPF,		
-		novoTelColaborador:novoTelColaborador,
+		validarCPF:validarCPF,				
 		editorLojaViewInit: editorLojaViewInit
         
 	});

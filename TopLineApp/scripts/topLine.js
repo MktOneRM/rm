@@ -1,6 +1,7 @@
 (function($, undefined) {
-	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+    
+	//var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
     
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
@@ -225,7 +226,7 @@
 			this.bindings["dateValue"].set(value);
 		}
 	});
- 
+
 	//schema
 	var schemaVendedores = { 
 		model: {
@@ -380,18 +381,36 @@
 	};
     
 	//Schema de cargos
-	var schemaCargos = { 
+	var scEscala = { 
 		model: {
-			id: "DsfId",
+			id: "HfuId",
 			fields: {
-				DsfId: { type: "int", validation: { required: true} },
-				DsfDescricao: { type: "string", validation: { required: true} },
+				HfuId: { type: "int", nullable: false },
+				LojId: { type: "int", nullable: false },
+				TufId: { type: "int", nullable: false },
+				TufDescricao: { type: "int", nullable: false },
+				DsfId: { type: "int", nullable: false },
+				DsfDescricao: { type: "int", nullable: false },
+				EscHrInicial: { type: "time", nullable: false },
+				EscHrFinal: { type: "time", nullable: false },
+				HfuInativo: { type: "boolean", nullable: false },
+			} 
+		}
+	};    
+    
+	//Schema de cargos
+	var scCargos = { 
+		model: {
+			id: "CarId",
+			fields: {
+				CarId: { type: "int", validation: { required: true} },
+				CarDescricao: { type: "string", validation: { required: true} },
 			} 
 		}
 	};
     
 	//Schema Atendimento
-	var schemaAtendimento = { 
+	var scAtendimento = { 
 		model: {
 			id: "RepId",
 			fields:{
@@ -641,6 +660,47 @@
 		}
 	});
     
+	//dataSource para gravacao de Horarios Funcionamento
+	var dsEscala = new kendo.data.DataSource({                    
+		transport: {	
+			read:  {
+				url: baseUrl + "/RmEscalas",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			create:  {
+				url: baseUrl + "/RmEscalas",							
+				type:"POST"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			update:  {
+				url: baseUrl + "/RmEscalas",							
+				type:"PUT"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation == "read") {
+					return {id: viewModel.lojaSelecionada.LojId}
+				}
+				else if (operation !== "read" && data.models) {
+					return kendo.stringify(data.models);
+				}
+			}
+		},
+		batch: true,
+		schema: scEscala,
+		change:function(e) {
+			viewModel.set("escalas", this.view());
+		},                       
+		sort: {
+			field:"EscId", 
+			dir: "asc"
+		}
+	});
+    
 	//dataSource de cargos
 	var dsCargos = new kendo.data.DataSource({                    
 		transport: {						
@@ -657,7 +717,7 @@
 			}
 		},
 		batch: true,
-		schema: schemaCargos,
+		schema: scCargos,
 		change: function (e) {						
 			viewModel.set("cargos", this.view());
 		},                       
@@ -689,7 +749,7 @@
 			}
 		},
 		batch: true,
-		schema: schemaAtendimento,
+		schema: scAtendimento,
 	});
 		
 	//Datasource - Loja
@@ -800,7 +860,7 @@
 		schema: scTelColaborador, 
 		sort: {
 			field:"TelId", 
-			dir: "desc"
+			dir: "asc"
 		},
 		change:function(e) {
 			viewModel.set("telefonesColaborador", this.view());
@@ -852,7 +912,11 @@
 		dsTiposMovto: dsTiposMovto,        		
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
-		dsColaborador: dsColaborador,	
+		dsColaborador: dsColaborador,
+        
+		escalas: [],
+		dsEscala: dsEscala,
+        
 		dsTelColaborador:dsTelColaborador,                
 		dsTelCompl: dsTelCompl,
         
@@ -1146,7 +1210,8 @@
 		var view = e.view;
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
-        
+		validatorTelColaborador = $("#editorTelColaborador").kendoValidator().data("kendoValidator");
+ 
 		$('#novoTelefone').click(function() {
 			viewModel.dsTelColaborador.add(
 				{
@@ -1176,7 +1241,6 @@
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
             
 			dsTelColaborador.sync();
-			//dsColaborador.sync();
 		});
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
@@ -1198,10 +1262,17 @@
 		validatorLoja = $("#editorLoja").kendoValidator().data("kendoValidator");
 		
 		$('#novoTurno').click(function() {
-			dsTurnosFunc.add(
+			dsEscala.add(
 				{
-				TufId: 0, 
-				TufDescricao: ""
+				EscId: 0,           
+				HfuId: 0,           
+				LojId: viewModel.lojaSelecionada.get("LojId"),           
+				TufId: 0,           
+				TufDescricao:"",    
+				DsfId: 0,  
+				DsfDescricao: "" ,   
+				EscHrInicial: "",    
+				EscHrFinal: ""
 			});
             
 			return false;
@@ -1216,10 +1287,16 @@
 			dsLoja.one("change", function() {				
 				view.loader.hide();
 				app.navigate("#detalhesLoja-view");
-			});
-         
+			});        
 			view.loader.show();
-			dsLoja.sync();
+            
+            
+            console.log(viewModel.escalas);
+              
+            dsEscala.sync(); 
+            return;
+          
+			//dsLoja.sync();
 		});
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {

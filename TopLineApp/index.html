@@ -485,7 +485,7 @@
 							<label>
 								Turno:
 							</label>
-							<select id="turnoId" name="Turno" data-bind="source: turnos, value: colaboradorSelecionado.ColHfuId" data-text-field="TufDescricao" data-value-field="HfuId"></select>
+							<select id="turnoId" name="Turno" data-bind="source: turnos, value: colaboradorSelecionado.ColHfuId" data-text-field="TufDescricao" data-value-field="TufId"></select>
 						</li>
 					</ul>
 				</li>
@@ -584,6 +584,9 @@
 						</li>
 					</ul>
 				</li>
+			</ul>
+			<ul id="infoLoja" data-bind="source: dsEscala" data-role="listview" data-style="inset" data-template="tEscalasLoja"></ul>
+			<ul id="infoLoja" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul>
 						Coordenadas
@@ -707,8 +710,7 @@
 					<a data-role="detailbutton" data-style="rowinsert"></a>
 				</li>
 			</ul>
-			<ul id="editorTurnosLoja" data-bind="source: turnos" data-role="listview" data-template="tAtuTurnosLoja" data-style="inset"></ul>
-            
+			<ul id="editorTurnosLoja" data-bind="source: escalas" data-role="listview" data-template="tAtuEscalasLoja" data-style="inset"></ul>
 			<ul id="editorLoja" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul id="coordenadas">
@@ -732,19 +734,6 @@
 					</ul>
 					<p id="results"></p>
 				</li>
-			</ul>
-		</div>
-
-		<!--Escala de trabalho View-->
-		<div id="Escala-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
-			<header data-role="header">
-				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEdicaoLoja}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEdicaoLoja}">Salvar</a>
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-			<ul id="info" data-role="listview" data-style="inset" data-type="group">
 			</ul>
 		</div>
 
@@ -800,18 +789,6 @@
 			</div>
 		</div>
 
-		<!--Consulta Não Vendas Loja View-->
-		<div id="consultaNaoVenda-view" data-role="view" data-model="viewModel" data-title="Top Line" data-layout="tools-layout">
-			<header data-role="header">
-				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" href="#:back">Voltar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="backbutton" href="#EditorLoja-view" >Editar</a>
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-			<ul data-bind="source: dsVendFila" data-role="listview" data-template="tdentroFila" data-style="inset"></ul>
-		</div>
-
 		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showDetalhesColaborador">
@@ -848,7 +825,39 @@
 			</div>
 		</script>
 
-		<script type="text/x-kendo-template" id="tAtuTurnosLoja">
+		<script type="text/x-kendo-template" id="tEscalasLoja">
+			<div>
+				<ul id="infoLoja" data-role="listview" data-style="inset">
+					<li>
+						<label>
+							Dias Funcionamento:
+						</label>
+						<span data-bind="text: DsfDescricao"></span>
+					</li>
+					<li>
+						<label>
+							Turnos Funcionamento:
+						</label>
+						<span data-bind="text: TufDescricao"></span>
+					</li>
+
+					<li>
+						<label>
+							Horário Inicial:
+						</label>
+						<span data-bind="text: EscHrInicial"></span>
+					</li>
+					<li>
+						<label>
+							Horário Final:
+						</label>
+						<span data-bind="text: EscHrFinal"></span>
+					</li>
+				</ul>
+			</div>			
+		</script>
+
+		<script type="text/x-kendo-template" id="tAtuEscalasLoja">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstartTelefone">
 				<ul id="editorTurnosLoja" data-role="listview" data-style="inset">
 					<li>
@@ -866,17 +875,16 @@
 
 					<li>
 						<label>
-							Horario Inicial:
+							Horário Inicial:
 							<input id="#= uid #" name="EscHrInicial" type="time" data-bind="value: EscHrInicial"/>
 						</label>
 					</li>
 					<li>
 						<label>
-							Horario Final:
+							Horário Final:
 							<input id="#= uid #" name="EscHrFinal" type="time" data-bind="value: EscHrFinal"/>
 						</label>
 					</li>
-
 				</ul>
 				<!--<button id="btnEntrada" data-role="button" class="excluir" data-icon="delete"></button>-->
 			</div>

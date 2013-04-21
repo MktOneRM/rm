@@ -24,7 +24,6 @@
 		schema: scData,
 		change: function (e) {			
 			viewModelConsultas.set("dataSelecionado", this.view());
-            console.log(viewModelConsultas, this.view());
 		}
 	});
     
@@ -37,4 +36,5 @@
 	$.extend(window, {
         viewModelConsultas: viewModelConsultas
 	});
+    
 })(jQuery);

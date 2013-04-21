@@ -493,7 +493,7 @@ div a
     text-align:right;
 }
 
-#editorColaborador input[type="text"], #editorColaborador select 
+#editorColaborador input[type="text"]
 {
 	font-size: 12px;
 	alignment-adjust: left;
@@ -502,7 +502,26 @@ div a
 	left: 100px;
 }
 
-#editorTelColaborador input[type="text"], #editorTelColaborador select 
+#editorColaborador select 
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
+
+#editorTelColaborador input[type="text"]
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
+#editorTelColaborador select 
 {
 	font-size: 12px;
 	alignment-adjust: left;

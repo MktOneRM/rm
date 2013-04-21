@@ -221,7 +221,7 @@
 			$(that.element).val(formatedValue); //update the HTML input element
 		},
 		change: function() {
-			var formatedValue = this.element.value,
+			var formatedValue = this.element.value;
 			value = kendo.parseDate(formatedValue, "dd/MM/yyyy", "pt-BR");             
 			this.bindings["dateValue"].set(value);
 		}

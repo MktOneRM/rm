@@ -383,17 +383,17 @@
 	//Schema de cargos
 	var scEscala = { 
 		model: {
-			id: "HfuId",
+			id: "EscId",
 			fields: {
-				HfuId: { type: "int", nullable: false },
-				LojId: { type: "int", nullable: false },
-				TufId: { type: "int", nullable: false },
-				TufDescricao: { type: "int", nullable: false },
-				DsfId: { type: "int", nullable: false },
-				DsfDescricao: { type: "int", nullable: false },
-				EscHrInicial: { type: "time", nullable: false },
-				EscHrFinal: { type: "time", nullable: false },
-				HfuInativo: { type: "boolean", nullable: false },
+                EscId: { type: "int", defaultValue:0 },
+				HfuId: { type: "int", validation: { required: true} },
+				LojId: { type: "int", validation: { required: true} },
+				TufId: { type: "int", validation: { required: true} },
+				TufDescricao: { type: "int" },
+				DsfId: { type: "int", validation: { required: true} },
+				DsfDescricao: { type: "int" },
+				EscHrInicial: { type: "time", validation: { required: true} },
+				EscHrFinal: { type: "time",  validation: { required: true} }
 			} 
 		}
 	};    
@@ -1232,15 +1232,16 @@
 		$("#turnoId").find("option[value=" + viewModel.colaboradorSelecionado.get("ColHfuId") + "]").attr("selected", true);
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
-			dsColaborador.one("change", function() {				
+			dsColaborador.one("change", function() {
+                dsTelColaborador.sync();
 				view.loader.hide();
 				app.navigate("#colaboradores-view");                
 			});
          
 			view.loader.show();
+            dsColaborador.sync();
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
             
-			dsTelColaborador.sync();
 		});
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
@@ -1262,17 +1263,17 @@
 		validatorLoja = $("#editorLoja").kendoValidator().data("kendoValidator");
 		
 		$('#novoTurno').click(function() {
-			dsEscala.add(
+			viewModel.dsEscala.add(
 				{
 				EscId: 0,           
 				HfuId: 0,           
 				LojId: viewModel.lojaSelecionada.get("LojId"),           
 				TufId: 0,           
-				TufDescricao:"",    
+				TufDescricao:null,    
 				DsfId: 0,  
-				DsfDescricao: "" ,   
-				EscHrInicial: "",    
-				EscHrFinal: ""
+				DsfDescricao: null ,   
+				EscHrInicial: null,    
+				EscHrFinal: null
 			});
             
 			return false;
@@ -1286,17 +1287,13 @@
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsLoja.one("change", function() {				
 				view.loader.hide();
+                dsEscala.sync(); 
 				app.navigate("#detalhesLoja-view");
 			});        
-			view.loader.show();
+			
+            view.loader.show();
+            dsLoja.sync();
             
-            
-            console.log(viewModel.escalas);
-              
-            dsEscala.sync(); 
-            return;
-          
-			//dsLoja.sync();
 		});
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
@@ -1309,6 +1306,7 @@
 			view.loader.show();
 			viewModel.set("lojaSelecionada", dsLoja.view()[0]);
 			dsLoja.cancelChanges();
+            dsEscala.cancelChanges
 		});
 	}
    

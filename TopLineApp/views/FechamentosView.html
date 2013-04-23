@@ -1,9 +1,74 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Toos-Layout -->
+<div data-role="layout" data-id="tools-layout" data-title="Top Line">
+	<header data-role="header">
+		<div data-role="navbar">
+			<span data-role="view-title"></span>
+		</div>
+	</header>
+</div>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title></title>
-    </head>
-    <body>
-    </body>
-</html>
+<!--Fechamento view-->
+<div id="fechamento-view" data-role="view" data-show="editorColViewInit" data-model="viewModelFechamento" data-title="Top Line" data-layout="tools-layout" >
+	<header data-role="header">
+		<div data-role="navbar">
+			<a id="btnCancel" data-role="backbutton" type="button" data-align="left">Cancelar</a>
+			<a id="btnCreate" data-role="button" type="button" data-align="right">Salvar</a>
+			<span data-role="view-title"></span>
+		</div>
+	</header>
+	<ul id="editorFechamento" data-role="listview" data-style="inset" data-type="group">
+		<li>
+			<ul>
+				<li>
+					<label>Top line </label>
+				</li>
+			</ul>
+			Parâmetros Fechamento
+			<ul>
+				<li>
+					<label>
+						Turno:
+					</label>
+					<select id="turnoId" name="Turno" data-bind="source: turnos, value: turnoFechamento.ColHfuId" data-text-field="TufDescricao" data-value-field="TufId"></select>
+				</li>
+				<li>
+					<label>
+						Tipo Fechamento:
+					</label>
+					<select>
+						<option value="1">Parcial</option>
+						<option value="1">Turno</option>
+						<option value="2">Loja</option>
+					</select>
+				</li>
+			</ul>
+			Dados Fechamento
+			<ul>
+				<li>
+					<label>
+						Qtde. de Vendas:
+						<input id="qtdeVendas" name="QtdeVendas" type="number" placeholder="Quantidade informada de vendas" maxlength=4 size=4 data-bind="value: fechamento.FecQtInfVendas" required validationmessage="Requerido"/>
+					</label>
+				</li>
+				<li>
+					<label>
+						Valor Total Vendas:
+						<input id="vlTotalVendas" name="VlTotalVendas" type="number" placeholder="Valor Total Vendas" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: fechamento.FecVlInfVendas" required validationmessage="Requerido" />
+					</label>
+				</li>
+				<li>
+					<label>
+						Estoque Total:
+						<input id="estoqueTotal" name="EstoqueTotal" type="number" placeholder="Estoque Total" maxlength="4" size="4" data-bind="valor: fechamento.FecEstoqueTotal"/>
+					</label>
+				</li>
+				<li>
+					<label>
+						Preço Médio:
+						<input id="precoMedio" name="PrecoMedio" type="number" placeholder="Preço Médio" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: fechamento.FecPrecoMedio"/>
+					</label>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>

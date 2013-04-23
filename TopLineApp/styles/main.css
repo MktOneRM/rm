@@ -510,6 +510,33 @@ div a
 	left: 100px;
 }
 
+#editorFechamento input[type="text"]
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
+#editorFechamento input[type="number"]
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
+#editorFechamento select 
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
 
 #editorTelColaborador input[type="text"]
 {
@@ -596,6 +623,26 @@ div a
     color: #2e2e2e;
     text-align:right;
 }
+
+#editorFechamento input[type="date"]
+{
+	font-size: 12px;
+	alignment-adjust: left;
+    text-align: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
+}
+
+#editorFechamento label
+{ 
+	display: block; 
+    width: 90px; 
+    float: left; 
+    color: #2e2e2e;
+    text-align:right;
+}
+
 
 #editorTelColaborador label
 { 

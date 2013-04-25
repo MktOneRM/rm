@@ -38,7 +38,7 @@
 				<div data-role="tabstrip">
 					<a href="#dentroFila-view" data-icon="action">Fila</a>
 					<a href="#consulta-view" data-icon="search">Consulta</a>
-					<a href="#Fechamento-view" data-icon="recents">Fechamento</a>
+					<a href="views/FechamentosView.html" data-icon="recents">Fechamento</a>
 					<a href="#config-view" data-icon="settings">Configuração</a>
 				</div>
 			</div>
@@ -71,7 +71,7 @@
 		</div>
 
 		<!-- Fila da Vez -->
-		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" <!--data-show="showVendedoresFila"--> data-model="viewModel">
+		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel">
 			<ul data-bind="source: dsVendFila" data-role="listview" data-template="tdentroFila" data-style="inset"></ul>
 		</div>
 
@@ -566,7 +566,6 @@
 					</ul>
 				</li>
 			</ul>
-			<ul id="infoLoja" data-bind="source: dsEscala" data-role="listview" data-style="inset" data-template="tEscalasLoja"></ul>
 			<ul id="infoLoja" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul>
@@ -584,6 +583,7 @@
 					</ul>
 				</li>
 			</ul>
+			<ul id="infoLoja" data-bind="source: dsEscala" data-role="listview" data-style="inset" data-template="tEscalasLoja"></ul>
 		</div>
 
 		<!--Editor Loja View-->
@@ -691,7 +691,6 @@
 					<a data-role="detailbutton" data-style="rowinsert"></a>
 				</li>
 			</ul>
-			<ul id="editorTurnosLoja" data-bind="source: escalas" data-role="listview" data-template="tAtuEscalasLoja" data-style="inset"></ul>
 			<ul id="editorLoja" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul id="coordenadas">
@@ -716,6 +715,7 @@
 					<p id="results"></p>
 				</li>
 			</ul>
+			<ul id="editorTurnosLoja" data-bind="source: escalas" data-role="listview" data-template="tAtuEscalasLoja" data-style="inset"></ul>
 		</div>
 
 		<!--Motivos não venda View-->

@@ -492,6 +492,25 @@ div a
     text-align:right;
 }
 
+#infoFechamento span
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+}
+
+#infoFechamento label
+{ 
+	display: block; 
+    width: 90px; 
+    float: left; 
+    padding-top: 6px; 
+    padding-right:5px;
+    color: #2e2e2e;
+    text-align:right;
+}
+
 #editorColaborador input[type="text"]
 {
 	font-size: 12px;

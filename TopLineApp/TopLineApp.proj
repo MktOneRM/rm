@@ -145,6 +145,7 @@
     <Content Include="scripts\topLineFechamentos.js" />
     <Content Include="scripts\topLineGeolocation.js" />
     <Content Include="scripts\topLineMtvNaoVenda.js" />
+    <Content Include="scripts\topLineNotificacao.js" />
     <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">
       <Platform>iOS</Platform>
@@ -166,7 +167,6 @@
     <Content Include="Bkp\views\VForaFilaView.html" />
     <Content Include="Bkp\views\VForaTurnoView.html" />
     <Content Include="views\ConsultasView.html" />
-    <Content Include="views\FechamentosView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

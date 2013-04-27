@@ -9,8 +9,8 @@
 				FecId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				LojId: { type: "int", nullable: false, defaultValue: 0},
 				HfuId: { type: "int", editable: true, defaultValue: 0},                
-				FecDtFechamento: { type: "date", validation: { required: false}, editable: true, nullable: false},                
-				FecHrFechamento: { type: "date", editable: true, nullable: false},                
+				FecDtFechamento: { type: "date", validation: { required: false}, editable: true, nullable: false, defaultValue: null},                
+				FecHrFechamento: { type: "date", editable: true, nullable: false, defaultValue: null},                
 				FecQtInfVenda: { type: "int", validation: { required: true}, editable: true, nullable: false, defaultValue:0},
 				FecQtApuVenda: { type: "int", editable: true, defaultValue:0},
 				FecVlInfVenda: { type: "float", validation: { required: true}, editable: true, nullable: false, defaultValue:0},
@@ -50,7 +50,7 @@
 				if (operation == "read")
 					return {id: viewModel.lojaSelecionada.LojId}
 				else if (operation !== "read" && data.models) {
-					return kendo.stringify([data.models[0]]);
+					return kendo.stringify(data.models[0]);
 				}
 			}     
 		},
@@ -114,6 +114,7 @@
 		dsTiposFech: dsTiposFech,
 		fechamentos: fechamentos,
 		fechamentoSelecionado: [],
+        lojaSelecionada: [],
 		turnos: [],
 		tiposFech: [],
 		editorFecViewInit: editorFecViewInit,
@@ -149,10 +150,6 @@
 			view.loader.show();
             
 			if (validatorFechamento.validate()) {
-				console.log(viewModelFechamento);
-				view.loader.hide();
-				return;
-                
 				dsFechamento.sync();    
 			}
 			else {

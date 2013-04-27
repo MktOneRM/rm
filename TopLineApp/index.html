@@ -101,7 +101,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+							<img id="smallImage" class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -148,7 +148,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+							<img id="smallImage" class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -185,7 +185,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+							<img id="smallImage" class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -372,7 +372,7 @@
 				<li>
 					<ul>
 						<li>
-							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
+							<img id="ImgPequena" class="fila-art" data-bind="attr: {src: colaboradorSelecionado.ColFoto}"/>
 							<ul id="btFoto" data-role="buttongroup" class="select-group">
 								<li>
 									<a id="capturePhotoEditButton">Tirar Foto</a>
@@ -735,7 +735,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+							<img id="smallImage" class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -896,7 +896,7 @@
 							<label>
 								Tipo Fechamento:
 							</label>
-                            <select id="tipoId" name="Tipo" data-bind="source: tipoFech, value: fechamentoSelecionado.TipoFechamento" data-text-field="Desc" data-value-field="Id"></select>						
+                            <select id="tipoId" name="Tipo" data-bind="source: tiposFech, value: fechamentoSelecionado.TipoFechamento" data-text-field="Desc" data-value-field="Id"></select>						
 						</li>
 					</ul>                    
 					Dados Fechamento
@@ -933,7 +933,7 @@
 		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showDetalhesColaborador">
-				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
+				<img id="smallImage" class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="col-nome">${ColNome} # # ${ColSobrenome}</h1>
 			</div>
 		</script>
@@ -941,7 +941,7 @@
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstart" data-tap="atendimentoViewInit">
-				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
+				<img id="smallImage" class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnSair" data-role="button" class="saida">Sair</button>
@@ -950,7 +950,7 @@
 
 		<script type="text/x-kendo-template" id="tforaFila">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipeFora" data-touchstart="onTouchstartFora">
-				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
+				<img id="smallImage" class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnEntrada" data-role="button" class="entrar">Entrar</button>
@@ -959,7 +959,7 @@
 
 		<script type="text/x-kendo-template" id="tforaTurno">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipeTurno" data-touchstart="onTouchstartTurno">
-				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
+				<img id="smallImage" class="fila-art" data-bind="srcPath: ${ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnEntrada" data-role="button" class="entrar">Entrar</button>

@@ -666,15 +666,6 @@ div a
 	text-align: right;
 }
 
-#lblTitulo label
-{ 
-	display: block; 
-	width: 250px;
-	float: left;
-	color: #2e2e2e;
-	text-align: center;
-}
-
 #editorTelColaborador label
 { 
 	display: block; 

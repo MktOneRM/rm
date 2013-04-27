@@ -51,8 +51,11 @@ cameraApp.prototype={
         }, function(){
             that._onFail.apply(that,arguments);
         }, {
-            quality: 20, allowEdit: true,
-            destinationType: cameraApp._destinationType.DATA_URL
+            quality: 20, 
+            allowEdit: true,
+            destinationType: cameraApp._destinationType.DATA_URL,
+            targetWidth: 50,
+            targetHeight: 50
         });
     },
     
@@ -79,7 +82,9 @@ cameraApp.prototype={
             cameraApp._onFail.apply(that,arguments);
         }, {
             quality: 20,
-            destinationType: cameraApp._destinationType.FILE_URI,
+            destinationType: cameraApp._destinationType.DATA_URL,
+            targetWidth: 50,
+            targetHeight: 50,
             sourceType: source
         });
     },
@@ -89,19 +94,15 @@ cameraApp.prototype={
         smallImage.style.display = 'block';
         // Show the captured photo.
         smallImage.src = "data:image/jpeg;base64," + imageData;
-          console.log("Camera1 = "+ "data:image/jpeg;base64," + imageData);
-      viewModel.colaboradorSelecionado.set("ColFoto", smallImage.src);
-        console.log("Camera2 = "+ viewModel.colaboradorSelecionado.get("ColFoto"));
+        viewModel.colaboradorSelecionado.set("ColFoto", smallImage.src);
     },
     
     _onPhotoURISuccess: function(imageURI) {
         var smallImage = document.getElementById('ImgPequena');
         smallImage.style.display = 'block';
         // Show the captured photo.
-        smallImage.src = imageURI;
-        console.log("Arquivo1 = " + imageURI);
-        viewModel.colaboradorSelecionado.set("ColFoto", imageURI);
-        console.log("Arquivo2 = " + viewModel.colaboradorSelecionado.get("ColFoto"));
+        smallImage.src = "data:image/jpeg;base64," + imageURI;
+        viewModel.colaboradorSelecionado.set("ColFoto", smallImage.src);
     },
     
     _onFail: function(message) {

@@ -102,7 +102,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+							<img class="fila-art" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -149,7 +149,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+							<img class="fila-art" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -186,7 +186,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
+							<img class="fila-art" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
 							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
@@ -208,7 +208,41 @@
 			</ul>
 		</div>
 
-		<!-- Consulta -->
+		<!--Motivos não venda View-->
+		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="Top Line" data-layout="home-layout" data-transition="slideup" data-show="showMotivosNaoVenda">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarNaoVenda}">Cancelar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarNaoVenda}">Salvar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+
+			<ul id="formMotivosNaoVenda" data-role="listview" data-style="inset" data-type="group">
+				<div class="mobile-fila-titulo"></div>
+				<li>
+					<ul>
+						<li style="height:65px">
+							<img class="fila-art" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
+							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<label>
+						Motivo:
+					</label>
+					<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+				</li>
+			</ul>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+				</div>
+			</div>
+		</div>
+
+                                <!-- Consulta -->
 		<div id="consulta-view" data-role="view" data-layout="tools-layout" data-title="Top Line">
 			<ul data-role="listview" data-style="inset" data-type="group">
 				<li>
@@ -285,7 +319,7 @@
 				<li>
 					<ul>
 						<li style="height:65px">
-							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
+							<img id="smallImage" class="fila-art" data-bind="attr: { src: colaboradorSelecionado.ColFoto }"/>
 							<h1 class="col-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
 						</li>
 					</ul>
@@ -373,7 +407,7 @@
 				<li>
 					<ul>
 						<li>
-							<img id="smallImage" class="fila-art" data-bind="srcPath: colaboradorSelecionado.ColFoto"/>
+							<img id="ImgPequena" class="fila-art" data-bind="attr: { src: colaboradorSelecionado.ColFoto }" />
 							<ul id="btFoto" data-role="buttongroup" class="select-group">
 								<li>
 									<a id="capturePhotoEditButton">Tirar Foto</a>
@@ -721,39 +755,6 @@
 			<ul id="editorTurnosLoja" data-bind="source: escalas" data-role="listview" data-template="tAtuEscalasLoja" data-style="inset"></ul>
 		</div>
 
-		<!--Motivos não venda View-->
-		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="Top Line" data-layout="home-layout" data-transition="slideup" data-show="showMotivosNaoVenda">
-			<header data-role="header">
-				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarNaoVenda}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarNaoVenda}">Salvar</a>
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-
-			<ul id="formMotivosNaoVenda" data-role="listview" data-style="inset" data-type="group">
-				<div class="mobile-fila-titulo"></div>
-				<li>
-					<ul>
-						<li style="height:65px">
-							<img class="fila-art" data-bind="srcPath: vendedorSelecionado.ColFoto"/>
-							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<label>
-						Motivo:
-					</label>
-					<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
-				</li>
-			</ul>
-			<div data-role="footer">
-				<div data-role="tabstrip">
-				</div>
-			</div>
-		</div>
 
 		<!--Validação dispositivo View-->
 		<div data-role="view" id="validacaoDispositivo-view" data-title="Top Line" data-model="viewModel" data-init="initValidacao" data-hide="viewHide" data-layout="updade-layout">
@@ -940,7 +941,7 @@
 		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showDetalhesColaborador">
-				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
+				<img class="fila-art" src="" data-bind="attr: { src: ColFoto}"/>
 				<h1 class="col-nome">${ColNome} # # ${ColSobrenome}</h1>
 			</div>
 		</script>
@@ -948,7 +949,7 @@
 		<!-- Templates -->
 		<script type="text/x-kendo-template" id="tdentroFila">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstart" data-tap="atendimentoViewInit">
-				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
+				<img class="fila-art" src="" data-bind="attr: { src: ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnSair" data-role="button" class="saida">Sair</button>
@@ -957,7 +958,7 @@
 
 		<script type="text/x-kendo-template" id="tforaFila">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipeFora" data-touchstart="onTouchstartFora">
-				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
+				<img class="fila-art" src="" data-bind="attr: { src: ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnEntrada" data-role="button" class="entrar">Entrar</button>
@@ -966,7 +967,7 @@
 
 		<script type="text/x-kendo-template" id="tforaTurno">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipeTurno" data-touchstart="onTouchstartTurno">
-				<img class="fila-art" data-bind="srcPath: ${ColFoto}"/>
+				<img class="fila-art" src="" data-bind="attr: { src: ColFoto}"/>
 				<h1 class="fila-nome" data-bind="text: ColApelido"></h1>
 				<h2 class="fila-turno" data-bind="text: ColTurno"></h2>
 				<button id="btnEntrada" data-role="button" class="entrar">Entrar</button>

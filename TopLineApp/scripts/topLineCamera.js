@@ -28,7 +28,7 @@ cameraApp.prototype={
         });
 	 },
     
-    _capturePhoto: function() {
+   _capturePhoto: function() {
         var that = this;
         
         // Take picture using device camera and retrieve image as base64-encoded string.
@@ -37,12 +37,12 @@ cameraApp.prototype={
         },function(){
             that._onFail.apply(that,arguments);
         },{
-            quality: 50,
+            quality: 20,
             destinationType: that._destinationType.DATA_URL
         });
     },
     
-    _capturePhotoEdit: function() {
+     _capturePhotoEdit: function() {
         var that = this;
         // Take picture using device camera, allow edit, and retrieve image as base64-encoded string. 
         // The allowEdit property has no effect on Android devices.
@@ -56,7 +56,7 @@ cameraApp.prototype={
         });
     },
     
-    _getPhotoFromLibrary: function() {
+   _getPhotoFromLibrary: function() {
         var that= this;
         // On Android devices, pictureSource.PHOTOLIBRARY and
         // pictureSource.SAVEDPHOTOALBUM display the same photo album.
@@ -70,7 +70,7 @@ cameraApp.prototype={
         that._getPhoto(that._pictureSource.SAVEDPHOTOALBUM)
     },
     
-    _getPhoto: function(source) {
+   _getPhoto: function(source) {
         var that = this;
         // Retrieve image file location from specified source.
         navigator.camera.getPicture(function(){
@@ -78,25 +78,30 @@ cameraApp.prototype={
         }, function(){
             cameraApp._onFail.apply(that,arguments);
         }, {
-            quality: 50,
+            quality: 20,
             destinationType: cameraApp._destinationType.FILE_URI,
             sourceType: source
         });
     },
     
     _onPhotoDataSuccess: function(imageData) {
-        var smallImage = document.getElementById('smallImage');
+        var smallImage = document.getElementById('ImgPequena');
         smallImage.style.display = 'block';
         // Show the captured photo.
         smallImage.src = "data:image/jpeg;base64," + imageData;
-        viewModel.colaboradorSelecionado.set("ColFoto", imageData);
+          console.log("Camera1 = "+ "data:image/jpeg;base64," + imageData);
+      viewModel.colaboradorSelecionado.set("ColFoto", smallImage.src);
+        console.log("Camera2 = "+ viewModel.colaboradorSelecionado.get("ColFoto"));
     },
     
     _onPhotoURISuccess: function(imageURI) {
-        var smallImage = document.getElementById('smallImage');
+        var smallImage = document.getElementById('ImgPequena');
         smallImage.style.display = 'block';
         // Show the captured photo.
         smallImage.src = imageURI;
+        console.log("Arquivo1 = " + imageURI);
+        viewModel.colaboradorSelecionado.set("ColFoto", imageURI);
+        console.log("Arquivo2 = " + viewModel.colaboradorSelecionado.get("ColFoto"));
     },
     
     _onFail: function(message) {

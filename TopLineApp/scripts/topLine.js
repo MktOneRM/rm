@@ -3,20 +3,6 @@
 	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
     
-	kendo.data.binders.srcPath = kendo.data.Binder.extend({
-		refresh: function() {
-            console.log(this.bindings["srcPath"].get());
-			var value = this.bindings["srcPath"].get();
-
-			if (value) { 
-				$(this.element).attr("src", "data:image/jpeg;base64," + value); 
-			}
-			else {
-				$(this.element).attr("src", "images/default.png"); 
-            }
-		}
-	});
-
 	kendo.data.binders.cep = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cep"].get();
@@ -466,7 +452,7 @@
 				ColSobrenome:  { validation: { required: true} },
 				ColDtnascimento: { type: "date", validation: { required: true} },  
 				ColEmail: { validation: { required: false} },
-				ColFoto: { validation: { required: false}, defaultValue: null },
+				ColFoto: { type: "text", validation: { required: false}, defaultValue: null },
 				ColDtentrada:{ type: "date", validation: { required: true} },  
 				ColDtsaida: { type: "date",  validation: { required: false}, defaultValue: null },
 				ColAfasttemp: { type: "boolean",  defaultValue: false },                  
@@ -1240,9 +1226,8 @@
 			});
          
 			view.loader.show();
-            dsColaborador.sync();
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
-            
+            dsColaborador.sync();
 		});
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {

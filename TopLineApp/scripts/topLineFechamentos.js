@@ -142,7 +142,6 @@
         
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsFechamento.one("change", function() {
-				dsFechamento.sync();
 				view.loader.hide();
 				app.navigate("#infoFechamento-view");                
 			});

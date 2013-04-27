@@ -5,14 +5,15 @@
     
 	kendo.data.binders.srcPath = kendo.data.Binder.extend({
 		refresh: function() {
+            console.log(this.bindings["srcPath"].get());
 			var value = this.bindings["srcPath"].get();
 
 			if (value) { 
-				$(this.element).attr("src", "data:image/png;base64," + value); 
+				$(this.element).attr("src", "data:image/jpeg;base64," + value); 
 			}
-			//			else {
-			//				$(this.element).attr("src", "images/default.png"); 
-			//			}
+			else {
+				$(this.element).attr("src", "images/default.png"); 
+            }
 		}
 	});
 

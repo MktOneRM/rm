@@ -774,6 +774,12 @@
 
 		<!--Lista de Fechamentos do dia-->
 		<div id="infoFechamento-view" data-role="view" data-title="Top Line" data-layout="tools-layout" data-model="viewModelFechamento" data-show="showFechamentos" >
+			<header data-role="header">
+				<div data-role="navbar">
+					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: adicionarFechamento}">Novo</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
 			<ul data-bind="source: dsFechamento" data-role="listview" data-template="tFechamentos" data-style="inset"></ul>
 		</div>
 
@@ -862,7 +868,7 @@
 		</div>
 
 		<!--Editor Fechamento-->
-		<div id="editorFechamento-view" data-role="view" data-show="editorFechamentoViewInit"  data-model="viewModelFechamento" data-title="Top Line" data-layout="tools-layout" >
+		<div id="editorFechamento-view" data-role="view" data-model="viewModelFechamento" data-title="Top Line" data-show="editorFecViewInit" data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="backbutton" type="button" data-align="left">Cancelar</a>
@@ -872,7 +878,8 @@
 			</header>
 			<ul id="editorFechamento" data-role="listview" data-style="inset" data-type="group">
 				<li>
-					<ul>
+                    
+					<ul id="lblTitulo">
 						<li>
 							<label>Top line </label>
 						</li>
@@ -883,43 +890,39 @@
 							<label>
 								Turno:
 							</label>
-							<select id="turnoId" name="Turno" data-bind="source: turnos, value: turnoFechamento.ColHfuId" data-text-field="TufDescricao" data-value-field="TufId"></select>
+							<select id="turnoId" name="Turno" data-bind="source: turnos, value: fechamentoSelecionado.HfuId" data-text-field="TufDescricao" data-value-field="TufId"></select>
 						</li>
 						<li>
 							<label>
 								Tipo Fechamento:
 							</label>
-							<select>
-								<option value="1">Parcial</option>
-								<option value="1">Turno</option>
-								<option value="2">Loja</option>
-							</select>
+                            <select id="tipoId" name="Tipo" data-bind="source: tipoFech, value: fechamentoSelecionado.TipoFechamento" data-text-field="Desc" data-value-field="Id"></select>						
 						</li>
-					</ul>
+					</ul>                    
 					Dados Fechamento
 					<ul>
 						<li>
 							<label>
 								Qtde. de Vendas:
-								<input id="qtdeVendas" name="QtdeVendas" type="number" placeholder="Quantidade informada de vendas" maxlength=4 size=4 data-bind="value: fechamento.FecQtInfVendas" required validationmessage="Requerido"/>
+								<input id="qtdeVendas" name="QtdeVendas" type="number" placeholder="Quantidade de vendas" maxlength="4" size="4" data-bind="value: fechamentoSelecionado.FecQtInfVenda" required validationmessage="Requerido"/>
 							</label>
 						</li>
 						<li>
 							<label>
 								Valor Total Vendas:
-								<input id="vlTotalVendas" name="VlTotalVendas" type="number" placeholder="Valor Total Vendas" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: fechamento.FecVlInfVendas" required validationmessage="Requerido" />
+								<input id="vlTotalVendas" name="VlTotalVendas" type="number" placeholder="Valor Total Vendas" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: fechamentoSelecionado.FecVlInfVenda" required validationmessage="Requerido" />
 							</label>
 						</li>
 						<li>
 							<label>
 								Estoque Total:
-								<input id="estoqueTotal" name="EstoqueTotal" type="number" placeholder="Estoque Total" maxlength="4" size="4" data-bind="valor: fechamento.FecEstoqueTotal"/>
+								<input id="estoqueTotal" name="EstoqueTotal" type="number" placeholder="Estoque Total" maxlength="4" size="4" data-bind="valor: fechamentoSelecionado.FecEstoqueTotal"/>
 							</label>
 						</li>
 						<li>
 							<label>
 								Preço Médio:
-								<input id="precoMedio" name="PrecoMedio" type="number" placeholder="Preço Médio" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: fechamento.FecPrecoMedio"/>
+								<input id="precoMedio" name="PrecoMedio" type="number" placeholder="Preço Médio" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: fechamentoSelecionado.FecPrecoMedio"/>
 							</label>
 						</li>
 					</ul>
@@ -1113,6 +1116,7 @@
 				viewModel.dsSexo.read();
 			
 				viewModel.dsTurnosFunc.read();
+                    
 				viewModel.dsDiasFunc.read();
 			
 				viewModel.set("tipoCompl", 1);

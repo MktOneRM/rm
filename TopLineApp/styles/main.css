@@ -35,12 +35,12 @@ input[type="text"], input[type="password"]
 .k-invalid-msg
 {
 	background: #D88E2E;
-    padding: 2px 5px 2px 4px;
+	padding: 2px 5px 2px 4px;
 	border: 0;
 	right: 0;
-	position:absolute;
+	position: absolute;
 	top: 0;
-    font-size: .6rem;
+	font-size: .6rem;
 }
 
 /* Modals */
@@ -151,8 +151,8 @@ div a
 
 .col-nome
 {
-    position:relative;
-    padding-top: 10px;
+	position: relative;
+	padding-top: 10px;
 	font-size: 14px;
 }
 
@@ -268,12 +268,14 @@ div a
 	background-color: rgb(0, 0, 0);
 }
 
-#btnCreate {
-    background: #D88E2E;
+#btnCreate
+{
+	background: #D88E2E;
 }
 
-#done {
-    background: #D88E2E;
+#done
+{
+	background: #D88E2E;
 }
 
 #dentroFila-view .saida
@@ -281,13 +283,13 @@ div a
 	display: none;
 	position: absolute;
 	margin: 10px 0 0 0;
-    padding: 10px;
+	padding: 10px;
 	top: .25em;
 	right: .5em;
 	width: 100px;
-    color: #000;
-    font-size:14px;
-    font-weight: bold;
+	color: #000;
+	font-size: 14px;
+	font-weight: bold;
 	background-color: #D88E2E;
 }
 
@@ -296,13 +298,13 @@ div a
 	display: none;
 	position: absolute;
 	margin: 10px 0 0 0;
-    padding: 10px;
+	padding: 10px;
 	top: .25em;
 	right: .5em;
 	width: 100px;
-    color: #000;
-    font-size:14px;
-    font-weight: bold;
+	color: #000;
+	font-size: 14px;
+	font-weight: bold;
 	background-color: #D88E2E;
 }
 
@@ -311,17 +313,16 @@ div a
 	display: none;
 	position: absolute;
 	margin: 10px 0 0 0;
-    padding: 10px;
+	padding: 10px;
 	top: .25em;
 	right: .5em;
 	width: 100px;
-    color: #000;
-    font-size:14px;
-    font-weight: bold;
+	color: #000;
+	font-size: 14px;
+	font-weight: bold;
 	background-color: Red;
-    vertical-align: middle;
+	vertical-align: middle;
 }
-
 
 .details-link
 {
@@ -354,11 +355,11 @@ div a
 #info label
 { 
 	display: block; 
-    width: 100px; 
-    float: left; 
-    padding: 6px 5px 0 0; 
-    color: #2e2e2e;
-    text-align:right;
+	width: 100px; 
+	float: left; 
+	padding: 6px 5px 0 0; 
+	color: #2e2e2e;
+	text-align: right;
 }
 
 .content
@@ -378,12 +379,12 @@ div a
 #infoLoja label
 { 
 	display: block; 
-    width: 90px; 
-    float: left; 
-    padding-top: 6px; 
-    padding-right:5px;
-    color: #2e2e2e;
-    text-align:right;
+	width: 90px; 
+	float: left; 
+	padding-top: 6px; 
+	padding-right: 5px;
+	color: #2e2e2e;
+	text-align: right;
 }
 
 #editorLoja input[type="text"], #editorLoja select
@@ -398,10 +399,10 @@ div a
 #editorLoja label
 { 
 	display: block; 
-    width: 90px; 
-    float: left; 
-    color: #2e2e2e;
-    text-align:right;
+	width: 90px; 
+	float: left; 
+	color: #2e2e2e;
+	text-align: right;
 }
 
 /*Add*/
@@ -453,21 +454,22 @@ div a
 	font-size: 1.5rem;
 }
 
-#formAtendimento label {
+#formAtendimento label
+{
 	display: block; 
-    width: 90px; 
-    float: left; 
-    padding-top: -5px; 
-    padding-right:5px;
-    color: #2e2e2e;
-    text-align:right;
+	width: 90px; 
+	float: left; 
+	padding-top: -5px; 
+	padding-right: 5px;
+	color: #2e2e2e;
+	text-align: right;
 }
 
 #formAtendimento input[type="number"]
 {
 	font-size: 12px;
 	alignment-adjust: left;
-    text-align: left;
+	text-align: left;
 	color: #476BD6; 
 	font-weight: bold;
 	left: 100px;
@@ -484,12 +486,12 @@ div a
 #infoColaborador label
 { 
 	display: block; 
-    width: 90px; 
-    float: left; 
-    padding-top: 6px; 
-    padding-right:5px;
-    color: #2e2e2e;
-    text-align:right;
+	width: 90px; 
+	float: left; 
+	padding-top: 6px; 
+	padding-right: 5px;
+	color: #2e2e2e;
+	text-align: right;
 }
 
 #infoFechamento span
@@ -503,12 +505,12 @@ div a
 #infoFechamento label
 { 
 	display: block; 
-    width: 90px; 
-    float: left; 
-    padding-top: 6px; 
-    padding-right:5px;
-    color: #2e2e2e;
-    text-align:right;
+	width: 90px; 
+	float: left; 
+	padding-top: 6px; 
+	padding-right: 5px;
+	color: #2e2e2e;
+	text-align: right;
 }
 
 #editorColaborador input[type="text"]
@@ -527,6 +529,7 @@ div a
 	color: #476BD6; 
 	font-weight: bold;
 	left: 100px;
+	width: auto;
 }
 
 #editorFechamento input[type="text"]
@@ -536,6 +539,7 @@ div a
 	color: #476BD6; 
 	font-weight: bold;
 	left: 100px;
+	width: auto;
 }
 
 #editorFechamento input[type="number"]
@@ -545,6 +549,7 @@ div a
 	color: #476BD6; 
 	font-weight: bold;
 	left: 100px;
+	width: auto;
 }
 
 #editorFechamento select 
@@ -555,7 +560,6 @@ div a
 	font-weight: bold;
 	left: 100px;
 }
-
 
 #editorTelColaborador input[type="text"]
 {
@@ -588,7 +592,7 @@ div a
 {
 	font-size: 12px;
 	alignment-adjust: left;
-    text-align: left;
+	text-align: left;
 	color: #476BD6; 
 	font-weight: bold;
 	left: 102px;
@@ -605,19 +609,19 @@ div a
 
 #editorTurnosLoja label
 { 
-    font-size: 12px;
+	font-size: 12px;
 	display: block; 
-    width: 90px; 
-    float: left; 
-    color: #2e2e2e;
-    text-align:right;
+	width: 90px; 
+	float: left; 
+	color: #2e2e2e;
+	text-align: right;
 }
 
 #editorColaborador input[type="date"]
 {
 	font-size: 12px;
 	alignment-adjust: left;
-    text-align: left;
+	text-align: left;
 	color: #476BD6; 
 	font-weight: bold;
 	left: 100px;
@@ -627,27 +631,27 @@ div a
 {
 	font-size: 12px;
 	alignment-adjust: left;
-    text-align: left;
+	text-align: left;
 	color: #476BD6; 
 	font-weight: bold;
 	left: 100px;
-    z-index:0;
+	z-index: 0;
 }
 
 #editorColaborador label
 { 
 	display: block; 
-    width: 90px; 
-    float: left; 
-    color: #2e2e2e;
-    text-align:right;
+	width: 90px; 
+	float: left; 
+	color: #2e2e2e;
+	text-align: right;
 }
 
 #editorFechamento input[type="date"]
 {
 	font-size: 12px;
 	alignment-adjust: left;
-    text-align: left;
+	text-align: left;
 	color: #476BD6; 
 	font-weight: bold;
 	left: 100px;
@@ -656,49 +660,58 @@ div a
 #editorFechamento label
 { 
 	display: block; 
-    width: 90px; 
-    float: left; 
-    color: #2e2e2e;
-    text-align:right;
+	width: 90px; 
+	float: left; 
+	color: #2e2e2e;
+	text-align: right;
 }
 
+#lblTitulo label
+{ 
+	display: block; 
+	width: 250px;
+	float: left;
+	color: #2e2e2e;
+	text-align: center;
+}
 
 #editorTelColaborador label
 { 
 	display: block; 
-    width: 90px; 
-    float: left;
-    color: #2e2e2e;
-    text-align:right;
+	width: 90px; 
+	float: left;
+	color: #2e2e2e;
+	text-align: right;
 }
 
 #editorTelColaborador .button
 {
-    float:right;
-    background-color: #f00;
-    display:block;
-    margin:5px;
-    z-index:99;
-    color:#fff;
-    width:20px;
-    height:20px;
-    font-weight: bold;
-    alignment-adjust:center;
-    text-align:center;
+	float: right;
+	background-color: #f00;
+	display: block;
+	margin: 5px;
+	z-index: 99;
+	color: #fff;
+	width: 20px;
+	height: 20px;
+	font-weight: bold;
+	alignment-adjust: center;
+	text-align: center;
 }
 
-#btFoto {
-    font-size: 14px;
-    font-weight:normal;
+#btFoto
+{
+	font-size: 14px;
+	font-weight: normal;
 }
 
 #formSaiFila label
 { 
 	display: block; 
-    width: 0px; 
-    float: left; 
-    color: #2e2e2e;
-    text-align:right;
+	width: 0px; 
+	float: left; 
+	color: #2e2e2e;
+	text-align: right;
 }
 
 #formSaiFila input[type="text"], #formSaiFila select
@@ -708,16 +721,16 @@ div a
 	color: #476BD6; 
 	font-weight: bold;
 	left: 50px;
-    width: 240px; 
+	width: 240px; 
 }
 
 #formEntrarFila label
 { 
 	display: block; 
-    width: 0px; 
-    float: left; 
-    color: #2e2e2e;
-    text-align:right;
+	width: 0px; 
+	float: left; 
+	color: #2e2e2e;
+	text-align: right;
 }
 
 #formEntrarFila input[type="text"], #formEntrarFila select
@@ -727,22 +740,22 @@ div a
 	color: #476BD6; 
 	font-weight: bold;
 	left: 50px;
-    width: 240px; 
+	width: 240px; 
 }
 /*
 .km-ios .km-detail 
 {
-    line-height: 1.3rem;
-    margin-top: -.8rem;
-    width: 1.5rem;
-    height: 1.5rem;
+line-height: 1.3rem;
+margin-top: -.8rem;
+width: 1.5rem;
+height: 1.5rem;
 }
 */
 
 /*
 .km-ios .km-detail:active
 {
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
-    box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
+-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
+box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
 }
 */

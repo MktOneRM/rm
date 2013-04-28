@@ -779,7 +779,7 @@
 		</div>
 
 		<!--Lista de Fechamentos do dia-->
-		<div id="infoFechamento-view" data-role="view" data-title="Fechamento" data-model="viewModelFechamento" data-zoom="true" data-before-show="showFechamentos" data-layout="update-layout" class="k-content absConf">
+		<div id="infoFechamento-view" data-role="view" data-title="Fechamento" data-model="viewModelFechamento" data-zoom="true"  data-before-show="showFechamentos" data-layout="update-layout" class="k-content absConf">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#dentroFila-view">Voltar</a>
@@ -788,7 +788,7 @@
 				</div>
 			</header>
 			<!--<ul data-bind="source: dsFechamento" data-role="listview" data-template="tFechamentos" data-style="inset"></ul>-->
-			<div class="chart-wrapper" style="margin: auto;">
+			<div class="chart-wrapper"  data-stretch="true" >
 				<div id="chart"></div>
 			</div>
 		</div>
@@ -806,9 +806,7 @@
 				<li>
 					<ul>
 						<li>
-							<label>
-								Loja: <span data-bind="text: lojaSelecionada.LojNomefantasia"></span>
-							</label>
+							<span id="teste" data-bind="text: lojaSelecionada.LojNomefantasia"></span>
 						</li>
 						<li>
 							<label>

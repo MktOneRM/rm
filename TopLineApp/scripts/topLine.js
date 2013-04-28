@@ -185,7 +185,7 @@
 			var that = this,
 			value = that.bindings["dateText"].get(); //get the value from the View-Model
 			if (value) {
-				formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
+				formatedValue = kendo.toString(value, "dd/MM/yyyy"); //format
 				$(that.element).text(formatedValue); //update the HTML input element
 			}     
 		}
@@ -204,12 +204,14 @@
 		refresh: function() {
 			var that = this,
 			value = that.bindings["dateValue"].get(); //get the value from the View-Model
-			formatedValue = kendo.toString(value, "dd/MM/yyyy", "pt-BR"); //format
-			$(that.element).val(formatedValue); //update the HTML input element
-		},
+            if (value) {
+    			formatedValue = kendo.toString(value, "dd/MM/yyyy"); //format
+    			$(that.element).val(formatedValue); //update the HTML input element
+            }
+    	},
 		change: function() {
 			var formatedValue = this.element.value;
-			value = kendo.parseDate(formatedValue, "dd/MM/yyyy", "pt-BR");             
+			value = kendo.parseDate(formatedValue, "dd/MM/yyyy");             
 			this.bindings["dateValue"].set(value);
 		}
 	});
@@ -1196,9 +1198,6 @@
 	function editorColViewInit(e) {
 		var view = e.view;
         
-		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
-		validatorTelColaborador = $("#editorTelColaborador").kendoValidator().data("kendoValidator");
- 
 		$('#novoTelefone').click(function() {
 			viewModel.dsTelColaborador.add(
 				{
@@ -1214,15 +1213,19 @@
 			return false;
 		});
       
-		$("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
+
+        $("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
 		$("#cargoId").find("option[value=" + viewModel.colaboradorSelecionado.get("CarId") + "]").attr("selected", true);
 		$("#turnoId").find("option[value=" + viewModel.colaboradorSelecionado.get("ColHfuId") + "]").attr("selected", true);
         
-		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
+		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
+		validatorTelColaborador = $("#editorTelColaborador").kendoValidator().data("kendoValidator");
+
+        view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsColaborador.one("change", function() {
                 dsTelColaborador.sync();
 				view.loader.hide();
-				app.navigate("#colaboradores-view");                
+    			document.location.href = "#colaboradores-view";                
 			});
             
             if(viewModel.colaboradorSelecionado.get("ColFoto") == null) {

@@ -20,7 +20,7 @@
 			kendo.culture("pt-BR");
 		</script>
 	</head>
-    
+
 	<body>
 		<!-- Home-Layout -->
 		<div data-role="layout" data-id="home-layout" data-title="Top Line">
@@ -74,17 +74,17 @@
 		</div>
 
 		<!-- Fila da Vez -->
-		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresFila" data-model="viewModel">
+		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-before-show="showVendedoresFila" data-model="viewModel">
 			<ul data-bind="source: dsVendFila" data-role="listview" data-template="tdentroFila" data-style="inset"></ul>
 		</div>
 
 		<!-- Fora da Fila da Vez -->
-		<div id="foraFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresForaFila" data-model="viewModel">
+		<div id="foraFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-before-show="showVendedoresForaFila" data-model="viewModel">
 			<ul data-bind="source: dsVendForaFila" data-role="listview" data-template="tforaFila" data-style="inset"></ul>
 		</div>
 
 		<!-- Fora do Turno -->
-		<div id="foraTurno-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-show="showVendedoresForaTurno" data-model="viewModel">
+		<div id="foraTurno-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-before-show="showVendedoresForaTurno" data-model="viewModel">
 			<ul data-bind="source: dsVendForaTurno" data-role="listview" data-template="tforaTurno" data-style="inset"></ul>
 		</div>
 
@@ -136,7 +136,7 @@
 		</div>
 
 		<!--Saida da Fila da Vez-->
-		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel" data-show="showTiposMovtoSaida">
+		<div id="sairdaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoSaida">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarSaida}">Cancelar</a>
@@ -173,7 +173,7 @@
 		</div>
 
 		<!--Entrada na Fila da Vez-->
-		<div id="entrarNaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel" data-show="showTiposMovtoEntrada">
+		<div id="entrarNaFila_View" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoEntrada">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEntrada}">Cancelar</a>
@@ -209,7 +209,7 @@
 		</div>
 
 		<!--Motivos não venda View-->
-		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="Top Line" data-layout="home-layout" data-transition="slideup" data-show="showMotivosNaoVenda">
+		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="Top Line" data-layout="home-layout" data-transition="slideup" data-before-show="showMotivosNaoVenda">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarNaoVenda}">Cancelar</a>
@@ -242,7 +242,7 @@
 			</div>
 		</div>
 
-                                <!-- Consulta -->
+		<!-- Consulta -->
 		<div id="consulta-view" data-role="view" data-layout="tools-layout" data-title="Top Line">
 			<ul data-role="listview" data-style="inset" data-type="group">
 				<li>
@@ -295,7 +295,7 @@
 		</div>
 
 		<!--Colaboradores View-->
-		<div data-role="view" id="colaboradores-view" data-title="Top Line" data-model="viewModel" data-layout="tools-layout" data-show="showColaboradores">
+		<div data-role="view" id="colaboradores-view" data-title="Top Line" data-model="viewModel" data-layout="tools-layout" data-before-show="showColaboradores">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#config-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -395,7 +395,7 @@
 		</div>
 
 		<!--Editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-show="editorColViewInit" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
+		<div id="editorColaborador-view" data-role="view" data-before-show="editorColViewInit" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="backbutton" type="button" data-align="left">Cancelar</a>
@@ -722,12 +722,6 @@
 					</ul>
 				</li>
 			</ul>
-			<ul data-role="listview" data-style="inset">
-				<li>
-					<a id="novoTurno">Novo Turno</a>
-					<a data-role="detailbutton" data-style="rowinsert"></a>
-				</li>
-			</ul>
 			<ul id="editorLoja" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul id="coordenadas">
@@ -752,9 +746,14 @@
 					<p id="results"></p>
 				</li>
 			</ul>
+			<ul data-role="listview" data-style="inset">
+				<li>
+					<a id="novoTurno">Novo Turno</a>
+					<a data-role="detailbutton" data-style="rowinsert"></a>
+				</li>
+			</ul>
 			<ul id="editorTurnosLoja" data-bind="source: escalas" data-role="listview" data-template="tAtuEscalasLoja" data-style="inset"></ul>
 		</div>
-
 
 		<!--Validação dispositivo View-->
 		<div data-role="view" id="validacaoDispositivo-view" data-title="Top Line" data-model="viewModel" data-init="initValidacao" data-hide="viewHide" data-layout="updade-layout">
@@ -775,102 +774,22 @@
 		</div>
 
 		<!--Lista de Fechamentos do dia-->
-		<div id="infoFechamento-view" data-role="view" data-title="Top Line" data-layout="tools-layout" data-model="viewModelFechamento" data-show="showFechamentos" >
+		<div id="infoFechamento-view" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModelFechamento" data-before-show="showFechamentos" class="k-content absConf">
 			<header data-role="header">
 				<div data-role="navbar">
+					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#dentroFila-view">Voltar</a>
 					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: adicionarFechamento}">Novo</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul data-bind="source: dsFechamento" data-role="listview" data-template="tFechamentos" data-style="inset"></ul>
-		</div>
-
-		<!--Detalhe Fechamento-->
-		<div id="detalhesFechamento-view" data-role="view" data-model="viewModelFechamento.fechamentoSelecionado" data-title="Top Line" data-layout="tools-layout" >
-			<header data-role="header">
-				<div data-role="navbar">
-					<a id="btnCancel" data-role="backbutton" type="button" data-align="left">Voltar</a>
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-			<ul id="detalhesFechamento" data-role="listview" data-style="inset" data-type="group">
-				<li>
-					<ul>
-						<li>
-							<label>Top line </label>
-						</li>
-					</ul>
-					Parâmetros Fechamento
-					<ul>
-						<li>
-							<label>
-								Turno: <span data-bind="text: ColHfuId"></span>
-							</label>
-
-						</li>
-						<li>
-							<label>
-								Tipo Fechamento: <span data-bind="text: ColHfuId"></span>
-							</label>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<label>
-								Data Fechamento <span data-bind="text: FecDtFechamento"></span>
-							</label>
-						</li>
-						<li>
-							<label>
-								Hora Fechamento <span data-bind="text: FecHrFechamento"></span>
-							</label>
-						</li>
-					</ul>
-					Informado
-					<ul>
-						<li>
-							<label>
-								Qtde. de Vendas: <span data-bind="text: FecQtInfVenda"></span>
-							</label>
-						</li>
-						<li>
-							<label>
-								Valor Total Vendas: <span data-bind="text: FecVlInfVenda"></span>
-							</label>
-						</li>
-					</ul>
-					Apurado
-					<ul>
-						<li>
-							<label>
-								Qtde. de Vendas: <span data-bind="text: FecQtApuVenda"></span>
-							</label>
-						</li>
-						<li>
-							<label>
-								Valor Total Vendas: <span data-bind="text: FecVlApuVenda"></span>
-							</label>
-						</li>
-					</ul>
-					Gerais
-					<ul>
-						<li>
-							<label>
-								Estoque Total: <span data-bind="text: FecEstoqueTotal"></span>
-							</label>
-						</li>
-						<li>
-							<label>
-								Preço Médio: <span data-bind="text: FecPrecoMedio"></span>
-							</label>
-						</li>
-					</ul>
-				</li>
-			</ul>
+			<!--<ul data-bind="source: dsFechamento" data-role="listview" data-template="tFechamentos" data-style="inset"></ul>-->
+			<div class="chart-wrapper" style="margin: auto;">
+				<div id="chart"></div>
+			</div>
 		</div>
 
 		<!--Editor Fechamento-->
-		<div id="editorFechamento-view" data-role="view" data-model="viewModelFechamento" data-title="Top Line" data-show="editorFecViewInit" data-layout="update-layout" >
+		<div id="editorFechamento-view" data-role="view" data-model="viewModelFechamento" data-title="Top Line" data-before-show="editorFecViewInit" data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="backbutton" type="button" data-align="left">Cancelar</a>
@@ -892,19 +811,19 @@
 							</label>
 						</li>
 					</ul>
-                    Parâmetros Fechamento					
+					Parâmetros Fechamento
 					<ul>
-						<li>
-							<label>
-								Turno:
-							</label>
-							<select id="turnoId" name="Turno" data-bind="source: turnos, value: fechamentoSelecionado.HfuId" data-text-field="TufDescricao" data-value-field="TufId"></select>
-						</li>
 						<li>
 							<label>
 								Tipo Fechamento:
 							</label>
 							<select id="tipoId" name="Tipo" data-bind="source: tiposFech, value: fechamentoSelecionado.TipoFechamento" data-text-field="Desc" data-value-field="Id"></select>
+						</li>
+						<li>
+							<label>
+								Turno:
+							</label>
+							<select id="turnoId" name="Turno" data-bind="source: turnos, value: fechamentoSelecionado.HfuId" data-text-field="TufDescricao" data-value-field="TufId"></select>
 						</li>
 					</ul>
 					Dados Fechamento
@@ -1077,9 +996,34 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tFechamentos">
-			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipeTurno" data-touchstart="onTouchstartTurno">
-				<span data-bind="dateText: FecDtFechamento"/><span> </span><span data-bind="text: FecHrFechamento"/><span> </span><span data-bind="text: FecQtInfVenda"/>
+			<!--
+			<div>
+			<ul id="infoFechamento" data-role="listview" data-style="inset">
+			<li>
+			<label>Horário:</label><span data-bind="text: FecHrFechamento"/>
+			</li>
+			<li>
+			<label>Vendas informadas:</label><span data-bind="text: FecQtInfVenda"/>
+			</li>
+			<li>
+			<label>Vendas apuradas:</label><span data-bind="text: FecQtApuVenda"/>
+			</li>
+			<li>
+			<label>Valor informado:</label><span data-bind="text: FecQtInfVenda"/>
+			</li>
+			<li>
+			<label>Valor apurado:</label><span data-bind="text: FecQtApuVenda"/>
+			</li>
+			</ul>
 			</div>
+		
+
+			<div id="graficoFechamento" class="k-content absConf">
+			<div class="chart-wrapper" style="margin: auto;">
+			<div id="chart"></div>
+			</div>
+			</div>
+			-->
 		</script>
 
 		<script type="text/javascript">
@@ -1124,7 +1068,7 @@
 				viewModel.dsSexo.read();
 			
 				viewModel.dsTurnosFunc.read();
-                    
+			
 				viewModel.dsDiasFunc.read();
 			
 				viewModel.set("tipoCompl", 1);

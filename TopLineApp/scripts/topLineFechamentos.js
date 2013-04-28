@@ -1,7 +1,7 @@
 (function($, undefined) {
-	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
-   
+	//var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
+
 	var scFechamento = {
 		model:{
 			id: "FecId",
@@ -10,7 +10,7 @@
 				LojId: { type: "int", nullable: false, defaultValue: 0},
 				HfuId: { type: "int", editable: true, defaultValue: 0},                
 				FecDtFechamento: { type: "date", validation: { required: false}, editable: true, nullable: false, defaultValue: null},                
-				FecHrFechamento: { type: "date", editable: true, nullable: false, defaultValue: null},                
+				FecHrFechamento: { editable: true, nullable: false, defaultValue: null},                
 				FecQtInfVenda: { type: "int", validation: { required: true}, editable: true, nullable: false, defaultValue:0},
 				FecQtApuVenda: { type: "int", editable: true, defaultValue:0},
 				FecVlInfVenda: { type: "float", validation: { required: true}, editable: true, nullable: false, defaultValue:0},
@@ -48,15 +48,22 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation == "read")
-					return {id: viewModel.lojaSelecionada.LojId}
+					return {
+						id: viewModel.lojaSelecionada.LojId
+					}                
 				else if (operation !== "read" && data.models) {
 					return kendo.stringify(data.models[0]);
 				}
 			}     
 		},
-		batch: true,
-		sort: { field: "FecParcial", dir: "desc" },
-		schema: scFechamento
+		batch: true,		
+		sort: { 
+			field: "TipoFechamento", dir: "asc"            
+		},
+		schema: scFechamento,
+		change: function (e) {						
+			viewModelFechamento.set("fechamentoSelecionado", this.view());
+		}, 
 	});
     
 	var dsTurnosFunc = new kendo.data.DataSource({                    
@@ -69,7 +76,10 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation == "read")
-					return {id: viewModel.lojaSelecionada.LojId}
+					return {
+						id: viewModel.lojaSelecionada.LojId,
+						isFechamento: true
+					}
 				else if (operation !== "read" && data.models) {
 					return kendo.stringify([data.models[0]]);
 				}
@@ -79,22 +89,23 @@
 		sort: { field: "TufId", dir: "asc" },
 		schema: scTurnosFunc,        
 		change: function(e) {
+			var turnoId = this.view()[0].get("TufId");            
+			viewModelFechamento.fechamentoSelecionado.set("HfuId", turnoId); 
 			viewModelFechamento.set("turnos", this.view());
 		}
 	})
 
-	var dataTiposFech = [
-        { Id:0,Desc:""},
-		{ Id:1,Desc:"Parcial"},
-		{ Id:2,Desc:"Turno"},
-		{ Id:3,Desc:"Loja"}
+	var dataTiposFech = [		
+		{ Id:"Parcial",Desc:"Parcial"},
+		{ Id:"Turno",Desc:"Turno"},
+		{ Id:"Loja",Desc:"Loja"}
 	];
     
 	var scTiposFech = {
 		model:{
 			id: "Id",
 			fields: {
-				Id: { type: "number"},
+				Id: { type: "string"},
 				Desc: { type: "string"}  
 			}
 		}
@@ -103,7 +114,9 @@
 	var dsTiposFech = new kendo.data.DataSource({ 
 		data: dataTiposFech,
 		schema: scTiposFech,
-		change: function (e) {			
+		change: function (e) {	
+			var tipoFechamentoId = this.view()[0].get("Id");            
+			viewModelFechamento.fechamentoSelecionado.set("TipoFechamento", tipoFechamentoId); 
 			viewModelFechamento.set("tiposFech", this.view());
 		}
 	});
@@ -114,7 +127,7 @@
 		dsTiposFech: dsTiposFech,
 		fechamentos: fechamentos,
 		fechamentoSelecionado: [],
-        lojaSelecionada: [],
+		lojaSelecionada: [],
 		turnos: [],
 		tiposFech: [],
 		editorFecViewInit: editorFecViewInit,
@@ -122,13 +135,23 @@
 	});
 
 	function fechamentos() {        
-		viewModelFechamento.dsFechamento.read();
+		viewModelFechamento.set("lojaSelecionada", viewModel.get("lojaSelecionada"));        
+		      
+		setTimeout(function() {
+			// Initialize the chart with a delay to make sure
+			// the initial animation is visible
+			createChart();
+
+			$("#infoFechamento-view").bind("kendo:skinChange", function(e) {
+				createChart();
+			});
+		}, 400);
 	};
 	
 	function adicionarFechamento() {
 		var novoFechamento = viewModelFechamento.dsFechamento.add();
 		viewModelFechamento.set("fechamentoSelecionado", novoFechamento);
-		viewModelFechamento.fechamentoSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
+		viewModelFechamento.fechamentoSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));        
 		app.navigate("#editorFechamento-view");
 	}
 	
@@ -136,7 +159,7 @@
 		var view = e.view;
         
 		viewModelFechamento.dsTurnosFunc.read();
-        viewModelFechamento.dsTiposFech.read();
+		viewModelFechamento.dsTiposFech.read();
         
 		validatorFechamento = $("#editorFechamento").kendoValidator().data("kendoValidator");
         
@@ -168,6 +191,68 @@
 		});
 	};
 	
+	//Gráfico Fechamentos
+	function createChart() {
+		$("#chart").kendoChart({
+			dataSource: dsFechamento,
+			title: {
+				text: "Informado X Apurado"
+			},
+			legend: {
+				position: "bottom"
+			},			
+			series: [
+				{
+					type: "line",                            
+					field: "FecVlInfVenda",
+					name: "Valor Informado",
+					color: "#ff1c1c",
+					axis: "Valor"
+				}, {
+					type: "line",
+					field: "FecVlApuVenda",
+					name: "Valor Apurado",
+					color: "#ffae00",
+					axis: "Valor"
+				}, {
+					type: "area",
+					field: "FecQtInfVenda",
+					name: "Qtde. Informada",
+					color: "#73c100",
+					axis: "Qtde"
+				}, {
+					type: "area",
+					field: "FecQtApuVenda",
+					name: "Qtde. Apurada",
+					color: "#007eff",
+					axis: "Qtde"
+				}
+			],
+			valueAxes: [
+				{
+					name: "Qtde",
+					color: "#007eff",
+					skip: 5,
+					step: 5
+				}, {
+					name: "Valor",
+					color: "#73c100",
+					skip: 5,
+					step: 5
+				}
+			],       
+			categoryAxis: {				
+				field: "FecHrFechamento",
+				justified: true,
+				axisCrossingValues: [0, 10]
+			},		
+			tooltip: {
+				visible: true,
+				format: "N0"
+			}
+		});
+	}
+    
 	$.extend(window, {       
 		viewModelFechamento: viewModelFechamento,		
 		showFechamentos: fechamentos,

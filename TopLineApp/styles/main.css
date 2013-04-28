@@ -532,13 +532,33 @@ div a
 	width: auto;
 }
 
+#nomeLoja
+{
+	font-size: 12px;
+	alignment-adjust: center;
+	color: #476BD6; 
+	font-weight: bold; 
+    text-align:center;
+    width: 100%;
+}
+
+#dataFechamento
+{
+	font-size: 12px;
+	alignment-adjust: center;
+	color: #476BD6; 
+	font-weight: bold; 
+    text-align:center;
+    width: 100%;
+}
+
 #editorFechamento input[type="text"]
 {
 	font-size: 12px;
 	alignment-adjust: left;
 	color: #476BD6; 
 	font-weight: bold;
-	left: 100px;
+	left: 135px;
 	width: auto;
 }
 
@@ -548,7 +568,7 @@ div a
 	alignment-adjust: left;
 	color: #476BD6; 
 	font-weight: bold;
-	left: 100px;
+	left: 135px;
 	width: auto;
 }
 
@@ -558,7 +578,7 @@ div a
 	alignment-adjust: left;
 	color: #476BD6; 
 	font-weight: bold;
-	left: 100px;
+	left: 135px;
 }
 
 #editorTelColaborador input[type="text"]
@@ -654,13 +674,13 @@ left: 100px;
 	text-align: left;
 	color: #476BD6; 
 	font-weight: bold;
-	left: 100px;
+	left: 135px;
 }
 
 #editorFechamento label
 { 
 	display: block; 
-	width: 90px; 
+	width: 120px; 
 	float: left; 
 	color: #2e2e2e;
 	text-align: right;
@@ -724,7 +744,7 @@ left: 100px;
 	text-align: right;
 }
 
-#formEntrarFila input[type="text"], #formEntrarFila select
+#formEntrarFila input[type="text"]
 {
 	font-size: 12px;
 	alignment-adjust: left;
@@ -733,34 +753,42 @@ left: 100px;
 	left: 50px;
 	width: 240px; 
 }
-/*
-.km-ios .km-detail 
-{
-line-height: 1.3rem;
-margin-top: -.8rem;
-width: 1.5rem;
-height: 1.5rem;
-}
-*/
 
-/*
-.km-ios .km-detail:active
+#formEntrarFila select
 {
--webkit-box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
-box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
-}
-*/
-
-.zoomable-explanation
-{
-	position: absolute;
-	width: 200px;
-	top: 50px;
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
 	left: 50px;
-	padding: 20px;
-	background: black;
-	color: white;
-	border: 2px solid white;
-	-webkit-border-radius: 10px;
-	-webkit-opacity: 0.5;
+	width: 240px; 
+}
+
+#formMotivosNaoVenda label
+{ 
+	display: block; 
+	width: 0px; 
+	float: left; 
+	color: #2e2e2e;
+	text-align: right;
+}
+
+#formMotivosNaoVenda input[type="text"]
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 50px;
+	width: 240px; 
+}
+
+#formMotivosNaoVenda select
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 50px;
+	width: 280px; 
 }

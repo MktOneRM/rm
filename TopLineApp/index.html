@@ -460,7 +460,7 @@
 						<li>
 							<label>
 								Nascimento:
-							    <input id="dtNascimento" name="DataNascimento" type="date" placeholder="Data de nascimento" data-bind="dateValue: colaboradorSelecionado.ColDtnascimento" required validationmessage="Requerido"/>
+								<input id="dtNascimento" name="DataNascimento" type="date" placeholder="Data de nascimento" data-bind="dateValue: colaboradorSelecionado.ColDtnascimento" required validationmessage="Requerido"/>
 							</label>
 						</li>
 
@@ -805,20 +805,18 @@
 			<ul id="editorFechamento" data-role="listview" data-style="inset" data-type="group">
 				<li>
 					<ul>
-						<li>
-							<span id="teste" data-bind="text: lojaSelecionada.LojNomefantasia"></span>
+						<li id="nomeLoja">
+							<span data-bind="text: lojaSelecionada.LojNomefantasia"></span>
 						</li>
-						<li>
-							<label>
-								Data: <span data-bind="text: lojaSelecionada.LojNomefantasia"></span>
-							</label>
+						<li id="dataFechamento">
+							<span data-bind="date: dataAtual" data-dateformat="dddd, dd MMMM yyyy, hh:mm:ss"></span>
 						</li>
 					</ul>
 					Parâmetros Fechamento
 					<ul>
 						<li>
 							<label>
-								Tipo Fechamento:
+								Tipo:
 							</label>
 							<select id="tipoId" name="Tipo" data-bind="source: tiposFech, value: fechamentoSelecionado.TipoFechamento" data-text-field="Desc" data-value-field="Id"></select>
 						</li>

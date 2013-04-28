@@ -2,6 +2,21 @@
 	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
 
+	kendo.data.binders.date = kendo.data.Binder.extend({
+		init: function (element, bindings, options) {
+			kendo.data.Binder.fn.init.call(this, element, bindings, options);
+ 
+			this.dateformat = $(element).data("dateformat");
+		},
+		refresh: function () {
+			var data = this.bindings["date"].get();
+			if (data) {
+				var dateObj = new Date(data);
+				$(this.element).text(kendo.toString(dateObj, this.dateformat, "pt-BR"));
+			}
+		}
+	});
+    
 	var scFechamento = {
 		model:{
 			id: "FecId",
@@ -133,7 +148,8 @@
 		tiposFech: [],
 		editorFecViewInit: editorFecViewInit,
 		editorFecViewShow: editorFecViewShow,
-		adicionarFechamento: adicionarFechamento
+		adicionarFechamento: adicionarFechamento,
+		dataAtual: new Date()
 	});
 
 	function fechamentos() {        
@@ -148,7 +164,6 @@
 				createChart();
 			});
 		}, 100);
-		
 	};
 	
 	function adicionarFechamento() {

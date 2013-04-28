@@ -205,13 +205,13 @@
 			value = that.bindings["dateValue"].get(); //get the value from the View-Model
 			console.log("refresh= ", this, value);
 			if (value) {
-				formatedValue = kendo.toString(value, "yyyy/MM/dd"); //format
+				formatedValue = kendo.toString(value, "yyyy-MM-dd"); //format
 				$(that.element).val(formatedValue); //update the HTML input element
 			}
 		},
 		change: function() {
 			var formatedValue = this.element.value;
-			value = kendo.parseDate(formatedValue, "yyyy/MM/dd");             
+			value = kendo.parseDate(formatedValue, "yyyy-MM-dd");             
 			this.bindings["dateValue"].set(value);
 		}
 	});

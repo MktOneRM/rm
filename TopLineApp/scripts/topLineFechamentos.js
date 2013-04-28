@@ -133,6 +133,7 @@
 	});
 
 	function fechamentos() {        
+        viewModelFechamento.dsFechamento.read();
 		viewModelFechamento.set("lojaSelecionada", viewModel.get("lojaSelecionada"));        
 		      
 		setTimeout(function() {
@@ -143,7 +144,7 @@
 			$("#infoFechamento-view").bind("kendo:skinChange", function(e) {
 				createChart();
 			});
-		}, 400);
+		}, 100);
 	};
 	
 	function adicionarFechamento() {

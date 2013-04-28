@@ -1,9 +1,8 @@
 (function($, undefined) {
-    
 	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
     
-    kendo.data.binders.cep = kendo.data.Binder.extend({
+	kendo.data.binders.cep = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cep"].get();
 			if (value) {
@@ -191,7 +190,7 @@
 		}
 	});
 
-   kendo.data.binders.dateValue = kendo.data.Binder.extend({
+	kendo.data.binders.dateValue = kendo.data.Binder.extend({
 		init: function(element, bindings, options) {
 			//call the base constructor
 			kendo.data.Binder.fn.init.call(this, element, bindings, options);
@@ -204,12 +203,12 @@
 		refresh: function() {
 			var that = this,
 			value = that.bindings["dateValue"].get(); //get the value from the View-Model
-            console.log("refresh= ",this, value);
-            if (value) {
-    			formatedValue = kendo.toString(value, "dd/MM/yyyy"); //format
-    			$(that.element).val(formatedValue); //update the HTML input element
-            }
-    	},
+			console.log("refresh= ", this, value);
+			if (value) {
+				formatedValue = kendo.toString(value, "dd/MM/yyyy"); //format
+				$(that.element).val(formatedValue); //update the HTML input element
+			}
+		},
 		change: function() {
 			var formatedValue = this.element.value;
 			value = kendo.parseDate(formatedValue, "dd/MM/yyyy");             
@@ -375,7 +374,7 @@
 		model: {
 			id: "EscId",
 			fields: {
-                EscId: { type: "int", defaultValue:0 },
+				EscId: { type: "int", defaultValue:0 },
 				HfuId: { type: "int", validation: { required: true} },
 				LojId: { type: "int", validation: { required: true} },
 				TufId: { type: "int", validation: { required: true} },
@@ -956,10 +955,12 @@
 		onSwipe:onSwipe,
 		onSwipeFora:onSwipeFora,
 		editorColViewInit:editorColViewInit,
+		editorColViewShow: editorColViewShow,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		onTouchstartTelefone:onTouchstartTelefone,
 		editorLojaViewInit: editorLojaViewInit,
+		editorLojaViewShow: editorLojaViewShow,
 		salvarEdicaoLoja: salvarEdicaoLoja,
 		cancelarEdicaoLoja: cancelarEdicaoLoja,
 		validarCPF:validarCPF,	
@@ -1195,10 +1196,16 @@
 		adicionarAtendimento();
 		app.navigate("#resultadoAtendimento-view");
 	}
+    
+	function editorColViewShow() {
+		$("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
+		$("#cargoId").find("option[value=" + viewModel.colaboradorSelecionado.get("CarId") + "]").attr("selected", true);
+		$("#turnoId").find("option[value=" + viewModel.colaboradorSelecionado.get("ColHfuId") + "]").attr("selected", true);
+	}
 
 	function editorColViewInit(e) {
 		var view = e.view;
-        
+		
 		$('#novoTelefone').click(function() {
 			viewModel.dsTelColaborador.add(
 				{
@@ -1213,27 +1220,22 @@
 			});  
 			return false;
 		});
-      
-
-        $("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
-		$("#cargoId").find("option[value=" + viewModel.colaboradorSelecionado.get("CarId") + "]").attr("selected", true);
-		$("#turnoId").find("option[value=" + viewModel.colaboradorSelecionado.get("ColHfuId") + "]").attr("selected", true);
         
 		validatorColaborador = $("#editorColaborador").kendoValidator().data("kendoValidator");
 		validatorTelColaborador = $("#editorTelColaborador").kendoValidator().data("kendoValidator");
 
-        view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
+		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsColaborador.one("change", function() {
-                dsTelColaborador.sync();
+				dsTelColaborador.sync();
 				view.loader.hide();
-    			document.location.href = "#colaboradores-view";                
+				document.location.href = "#colaboradores-view";                
 			});
             
-            if(viewModel.colaboradorSelecionado.get("ColFoto") == null) {
-                viewModel.colaboradorSelecionado.set("ColFoto","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABbCAQAAABkbztKAAAAAXNSR0IArs4c6QAAAAJiS0dEAACqjSMyAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH2wQEFTgvaGyX4gAABD9JREFUaN7tmuty2zYQhb8FITmyFcmRa1uqk4k9bd//SfIGaTqdTHpz4tws60Zi+4MgQ9upBHBIuz9IzUgjiRAOds+eXSwkr5T/zWWgA9OB6cB0YDowHZgOTMNglDaSva0DRFAon6kAK97JQ4ERFONBORRwgCA4QDGIv0vaBwPgUARhzFMGDOj56TekLPnCnBWO5CHcBMKYCZPSUsXnFss+EzIy/uaybTCOhAUvmJbr1jvxoIDB8IIRb6KIbuLDb8U5UyzynQeePTmRRzyP4o2Jt8wFM29Q3epKEI75OcI2Jo4tG044xeF2Rov6x5BfyJoHowg9pjgEQ4oJWrNjxBGbNtw0xWIwCHarZQSD8a/KOb1mweQSN6gMkAB5LEK/F2TFSMsMcDUkUgLlL4ozSRm+j5y1pcw6dSzjgkaaGNwZUop/OBDKxNoggYub5fHd1F5JVRNMRhZk7gcAoygmkIp3s5QLKrUidaaeVULdG5mbtGZoa7OhLRF6cd8qrg3O1CVv1qxlUiw/BCa8+xP82CyYhJSX9Gu4CZQZg6Zzk6sVSXly3TSZDjIsn4OpeDujASya1BkDLGsEd2iSjEyUykcgiYSTc+aq6UrPskZr7KDBMA+q9SII7GpROHfsqtl6Jk927+60QEJGwQdugmQvMh1c8tWvVoNdZHgbuMsycQZX1iguovxUMrLAaaJLiHkJRAOXcBM8iYml46cy0CVwxHU7YATDDRs/LNRR79nggrY50W7q86sP823xoSgZDsdn1thAUYh2EyzZIDu0ON/yGeDPsu2oTYPJU+ZrryDbLJN/+4FrEjKSoBoxGowAH1ntZEwuBJdknuwtWcbRZ7kzmgyKssIgJO1sVYqYsjsGSvnjibeMNE/gYqIkcM+deLVuRfQKetpA0E/a22tXV6wBkGEQVRtGi56S0g/I2rlzBqQRcGw8X2ac7GwAqJe5CcLvwYc+kf0ZWDOjj5LsbDXnresj39hvwU0pCT0Es+MAR7y+KDAMdlTUXtsAY7+Rl62pT1EcDkUZsQmEY8MdBI6UcXnOlmxR1UKLQNnHeuDShGWKnpXjjMPyxCSMlMo+L9kPqg1teKfqORP2ojs0guOIZ3zlHYsdCwhwU8YBp4yxNdto+fQjDvnEHyy2OEy+/2+0b8fFQ844KKsXV6NLnpXlgwJL/uEL6S2g/2kZ9W35JXuccYxiKw3pxAONicHbSfWAc5Q5b1jeO/ipWKao+B0w4pQhhqzSq2qqM65+cde854pNBVIFjPPh9YwZT3wJbSp1W3NgiqLVkHLFXyxIMFU3KYaEE6a+YMwVtogdbfTEID9IS3AYjjlhzm95pOWWUQwXPK2UBlLqiTbqpNsBUvyuY83b3DLKmAvPebkTku2cotyXzD1+wsKQA85wPvc8zpWXJPaUI/YeFci3vGQPa/R227pEu/8Dd2A6MB2YDkwHhn8BXNB6BARw7GsAAAAASUVORK5CYII=");
-            }
+			if (viewModel.colaboradorSelecionado.get("ColFoto") == null) {
+				viewModel.colaboradorSelecionado.set("ColFoto", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABbCAQAAABkbztKAAAAAXNSR0IArs4c6QAAAAJiS0dEAACqjSMyAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH2wQEFTgvaGyX4gAABD9JREFUaN7tmuty2zYQhb8FITmyFcmRa1uqk4k9bd//SfIGaTqdTHpz4tws60Zi+4MgQ9upBHBIuz9IzUgjiRAOds+eXSwkr5T/zWWgA9OB6cB0YDowHZgOTMNglDaSva0DRFAon6kAK97JQ4ERFONBORRwgCA4QDGIv0vaBwPgUARhzFMGDOj56TekLPnCnBWO5CHcBMKYCZPSUsXnFss+EzIy/uaybTCOhAUvmJbr1jvxoIDB8IIRb6KIbuLDb8U5UyzynQeePTmRRzyP4o2Jt8wFM29Q3epKEI75OcI2Jo4tG044xeF2Rov6x5BfyJoHowg9pjgEQ4oJWrNjxBGbNtw0xWIwCHarZQSD8a/KOb1mweQSN6gMkAB5LEK/F2TFSMsMcDUkUgLlL4ozSRm+j5y1pcw6dSzjgkaaGNwZUop/OBDKxNoggYub5fHd1F5JVRNMRhZk7gcAoygmkIp3s5QLKrUidaaeVULdG5mbtGZoa7OhLRF6cd8qrg3O1CVv1qxlUiw/BCa8+xP82CyYhJSX9Gu4CZQZg6Zzk6sVSXly3TSZDjIsn4OpeDujASya1BkDLGsEd2iSjEyUykcgiYSTc+aq6UrPskZr7KDBMA+q9SII7GpROHfsqtl6Jk927+60QEJGwQdugmQvMh1c8tWvVoNdZHgbuMsycQZX1iguovxUMrLAaaJLiHkJRAOXcBM8iYml46cy0CVwxHU7YATDDRs/LNRR79nggrY50W7q86sP823xoSgZDsdn1thAUYh2EyzZIDu0ON/yGeDPsu2oTYPJU+ZrryDbLJN/+4FrEjKSoBoxGowAH1ntZEwuBJdknuwtWcbRZ7kzmgyKssIgJO1sVYqYsjsGSvnjibeMNE/gYqIkcM+deLVuRfQKetpA0E/a22tXV6wBkGEQVRtGi56S0g/I2rlzBqQRcGw8X2ac7GwAqJe5CcLvwYc+kf0ZWDOjj5LsbDXnresj39hvwU0pCT0Es+MAR7y+KDAMdlTUXtsAY7+Rl62pT1EcDkUZsQmEY8MdBI6UcXnOlmxR1UKLQNnHeuDShGWKnpXjjMPyxCSMlMo+L9kPqg1teKfqORP2ojs0guOIZ3zlHYsdCwhwU8YBp4yxNdto+fQjDvnEHyy2OEy+/2+0b8fFQ844KKsXV6NLnpXlgwJL/uEL6S2g/2kZ9W35JXuccYxiKw3pxAONicHbSfWAc5Q5b1jeO/ipWKao+B0w4pQhhqzSq2qqM65+cde854pNBVIFjPPh9YwZT3wJbSp1W3NgiqLVkHLFXyxIMFU3KYaEE6a+YMwVtogdbfTEID9IS3AYjjlhzm95pOWWUQwXPK2UBlLqiTbqpNsBUvyuY83b3DLKmAvPebkTku2cotyXzD1+wsKQA85wPvc8zpWXJPaUI/YeFci3vGQPa/R227pEu/8Dd2A6MB2YDkwHhn8BXNB6BARw7GsAAAAASUVORK5CYII=");
+			}
 			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
-            dsColaborador.sync();
+			dsColaborador.sync();
 			view.loader.show();
 		});
         
@@ -1248,6 +1250,13 @@
 			dsColaborador.cancelChanges();
 			dsTelColaborador.cancelChanges();
 		});
+	}
+    
+	function editorLojaViewShow() {
+		var ufSel = viewModel.lojaSelecionada.get("LojUf");
+		var lojaDe = viewModel.lojaSelecionada.get("LojShopping_rua");
+		$("#LojUf").find("option[value='" + ufSel + "']").attr("selected", true)
+		$("#LojShopping_rua").find("option[value=" + lojaDe + "]").attr("selected", true)
 	}
     
 	function editorLojaViewInit(e) {
@@ -1271,22 +1280,16 @@
             
 			return false;
 		});
-        
-		var ufSel = viewModel.lojaSelecionada.get("LojUf");
-		var lojaDe = viewModel.lojaSelecionada.get("LojShopping_rua");
-		$("#LojUf").find("option[value='" + ufSel + "']").attr("selected", true)
-		$("#LojShopping_rua").find("option[value=" + lojaDe + "]").attr("selected", true)
-        
+		
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			dsLoja.one("change", function() {				
 				view.loader.hide();
-                dsEscala.sync(); 
+				dsEscala.sync(); 
 				app.navigate("#detalhesLoja-view");
 			});        
 			
-            view.loader.show();
-            dsLoja.sync();
-            
+			view.loader.show();
+			dsLoja.sync();
 		});
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
@@ -1299,7 +1302,7 @@
 			view.loader.show();
 			viewModel.set("lojaSelecionada", dsLoja.view()[0]);
 			dsLoja.cancelChanges();
-            dsEscala.cancelChanges
+			dsEscala.cancelChanges();
 		});
 	}
    
@@ -1429,11 +1432,12 @@
 		onSwipe:onSwipe,
 		onSwipeFora:onSwipeFora,
 		editorColViewInit:editorColViewInit,
+		editorColViewShow: editorColViewShow,
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		onTouchstartTelefone:onTouchstartTelefone,
 		validarCPF:validarCPF,				
-		editorLojaViewInit: editorLojaViewInit
-        
+		editorLojaViewInit: editorLojaViewInit,
+		editorLojaViewShow: editorLojaViewShow        
 	});
 })(jQuery);

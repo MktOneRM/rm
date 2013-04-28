@@ -1,6 +1,6 @@
 (function($, undefined) {
-	//var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-	var baseUrl = "http://localhost:50000/api";
+	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+	//var baseUrl = "http://localhost:50000/api";
 
 	var scFechamento = {
 		model:{
@@ -115,6 +115,9 @@
 		data: dataTiposFech,
 		schema: scTiposFech,
 		change: function (e) {	
+            
+            console.log(this.view());
+            
 			var tipoFechamentoId = this.view()[0].get("Id");            
 			viewModelFechamento.fechamentoSelecionado.set("TipoFechamento", tipoFechamentoId); 
 			viewModelFechamento.set("tiposFech", this.view());
@@ -243,6 +246,9 @@
 			],       
 			categoryAxis: {				
 				field: "FecHrFechamento",
+				labels: {
+					rotation: -90
+				},
 				justified: true,
 				axisCrossingValues: [0, 10]
 			},		

@@ -521,7 +521,7 @@
 		</div>
 
 		<!--Detalhes Loja View-->
-		<div id="detalhesLoja-view" data-role="view" data-model="viewModel.lojaSelecionada" data-title="Top Line" data-layout="tools-layout">
+		<div id="detalhesLoja-view" data-role="view" data-model="viewModel.lojaSelecionada" data-title="Top Line" data-layout="tools-layout" data-before-show="showLojas">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#:back">Voltar</a>
@@ -925,35 +925,34 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tAtuEscalasLoja">
-			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstartTelefone">
+			<div>
 				<ul id="editorTurnosLoja" data-role="listview" data-style="inset">
 					<li>
 						<label>
 							Dias Funcionamento:
 						</label>
-						<select id="DsfId" name="DsfId" data-bind="source: diasFunc, value: DsfId" data-text-field="DsfDescricao" data-value-field="DsfId"></select>
+						<select id="DsfId" name="DsfId" data-bind="source: diasFunc, value: DsfId" data-text-field="DsfDescricao" data-value-field="DsfId" required validationmessage="Requerido"></select>
 					</li>
 					<li>
 						<label>
 							Turnos Funcionamento:
 						</label>
-						<select id="TufId" name="TufId" data-bind="source: turnos, value: TufId" data-text-field="TufDescricao" data-value-field="TufId"></select>
+						<select id="TufId" name="TufId" data-bind="source: turnos, value: TufId" data-text-field="TufDescricao" data-value-field="TufId" required validationmessage="Requerido"></select>
 					</li>
 
 					<li>
 						<label>
 							Horário Inicial:
-							<input id="#= uid #" name="EscHrInicial" type="time" data-bind="value: EscHrInicial"/>
+							<input id="#= uid #" name="EscHrInicial" type="time" data-bind="value: EscHrInicial" required validationmessage="Requerido"/>
 						</label>
 					</li>
 					<li>
 						<label>
 							Horário Final:
-							<input id="#= uid #" name="EscHrFinal" type="time" data-bind="value: EscHrFinal"/>
+							<input id="#= uid #" name="EscHrFinal" type="time" data-bind="value: EscHrFinal" required validationmessage="Requerido"/>
 						</label>
 					</li>
 				</ul>
-				<!--<button id="btnEntrada" data-role="button" class="excluir" data-icon="delete"></button>-->
 			</div>
 		</script>
 
@@ -987,7 +986,7 @@
 						<label>
 							Tipo Celular:
 						</label>
-						<select id="TceId" name="TceId" data-bind="source: tiposCel, value: TceId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Tipo Celular" required validationmessage="Requerido"></select>
+						<select id="TceId" name="TceId" data-bind="source: tiposCel, value: TceId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Tipo Celular"></select>
 					</li>
 				</ul>
 				<button id="btnEntrada" data-role="button" class="excluir" data-icon="delete"></button>

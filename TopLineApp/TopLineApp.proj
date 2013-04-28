@@ -43,6 +43,7 @@
     <Folder Include="Bkp" />
     <Folder Include="Bkp\viewModels" />
     <Folder Include="Bkp\views" />
+    <Folder Include="kendo\styles\Black" />
     <Folder Include="kendo\styles\textures" />
     <Folder Include="views" />
     <Folder Include="scripts" />
@@ -76,6 +77,14 @@
     <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="Bkp\kendo.indexedlistview.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />
+    <Content Include="kendo\styles\Black\editor.png" />
+    <Content Include="kendo\styles\Black\imagebrowser.png" />
+    <Content Include="kendo\styles\Black\loading-image.gif" />
+    <Content Include="kendo\styles\Black\loading.gif" />
+    <Content Include="kendo\styles\Black\slider-h.gif" />
+    <Content Include="kendo\styles\Black\slider-v.gif" />
+    <Content Include="kendo\styles\Black\sprite.png" />
+    <Content Include="kendo\styles\Black\sprite_2x.png" />
     <Content Include="kendo\styles\default\editor.png" />
     <Content Include="kendo\styles\default\imagebrowser.png" />
     <Content Include="kendo\styles\default\loading-image.gif" />
@@ -92,6 +101,7 @@
     <Content Include="Bkp\homeLayout.js" />
     <Content Include="Bkp\require.js" />
     <Content Include="Bkp\toolslayout.js" />
+    <Content Include="kendo\styles\kendo.black.min.css" />
     <Content Include="kendo\styles\textures\brushed-metal.png" />
     <Content Include="kendo\styles\textures\dots1.png" />
     <Content Include="kendo\styles\textures\dots10.png" />

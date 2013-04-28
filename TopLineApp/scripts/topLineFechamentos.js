@@ -17,7 +17,7 @@
 				FecVlApuVenda: { type: "float", editable: true, defaultValue:0},
 				FecEstoqueTotal: { type: "int", editable: true, defaultValue:0},
 				FecPrecoMedio: { type: "float", editable: true, defaultValue:0},
-				TipoFechamento: { type: "int", editable: true, defaultValue:0}
+				TipoFechamento: { type: "string", editable: true, defaultValue:0}
 			}
 		}
 	};
@@ -115,10 +115,8 @@
 		data: dataTiposFech,
 		schema: scTiposFech,
 		change: function (e) {	
-            
-            console.log(this.view());
-            
 			var tipoFechamentoId = this.view()[0].get("Id");            
+			console.log(this.view(), tipoFechamentoId, viewModelFechamento.fechamentoSelecionado, parseInt(tipoFechamentoId), tipoFechamentoId);
 			viewModelFechamento.fechamentoSelecionado.set("TipoFechamento", tipoFechamentoId); 
 			viewModelFechamento.set("tiposFech", this.view());
 		}

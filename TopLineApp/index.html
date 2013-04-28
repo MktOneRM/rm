@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-        <link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
+		<link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
 		<link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
@@ -229,8 +229,8 @@
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
 					</ul>
-				</li>                
-                <div>
+				</li>
+				<div>
 					<ul>
 						<li>
 							<label>
@@ -779,7 +779,7 @@
 		</div>
 
 		<!--Lista de Fechamentos do dia-->
-		<div id="infoFechamento-view" data-role="view" data-title="Top Line" data-layout="update-layout" data-model="viewModelFechamento" data-before-show="showFechamentos" class="k-content absConf">
+		<div id="infoFechamento-view" data-role="view" data-title="Fechamento" data-model="viewModelFechamento" data-zoom="true" data-before-show="showFechamentos" data-layout="update-layout" class="k-content absConf">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#dentroFila-view">Voltar</a>
@@ -794,7 +794,7 @@
 		</div>
 
 		<!--Editor Fechamento-->
-		<div id="editorFechamento-view" data-role="view" data-model="viewModelFechamento" data-title="Top Line" data-show="editorFecViewInit" data-layout="update-layout" >
+		<div id="editorFechamento-view" data-role="view" data-model="viewModelFechamento" data-title="Top Line" data-before-show="editorFecViewShow" data-init="editorFecViewInit"  data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="backbutton" type="button" data-align="left">Cancelar</a>

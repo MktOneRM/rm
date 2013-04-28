@@ -53,11 +53,14 @@
 						id: viewModel.lojaSelecionada.LojId
 					}                
 				else if (operation !== "read" && data.models) {
+					console.log(data.models, "Models Map");
+                    
 					return kendo.stringify(data.models[0]);
 				}
 			}     
 		},
-		batch: true,		
+		batch: true,
+		cache: false,
 		sort: { 
 			field: "TipoFechamento", dir: "asc"            
 		},
@@ -87,8 +90,8 @@
 		sort: { field: "TufId", dir: "asc" },
 		schema: scTurnosFunc,        
 		change: function(e) {			
-            var turnoId = this.view()[0].get("TufId");
-            viewModelFechamento.fechamentoSelecionado.set("HfuId", turnoId);            
+			var turnoId = this.view()[0].get("TufId");
+			viewModelFechamento.fechamentoSelecionado.set("HfuId", turnoId);            
 			viewModelFechamento.set("turnos", this.view());
 		}
 	})
@@ -113,8 +116,8 @@
 		data: dataTiposFech,
 		schema: scTiposFech,
 		change: function (e) {	            			
-            var tpFechId = this.view()[0].get("Id");
-            viewModelFechamento.fechamentoSelecionado.set("TipoFechamento", tpFechId);            
+			var tpFechId = this.view()[0].get("Id");
+			viewModelFechamento.fechamentoSelecionado.set("TipoFechamento", tpFechId);            
 			viewModelFechamento.set("tiposFech", this.view());
 		}
 	});
@@ -129,22 +132,23 @@
 		turnos: [],
 		tiposFech: [],
 		editorFecViewInit: editorFecViewInit,
+		editorFecViewShow: editorFecViewShow,
 		adicionarFechamento: adicionarFechamento
 	});
 
 	function fechamentos() {        
-        viewModelFechamento.dsFechamento.read();
+		viewModelFechamento.dsFechamento.read();
 		viewModelFechamento.set("lojaSelecionada", viewModel.get("lojaSelecionada"));        
-		      
+		
 		setTimeout(function() {
 			// Initialize the chart with a delay to make sure
 			// the initial animation is visible
 			createChart();
-			
 			$("#infoFechamento-view").bind("kendo:skinChange", function(e) {
 				createChart();
 			});
 		}, 100);
+		
 	};
 	
 	function adicionarFechamento() {
@@ -156,14 +160,11 @@
 	
 	function editorFecViewInit(e) {
 		var view = e.view;
-        
-		viewModelFechamento.dsTurnosFunc.read();
-		viewModelFechamento.dsTiposFech.read();
-        
+
 		validatorFechamento = $("#editorFechamento").kendoValidator().data("kendoValidator");
-        
+  
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
-			dsFechamento.one("change", function() {
+			viewModelFechamento.dsFechamento.one("change", function() {
 				view.loader.hide();
 				app.navigate("#infoFechamento-view");                
 			});
@@ -171,10 +172,7 @@
 			view.loader.show();
             
 			if (validatorFechamento.validate()) {
-                
-                console.log(viewModelFechamento);
-                
-				dsFechamento.sync();    
+				viewModelFechamento.dsFechamento.sync(); 
 			}
 			else {
 				view.loader.hide();
@@ -183,16 +181,21 @@
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
 			e.preventDefault();
-			dsFechamento.one("change", function() {
+			viewModelFechamento.dsFechamento.one("change", function() {
 				view.loader.hide();
 				app.navigate("#infoFechamento-view");
 			});
 
 			view.loader.show();			
-			dsFechamento.cancelChanges();
+			viewModelFechamento.dsFechamento.cancelChanges();
 		});
 	};
 	
+	function editorFecViewShow() {
+		viewModelFechamento.dsTurnosFunc.read();
+		viewModelFechamento.dsTiposFech.read();
+	}
+    
 	//Gráfico Fechamentos
 	function createChart() {
 		$("#chart").kendoChart({
@@ -234,13 +237,19 @@
 				{
 					name: "Qtde",
 					color: "#007eff",
-					skip: 5,
-					step: 5
+					labels: {
+						format: "NO",
+						skip: 2,
+						step: 2
+					}
 				}, {
 					name: "Valor",
-					color: "#73c100",
-					skip: 5,
-					step: 5
+					color: "#73c100", 
+					labels: {
+						format: "R${0}",
+						skip: 5,
+						step: 2
+					}
 				}
 			],       
 			categoryAxis: {				
@@ -253,15 +262,17 @@
 			},		
 			tooltip: {
 				visible: true,
-				format: "N0"
+				format: "N0",
+				template: "#= series.name #: #= value #"
 			}
-		});
+		});        
 	}
     
 	$.extend(window, {       
 		viewModelFechamento: viewModelFechamento,		
 		showFechamentos: fechamentos,
 		adicionarFechamento: adicionarFechamento,
-		editorFecViewInit: editorFecViewInit
+		editorFecViewInit: editorFecViewInit,
+		editorFecViewShow: editorFecViewShow
 	});
 })(jQuery);

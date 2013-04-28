@@ -499,7 +499,7 @@ div a
 	font-size: 12px;
 	alignment-adjust: left;
 	color: #476BD6; 
-	font-weight: bold;    
+	font-weight: bold; 
 }
 
 #infoFechamento label
@@ -510,7 +510,7 @@ div a
 	padding-top: 6px; 
 	padding-right: 5px;
 	color: #2e2e2e;
-	text-align: right;    
+	text-align: right; 
 }
 
 #editorColaborador input[type="text"]
@@ -619,12 +619,12 @@ div a
 
 /*#editorColaborador input[type="date"]
 {
-	font-size: 12px;
-	alignment-adjust: left;
-	text-align: left;
-	color: #476BD6; 
-	font-weight: bold;
-	left: 100px;
+font-size: 12px;
+alignment-adjust: left;
+text-align: left;
+color: #476BD6; 
+font-weight: bold;
+left: 100px;
 }
 */
 #editorColaborador input[type="radio"]
@@ -750,3 +750,17 @@ height: 1.5rem;
 box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
 }
 */
+
+#zoomable-explanation
+{
+	position: absolute;
+	width: 200px;
+	top: 50px;
+	left: 50px;
+	padding: 20px;
+	background: black;
+	color: white;
+	border: 2px solid white;
+	-webkit-border-radius: 10px;
+	-webkit-opacity: 0.5;
+}

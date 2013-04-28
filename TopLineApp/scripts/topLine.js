@@ -191,7 +191,7 @@
 		}
 	});
 
-	kendo.data.binders.dateValue = kendo.data.Binder.extend({
+   kendo.data.binders.dateValue = kendo.data.Binder.extend({
 		init: function(element, bindings, options) {
 			//call the base constructor
 			kendo.data.Binder.fn.init.call(this, element, bindings, options);
@@ -204,6 +204,7 @@
 		refresh: function() {
 			var that = this,
 			value = that.bindings["dateValue"].get(); //get the value from the View-Model
+            console.log("refresh= ",this, value);
             if (value) {
     			formatedValue = kendo.toString(value, "dd/MM/yyyy"); //format
     			$(that.element).val(formatedValue); //update the HTML input element

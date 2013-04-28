@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+        <link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />
 		<link href="kendo/styles/kendo.default.min.css" rel="stylesheet" />
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
@@ -228,13 +229,17 @@
 							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 						</li>
 					</ul>
-				</li>
-				<li>
-					<label>
-						Motivo:
-					</label>
-					<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
-				</li>
+				</li>                
+                <div>
+					<ul>
+						<li>
+							<label>
+								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+								Motivo:
+							</label>
+						</li>
+					</ul>
+				</div>
 			</ul>
 			<div data-role="footer">
 				<div data-role="tabstrip">
@@ -395,7 +400,7 @@
 		</div>
 
 		<!--Editor colaboradores view-->
-		<div id="editorColaborador-view" data-role="view" data-before-show="editorColViewInit" data-model="viewModel" data-title="Top Line" data-layout="update-layout" >
+		<div id="editorColaborador-view" data-role="view" data-init="editorColViewInit" data-model="viewModel" data-title="Top Line" data-layout="update-layout">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="backbutton" type="button" data-align="left">Cancelar</a>

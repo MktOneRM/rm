@@ -17,7 +17,8 @@
 				FecVlApuVenda: { type: "float", editable: true, defaultValue:0},
 				FecEstoqueTotal: { type: "int", editable: true, defaultValue:0},
 				FecPrecoMedio: { type: "float", editable: true, defaultValue:0},
-				TipoFechamento: { type: "string", editable: true, defaultValue:0}
+                FecParcial: { type: "boolean", editable: true, defaultValue:true},
+				TipoFechamento: { type: "string", editable: true, defaultValue:""}
 			}
 		}
 	};
@@ -89,8 +90,6 @@
 		sort: { field: "TufId", dir: "asc" },
 		schema: scTurnosFunc,        
 		change: function(e) {
-			var turnoId = this.view()[0].get("TufId");            
-			viewModelFechamento.fechamentoSelecionado.set("HfuId", turnoId); 
 			viewModelFechamento.set("turnos", this.view());
 		}
 	})
@@ -114,10 +113,7 @@
 	var dsTiposFech = new kendo.data.DataSource({ 
 		data: dataTiposFech,
 		schema: scTiposFech,
-		change: function (e) {	
-			var tipoFechamentoId = this.view()[0].get("Id");            
-			console.log(this.view(), tipoFechamentoId, viewModelFechamento.fechamentoSelecionado, parseInt(tipoFechamentoId), tipoFechamentoId);
-			viewModelFechamento.fechamentoSelecionado.set("TipoFechamento", tipoFechamentoId); 
+		change: function (e) {				
 			viewModelFechamento.set("tiposFech", this.view());
 		}
 	});
@@ -152,7 +148,16 @@
 	function adicionarFechamento() {
 		var novoFechamento = viewModelFechamento.dsFechamento.add();
 		viewModelFechamento.set("fechamentoSelecionado", novoFechamento);
-		viewModelFechamento.fechamentoSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));        
+		viewModelFechamento.fechamentoSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));   
+        
+        
+			console.log(viewModelFechamento.fechamentoSelecionado, tiposFech[0]);
+			//viewModelFechamento.fechamentoSelecionado.set("TipoFechamento", tipoFechamentoId); 
+        
+   
+            console.log(viewModelFechamento.fechamentoSelecionado, turnos[0]);
+			//viewModelFechamento.fechamentoSelecionado.set("HfuId", turnoId); 
+        
 		app.navigate("#editorFechamento-view");
 	}
 	

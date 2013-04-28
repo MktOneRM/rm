@@ -102,6 +102,8 @@
     <Content Include="Bkp\require.js" />
     <Content Include="Bkp\toolslayout.js" />
     <Content Include="kendo\styles\kendo.black.min.css" />
+    <Content Include="kendo\styles\kendo.dataviz.black.min.css" />
+    <Content Include="kendo\styles\kendo.dataviz.min.css" />
     <Content Include="kendo\styles\textures\brushed-metal.png" />
     <Content Include="kendo\styles\textures\dots1.png" />
     <Content Include="kendo\styles\textures\dots10.png" />

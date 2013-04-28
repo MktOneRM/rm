@@ -617,7 +617,7 @@ div a
 	text-align: right;
 }
 
-/*#editorColaborador input[type="date"]
+#editorColaborador input[type="date"]
 {
 font-size: 12px;
 alignment-adjust: left;
@@ -626,7 +626,7 @@ color: #476BD6;
 font-weight: bold;
 left: 100px;
 }
-*/
+
 #editorColaborador input[type="radio"]
 {
 	font-size: 12px;

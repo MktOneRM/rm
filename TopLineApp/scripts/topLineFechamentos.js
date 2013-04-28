@@ -149,7 +149,8 @@
 		editorFecViewInit: editorFecViewInit,
 		editorFecViewShow: editorFecViewShow,
 		adicionarFechamento: adicionarFechamento,
-		dataAtual: new Date()
+		dataAtual: "",
+		confirma: false
 	});
 
 	function fechamentos() {        
@@ -175,7 +176,8 @@
 	
 	function editorFecViewInit(e) {
 		var view = e.view;
-
+		var that = this;
+		
 		validatorFechamento = $("#editorFechamento").kendoValidator().data("kendoValidator");
   
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
@@ -186,11 +188,26 @@
          
 			view.loader.show();
             
+			navigator.notification.confirm('Deseja gravar o fechamento?', 
+										   function() {                                               
+											   onConfirm.apply(that, arguments);
+										   }, 
+										   'Fechamento', 
+										   'Não,Sim'
+			);  
+            
+			//Caso não confirme a gravação retorna para a tela de edição!
+			if (!viewModelFechamento.get("confirma")) {				
+				view.loader.hide();
+				return;
+			}
+             
 			if (validatorFechamento.validate()) {
 				viewModelFechamento.dsFechamento.sync(); 
 			}
 			else {
 				view.loader.hide();
+                return;
 			}
 		});
         
@@ -206,9 +223,15 @@
 		});
 	};
 	
+	function onConfirm(button) {
+		viewModelFechamento.set("confirma", button);
+	}
+    
 	function editorFecViewShow() {
 		viewModelFechamento.dsTurnosFunc.read();
 		viewModelFechamento.dsTiposFech.read();
+		viewModelFechamento.set("dataAtual", new Date());
+		viewModelFechamento.set("confirma", false);      
 	}
     
 	//Gráfico Fechamentos

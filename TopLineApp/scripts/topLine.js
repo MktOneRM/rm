@@ -202,8 +202,7 @@
 		},
 		refresh: function() {
 			var that = this,
-			value = that.bindings["dateValue"].get(); //get the value from the View-Model
-			console.log("refresh= ", this, value);
+			value = that.bindings["dateValue"].get(); //get the value from the View-Model			
 			if (value) {
 				formatedValue = kendo.toString(value, "yyyy-MM-dd"); //format
 				$(that.element).val(formatedValue); //update the HTML input element
@@ -447,8 +446,8 @@
 			fields: {
 				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				CarId: { type: "int", validation: { required: false} },  
-				ColCpf: { validation: { required: true}},
-				ColSexo: { validation: { required: true}, defaultvalue: "M"},
+				ColCpf: { type:"string", validation: { required: true}, editable: true, nullable: false},
+				ColSexo: { validation: { required:true}, defaultvalue: "M"},
 				ColApelido:  { validation: { required: true} },
 				ColNome:  { validation: { required: true} },
 				ColSobrenome:  { validation: { required: true} },
@@ -972,7 +971,8 @@
         
 		idLoja: null,        
 		motivos: [],
-		motivo: []
+		motivo: [],
+		confirma: false
 	});
 
 	function adicionarAtendimento() {
@@ -1068,11 +1068,9 @@
  
 	function vendedoresFila() {
 		atualizaFilaNoSalao(dsVendFila, 1);
-		/*
-		var sltBtn = this.header.find(".select-group").data("kendoMobileButtonGroup");        
+		var sltBtn = this.header.find("#btFila").data("kendoMobileButtonGroup");        
 		if (sltBtn)
-		sltBtn.select(0);
-		*/
+		  sltBtn.select(0);
 	}
 			
 	function vendedoresForaFila() {	
@@ -1198,6 +1196,12 @@
 	}
     
 	function editorColViewShow() {
+		var formatedValue = kendo.toString(new Date(), "yyyy-MM-dd"); //format
+		
+		viewModel.set("confirma", false);
+		viewModel.colaboradorSelecionado.set("ColDtnascimento", formatedValue);
+		viewModel.colaboradorSelecionado.set("ColDtentrada", formatedValue);
+		        
 		$("#sexoId").find("option[value='" + viewModel.colaboradorSelecionado.get("ColSexo") + "']").attr("selected", true);
 		$("#cargoId").find("option[value=" + viewModel.colaboradorSelecionado.get("CarId") + "]").attr("selected", true);
 		$("#turnoId").find("option[value=" + viewModel.colaboradorSelecionado.get("ColHfuId") + "]").attr("selected", true);
@@ -1205,6 +1209,7 @@
 
 	function editorColViewInit(e) {
 		var view = e.view;
+		var that = this;
 		
 		$('#novoTelefone').click(function() {
 			viewModel.dsTelColaborador.add(
@@ -1228,15 +1233,40 @@
 			dsColaborador.one("change", function() {
 				dsTelColaborador.sync();
 				view.loader.hide();
-				document.location.href = "#colaboradores-view";                
+				app.navigate("#colaboradores-view"); 
 			});
             
-			if (viewModel.colaboradorSelecionado.get("ColFoto") == null) {
-				viewModel.colaboradorSelecionado.set("ColFoto", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABbCAQAAABkbztKAAAAAXNSR0IArs4c6QAAAAJiS0dEAACqjSMyAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH2wQEFTgvaGyX4gAABD9JREFUaN7tmuty2zYQhb8FITmyFcmRa1uqk4k9bd//SfIGaTqdTHpz4tws60Zi+4MgQ9upBHBIuz9IzUgjiRAOds+eXSwkr5T/zWWgA9OB6cB0YDowHZgOTMNglDaSva0DRFAon6kAK97JQ4ERFONBORRwgCA4QDGIv0vaBwPgUARhzFMGDOj56TekLPnCnBWO5CHcBMKYCZPSUsXnFss+EzIy/uaybTCOhAUvmJbr1jvxoIDB8IIRb6KIbuLDb8U5UyzynQeePTmRRzyP4o2Jt8wFM29Q3epKEI75OcI2Jo4tG044xeF2Rov6x5BfyJoHowg9pjgEQ4oJWrNjxBGbNtw0xWIwCHarZQSD8a/KOb1mweQSN6gMkAB5LEK/F2TFSMsMcDUkUgLlL4ozSRm+j5y1pcw6dSzjgkaaGNwZUop/OBDKxNoggYub5fHd1F5JVRNMRhZk7gcAoygmkIp3s5QLKrUidaaeVULdG5mbtGZoa7OhLRF6cd8qrg3O1CVv1qxlUiw/BCa8+xP82CyYhJSX9Gu4CZQZg6Zzk6sVSXly3TSZDjIsn4OpeDujASya1BkDLGsEd2iSjEyUykcgiYSTc+aq6UrPskZr7KDBMA+q9SII7GpROHfsqtl6Jk927+60QEJGwQdugmQvMh1c8tWvVoNdZHgbuMsycQZX1iguovxUMrLAaaJLiHkJRAOXcBM8iYml46cy0CVwxHU7YATDDRs/LNRR79nggrY50W7q86sP823xoSgZDsdn1thAUYh2EyzZIDu0ON/yGeDPsu2oTYPJU+ZrryDbLJN/+4FrEjKSoBoxGowAH1ntZEwuBJdknuwtWcbRZ7kzmgyKssIgJO1sVYqYsjsGSvnjibeMNE/gYqIkcM+deLVuRfQKetpA0E/a22tXV6wBkGEQVRtGi56S0g/I2rlzBqQRcGw8X2ac7GwAqJe5CcLvwYc+kf0ZWDOjj5LsbDXnresj39hvwU0pCT0Es+MAR7y+KDAMdlTUXtsAY7+Rl62pT1EcDkUZsQmEY8MdBI6UcXnOlmxR1UKLQNnHeuDShGWKnpXjjMPyxCSMlMo+L9kPqg1teKfqORP2ojs0guOIZ3zlHYsdCwhwU8YBp4yxNdto+fQjDvnEHyy2OEy+/2+0b8fFQ844KKsXV6NLnpXlgwJL/uEL6S2g/2kZ9W35JXuccYxiKw3pxAONicHbSfWAc5Q5b1jeO/ipWKao+B0w4pQhhqzSq2qqM65+cde854pNBVIFjPPh9YwZT3wJbSp1W3NgiqLVkHLFXyxIMFU3KYaEE6a+YMwVtogdbfTEID9IS3AYjjlhzm95pOWWUQwXPK2UBlLqiTbqpNsBUvyuY83b3DLKmAvPebkTku2cotyXzD1+wsKQA85wPvc8zpWXJPaUI/YeFci3vGQPa/R227pEu/8Dd2A6MB2YDkwHhn8BXNB6BARw7GsAAAAASUVORK5CYII=");
-			}
-			viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
-			dsColaborador.sync();
 			view.loader.show();
+            
+			navigator.notification.confirm('Confirma as informações?', 
+										   function() {                                               
+											   onConfirm.apply(that, arguments);
+										   }, 
+										   'Colaborador', 
+										   'Não,Sim'
+			); 
+            
+			//Caso não confirme a gravação retorna para a tela de edição!
+			if (!viewModel.get("confirma")) {				
+				view.loader.hide();
+				return;
+			}
+            
+			console.log(validatorColaborador, validatorTelColaborador, validatorColaborador.validate(), validatorTelColaborador.validate(), viewModel.colaboradorSelecionado, viewModel.get("confirma"), "Validadores");
+			            
+			if (validatorColaborador.validate()) {
+				if (validatorTelColaborador.validate()) {
+					if (viewModel.colaboradorSelecionado.get("ColFoto") == null) {
+						viewModel.colaboradorSelecionado.set("ColFoto", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABbCAQAAABkbztKAAAAAXNSR0IArs4c6QAAAAJiS0dEAACqjSMyAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH2wQEFTgvaGyX4gAABD9JREFUaN7tmuty2zYQhb8FITmyFcmRa1uqk4k9bd//SfIGaTqdTHpz4tws60Zi+4MgQ9upBHBIuz9IzUgjiRAOds+eXSwkr5T/zWWgA9OB6cB0YDowHZgOTMNglDaSva0DRFAon6kAK97JQ4ERFONBORRwgCA4QDGIv0vaBwPgUARhzFMGDOj56TekLPnCnBWO5CHcBMKYCZPSUsXnFss+EzIy/uaybTCOhAUvmJbr1jvxoIDB8IIRb6KIbuLDb8U5UyzynQeePTmRRzyP4o2Jt8wFM29Q3epKEI75OcI2Jo4tG044xeF2Rov6x5BfyJoHowg9pjgEQ4oJWrNjxBGbNtw0xWIwCHarZQSD8a/KOb1mweQSN6gMkAB5LEK/F2TFSMsMcDUkUgLlL4ozSRm+j5y1pcw6dSzjgkaaGNwZUop/OBDKxNoggYub5fHd1F5JVRNMRhZk7gcAoygmkIp3s5QLKrUidaaeVULdG5mbtGZoa7OhLRF6cd8qrg3O1CVv1qxlUiw/BCa8+xP82CyYhJSX9Gu4CZQZg6Zzk6sVSXly3TSZDjIsn4OpeDujASya1BkDLGsEd2iSjEyUykcgiYSTc+aq6UrPskZr7KDBMA+q9SII7GpROHfsqtl6Jk927+60QEJGwQdugmQvMh1c8tWvVoNdZHgbuMsycQZX1iguovxUMrLAaaJLiHkJRAOXcBM8iYml46cy0CVwxHU7YATDDRs/LNRR79nggrY50W7q86sP823xoSgZDsdn1thAUYh2EyzZIDu0ON/yGeDPsu2oTYPJU+ZrryDbLJN/+4FrEjKSoBoxGowAH1ntZEwuBJdknuwtWcbRZ7kzmgyKssIgJO1sVYqYsjsGSvnjibeMNE/gYqIkcM+deLVuRfQKetpA0E/a22tXV6wBkGEQVRtGi56S0g/I2rlzBqQRcGw8X2ac7GwAqJe5CcLvwYc+kf0ZWDOjj5LsbDXnresj39hvwU0pCT0Es+MAR7y+KDAMdlTUXtsAY7+Rl62pT1EcDkUZsQmEY8MdBI6UcXnOlmxR1UKLQNnHeuDShGWKnpXjjMPyxCSMlMo+L9kPqg1teKfqORP2ojs0guOIZ3zlHYsdCwhwU8YBp4yxNdto+fQjDvnEHyy2OEy+/2+0b8fFQ844KKsXV6NLnpXlgwJL/uEL6S2g/2kZ9W35JXuccYxiKw3pxAONicHbSfWAc5Q5b1jeO/ipWKao+B0w4pQhhqzSq2qqM65+cde854pNBVIFjPPh9YwZT3wJbSp1W3NgiqLVkHLFXyxIMFU3KYaEE6a+YMwVtogdbfTEID9IS3AYjjlhzm95pOWWUQwXPK2UBlLqiTbqpNsBUvyuY83b3DLKmAvPebkTku2cotyXzD1+wsKQA85wPvc8zpWXJPaUI/YeFci3vGQPa/R227pEu/8Dd2A6MB2YDkwHhn8BXNB6BARw7GsAAAAASUVORK5CYII=");
+					}
+					viewModel.colaboradorSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
+					dsColaborador.sync();
+				}					
+			}
+			else {
+				view.loader.hide();		
+				return;
+			}
 		});
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
@@ -1250,6 +1280,10 @@
 			dsColaborador.cancelChanges();
 			dsTelColaborador.cancelChanges();
 		});
+	}
+	
+	function onConfirm(button) {
+		viewModel.set("confirma", button);
 	}
     
 	function editorLojaViewShow() {

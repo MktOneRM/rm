@@ -17,7 +17,7 @@
 				FecVlApuVenda: { type: "float", editable: true, defaultValue:0},
 				FecEstoqueTotal: { type: "int", editable: true, defaultValue:0},
 				FecPrecoMedio: { type: "float", editable: true, defaultValue:0},
-                FecParcial: { type: "boolean", editable: true, defaultValue:true},
+				FecParcial: { type: "boolean", editable: true, defaultValue:true},
 				TipoFechamento: { type: "string", editable: true, defaultValue:""}
 			}
 		}
@@ -61,10 +61,7 @@
 		sort: { 
 			field: "TipoFechamento", dir: "asc"            
 		},
-		schema: scFechamento,
-		change: function (e) {						
-			viewModelFechamento.set("fechamentoSelecionado", this.view());
-		}, 
+		schema: scFechamento        
 	});
     
 	var dsTurnosFunc = new kendo.data.DataSource({                    
@@ -89,7 +86,9 @@
 		batch: true,
 		sort: { field: "TufId", dir: "asc" },
 		schema: scTurnosFunc,        
-		change: function(e) {
+		change: function(e) {			
+            var turnoId = this.view()[0].get("TufId");
+            viewModelFechamento.fechamentoSelecionado.set("HfuId", turnoId);            
 			viewModelFechamento.set("turnos", this.view());
 		}
 	})
@@ -113,7 +112,9 @@
 	var dsTiposFech = new kendo.data.DataSource({ 
 		data: dataTiposFech,
 		schema: scTiposFech,
-		change: function (e) {				
+		change: function (e) {	            			
+            var tpFechId = this.view()[0].get("Id");
+            viewModelFechamento.fechamentoSelecionado.set("TipoFechamento", tpFechId);            
 			viewModelFechamento.set("tiposFech", this.view());
 		}
 	});
@@ -138,7 +139,7 @@
 			// Initialize the chart with a delay to make sure
 			// the initial animation is visible
 			createChart();
-
+			
 			$("#infoFechamento-view").bind("kendo:skinChange", function(e) {
 				createChart();
 			});
@@ -148,16 +149,7 @@
 	function adicionarFechamento() {
 		var novoFechamento = viewModelFechamento.dsFechamento.add();
 		viewModelFechamento.set("fechamentoSelecionado", novoFechamento);
-		viewModelFechamento.fechamentoSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));   
-        
-        
-			console.log(viewModelFechamento.fechamentoSelecionado, tiposFech[0]);
-			//viewModelFechamento.fechamentoSelecionado.set("TipoFechamento", tipoFechamentoId); 
-        
-   
-            console.log(viewModelFechamento.fechamentoSelecionado, turnos[0]);
-			//viewModelFechamento.fechamentoSelecionado.set("HfuId", turnoId); 
-        
+		viewModelFechamento.fechamentoSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
 		app.navigate("#editorFechamento-view");
 	}
 	
@@ -178,6 +170,9 @@
 			view.loader.show();
             
 			if (validatorFechamento.validate()) {
+                
+                console.log(viewModelFechamento);
+                
 				dsFechamento.sync();    
 			}
 			else {

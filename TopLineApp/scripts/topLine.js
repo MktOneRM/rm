@@ -564,34 +564,8 @@
 			"asc" 
 		}	
 	});
-			
-	//dataSource
-	var dsVendForaTurno = new kendo.data.DataSource({                    
-		transport: {						
-			read:  {
-				url: baseUrl + "/RmFilaLoja/3",							
-				type:"GET"      
-				,contentType: "application/json"
-				,dataType: "json"
-			},
-			update: {
-				url: baseUrl + "/RmFilaLoja/3",							
-				type:"POST"
-				,contentType:"application/json"
-				,dataType: "json"
-			},
-			parameterMap: function(data, operation) {
-				if (operation !== "read" && data.models) {
-					return kendo.stringify([data.models[0]]);
-				}
-			}                        
-		},             
-		batch: true,
-		schema: schemaVendedores,
-		serverPaging: true,
-		sort: { field: "VendedorNome", dir: "asc" }	
-	});
-			
+		
+	
 	//dataSource tipos de movimentação
 	var dsTiposMovto = new kendo.data.DataSource({                    
 		transport: {						
@@ -899,8 +873,7 @@
     
 	var viewModel = kendo.observable({		
 		dsVendFila: dsVendFila,		
-		dsVendForaFila: dsVendForaFila,
-		dsVendForaTurno: dsVendForaTurno,
+		dsVendForaFila: dsVendForaFila,		
 		dsTiposMovto: dsTiposMovto,        		
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
@@ -948,8 +921,7 @@
 		adicionarColaborador: adicionarColaborador,
 		detalhesColaborador: detalhesColaborador,				
 		vendedoresFila : vendedoresFila,
-		vendedoresForaFila : vendedoresForaFila,
-		vendedoresForaTurno : vendedoresForaTurno,
+		vendedoresForaFila : vendedoresForaFila,		
 		tiposMovtoSaida : tiposMovtoSaida,
 		tiposMovtoEntrada : tiposMovtoEntrada,           
 		lojas: lojas,

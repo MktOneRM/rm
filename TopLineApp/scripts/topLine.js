@@ -1072,15 +1072,14 @@
 		app.navigate("#EditorLoja-view");
 	}
  
-	function vendedoresFila() {
-        viewModel.set("confirma", false);
+	function vendedoresFila() {        
 		atualizaFilaNoSalao(dsVendFila, 1);
 		var sltBtn = this.header.find("#btFila").data("kendoMobileButtonGroup");        
 		if (sltBtn)
 			sltBtn.select(0);
 	}
 			
-	function vendedoresForaFila() {	
+	function vendedoresForaFila() {
 		atualizaFilaNoSalao(dsVendForaFila, 2);
 	}
 	    
@@ -1091,12 +1090,18 @@
 			
 	function tiposMovtoEntrada() {
         viewModel.set("confirma", false);
+        
+        console.log(viewModel, "Entrada");
+        
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/true";
 		dsTiposMovto.read(); 
 	}
 	
 	function tiposMovtoSaida() {	
         viewModel.set("confirma", false);
+        
+        console.log(viewModel, "Saida");
+        
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
 		dsTiposMovto.read(); 
 	}

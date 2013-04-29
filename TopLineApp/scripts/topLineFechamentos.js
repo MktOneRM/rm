@@ -68,8 +68,6 @@
 						id: viewModel.lojaSelecionada.LojId
 					}                
 				else if (operation !== "read" && data.models) {
-					console.log(data.models, "Models Map");
-                    
 					return kendo.stringify(data.models[0]);
 				}
 			}     
@@ -187,42 +185,29 @@
 			});
          
 			view.loader.show();
-			/*
+			
 			navigator.notification.confirm('Deseja gravar o fechamento?', 
-			function() {                                               
-			onConfirmFechamento.apply(that, arguments);
-			}, 
-			'Fechamento', 
-			'Não,Sim'
+										   function() {                                               
+											   onConfirmFechamento.apply(that, arguments);
+										   }, 
+										   'Fechamento', 
+										   'Não,Sim'
 			);  
-            
+       
 			//Caso não confirme a gravação retorna para a tela de edição!
-			if (!viewModelFechamento.get("confirmaFechamento")) {				
-			view.loader.hide();
-			return;
-			}
-			*/
-			if (confirm("Deseja gravar o fechamento?")) { 
-				if (validatorFechamento.validate()) {
-					viewModelFechamento.dsFechamento.sync(); 
-				}
-				else {
-					view.loader.hide();
-					return;
-				}
-			}
-			else { 
+			if (!viewModelFechamento.get("confirmaFechamento")) {
+                alert("False");
 				view.loader.hide();
 				return;
-			} 
-			/*
+			}
+		
 			if (validatorFechamento.validate()) {
-			viewModelFechamento.dsFechamento.sync(); 
+				viewModelFechamento.dsFechamento.sync(); 
 			}
 			else {
-			view.loader.hide();
-			return;
-			}*/
+				view.loader.hide();
+				return;
+			}
 		}
 		);
         
@@ -239,7 +224,13 @@
 	};
 	
 	function onConfirmFechamento(button) {
-		viewModelFechamento.set("confirmaFechamento", button);
+        
+        alert("OnConfirm: " + button);
+        
+        
+		if (button === 2 || button === true) {
+			viewModelFechamento.set("confirmaFechamento", true);
+		}
 	}
     
 	function editorFecViewShow() {

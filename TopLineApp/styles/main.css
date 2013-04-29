@@ -725,7 +725,7 @@ left: 100px;
 	text-align: right;
 }
 
-#formSaiFila input[type="text"], #formSaiFila select
+#formSaiFila input[type="text"]
 {
 	font-size: 12px;
 	alignment-adjust: left;
@@ -733,6 +733,16 @@ left: 100px;
 	font-weight: bold;
 	left: 50px;
 	width: 240px; 
+}
+
+#formSaiFila select
+{
+	font-size: 12px;
+	alignment-adjust: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 60px;
+	width: 230px; 
 }
 
 #formEntrarFila label
@@ -760,8 +770,8 @@ left: 100px;
 	alignment-adjust: left;
 	color: #476BD6; 
 	font-weight: bold;
-	left: 50px;
-	width: 240px; 
+	left: 60px;
+	width: 230px; 
 }
 
 #formMotivosNaoVenda label
@@ -789,6 +799,6 @@ left: 100px;
 	alignment-adjust: left;
 	color: #476BD6; 
 	font-weight: bold;
-	left: 50px;
-	width: 280px; 
+	left: 60px;
+	width: 230px; 
 }

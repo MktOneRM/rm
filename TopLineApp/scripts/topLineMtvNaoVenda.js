@@ -1,6 +1,5 @@
 (function($, undefined) {
-	
-    var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
+	var baseUrl = "http://revenuemachine.hospedagemdesites.ws/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
 
 	//Schema Motivos não venda
@@ -46,9 +45,11 @@
 		},
 		batch: true,
 		schema: scMotivosNaoVenda,
-        change: function(e){
-             viewModelNaoVenda.set("motivos", this.view());   
-        }        
+		change: function(e) {
+            var motivoId = this.view()[0].get("MnvId");
+            viewModelNaoVenda.motivoNaoVenda.set("MnvId", motivoId);            
+			viewModelNaoVenda.set("motivos", this.view());   
+		}        
         
 	});
     
@@ -76,14 +77,28 @@
 		dsNaoVenda: dsNaoVenda,
 		motivosNaoVenda: motivosNaoVenda,
 		motivoNaoVenda: {},        
-        motivos: [],
-        motivo: [],
+		motivos: [],
+		motivo: [],
 		vendedorSelecionado: {},
 		salvarNaoVenda: salvarNaoVenda,
-		cancelarNaoVenda: cancelarNaoVenda
+		cancelarNaoVenda: cancelarNaoVenda,
+        confirma: false
 	});
 
 	function salvarNaoVenda() {
+		var that = this;
+		navigator.notification.confirm('Confirma Não Venda?', 
+									   function() {                                               
+										   onConfirm.apply(that, arguments);
+									   }, 
+									   'Atendimento', 
+									   'Não,Sim'
+		); 
+            
+		//Caso não confirme a gravação retorna para a tela de edição!
+		if (!viewModelNaoVenda.get("confirma")) {							
+			return;
+		}
         
 		var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");
 		var LcoId = viewModel.vendedorSelecionado.get("LojaColId");
@@ -108,13 +123,18 @@
 		app.navigate("#dentroFila-view");                 
 	}
     
-	function motivosNaoVenda() {		
+	function motivosNaoVenda() {	
+        viewModelNaoVenda.set("confirma", false);  
 		dsMotivosNaoVenda.options.transport.read.url = baseUrl + "/RmMotNaoVenda";
 		dsMotivosNaoVenda.read(); 
 		var naoVenda = viewModelNaoVenda.dsNaoVenda.add(); 
 		viewModelNaoVenda.set("motivoNaoVenda", naoVenda); 
 	}
 
+    function onConfirm(button) {
+		viewModelNaoVenda.set("confirma", button);
+	}
+    
 	$.extend(window, {
 		showMotivosNaoVenda: motivosNaoVenda,
 		viewModelNaoVenda: viewModelNaoVenda

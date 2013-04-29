@@ -963,9 +963,7 @@
 		onTouchstartFora:onTouchstartFora,
 		onTouchstartTelefone:onTouchstartTelefone,
 		editorLojaViewInit: editorLojaViewInit,
-		editorLojaViewShow: editorLojaViewShow,
-		salvarEdicaoLoja: salvarEdicaoLoja,
-		cancelarEdicaoLoja: cancelarEdicaoLoja,
+		editorLojaViewShow: editorLojaViewShow,		
 		validarCPF:validarCPF,	
 		salvarSaida: salvarSaida,
 		cancelarSaida:cancelarSaida,
@@ -985,6 +983,20 @@
 	}
 
 	function salvarAtendimento() {
+		var that = this;
+		navigator.notification.confirm('Confirma atendimento?', 
+									   function() {                                               
+										   onConfirm.apply(that, arguments);
+									   }, 
+									   'Atendimento', 
+									   'Não,Sim'
+		); 
+            
+		//Caso não confirme a gravação retorna para a tela de edição!
+		if (!viewModel.get("confirma")) {							
+			return;
+		}
+        
 		if (validatorAtendimento.validate()) { 
 			var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");            
 			var LcoId = viewModel.vendedorSelecionado.get("LojaColId");
@@ -1005,6 +1017,20 @@
 	}
 
 	function salvarSaida() {
+		var that = this;
+		navigator.notification.confirm('Confirma Saída?', 
+									   function() {                                               
+										   onConfirm.apply(that, arguments);
+									   }, 
+									   'Saída Fila', 
+									   'Não,Sim'
+		); 
+            
+		//Caso não confirme a gravação retorna para a tela de edição!
+		if (!viewModel.get("confirma")) {							
+			return;
+		}
+        
 		viewModel.vendedorSelecionado.set("SaidaFila", true);
 		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivo[0].TmoId));
 		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
@@ -1018,6 +1044,20 @@
 	}
     
 	function salvarEntrada() {
+		var that = this;
+		navigator.notification.confirm('Confirma Entrada?', 
+									   function() {                                               
+										   onConfirm.apply(that, arguments);
+									   }, 
+									   'Entrada Fila', 
+									   'Não,Sim'
+		); 
+            
+		//Caso não confirme a gravação retorna para a tela de edição!
+		if (!viewModel.get("confirma")) {							
+			return;
+		}
+        
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
 		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");
         
@@ -1059,18 +1099,9 @@
 		viewModel.set("lojaSelecionada", loja);
 		app.navigate("#EditorLoja-view");
 	}
-    
-	function salvarEdicaoLoja() {
-		viewModel.dsLoja.sync();
-		app.navigate("#:back");      
-	}
-    
-	function cancelarEdicaoLoja() {
-		viewModel.dsLoja.cancelChanges();        
-		app.navigate("#:back");
-	}
  
 	function vendedoresFila() {
+        viewModel.set("confirma", false);
 		atualizaFilaNoSalao(dsVendFila, 1);
 		var sltBtn = this.header.find("#btFila").data("kendoMobileButtonGroup");        
 		if (sltBtn)
@@ -1080,22 +1111,20 @@
 	function vendedoresForaFila() {	
 		atualizaFilaNoSalao(dsVendForaFila, 2);
 	}
-			
-	function vendedoresForaTurno() {
-		atualizaFilaNoSalao(dsVendForaTurno, 3);
-	}
-    
+	    
 	function tiposMovto(e) {
 		var vendedor = viewModel.dsVendFila.get(e.context);
 		viewModel.set("vendedorSelecionado", vendedor); 	
 	}
 			
-	function tiposMovtoEntrada() {		
+	function tiposMovtoEntrada() {
+        viewModel.set("confirma", false);
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/true";
 		dsTiposMovto.read(); 
 	}
 	
-	function tiposMovtoSaida() {		
+	function tiposMovtoSaida() {	
+        viewModel.set("confirma", false);
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
 		dsTiposMovto.read(); 
 	}
@@ -1189,6 +1218,7 @@
 	}
     
 	function atendimentoViewInit(e) {
+		viewModel.set("confirma", false);
 		var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
 		viewModel.set("vendedorSelecionado", schemaVendedores);
 		viewModelNaoVenda.set("vendedorSelecionado", schemaVendedores);
@@ -1468,8 +1498,7 @@
     
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
-		showVendedoresForaFila: vendedoresForaFila,
-		showVendedoresForaTurno: vendedoresForaTurno,
+		showVendedoresForaFila: vendedoresForaFila,		
 		showTiposMovto: tiposMovto,
 		showTiposMovtoSaida: tiposMovtoSaida,
 		showTiposMovtoEntrada: tiposMovtoEntrada,        

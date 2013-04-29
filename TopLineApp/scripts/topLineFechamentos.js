@@ -190,7 +190,7 @@
             
 			navigator.notification.confirm('Deseja gravar o fechamento?', 
 										   function() {                                               
-											   onConfirmFechamento.apply(that, arguments);
+											   onConfirmFechamento.apply(this, arguments);
 										   }, 
 										   'Fechamento', 
 										   'Não,Sim'

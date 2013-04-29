@@ -944,8 +944,8 @@
         
 		idLoja: null,        
 		motivos: [],
-		motivo: [],
-		confirma: false
+		motivo: []
+        //,confirma: false
 	});
 
 	function adicionarAtendimento() {

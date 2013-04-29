@@ -81,8 +81,8 @@
 		motivo: [],
 		vendedorSelecionado: {},
 		salvarNaoVenda: salvarNaoVenda,
-		cancelarNaoVenda: cancelarNaoVenda,
-        confirma: false
+		cancelarNaoVenda: cancelarNaoVenda
+        //,confirma: false
 	});
 
 	function salvarNaoVenda() {

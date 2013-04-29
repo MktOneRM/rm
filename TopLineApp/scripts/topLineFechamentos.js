@@ -187,29 +187,44 @@
 			});
          
 			view.loader.show();
-            
+			/*
 			navigator.notification.confirm('Deseja gravar o fechamento?', 
-										   function() {                                               
-											   onConfirmFechamento.apply(this, arguments);
-										   }, 
-										   'Fechamento', 
-										   'Não,Sim'
+			function() {                                               
+			onConfirmFechamento.apply(that, arguments);
+			}, 
+			'Fechamento', 
+			'Não,Sim'
 			);  
             
 			//Caso não confirme a gravação retorna para a tela de edição!
 			if (!viewModelFechamento.get("confirmaFechamento")) {				
+			view.loader.hide();
+			return;
+			}
+			*/
+			if (confirm("Deseja gravar o fechamento?")) { 
+				if (validatorFechamento.validate()) {
+					viewModelFechamento.dsFechamento.sync(); 
+				}
+				else {
+					view.loader.hide();
+					return;
+				}
+			}
+			else { 
 				view.loader.hide();
 				return;
-			}
-             
+			} 
+			/*
 			if (validatorFechamento.validate()) {
-				viewModelFechamento.dsFechamento.sync(); 
+			viewModelFechamento.dsFechamento.sync(); 
 			}
 			else {
-				view.loader.hide();
-                return;
-			}
-		});
+			view.loader.hide();
+			return;
+			}*/
+		}
+		);
         
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
 			e.preventDefault();

@@ -86,10 +86,11 @@
 	});
 
 	function salvarNaoVenda() {
+        /*
 		var that = this;
 		navigator.notification.confirm('Confirma Não Venda?', 
 									   function() {                                               
-										   onConfirm.apply(that, arguments);
+										   onConfirmNaoVenda.apply(that, arguments);
 									   }, 
 									   'Atendimento', 
 									   'Não,Sim'
@@ -99,7 +100,7 @@
 		if (!viewModelNaoVenda.get("confirma")) {							
 			return;
 		}
-        
+        */
 		var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");
 		var LcoId = viewModel.vendedorSelecionado.get("LojaColId");
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
@@ -107,7 +108,7 @@
 		viewModelNaoVenda.motivoNaoVenda.set("RLojId", RLoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LcoId", LcoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);
-		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivo[0].MnvId));
+		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
         
 		viewModelNaoVenda.dsNaoVenda.sync(); 	                
         
@@ -131,7 +132,7 @@
 		viewModelNaoVenda.set("motivoNaoVenda", naoVenda); 
 	}
 
-    function onConfirm(button) {
+    function onConfirmNaoVenda(button) {
 		viewModelNaoVenda.set("confirma", button);
 	}
     

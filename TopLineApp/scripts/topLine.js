@@ -565,7 +565,6 @@
 		}	
 	});
 		
-	
 	//dataSource tipos de movimentação
 	var dsTiposMovto = new kendo.data.DataSource({                    
 		transport: {						
@@ -955,10 +954,12 @@
 	}
 
 	function salvarAtendimento() {
+        
+        /*
 		var that = this;
 		navigator.notification.confirm('Confirma atendimento?', 
 									   function() {                                               
-										   onConfirm.apply(that, arguments);
+										   onConfirmPrincipal.apply(that, arguments);
 									   }, 
 									   'Atendimento', 
 									   'Não,Sim'
@@ -968,6 +969,7 @@
 		if (!viewModel.get("confirma")) {							
 			return;
 		}
+        */
         
 		if (validatorAtendimento.validate()) { 
 			var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");            
@@ -989,22 +991,25 @@
 	}
 
 	function salvarSaida() {
+        /*
 		var that = this;
 		navigator.notification.confirm('Confirma Saída?', 
 									   function() {                                               
-										   onConfirm.apply(that, arguments);
+										   onConfirmPrincipal.apply(that, arguments);
 									   }, 
 									   'Saída Fila', 
 									   'Não,Sim'
 		); 
-            
+       
+		console.log(viewModel.get("confirma"), "Salvar Saida");
+        
 		//Caso não confirme a gravação retorna para a tela de edição!
 		if (!viewModel.get("confirma")) {							
 			return;
 		}
-        
+        */
 		viewModel.vendedorSelecionado.set("SaidaFila", true);
-		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivo[0].TmoId));
+		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
 		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
 		viewModel.dsVendFila.sync();
 		app.navigate("#dentroFila-view");
@@ -1016,10 +1021,11 @@
 	}
     
 	function salvarEntrada() {
+		/*
 		var that = this;
 		navigator.notification.confirm('Confirma Entrada?', 
 									   function() {                                               
-										   onConfirm.apply(that, arguments);
+										   onConfirmPrincipal.apply(that, arguments);
 									   }, 
 									   'Entrada Fila', 
 									   'Não,Sim'
@@ -1029,7 +1035,7 @@
 		if (!viewModel.get("confirma")) {							
 			return;
 		}
-        
+        */
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
 		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");
         
@@ -1039,7 +1045,7 @@
 		viewModel.vendedorSelecionado.set("LojId", LojId);
 		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);        
 		viewModel.vendedorSelecionado.set("EntradaFila", 1);		
-		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivo[0].TmoId));
+		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
         
 		viewModel.dsVendFila.sync();
         
@@ -1089,19 +1095,14 @@
 	}
 			
 	function tiposMovtoEntrada() {
-        viewModel.set("confirma", false);
-        
-        console.log(viewModel, "Entrada");
-        
+		viewModel.set("confirma", false);
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/true";
 		dsTiposMovto.read(); 
 	}
 	
 	function tiposMovtoSaida() {	
-        viewModel.set("confirma", false);
-        
-        console.log(viewModel, "Saida");
-        
+		viewModel.set("confirma", false);
+		console.log(viewModel.confirma, "Saida");
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
 		dsTiposMovto.read(); 
 	}
@@ -1141,7 +1142,7 @@
 		if (button[0]) {
 			var schemaVendedores = viewModel.dsVendFila.getByUid(e.touch.target.context.id);
 			viewModel.set("vendedorSelecionado", schemaVendedores);
-			tiposMovtoSaida();
+			//Saida
 			app.navigate("#sairdaFila_View");
        
 			//prevent `swipe`
@@ -1245,10 +1246,10 @@
 			});
             
 			view.loader.show();
-            
+            /*
 			navigator.notification.confirm('Confirma as informações?', 
 										   function() {                                               
-											   onConfirm.apply(that, arguments);
+											   onConfirmPrincipal.apply(that, arguments);
 										   }, 
 										   'Colaborador', 
 										   'Não,Sim'
@@ -1259,7 +1260,7 @@
 				view.loader.hide();
 				return;
 			}
-         
+         */
 			if (validatorColaborador.validate() && validatorTelColaborador.validate()) {
 				if (viewModel.colaboradorSelecionado.get("ColFoto") == null) {
 					viewModel.colaboradorSelecionado.set("ColFoto", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABbCAQAAABkbztKAAAAAXNSR0IArs4c6QAAAAJiS0dEAACqjSMyAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH2wQEFTgvaGyX4gAABD9JREFUaN7tmuty2zYQhb8FITmyFcmRa1uqk4k9bd//SfIGaTqdTHpz4tws60Zi+4MgQ9upBHBIuz9IzUgjiRAOds+eXSwkr5T/zWWgA9OB6cB0YDowHZgOTMNglDaSva0DRFAon6kAK97JQ4ERFONBORRwgCA4QDGIv0vaBwPgUARhzFMGDOj56TekLPnCnBWO5CHcBMKYCZPSUsXnFss+EzIy/uaybTCOhAUvmJbr1jvxoIDB8IIRb6KIbuLDb8U5UyzynQeePTmRRzyP4o2Jt8wFM29Q3epKEI75OcI2Jo4tG044xeF2Rov6x5BfyJoHowg9pjgEQ4oJWrNjxBGbNtw0xWIwCHarZQSD8a/KOb1mweQSN6gMkAB5LEK/F2TFSMsMcDUkUgLlL4ozSRm+j5y1pcw6dSzjgkaaGNwZUop/OBDKxNoggYub5fHd1F5JVRNMRhZk7gcAoygmkIp3s5QLKrUidaaeVULdG5mbtGZoa7OhLRF6cd8qrg3O1CVv1qxlUiw/BCa8+xP82CyYhJSX9Gu4CZQZg6Zzk6sVSXly3TSZDjIsn4OpeDujASya1BkDLGsEd2iSjEyUykcgiYSTc+aq6UrPskZr7KDBMA+q9SII7GpROHfsqtl6Jk927+60QEJGwQdugmQvMh1c8tWvVoNdZHgbuMsycQZX1iguovxUMrLAaaJLiHkJRAOXcBM8iYml46cy0CVwxHU7YATDDRs/LNRR79nggrY50W7q86sP823xoSgZDsdn1thAUYh2EyzZIDu0ON/yGeDPsu2oTYPJU+ZrryDbLJN/+4FrEjKSoBoxGowAH1ntZEwuBJdknuwtWcbRZ7kzmgyKssIgJO1sVYqYsjsGSvnjibeMNE/gYqIkcM+deLVuRfQKetpA0E/a22tXV6wBkGEQVRtGi56S0g/I2rlzBqQRcGw8X2ac7GwAqJe5CcLvwYc+kf0ZWDOjj5LsbDXnresj39hvwU0pCT0Es+MAR7y+KDAMdlTUXtsAY7+Rl62pT1EcDkUZsQmEY8MdBI6UcXnOlmxR1UKLQNnHeuDShGWKnpXjjMPyxCSMlMo+L9kPqg1teKfqORP2ojs0guOIZ3zlHYsdCwhwU8YBp4yxNdto+fQjDvnEHyy2OEy+/2+0b8fFQ844KKsXV6NLnpXlgwJL/uEL6S2g/2kZ9W35JXuccYxiKw3pxAONicHbSfWAc5Q5b1jeO/ipWKao+B0w4pQhhqzSq2qqM65+cde854pNBVIFjPPh9YwZT3wJbSp1W3NgiqLVkHLFXyxIMFU3KYaEE6a+YMwVtogdbfTEID9IS3AYjjlhzm95pOWWUQwXPK2UBlLqiTbqpNsBUvyuY83b3DLKmAvPebkTku2cotyXzD1+wsKQA85wPvc8zpWXJPaUI/YeFci3vGQPa/R227pEu/8Dd2A6MB2YDkwHhn8BXNB6BARw7GsAAAAASUVORK5CYII=");
@@ -1286,7 +1287,9 @@
 		});
 	}
 	
-	function onConfirm(button) {
+	function onConfirmPrincipal(button) {
+		console.log(button, "OnCOnfimr");
+        
 		viewModel.set("confirma", button);
 	}
     
@@ -1330,10 +1333,10 @@
 			});        
 			
 			view.loader.show();
-            
+            /*
 			navigator.notification.confirm('Confirma as informações?', 
 										   function() {                                               
-											   onConfirm.apply(that, arguments);
+											   onConfirmPrincipal.apply(that, arguments);
 										   }, 
 										   'Loja', 
 										   'Não,Sim'
@@ -1344,7 +1347,7 @@
 				view.loader.hide();
 				return;
 			}
-            
+            */
 			if (validatorLoja.validate() && validatorTurno.validate()) {
 				dsLoja.sync();
 			}

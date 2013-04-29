@@ -150,7 +150,7 @@
 		editorFecViewShow: editorFecViewShow,
 		adicionarFechamento: adicionarFechamento,
 		dataAtual: "",
-		confirma: false
+		confirmaFechamento: false
 	});
 
 	function fechamentos() {        
@@ -190,14 +190,14 @@
             
 			navigator.notification.confirm('Deseja gravar o fechamento?', 
 										   function() {                                               
-											   onConfirm.apply(that, arguments);
+											   onConfirmFechamento.apply(that, arguments);
 										   }, 
 										   'Fechamento', 
 										   'Não,Sim'
 			);  
             
 			//Caso não confirme a gravação retorna para a tela de edição!
-			if (!viewModelFechamento.get("confirma")) {				
+			if (!viewModelFechamento.get("confirmaFechamento")) {				
 				view.loader.hide();
 				return;
 			}
@@ -223,15 +223,15 @@
 		});
 	};
 	
-	function onConfirm(button) {
-		viewModelFechamento.set("confirma", button);
+	function onConfirmFechamento(button) {
+		viewModelFechamento.set("confirmaFechamento", button);
 	}
     
 	function editorFecViewShow() {
 		viewModelFechamento.dsTurnosFunc.read();
 		viewModelFechamento.dsTiposFech.read();
 		viewModelFechamento.set("dataAtual", new Date());
-		viewModelFechamento.set("confirma", false);      
+		viewModelFechamento.set("confirmaFechamento", false);      
 	}
     
 	//Gráfico Fechamentos

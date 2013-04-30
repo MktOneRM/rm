@@ -148,7 +148,7 @@
 		editorFecViewShow: editorFecViewShow,
 		adicionarFechamento: adicionarFechamento,
 		dataAtual: "",
-		confirmaFechamento: false
+		confirma: false
 	});
 
 	function fechamentos() {        
@@ -175,7 +175,7 @@
 	function editorFecViewInit(e) {
 		var view = e.view;
 		var that = this;
-		
+        
 		validatorFechamento = $("#editorFechamento").kendoValidator().data("kendoValidator");
   
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
@@ -188,15 +188,15 @@
 			
 			navigator.notification.confirm('Deseja gravar o fechamento?', 
 										   function() {                                               
-											   onConfirmFechamento.apply(that, arguments);
+											   onConfirm.apply(that, arguments);
 										   }, 
 										   'Fechamento', 
 										   'Não,Sim'
 			);  
        
 			//Caso não confirme a gravação retorna para a tela de edição!
-			if (!viewModelFechamento.get("confirmaFechamento")) {
-                alert("False");
+			if (!viewModelFechamento.get("confirma")) {
+				alert("False");
 				view.loader.hide();
 				return;
 			}
@@ -223,21 +223,24 @@
 		});
 	};
 	
-	function onConfirmFechamento(button) {
-        
-        alert("OnConfirm: " + button);
-        
-        
-		if (button === 2 || button === true) {
-			viewModelFechamento.set("confirmaFechamento", true);
+	function onConfirm(button) {
+		viewModelFechamento.set("confirma", false);
+		
+		switch (button) {
+			case 2:
+				viewModelFechamento.set("confirma", true);
+				break;
+			case true:
+				viewModelFechamento.set("confirma", true);
+				break;
 		}
 	}
     
-	function editorFecViewShow() {
+	function editorFecViewShow() {		
 		viewModelFechamento.dsTurnosFunc.read();
 		viewModelFechamento.dsTiposFech.read();
 		viewModelFechamento.set("dataAtual", new Date());
-		viewModelFechamento.set("confirmaFechamento", false);      
+		viewModelFechamento.set("confirma", false);
 	}
     
 	//Gráfico Fechamentos

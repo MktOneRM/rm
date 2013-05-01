@@ -185,9 +185,14 @@
       <Version>4.1.0</Version>
       <Name>Child Browser</Name>
     </CordovaPlugin>
+    <CordovaPlugin Include="com.phonegap.plugins.pushPlugin">
+      <Version>1.1.1</Version>
+      <Name>PushPlugin</Name>
+    </CordovaPlugin>
   </ItemGroup>
   <ItemGroup>
     <CordovaPluginContent Include="com.phonegap.plugins.childbrowser\childbrowser.js" />
+    <CordovaPluginContent Include="com.phonegap.plugins.pushPlugin\PushNotification.js" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

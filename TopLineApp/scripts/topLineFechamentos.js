@@ -148,7 +148,7 @@
 		editorFecViewShow: editorFecViewShow,
 		adicionarFechamento: adicionarFechamento,
 		dataAtual: "",
-		confirma: false
+		confirma: 0
 	});
 
 	function fechamentos() {        
@@ -185,18 +185,25 @@
 			});
          
 			view.loader.show();
-			
+			        
+			viewModelFechamento.set("confirma", 0);
+		
 			navigator.notification.confirm('Deseja gravar o fechamento?', 
-										   function() {                                               
-											   onConfirm.apply(that, arguments);
+										   function() {                               
+											   console.log(that, arguments);
+											   alert("Dentro - Arg " + arguments);
+                                               
+											   _onConfirm.apply(that, arguments);
 										   }, 
 										   'Fechamento', 
-										   'Não,Sim'
-			);  
-       
+										   'Sim,Não'
+			);
+			
+			alert("Fora: " + viewModelFechamento.get("confirma"));
+			navigator.notification.vibrate(2000);
+            
 			//Caso não confirme a gravação retorna para a tela de edição!
-			if (!viewModelFechamento.get("confirma")) {
-				alert("False");
+			if (viewModelFechamento.get("confirma") != 1) {				
 				view.loader.hide();
 				return;
 			}
@@ -210,37 +217,29 @@
 			}
 		}
 		);
-        
+	
 		view.element.find("#btnCancel").data("kendoMobileBackButton").bind("click", function(e) {
 			e.preventDefault();
 			viewModelFechamento.dsFechamento.one("change", function() {
 				view.loader.hide();
 				app.navigate("#infoFechamento-view");
 			});
-
 			view.loader.show();			
 			viewModelFechamento.dsFechamento.cancelChanges();
 		});
 	};
-	
-	function onConfirm(button) {
-		viewModelFechamento.set("confirma", false);
-		
-		switch (button) {
-			case 2:
-				viewModelFechamento.set("confirma", true);
-				break;
-			case true:
-				viewModelFechamento.set("confirma", true);
-				break;
+	 
+	function _onConfirm(button) {
+		if (button === 1 || button) {
+			viewModelFechamento.set("confirma", 1);
 		}
 	}
-    
+	
 	function editorFecViewShow() {		
 		viewModelFechamento.dsTurnosFunc.read();
 		viewModelFechamento.dsTiposFech.read();
 		viewModelFechamento.set("dataAtual", new Date());
-		viewModelFechamento.set("confirma", false);
+		viewModelFechamento.set("confirma", 0);
 	}
     
 	//Gráfico Fechamentos

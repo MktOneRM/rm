@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-		<link href="styles/main.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" />
 		<script src="cordova.js" type="text/javascript"></script>
 		<script src="kendo/js/jquery.min.js" type="text/javascript"></script>
 		<script src="kendo/js/kendo.all.min.js" type="text/javascript"></script>
@@ -21,49 +21,42 @@
 
 	<body>
 		<!-- Home-Layout -->
-		<div data-role="layout" data-id="home-layout" data-title="Top Line">
+		<div data-role="layout" data-id="home-layout" data-title="">
 			<header data-role="header">
 				<div data-role="navbar">
+                    <a data-align="right" data-role="button" href="#config-view" data-icon="configuracoes"></a>
 					<span data-role="view-title"></span>
-				</div>
-				<ul id="btFila" data-role="buttongroup" class="select-group" data-index="0">
-					<li>
-						<a href="#dentroFila-view">Fila</a>
-					</li>
-					<li>
-						<a href="#foraFila-view">Fora</a>
-					</li>
-				</ul>
+				</div>			
 			</header>
 			<div data-role="footer">
 				<div data-role="tabstrip">
-					<a href="#dentroFila-view" data-icon="action">Fila</a>
-					<a href="#consulta-view" data-icon="search">Consulta</a>
-					<a href="#infoFechamento-view" data-icon="recents">Fechamento</a>
-					<a href="#config-view" data-icon="settings">Configuração</a>
+					<a href="#dentroFila-view" data-icon="dentroFila"></a>
+					<a href="#foraFila-view" data-icon="foraFila"></a>
+					<a href="#infoFechamento-view"  data-icon="fechamento"></a>
+					<a href="#consulta-view" data-icon="desempenho"></a>
 				</div>
 			</div>
 		</div>
 
 		<!-- Toos-Layout -->
-		<div data-role="layout" data-id="tools-layout" data-title="Top Line">
+		<div data-role="layout" data-id="tools-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
 					<span data-role="view-title"></span>
 				</div>
 			</header>
 			<footer data-role="footer">
-				<div data-role="tabstrip">
-					<a href="#dentroFila-view" data-icon="action">Fila</a>
-					<a href="#consulta-view" data-icon="search">Consulta</a>
-					<a href="#infoFechamento-view" data-icon="recents">Fechamento</a>
-					<a href="#config-view" data-icon="settings">Configuração</a>
-				</div>
+					<div data-role="tabstrip">
+					<a href="#dentroFila-view" data-icon="dentroFila"></a>
+					<a href="#foraFila-view" data-icon="foraFila"></a>
+					<a href="#infoFechamento-view"  data-icon="fechamento"></a>
+					<a href="#consulta-view" data-icon="desempenho"></a>
+				</div>>
 			</footer>
 		</div>
 
 		<!-- update-Layout -->
-		<div data-role="layout" data-id="update-layout" data-title="Top Line" data-init="selBtn">
+		<div data-role="layout" data-id="update-layout" data-title="" data-init="selBtn">
 			<header data-role="header">
 				<div data-role="navbar">
 					<span data-role="view-title"></span>
@@ -72,18 +65,13 @@
 		</div>
 
 		<!-- Fila da Vez -->
-		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-before-show="showVendedoresFila" data-model="viewModel">
+		<div id="dentroFila-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO" data-before-show="showVendedoresFila" data-model="viewModel">
 			<ul data-bind="source: dsVendFila" data-role="listview" data-template="tdentroFila" data-style="inset"></ul>
 		</div>
 
 		<!-- Fora da Fila da Vez -->
-		<div id="foraFila-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-before-show="showVendedoresForaFila" data-model="viewModel">
+		<div id="foraFila-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO" data-before-show="showVendedoresForaFila" data-model="viewModel">
 			<ul data-bind="source: dsVendForaFila" data-role="listview" data-template="tforaFila" data-style="inset"></ul>
-		</div>
-
-		<!-- Fora do Turno -->
-		<div id="foraTurno-view" data-role="view" data-layout="home-layout" data-title="Top Line" data-before-show="showVendedoresForaTurno" data-model="viewModel">
-			<ul data-bind="source: dsVendForaTurno" data-role="listview" data-template="tforaTurno" data-style="inset"></ul>
 		</div>
 
 		<!-- Resultado Atendimento -->

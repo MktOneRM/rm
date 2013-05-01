@@ -36,7 +36,6 @@
     <Folder Include="App_Resources\Android\drawable-nodpi">
       <Platform>Android</Platform>
     </Folder>
-    <Folder Include="Images" />
     <Folder Include="Bkp\html" />
     <Folder Include="kendo\cultures" />
     <Folder Include="kendo\styles\default" />
@@ -72,21 +71,21 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\iconConfig.png" />
-    <Content Include="Images\iconDesempenho_off.png" />
-    <Content Include="Images\iconDesempenho_on.png" />
-    <Content Include="Images\iconFechamento_off.png" />
-    <Content Include="Images\iconFechamento_on.png" />
-    <Content Include="Images\iconFora_off.png" />
-    <Content Include="Images\iconFora_on.png" />
-    <Content Include="Images\iconFoto.png" />
-    <Content Include="Images\iconFoto_fila.png" />
-    <Content Include="Images\iconFoto_venda.png" />
-    <Content Include="Images\iconGaleria.png" />
-    <Content Include="Images\iconsFila_off.png" />
-    <Content Include="Images\iconsFila_on.png" />
-    <Content Include="Images\seta_off.png" />
-    <Content Include="Images\seta_on.png" />
+    <Content Include="styles\iconConfig.png" />
+    <Content Include="styles\iconDesempenho_off.png" />
+    <Content Include="styles\iconDesempenho_on.png" />
+    <Content Include="styles\iconFechamento_off.png" />
+    <Content Include="styles\iconFechamento_on.png" />
+    <Content Include="styles\iconFora_off.png" />
+    <Content Include="styles\iconFora_on.png" />
+    <Content Include="styles\iconFoto.png" />
+    <Content Include="styles\iconFoto_fila.png" />
+    <Content Include="styles\iconFoto_venda.png" />
+    <Content Include="styles\iconGaleria.png" />
+    <Content Include="styles\iconsFila_off.png" />
+    <Content Include="styles\iconsFila_on.png" />
+    <Content Include="styles\seta_off.png" />
+    <Content Include="styles\seta_on.png" />
     <Content Include="kendo\cultures\kendo.culture.pt-BR.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="Bkp\kendo.indexedlistview.js" />

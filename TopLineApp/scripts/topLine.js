@@ -1101,8 +1101,7 @@
 	}
 	
 	function tiposMovtoSaida() {	
-		viewModel.set("confirma", false);
-		console.log(viewModel.confirma, "Saida");
+		viewModel.set("confirma", false);		
 		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
 		dsTiposMovto.read(); 
 	}

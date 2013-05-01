@@ -803,9 +803,3 @@ div a
 	width: 230px; 
 }
 
-/*Design Grafico*/
-.km-custom
-{
-	-webkit-mask-box-image: url("../Images/iconFechamento_off.png");
-	/*background-color: red;*/
-}

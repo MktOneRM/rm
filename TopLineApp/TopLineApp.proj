@@ -72,7 +72,21 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\default.png" />
+    <Content Include="Images\iconConfig.png" />
+    <Content Include="Images\iconDesempenho_off.png" />
+    <Content Include="Images\iconDesempenho_on.png" />
+    <Content Include="Images\iconFechamento_off.png" />
+    <Content Include="Images\iconFechamento_on.png" />
+    <Content Include="Images\iconFora_off.png" />
+    <Content Include="Images\iconFora_on.png" />
+    <Content Include="Images\iconFoto.png" />
+    <Content Include="Images\iconFoto_fila.png" />
+    <Content Include="Images\iconFoto_venda.png" />
+    <Content Include="Images\iconGaleria.png" />
+    <Content Include="Images\iconsFila_off.png" />
+    <Content Include="Images\iconsFila_on.png" />
+    <Content Include="Images\seta_off.png" />
+    <Content Include="Images\seta_on.png" />
     <Content Include="kendo\cultures\kendo.culture.pt-BR.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="Bkp\kendo.indexedlistview.js" />

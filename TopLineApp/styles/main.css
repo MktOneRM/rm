@@ -538,8 +538,8 @@ div a
 	alignment-adjust: center;
 	color: #476BD6; 
 	font-weight: bold; 
-    text-align:center;
-    width: 100%;
+	text-align: center;
+	width: 100%;
 }
 
 #dataFechamento
@@ -548,8 +548,8 @@ div a
 	alignment-adjust: center;
 	color: #476BD6; 
 	font-weight: bold; 
-    text-align:center;
-    width: 100%;
+	text-align: center;
+	width: 100%;
 }
 
 #editorFechamento input[type="text"]
@@ -639,12 +639,12 @@ div a
 
 #editorColaborador input[type="date"]
 {
-font-size: 12px;
-alignment-adjust: left;
-text-align: left;
-color: #476BD6; 
-font-weight: bold;
-left: 100px;
+	font-size: 12px;
+	alignment-adjust: left;
+	text-align: left;
+	color: #476BD6; 
+	font-weight: bold;
+	left: 100px;
 }
 
 #editorColaborador input[type="radio"]
@@ -801,4 +801,11 @@ left: 100px;
 	font-weight: bold;
 	left: 60px;
 	width: 230px; 
+}
+
+/*Design Grafico*/
+.km-custom
+{
+	-webkit-mask-box-image: url("../Images/iconFechamento_off.png");
+	/*background-color: red;*/
 }

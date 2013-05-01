@@ -1,6 +1,6 @@
 (function($, undefined) {
-	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+	//var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+	var baseUrl = "http://localhost:50000/api";
 
 	kendo.data.binders.date = kendo.data.Binder.extend({
 		init: function (element, bindings, options) {
@@ -186,17 +186,15 @@
          
 			view.loader.show();
 			        
+			/*
 			viewModelFechamento.set("confirma", 0);
 		
 			navigator.notification.confirm('Deseja gravar o fechamento?', 
-										   function() {                               
-											   console.log(that, arguments);
-											   alert("Dentro - Arg " + arguments);
-                                               
-											   _onConfirm.apply(that, arguments);
-										   }, 
-										   'Fechamento', 
-										   'Sim,Não'
+			function() {
+			_onConfirm.apply(that, arguments);
+			}, 
+			'Fechamento', 
+			'Sim,Não'
 			);
 			
 			alert("Fora: " + viewModelFechamento.get("confirma"));
@@ -204,10 +202,11 @@
             
 			//Caso não confirme a gravação retorna para a tela de edição!
 			if (viewModelFechamento.get("confirma") != 1) {				
-				view.loader.hide();
-				return;
+			view.loader.hide();
+			return;
 			}
-		
+			*/
+            
 			if (validatorFechamento.validate()) {
 				viewModelFechamento.dsFechamento.sync(); 
 			}

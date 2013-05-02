@@ -37,7 +37,7 @@ cameraApp.prototype={
         },function(){
             that._onFail.apply(that,arguments);
         },{
-            quality: 20,
+            quality: 50,
             destinationType: that._destinationType.DATA_URL
         });
     },
@@ -51,7 +51,7 @@ cameraApp.prototype={
         }, function(){
             that._onFail.apply(that,arguments);
         }, {
-            quality: 20, 
+            quality: 50, 
             allowEdit: true,
             destinationType: cameraApp._destinationType.DATA_URL,
             targetWidth: 50,
@@ -81,7 +81,7 @@ cameraApp.prototype={
         }, function(){
             cameraApp._onFail.apply(that,arguments);
         }, {
-            quality: 20,
+            quality: 50,
             destinationType: cameraApp._destinationType.DATA_URL,
             targetWidth: 50,
             targetHeight: 50,

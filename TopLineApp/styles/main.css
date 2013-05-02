@@ -166,6 +166,7 @@ label
 	margin: 0;
 	border: 0;
 	float: left;
+    width: auto;
 }
 
 .fila-nome
@@ -254,7 +255,7 @@ label
 #atendimento_left
 {
 	float: left;
-	height: auto;
+	height: 100%;
 	width: 50%;
 }
 
@@ -264,6 +265,16 @@ label
 }
 
 #formSaiFila
+{
+    height: 100%;
+}
+
+#formEntrarFila
+{
+    height: 100%;
+}
+
+#formMotivosNaoVenda
 {
     height: 100%;
 }

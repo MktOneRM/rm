@@ -84,76 +84,68 @@
 				</div>
 			</div>
 			<div id="formAtendimento">
-				<table style="width: 100%;height: 100%;">
-					<tr>
-						<td style="width: 100%;height: 100%;">
-							<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 100%;height: 100%;">
-							<table style="width: 100%;height: 100%;">
-								<tr align="center" id="atendimento_nome">
-									<td>
-										<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-										<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
-									</td>
-								</tr>
-								<tr align="center">
-									<td>
-										<label>Vendeu&nbsp;&nbsp;&nbsp;&nbsp;</label>
-										<input id="chkVendeu" data-role="switch" data-on-label="Sim" data-off-label="Não" data-change="switchChange" checked="Checked">
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-								<tr align="center">
-									<td>
-										<label>Qtde. de Peças</label>
-									</td>
-								</tr>
-								<tr align="center">
-									<td>
-										<input id="RepQtde" name="RepQtde" type="number" placeholder="Qtde." maxlength="4" size="4" min="1" step="1" data-bind="qtde: atendimento.RepQtde" required validationmessage="Requerido" />
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-								<tr align="center">
-									<td>
-										<label>Valor da Venda</label>
-									</td>
-								</tr>
-								<tr align="center">
-									<td>
-										<input id="RepValor" name="RepValor" type="number" placeholder="Valor" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: atendimento.RepValor" data-bind="text: atendimento.RepValor" required validationmessage="Requerido" />
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-								<tr align="center">
-									<td>
-										<a id="salvar" data-role="button" id="done" data-bind="events: {click: salvarAtendimento}">Salvar</a>
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-								<tr align="center">
-									<td>
-										<a id="cancelar" data-role="button" id="cancelAtendimento" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
-									</td>
-								</tr>
-								<tr style="height:100%">
-									<td>&nbsp;</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
+				<div id="atendimento_left">
+					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
+				</div>
+				<div id="atendimento_rigth">
+					<div id="atendimento_nome">
+						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+					</div>
+					<table id="atendimento_tb">
+						<tr align="center">
+							<td>
+								<label>Vendeu&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input id="chkVendeu" data-role="switch" data-on-label="Sim" data-off-label="Não" data-change="switchChange" checked="Checked">
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<label>Qtde. de Peças</label>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<input id="RepQtde" name="RepQtde" type="number" placeholder="Qtde." maxlength="4" size="4" min="1" step="1" data-bind="qtde: atendimento.RepQtde" required validationmessage="Requerido" />
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<label>Valor da Venda</label>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<input id="RepValor" name="RepValor" type="number" placeholder="Valor" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: atendimento.RepValor" data-bind="text: atendimento.RepValor" required validationmessage="Requerido" />
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<a id="salvar" data-role="button" id="done" data-bind="events: {click: salvarAtendimento}">Salvar</a>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<a id="cancelar" data-role="button" id="cancelAtendimento" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
+							</td>
+						</tr>
+						<tr style="height:100%">
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<script type="text/javascript">
 				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
@@ -162,112 +154,139 @@
 
 		<!--Saida da Fila da Vez-->
 		<div id="sairdaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoSaida">
-			<header data-role="header">
-				<div data-role="navbar">
-					<a id="back-button" class="nav-button" data-align="left" data-role="backbutton" data-bind="events: {click: cancelarSaida}">Cancelar</a>
-					<span data-role="view-title"></span>
-					<a data-align="right" data-role="button" class="nav-button" data-bind="events: {click: salvarSaida}">Salvar</a>
+			<div id="formSaiFila">
+				<div id="atendimento_left">
+					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
 				</div>
-			</header>
-			<ul id="formSaiFila" data-role="listview" data-style="inset" data-type="group">
-				<div class="mobile-fila-titulo"></div>
-				<li>
-					<ul>
-						<li style="height:65px">
-							<img class="fila-art" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
-							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
-						</li>
-					</ul>
-				</li>
-				<li>
-
-				</li>
-				<div>
-					<ul>
-						<li>
-							<label>
+				<div id="atendimento_rigth">
+					<div id="atendimento_nome">
+						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+					</div>
+					<table id="atendimento_tb">
+						<tr align="center">
+							<td>
+								<label> Motivo Saída</label>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
 								<select id="MotivosSaida" name="MotivoSaida" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
-								Motivo:
-							</label>
-						</li>
-					</ul>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<a id="salvar" data-role="button" data-bind="events: {click: salvarSaida}">Salvar</a>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<a id="cancelar" data-role="button" data-bind="events: {click: cancelarSaida}">Cancelar</a>
+							</td>
+						</tr>
+						<tr style="height:100%">
+							<td>&nbsp;</td>
+						</tr>
+					</table>
 				</div>
-
-			</ul>
+			</div>
 		</div>
 
 		<!--Entrada na Fila da Vez-->
 		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoEntrada">
-			<header data-role="header">
-				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarEntrada}">Cancelar</a>
-					<span data-role="view-title"></span>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarEntrada}">Salvar</a>
+			<div id="formEntrarFila">
+				<div id="atendimento_left">
+					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
 				</div>
-			</header>
-			<ul id="formEntrarFila" data-role="listview" data-style="inset" data-type="group">
-				<div class="mobile-fila-titulo"></div>
-				<li>
-					<ul>
-						<li style="height:65px">
-							<img class="fila-art" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
-							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
-						</li>
-					</ul>
-				</li>
-				<li>
-
-				</li>
-				<div>
-					<ul>
-						<li>
-							<label>
+				<div id="atendimento_rigth">
+					<div id="atendimento_nome">
+						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+					</div>
+					<table id="atendimento_tb">
+						<tr align="center">
+							<td>
+								<label> Motivo Entrada</label>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
 								<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
-								Motivo:
-							</label>
-						</li>
-					</ul>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<a id="salvar" data-role="button" data-bind="events: {click: salvarEntrada}">Salvar</a>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<a id="cancelar" data-role="button" data-bind="events: {click: cancelarEntrada}">Cancelar</a>
+							</td>
+						</tr>
+						<tr style="height:100%">
+							<td>&nbsp;</td>
+						</tr>
+					</table>
 				</div>
-			</ul>
+			</div>
 		</div>
 
 		<!--Motivos não venda View-->
 		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="TOP LINE PRO" data-layout="home-layout" data-transition="slideup" data-before-show="showMotivosNaoVenda">
-			<header data-role="header">
-				<div data-role="navbar">
-					<a id="btnCancel" data-role="button" type="button" data-align="left"  data-role="backbutton" data-bind="events: {click: cancelarNaoVenda}">Cancelar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: salvarNaoVenda}">Salvar</a>
-					<span data-role="view-title"></span>
+			<div id="formMotivosNaoVenda">				
+                	<div id="atendimento_left">
+					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
 				</div>
-			</header>
-
-			<ul id="formMotivosNaoVenda" data-role="listview" data-style="inset" data-type="group">
-				<div class="mobile-fila-titulo"></div>
-				<li>
-					<ul>
-						<li style="height:65px">
-							<img class="fila-art" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
-							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
-						</li>
-					</ul>
-				</li>
-				<li>
-
-				</li>
-				<div>
-					<ul>
-						<li>
-							<label>
-								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
-								Motivo:
-							</label>
-						</li>
-					</ul>
+				<div id="atendimento_rigth">
+					<div id="atendimento_nome">
+						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+					</div>
+					<table id="atendimento_tb">
+						<tr align="center">
+							<td>
+								<label> Motivo Não Venda</label>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<a id="salvar" data-role="button" data-bind="events: {click: salvarNaoVenda}">Salvar</a>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<a id="cancelar" data-role="button" data-bind="events: {click: cancelarNaoVenda}">Cancelar</a>
+							</td>
+						</tr>
+						<tr style="height:100%">
+							<td>&nbsp;</td>
+						</tr>
+					</table>
 				</div>
-			</ul>
+			</div>
 			<div data-role="footer">
 				<div data-role="tabstrip">
 				</div>

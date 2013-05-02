@@ -53,7 +53,7 @@
 					<a href="#foraFila-view" data-icon="foraFila"></a>
 					<a href="#infoFechamento-view"  data-icon="fechamento"></a>
 					<a href="#consulta-view" data-icon="desempenho"></a>
-				</div>>
+				</div>
 			</footer>
 		</div>
 
@@ -246,8 +246,8 @@
 
 		<!--Motivos não venda View-->
 		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="TOP LINE PRO" data-layout="home-layout" data-transition="slideup" data-before-show="showMotivosNaoVenda">
-			<div id="formMotivosNaoVenda">				
-                	<div id="atendimento_left">
+			<div id="formMotivosNaoVenda">
+				<div id="atendimento_left">
 					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
 				</div>
 				<div id="atendimento_rigth">
@@ -263,7 +263,8 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>							</td>
+								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+							</td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
@@ -314,20 +315,14 @@
 		</div>
 
 		<!-- Configuração -->
-		<div id="config-view" data-role="view" data-layout="tools-layout" data-title="TOP LINE PRO" data-init="selBtn">
-			<ul data-role="listview" data-style="inset" data-type="group">
+		<div id="config-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
+			<div class="configTitulo">CONFIGURAÇÕES</div>
+            <ul data-role="listview">
 				<li>
-					Configuração
-					<ul>
-						<li>
-							<a href="#detalhesLoja-view">Cadastro de Loja</a>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<a href="#colaboradores-view">Cadastro de Colaboradores</a>
-						</li>
-					</ul>
+                    <a id="menu" href="#detalhesLoja-view">Cadastro de Loja</a>
+                </li> 
+                <li>
+                    <a id="menu" href="#colaboradores-view">Cadastro de Colaboradores</a>
 				</li>
 			</ul>
 		</div>
@@ -354,7 +349,7 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador" data-style="inset"></ul>
+			<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
 		</div>
 
 		<!--Detalhes Colaboradores view-->
@@ -366,12 +361,14 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul id="infoColaborador" data-role="listview" data-style="inset" data-type="group">
+			<ul id="infoColaborador" data-role="listview" data-type="group">
 				<li>
 					<ul>
-						<li style="height:65px">
-							<img id="smallImage" class="fila-art" data-bind="attr: { src: colaboradorSelecionado.ColFoto }"/>
-							<h1 class="col-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+						<li>
+							<img class="fila-art" data-bind="attr: { src: colaboradorSelecionado.ColFoto }"/>
+							<div class="fila-div">
+								<h1 class="col-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+							</div>
 						</li>
 					</ul>
 				</li>
@@ -454,11 +451,11 @@
 					<span data-role="view-title"></span>
 				</div>
 			</header>
-			<ul id="editorColaborador" data-role="listview" data-style="inset" data-type="group">
+			<ul id="editorColaborador" data-role="listview" data-type="group">
 				<li>
 					<ul>
 						<li>
-							<img id="ImgPequena" class="fila-art" data-bind="attr: { src: colaboradorSelecionado.ColFoto }" />
+							<img class="fila-art" data-bind="attr: { src: colaboradorSelecionado.ColFoto }" />
 							<ul id="btFoto" data-role="buttongroup" class="select-group">
 								<li>
 									<a id="capturePhotoEditButton">Tirar Foto</a>
@@ -908,7 +905,9 @@
 		<script type="text/x-kendo-template" id="tColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showDetalhesColaborador">
 				<img class="fila-art" src="" data-bind="attr: { src: ColFoto}"/>
-				<h1 class="col-nome">${ColNome} # # ${ColSobrenome}</h1>
+				<div class="fila-div">
+					<h1 class="col-nome"> ${ColNome} # # ${ColSobrenome} </h1>
+				</div>
 			</div>
 		</script>
 
@@ -1034,37 +1033,6 @@
 				</ul>
 				<button id="btnEntrada" data-role="button" class="excluir" data-icon="delete"></button>
 			</div>
-		</script>
-
-		<script type="text/x-kendo-template" id="tFechamentos">
-			<!--
-			<div>
-			<ul id="infoFechamento" data-role="listview" data-style="inset">
-			<li>
-			<label>Horário:</label><span data-bind="text: FecHrFechamento"/>
-			</li>
-			<li>
-			<label>Vendas informadas:</label><span data-bind="text: FecQtInfVenda"/>
-			</li>
-			<li>
-			<label>Vendas apuradas:</label><span data-bind="text: FecQtApuVenda"/>
-			</li>
-			<li>
-			<label>Valor informado:</label><span data-bind="text: FecQtInfVenda"/>
-			</li>
-			<li>
-			<label>Valor apurado:</label><span data-bind="text: FecQtApuVenda"/>
-			</li>
-			</ul>
-			</div>
-		
-
-			<div id="graficoFechamento" class="k-content absConf">
-			<div class="chart-wrapper" style="margin: auto;">
-			<div id="chart"></div>
-			</div>
-			</div>
-			-->
 		</script>
 
 		<script type="text/javascript">

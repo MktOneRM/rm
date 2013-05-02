@@ -1,10 +1,10 @@
 body
 {
 	font: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background-color: #f2f2f2;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: #f2f2f2;
 }
 label
 {
@@ -47,6 +47,7 @@ label
 	width: 75px;
 	height: 54px;
 }
+
 
 .km-dentroFila
 {
@@ -139,13 +140,62 @@ label
 {
 	padding: 0;
 	margin: 0;
-    width: 100%;
+	width: 100%;
 }
 
 #foraFila-view li
 {
 	padding: 0;
 	margin: 0;
+}
+
+#editorColaborador-view li
+{
+	padding: 0;
+	margin: 0;
+}
+
+#detalhesColaborador-view li
+{
+	padding: 0;
+	margin: 0;
+}
+
+#colaboradores-view li
+{
+	padding: 0;
+	margin: 0;
+}
+
+#config-view li
+{
+    display:block;
+    text-decoration: none; 		
+    font-size: 18px;
+    padding: 10px 0 10px 0;
+}
+
+#config-view li:hover 
+{
+    display:block;
+    text-decoration: none;
+    background-color:#2d8402;
+    color:#fff;
+ }
+
+#menu
+{
+    text-decoration: none;
+    padding-left:20px;
+}
+
+.configTitulo
+{
+    text-align: center;
+    background-color: #DDDDDD;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 0 10px 0;
 }
 
 .fila-art
@@ -166,10 +216,20 @@ label
 	margin: 0;
 	border: 0;
 	float: left;
-    width: auto;
+	width: auto;
 }
 
 .fila-nome
+{
+	padding: 20px 0 0 0;
+	margin: 0;
+	border: 0;
+	font-size: 20px;
+	font-weight: bold;
+    width: auto;
+}
+
+.col-nome
 {
 	padding: 20px 0 0 0;
 	margin: 0;
@@ -261,22 +321,22 @@ label
 
 #formAtendimento
 {
-    height: 100%;
+	height: 100%;
 }
 
 #formSaiFila
 {
-    height: 100%;
+	height: 100%;
 }
 
 #formEntrarFila
 {
-    height: 100%;
+	height: 100%;
 }
 
 #formMotivosNaoVenda
 {
-    height: 100%;
+	height: 100%;
 }
 
 .foto_grande
@@ -294,13 +354,13 @@ label
 {
 	background-color: #f2f2f2;
 	width: 100%;
-	height: 100%;   
+	height: 100%; 
 }
 
 #atendimento_rigth
 {
 	float: left;
-    max-height: 100%;
+	max-height: 100%;
 	width: 50%;
 	background-color: #f2f2f2;
 }
@@ -316,10 +376,11 @@ label
 	margin-bottom: 20px;
 }
 
-#atendimento_tb {
+#atendimento_tb
+{
 	width: 100%;
 	height: 100%;
-    background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }
 
 #atendimento_tb label
@@ -337,7 +398,7 @@ label
 	border: 1;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
-    font-weight: bold;
+	font-weight: bold;
 }
 
 #atendimento_tb select
@@ -349,12 +410,41 @@ label
 	border: 1;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
-    font-weight: bold;
+	font-weight: bold;
 }
+
+#config_tb
+{    
+    margin-left: 10px;
+    margin-right: 10px;    
+}
+
+#config_tb tr:hover
+{    
+    background-color:#2d8402;
+    color:#fff;
+}
+
+#seta
+{    
+    background: transparent url("seta_off.png") no-repeat;
+    border:0;
+    width:15px;
+    height:32px;
+}
+
+#seta:hover
+{    
+    background: transparent url("seta_on.png") no-repeat;
+    border:0;
+    width:15px;
+    height:32px;
+}
+
 
 #salvar
 {
-    background-color:#2d8402;
+	background-color: #2d8402;
 	font-size: 16px;
 	color: #f2f2f2;
 	text-align: center;
@@ -366,7 +456,7 @@ label
 
 #cancelar
 {
-    background-color:#681212;
+	background-color: #681212;
 	font-size: 16px;
 	color: #f2f2f2;
 	text-align: center;
@@ -375,5 +465,3 @@ label
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 }
-
-

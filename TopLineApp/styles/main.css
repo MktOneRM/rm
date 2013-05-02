@@ -194,6 +194,22 @@ label
     color:#fff;
  }
 
+#consulta-view li
+{
+    display:block;
+    text-decoration: none; 		
+    font-size: 18px;
+    padding: 10px 0 10px 0;
+}
+
+#consulta-view li:hover 
+{
+    display:block;
+    text-decoration: none;
+    background-color:#2d8402;
+    color:#fff;
+ }
+
 #menu
 {
     text-decoration: none;

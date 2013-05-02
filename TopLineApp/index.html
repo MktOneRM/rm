@@ -296,20 +296,13 @@
 
 		<!-- Consulta -->
 		<div id="consulta-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
-			<ul data-role="listview" data-style="inset" data-type="group">
+			<div class="configTitulo">DESEMPENHO</div>
+			<ul data-role="listview">
 				<li>
-					Consulta
-					<ul>
-						<li>
-							<a href="views/ConsultasView.html">Loja</a>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<a href="#desenvView">Vendedor</a>
-						</li>
-					</ul>
-
+					<a id="menu" href="views/ConsultasView.html">Loja</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Vendedor</a>
 				</li>
 			</ul>
 		</div>
@@ -317,12 +310,12 @@
 		<!-- Configuração -->
 		<div id="config-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
 			<div class="configTitulo">CONFIGURAÇÕES</div>
-            <ul data-role="listview">
+			<ul data-role="listview">
 				<li>
-                    <a id="menu" href="#detalhesLoja-view">Cadastro de Loja</a>
-                </li> 
-                <li>
-                    <a id="menu" href="#colaboradores-view">Cadastro de Colaboradores</a>
+					<a id="menu" href="#detalhesLoja-view">Cadastro de Loja</a>
+				</li>
+				<li>
+					<a id="menu" href="#colaboradores-view">Cadastro de Colaboradores</a>
 				</li>
 			</ul>
 		</div>
@@ -455,7 +448,7 @@
 				<li>
 					<ul>
 						<li>
-							<img class="fila-art" data-bind="attr: { src: colaboradorSelecionado.ColFoto }" />
+							<img id="ImgPequena" class="fila-art" data-bind="attr: { src: colaboradorSelecionado.ColFoto }" />
 							<ul id="btFoto" data-role="buttongroup" class="select-group">
 								<li>
 									<a id="capturePhotoEditButton">Tirar Foto</a>

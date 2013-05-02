@@ -10,6 +10,17 @@ label
 {
 	font-size: 12px;
 }
+.k-invalid-msg
+{
+	background: #681212;
+    color:#fff;
+	padding: 2px 5px 2px 4px;
+	border: 0;
+	right: 0;
+    float:right;
+	top: 0;
+	font-size: .6rem;
+}
 
 /*TabStrip - IOS*/
 .km-root .km-pane .km-view .km-dentroFila

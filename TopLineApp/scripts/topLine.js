@@ -560,7 +560,7 @@
 		schema: schemaVendedores,					
 		sort: { 
 			field: 
-			"VendedorApelido", dir: 
+			"ColApelido", dir: 
 			"asc" 
 		}	
 	});

@@ -13,11 +13,11 @@ label
 .k-invalid-msg
 {
 	background: #681212;
-    color:#fff;
+	color: #fff;
 	padding: 2px 5px 2px 4px;
 	border: 0;
 	right: 0;
-    float:right;
+	float: right;
 	top: 0;
 	font-size: .6rem;
 }
@@ -58,7 +58,6 @@ label
 	width: 75px;
 	height: 54px;
 }
-
 
 .km-dentroFila
 {
@@ -180,49 +179,49 @@ label
 
 #config-view li
 {
-    display:block;
-    text-decoration: none; 		
-    font-size: 18px;
-    padding: 10px 0 10px 0;
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
 }
 
 #config-view li:hover 
 {
-    display:block;
-    text-decoration: none;
-    background-color:#2d8402;
-    color:#fff;
- }
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
 
 #consulta-view li
 {
-    display:block;
-    text-decoration: none; 		
-    font-size: 18px;
-    padding: 10px 0 10px 0;
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
 }
 
 #consulta-view li:hover 
 {
-    display:block;
-    text-decoration: none;
-    background-color:#2d8402;
-    color:#fff;
- }
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
 
 #menu
 {
-    text-decoration: none;
-    padding-left:20px;
+	text-decoration: none;
+	padding-left: 20px;
 }
 
 .configTitulo
 {
-    text-align: center;
-    background-color: #DDDDDD;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 0 10px 0;
+	text-align: center;
+	background-color: #DDDDDD;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 10px 0 10px 0;
 }
 
 .fila-art
@@ -253,7 +252,7 @@ label
 	border: 0;
 	font-size: 20px;
 	font-weight: bold;
-    width: auto;
+	width: auto;
 }
 
 .col-nome
@@ -441,33 +440,32 @@ label
 }
 
 #config_tb
-{    
-    margin-left: 10px;
-    margin-right: 10px;    
+{ 
+	margin-left: 10px;
+	margin-right: 10px; 
 }
 
 #config_tb tr:hover
-{    
-    background-color:#2d8402;
-    color:#fff;
+{ 
+	background-color: #2d8402;
+	color: #fff;
 }
 
 #seta
-{    
-    background: transparent url("seta_off.png") no-repeat;
-    border:0;
-    width:15px;
-    height:32px;
+{ 
+	background: transparent url("seta_off.png") no-repeat;
+	border: 0;
+	width: 15px;
+	height: 32px;
 }
 
 #seta:hover
-{    
-    background: transparent url("seta_on.png") no-repeat;
-    border:0;
-    width:15px;
-    height:32px;
+{ 
+	background: transparent url("seta_on.png") no-repeat;
+	border: 0;
+	width: 15px;
+	height: 32px;
 }
-
 
 #salvar
 {
@@ -479,6 +477,13 @@ label
 	border: 1;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
+}
+
+#lerCoordenadas
+{
+	background-color: #2d8402;	
+	height: 35px; 
+    alignment-adjust: center;
 }
 
 #cancelar
@@ -493,60 +498,124 @@ label
 	border-radius: 2px;
 }
 
-#btnCreate {
-    background-color: #2d8402;
+#btnCreate
+{
+	background-color: #2d8402;
 }
 
-#infoLoja ul {
-    padding:0;
-    background-color: #DDDDDD;
+#divTitulo
+{
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px;
 }
 
-#divTitulo {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    padding:10px;
+#divSubTitulo
+{
+	font-size: 14px;
+	font-weight: bold;
+	text-align: left;
+	padding: 5px;
+	background-color: #DDDDDD;
 }
 
-#divSubTitulo {
-    font-size: 14px;
-    font-weight: bold;
-    text-align: left;
-    padding:5px;
-    background-color: #DDDDDD;
+#infoLoja ul
+{
+	padding: 0;
+	background-color: #DDDDDD;
 }
 
-#infoLoja span {
-    float:left;
-    padding-top:10px;
-    width:50%;
-    padding-left:5px;
-    font-size: 14px;
-    font-weight: normal;
-    text-align: left;
-    color:#333333;
+#infoLoja span:hover
+{
+	text-decoration: none;
 }
 
-#infoLoja li {
-    padding: 0;
-    margin-right:10px;
-    text-align: left;
-    background-color: #FFF;
-    width:100%;
+#infoLoja span
+{
+	text-decoration: none;
+	float: left;
+	padding-top: 10px;
+	width: 50%;
+	padding-left: 5px;
+	font-size: 14px;
+	font-weight: normal;
+	text-align: left;
+	color: #333333; 
 }
 
-#infoLoja label {
-    float:left;
-    width:30%;
-    padding: 10px 5px 10px 10px;
-    border-right-style:solid;
-    border-right-color:#DDDDDD;
-    border-right-width:1px;
-    text-align: right;
-    background-color: #f2f2f2;
-    font-size: 14px;
-    font-weight: normal;
-    color:#000;
+#infoLoja li
+{
+	padding: 0;
+	margin-right: 10px;
+	text-align: left;
+	background-color: #FFF;
+	width: 100%;
 }
 
+#infoLoja label
+{
+	float: left;
+	width: 30%;
+	padding: 10px 5px 10px 10px;
+	border-right-style: solid;
+	border-right-color: #DDDDDD;
+	border-right-width: 1px;
+	text-align: right;
+	background-color: #f2f2f2;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
+}
+
+#editorLoja ul
+{
+	padding: 0;
+	background-color: #DDDDDD;
+}
+
+#editorLoja li
+{
+	padding: 0;
+	margin-right: 10px;
+	text-align: left;
+	background-color: #FFF;
+	width: 100%;
+}
+
+#editorLoja label
+{
+	float: left;
+	width: 30%;
+	padding: 10px 5px 10px 10px;
+    margin-left:0;
+	border-right-style: solid;
+	border-right-color: #DDDDDD;
+	border-right-width: 1px;
+	text-align: right;
+	background-color: #f2f2f2;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
+}
+
+#editorLoja input[type="text"]
+{	
+	float: left;		
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+    width: 65%;
+}
+
+#editorLoja select
+{
+	float: left;		
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+    left: 110px;
+    width: 100%;
+}

@@ -673,121 +673,125 @@
 					<a id="btnCreate" data-role="button" type="button" data-align="right">Salvar</a>
 					<span data-role="view-title"></span>
 				</div>
+				<div id="divTitulo">LOJA</div>
 			</header>
-			<ul id="editorLoja" data-role="listview" data-style="inset" data-type="group" >
-				<li>
+			<ul id="editorLoja" data-role="listview" data-type="group" >
+				<div>
 					<ul>
-						Dados
+						<div id="divSubTitulo">Dados</div>
 						<li>
 							<label>
-								CNPJ:
+								CNPJ
 							</label>
-							<input id="cnpj" name="Cnpj" type="text" placeholder="Cnpj" maxlength=14 size=14 data-bind="cnpj: lojaSelecionada.LojCnpj, value: lojaSelecionada.LojCnpj" required validationmessage="Requerido"/>
+
+							<input id="cnpj" name="Cnpj" type="text" placeholder="Cnpj" align="left" maxlength=14 size=14 data-bind="cnpj: lojaSelecionada.LojCnpj, value: lojaSelecionada.LojCnpj" required validationmessage="Requerido"/>
+
 						</li>
 						<li>
 							<label>
-								Código:
+								Código
 							</label>
 							<input id="LojCodigo" name="Código" type="text" maxlength=10 size=10 placeholder="Código" data-bind="value: lojaSelecionada.LojCodigo" required validationmessage="Requerido"/>
 						</li>
 						<li>
 							<label>
-								Razão Social:
+								Razão Social
 							</label>
 							<input id="LojRazaosocial" name="RazaoSocial" placeholder="Razão Social" type="text" maxlength=60 size=60 data-bind="value: lojaSelecionada.LojRazaosocial" required validationmessage="Requerido" />
 						</li>
 						<li>
 							<label>
-								Nome Fantasia:
+								Nome Fantasia
 							</label>
 							<input id="LojNomefantasia" name="NomeFantasia" placeholder="Nome Fantasia" maxlength=50 size=50 type="text" data-bind="value: lojaSelecionada.LojNomefantasia" required validationmessage="Requerido" />
 						</li>
 						<li>
 							<label>
-								Telefone:
+								Telefone
 							</label>
 							<input id="LojTelefone" name="Telefone" type="text" maxlength=11 size=11 data-bind="telefoneValue: lojaSelecionada.LojTelefone" />
 						</li>
 						<li>
 							<label>
-								Loja de:
+								Loja de
 							</label>
 							<select id="LojShopping_rua" name="TipoLoja" data-bind="source: TLojas, value: lojaSelecionada.LojShopping_rua" data-text-field="Desc" data-value-field="Id"></select>
 						</li>
 					</ul>
-				</li>
-				<li>
+				</div>
+				<div>
 					<ul>
-						Endereço
+						<div id="divSubTitulo">Endereço</div>
 						<li>
 							<label>
-								Logradouro:
+								Logradouro
 							</label>
 							<input id="LojLogradouro" name="Logradouro" type="text" maxlength=60 size=60 data-bind="value: lojaSelecionada.LojLogradouro" />
 						</li>
 						<li>
 							<label>
-								Número:
+								Número
 							</label>
 							<input id="LojNumero" name="Nº" type="text" maxlength=10 size=10 data-bind="value: lojaSelecionada.LojNumero" />
 						</li>
 						<li>
 							<label>
-								Complemento:
+								Complemento
 							</label>
 							<input id="LojComplemento" name="Complemento" maxlength=40 size=40 type="text" data-bind="value: lojaSelecionada.LojComplemento" />
 						</li>
 						<li>
 							<label>
-								Bairro:
+								Bairro
 							</label>
 							<input id="LojBairro" name="Bairro" type="text" maxlength=50 size=50 data-bind="value: lojaSelecionada.LojBairro" />
 						</li>
 						<li>
 							<label>
-								Cidade:
+								Cidade
 							</label>
 							<input id="LojCidade" name="Cidade" type="text" maxlength=50 size=50 data-bind="value: lojaSelecionada.LojCidade" />
 						</li>
 						<li>
 							<label>
-								UF:
+								UF
 							</label>
 							<select id="LojUf" name="Uf" data-bind="source: UFs, value: lojaSelecionada.LojUF" data-text-field="Uf" data-value-field="Uf"></select>
 						</li>
 						<li>
 							<label>
-								CEP:
+								CEP
 							</label>
 							<input id="LojCep" name="Cep" type="text" maxlength=9 size=9 data-bind="cep: lojaSelecionada.LojCep, value: lojaSelecionada.LojCep" />
 						</li>
 					</ul>
-				</li>
-			</ul>
-			<ul id="editorLoja" data-role="listview" data-style="inset" data-type="group">
-				<li>
-					<ul id="coordenadas">
-						Coordenadas
-						<li style="text-align: center;">
-							<i></i>
-							<button id="lerCoordenadas" data-role="button" data-icon="globe">Ler Coordenadas</button>
+				</div>
+
+				<div>
+					<ul>
+						<div id="divSubTitulo">Coordenadas</div>
+						<li>
+							<div style="background-color:#f2f2f2" align=center>
+								<button id="lerCoordenadas" data-role="button" data-icon="globe">Ler Coordenadas</button>
+							</div>
 						</li>
 						<li>
 							<label>
-								Latitude:
+								Latitude
 							</label>
 							<input id="LojLatitude" name="Latitude" type="text" data-bind="value: lojaSelecionada.LojLatitude" disabled />
 						</li>
 						<li>
 							<label>
-								Longitude:
+								Longitude
 							</label>
 							<input id="LojLongitude" name="Longitude" type="text" data-bind="value: lojaSelecionada.LojLongitude" disabled />
 						</li>
 					</ul>
 					<p id="results"></p>
-				</li>
+				</div>
 			</ul>
+
 			<ul data-role="listview" data-style="inset">
 				<li>
 					<a id="novoTurno">Novo Turno</a>
@@ -945,7 +949,7 @@
 				</li>
 			</ul>
 		</script>
-			
+
 		<script type="text/x-kendo-template" id="tAtuEscalasLoja">
 			<div>
 				<ul id="editorTurnosLoja" data-role="listview" data-style="inset">
@@ -961,7 +965,7 @@
 						</label>
 						<select id="TufId" name="TufId" data-bind="source: turnos, value: TufId" data-text-field="TufDescricao" data-value-field="TufId" required validationmessage="Requerido"></select>
 					</li>
-			
+
 					<li>
 						<label>
 							Horário Inicial:
@@ -977,12 +981,12 @@
 				</ul>
 			</div>
 		</script>
-			
+
 		<script type="text/x-kendo-template" id="tTelColaborador">
 			<label> ${TteDescricao}: </label><span data-bind="telefoneText: TelNumero"/><span> </span><span data-bind="text: TceDescricao"/><br>
 			<label> Operadora: </label><span data-bind="text: OpeDescricao"/>
 		</script>
-			
+
 		<script type="text/x-kendo-template" id="tAtuTelColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstartTelefone">
 				<ul id="editorTelColaborador" data-role="listview" data-style="inset">

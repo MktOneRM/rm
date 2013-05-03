@@ -308,7 +308,7 @@
 		</div>
 
 		<!-- Configuração -->
-		<div id="config-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
+		<div id="config-view" data-role="view" data-layout="tools-layout" data-title="TOP LINE PRO">
 			<div class="configTitulo">CONFIGURAÇÕES</div>
 			<ul data-role="listview">
 				<li>
@@ -559,109 +559,110 @@
 		</div>
 
 		<!--Detalhes Loja View-->
-		<div id="detalhesLoja-view" data-role="view" data-model="viewModel.lojaSelecionada" data-title="TOP LINE PRO" data-layout="tools-layout" data-before-show="showLojas">
+		<div id="detalhesLoja-view" data-role="view" data-model="viewModel.lojaSelecionada" data-title="TOP LINE PRO" data-layout="update-layout" data-before-show="showLojas">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#:back">Voltar</a>
+					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#config-view">Voltar</a>
 					<a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="backbutton" href="#EditorLoja-view" >Editar</a>
 					<span data-role="view-title"></span>
 				</div>
+				<div id="divTitulo">LOJA</div>
 			</header>
-			<ul id="infoLoja" data-role="listview" data-style="inset" data-type="group" >
-				<li>
+			<ul id="infoLoja" data-role="listview" data-type="group">
+				<div>
 					<ul>
-						Dados
+						<div id="divSubTitulo">DADOS</div>
 						<li>
 							<label>
-								CNPJ:
+								CNPJ
 							</label><span data-bind="cnpj: LojCnpj"></span>
 						</li>
 						<li>
 							<label>
-								Razão Social:
+								Razão Social
 							</label> <span data-bind="text: LojRazaosocial"></span>
 						</li>
 						<li>
 							<label>
-								Nome Fantasia:
+								Nome Fantasia
 							</label><span data-bind="text: LojNomefantasia"></span>
 						</li>
 						<li>
 							<label>
-								Telefone:
+								Telefone
 							</label><span data-bind="telefoneText: LojTelefone"></span>
 						</li>
 						<li>
 							<label>
-								Loja de:
+								Loja de
 							</label><span data-bind="ShopRua: LojShopping_rua"></span>
 						</li>
 						<li>
 							<label>
-								Data Cadastro:
+								Data Cadastro
 							</label><span id="dtCadastro" data-bind="dateText: LojDtcadastro"></span>
 						</li>
 					</ul>
-				</li>
-				<li>
+				</div>
+				<div>
 					<ul>
-						Endereço
+						<div id="divSubTitulo">ENDEREÇO</div>
 						<li>
 							<label>
-								Logradouro:
+								Logradouro
 							</label><span data-bind="text: LojLogradouro"></span>
 						</li>
 						<li>
 							<label>
-								Número:
+								Número
 							</label><span data-bind="text: LojNumero"></span>
 						</li>
 						<li>
 							<label>
-								Complemento:
-							</label> <span data-bind="text: LojComplemento"></span>
+								Complemento
+							</label><span data-bind="text: LojComplemento"></span>
 						</li>
 						<li>
 							<label>
-								Bairro:
-							</label> <span data-bind="text: LojBairro"></span>
+								Bairro
+							</label><span data-bind="text: LojBairro"></span>
 						</li>
 						<li>
 							<label>
-								Cidade:
+								Cidade
 							</label><span data-bind="text: LojCidade"></span>
 						</li>
 						<li>
 							<label>
-								UF:
+								UF
 							</label> <span data-bind="text: LojUf"></span>
 						</li>
 						<li>
 							<label>
-								CEP:
+								CEP
 							</label><span data-bind="cep: LojCep"></span>
 						</li>
 					</ul>
-				</li>
-			</ul>
-			<ul id="infoLoja" data-role="listview" data-style="inset" data-type="group">
-				<li>
+				</div>
+				<div>
 					<ul>
-						Coordenadas
+						<div id="divSubTitulo">COORDENADAS</div>
 						<li>
 							<label>
-								Latitude:
+								Latitude
 							</label><span data-bind="text: LojLatitude"></span>
 						</li>
 						<li>
 							<label>
-								Longitude:
+								Longitude
 							</label> <span data-bind="text: LojLongitude"></span>
 						</li>
 					</ul>
-				</li>
+				</div>
+				<div>
+					<ul id="infoLoja" data-bind="source: dsEscala" data-role="listview" data-template="tEscalasLoja"></ul>
+				</div>
 			</ul>
-			<ul id="infoLoja" data-bind="source: dsEscala" data-role="listview" data-style="inset" data-template="tEscalasLoja"></ul>
 		</div>
 
 		<!--Editor Loja View-->
@@ -928,37 +929,29 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tEscalasLoja">
-			<div>
-				<ul id="infoLoja" data-role="listview" data-style="inset">
-					<li>
-						<label>
-							Dias Funcionamento:
-						</label>
-						<span data-bind="text: DsfDescricao"></span>
-					</li>
-					<li>
-						<label>
-							Turnos Funcionamento:
-						</label>
-						<span data-bind="text: TufDescricao"></span>
-					</li>
-
-					<li>
-						<label>
-							Horário Inicial:
-						</label>
-						<span data-bind="text: EscHrInicial"></span>
-					</li>
-					<li>
-						<label>
-							Horário Final:
-						</label>
-						<span data-bind="text: EscHrFinal"></span>
-					</li>
-				</ul>
-			</div>			
+			<ul id="infoLoja" data-role="listview">
+				<div id="divSubTitulo">#= TufDescricao #</div>
+				<li>
+					<label>
+						Escala
+					</label>
+					<span data-bind="text: DsfDescricao"></span>
+				</li>
+				<li>
+					<label>
+						Horário Inicial:
+					</label>
+					<span data-bind="text: EscHrInicial"></span>
+				</li>
+				<li>
+					<label>
+						Horário Final:
+					</label>
+					<span data-bind="text: EscHrFinal"></span>
+				</li>
+			</ul>
 		</script>
-
+			
 		<script type="text/x-kendo-template" id="tAtuEscalasLoja">
 			<div>
 				<ul id="editorTurnosLoja" data-role="listview" data-style="inset">
@@ -974,7 +967,7 @@
 						</label>
 						<select id="TufId" name="TufId" data-bind="source: turnos, value: TufId" data-text-field="TufDescricao" data-value-field="TufId" required validationmessage="Requerido"></select>
 					</li>
-
+			
 					<li>
 						<label>
 							Horário Inicial:
@@ -990,12 +983,12 @@
 				</ul>
 			</div>
 		</script>
-
+			
 		<script type="text/x-kendo-template" id="tTelColaborador">
 			<label> ${TteDescricao}: </label><span data-bind="telefoneText: TelNumero"/><span> </span><span data-bind="text: TceDescricao"/><br>
 			<label> Operadora: </label><span data-bind="text: OpeDescricao"/>
 		</script>
-
+			
 		<script type="text/x-kendo-template" id="tAtuTelColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstartTelefone">
 				<ul id="editorTelColaborador" data-role="listview" data-style="inset">
@@ -1029,7 +1022,7 @@
 		</script>
 
 		<script type="text/javascript">
-		
+			
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 			//var baseUrl = "http://localhost:50000/api";
 			
@@ -1084,11 +1077,11 @@
 			
 				app.hideLoading();
 			
-				app.navigate("#dentroFila-view");
+				//app.navigate("#dentroFila-view");
 				//app.navigate("#colaboradores-view");
-				//app.navigate("#config-view");
+				app.navigate("#config-view");
 			}  
-			
+	
 		</script>
 	</body>
 </html>

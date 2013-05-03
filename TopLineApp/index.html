@@ -571,7 +571,7 @@
 			<ul id="infoLoja" data-role="listview" data-type="group">
 				<div>
 					<ul>
-						<div id="divSubTitulo">DADOS</div>
+						<div id="divSubTitulo">Dados</div>
 						<li>
 							<label>
 								CNPJ
@@ -606,7 +606,7 @@
 				</div>
 				<div>
 					<ul>
-						<div id="divSubTitulo">ENDEREÇO</div>
+						<div id="divSubTitulo">Endereço</div>
 						<li>
 							<label>
 								Logradouro
@@ -646,7 +646,7 @@
 				</div>
 				<div>
 					<ul>
-						<div id="divSubTitulo">COORDENADAS</div>
+						<div id="divSubTitulo">Coordenadas</div>
 						<li>
 							<label>
 								Latitude
@@ -930,7 +930,7 @@
 
 		<script type="text/x-kendo-template" id="tEscalasLoja">
 			<ul id="infoLoja" data-role="listview">
-				<div id="divSubTitulo">#= TufDescricao #</div>
+				<div id="divSubTitulo">#=TufDescricao#</div>
 				<li>
 					<label>
 						Escala
@@ -939,15 +939,9 @@
 				</li>
 				<li>
 					<label>
-						Horário Inicial:
+						Período:
 					</label>
-					<span data-bind="text: EscHrInicial"></span>
-				</li>
-				<li>
-					<label>
-						Horário Final:
-					</label>
-					<span data-bind="text: EscHrFinal"></span>
+					<span>#=EscHrInicial# às #=EscHrFinal#</span>
 				</li>
 			</ul>
 		</script>

@@ -155,10 +155,7 @@
 		<!--Saida da Fila da Vez-->
 		<div id="sairdaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoSaida">
 			<div id="formSaiFila">
-				<div id="atendimento_left">
-					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
-				</div>
-				<div id="atendimento_rigth">
+				<div id="atendimento_fila">
 					<div id="atendimento_nome">
 						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
@@ -166,7 +163,7 @@
 					<table id="atendimento_tb">
 						<tr align="center">
 							<td>
-								<label> Motivo Saída</label>
+								<label>Motivo Saída</label>
 							</td>
 						</tr>
 						<tr align="center">
@@ -201,10 +198,7 @@
 		<!--Entrada na Fila da Vez-->
 		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoEntrada">
 			<div id="formEntrarFila">
-				<div id="atendimento_left">
-					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
-				</div>
-				<div id="atendimento_rigth">
+				<div>
 					<div id="atendimento_nome">
 						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
@@ -212,7 +206,7 @@
 					<table id="atendimento_tb">
 						<tr align="center">
 							<td>
-								<label> Motivo Entrada</label>
+								<label>Motivo Entrada</label>
 							</td>
 						</tr>
 						<tr align="center">
@@ -247,7 +241,7 @@
 		<!--Motivos não venda View-->
 		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="TOP LINE PRO" data-layout="home-layout" data-transition="slideup" data-before-show="showMotivosNaoVenda">
 			<div id="formMotivosNaoVenda">
-				<div id="atendimento_left">
+				<div>
 					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
 				</div>
 				<div id="atendimento_rigth">
@@ -258,7 +252,7 @@
 					<table id="atendimento_tb">
 						<tr align="center">
 							<td>
-								<label> Motivo Não Venda</label>
+								<label>Motivo Não Venda</label>
 							</td>
 						</tr>
 						<tr align="center">

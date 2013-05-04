@@ -1,59 +1,26 @@
 <!-- Consultas-Layout -->
-<div data-role="layout" data-id="consultas-layout" data-title="Consulta">
+<div data-role="layout" data-id="consultas-layout" data-title="">
 	<header data-role="header">
 		<div data-role="navbar">
+			<a data-align="right" href="#consulta-view" >
+				<img id="imgPrincipal" src="styles/iconList.png"/>
+			</a>
 			<span data-role="view-title"></span>
 		</div>
-		<ul data-role="buttongroup" data-index="0">
-			<li>
-				<a>Previsto</a>
-			</li>
-			<li>
-				<a>Realizado</a>
-			</li>
-		</ul>
-		<ul data-role="buttongroup" data-index="0">
-			<li>
-				<a>Opção</a>
-			</li>
-			<li>
-				<a>Opção</a>
-			</li>
-			<li>
-				<a>Opção</a>
-			</li>
-			<li>
-				<a>Opção</a>
-			</li>
-		</ul>
-		<ul data-role="buttongroup" data-index="0">
-			<li>
-				<a>Opção</a>
-			</li>
-			<li>
-				<a>Opção</a>
-			</li>
-			<li>
-				<a>Opção</a>
-			</li>
-			<li>
-				<a>Opção</a>
-			</li>
-		</ul>
-	</header>
+	</header>    
 	<div data-role="footer">
 		<div data-role="tabstrip">
-			<a href="#Consulta-view" data-icon="compose">Tabela</a>
-			<a href="#Grafico-view" data-icon="featured">Grafico</a>
+			<a href="#Consulta-view" data-icon="tabela"></a>
+			<a href="#Grafico-view" data-icon="grafico"></a>
 		</div>
 	</div>
 </div>
 
-<div id="Consulta-view" data-role="view" data-layout="consultas-layout"  data-model="viewModelConsultas">
+<div id="Consulta-view" data-role="view" data-layout="consultas-layout"  data-model="viewModelConsultas" data-title="TOP LINE PRO">
 	<ul data-bind="source: dataSelecionado" data-role="listview" data-template="tConsulta" data-style="inset"></ul>
 </div>
 
-<div id="Grafico-view"  class="k-content" data-role="view" data-layout="consultas-layout" data-show="initChart">
+<div id="Grafico-view"  class="k-content" data-role="view" data-layout="consultas-layout" data-show="initChart" data-title="TOP LINE PRO">
 	<div class="chart-wrapper">
 		<div id="chart"></div>
 	</div>

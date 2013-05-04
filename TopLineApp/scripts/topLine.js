@@ -824,7 +824,7 @@
 		batch: true,
 		schema: scTelColaborador, 
 		sort: {
-			field:"TelId", 
+			field:"TteId", 
 			dir: "asc"
 		},
 		change:function(e) {
@@ -1057,10 +1057,7 @@
 	}
  
 	function vendedoresFila() {        
-		atualizaFilaNoSalao(dsVendFila, 1);
-		var sltBtn = this.header.find("#btFila").data("kendoMobileButtonGroup");        
-		if (sltBtn)
-			sltBtn.select(0);
+		atualizaFilaNoSalao(dsVendFila, 1);		
 	}
 			
 	function vendedoresForaFila() {

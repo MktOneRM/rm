@@ -531,11 +531,13 @@ label
 
 #divSubTitulo
 {
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: bold;
 	text-align: left;
 	padding: 5px;
+    padding-left: 15px;
 	background-color: #DDDDDD;
+    color: #333333;
 }
 
 .subTitulo

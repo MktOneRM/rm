@@ -688,3 +688,235 @@ label
 	font-weight: normal;
 	color: #000;
 }
+
+
+#editorFechamento ul
+{
+	padding: 0;
+	background-color: #DDDDDD;
+}
+
+#editorFechamento li
+{
+	padding: 0;
+	margin-right: 10px;
+	text-align: left;
+	background-color: #FFF;
+	width: 100%;
+}
+
+#editorFechamento label
+{
+	float: left;
+	width: 40%;
+	padding: 10px 5px 10px 10px;
+    margin-left:0;
+	border-right-style: solid;
+	border-right-color: #DDDDDD;
+	border-right-width: 1px;
+	text-align: right;
+	background-color: #f2f2f2;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
+}
+
+#editorFechamento input[type=number]
+{	
+	float: left;		
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+    width: 55%;
+}
+
+#editorFechamento select
+{
+	float: left;		
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+    width: 55%;
+}
+
+#spanEditor span
+{
+	text-decoration: none;
+	float: left;
+	padding: 10px 5px 10px 10px;
+	width: 100%;	
+	font-size: 14px;
+	font-weight: normal;
+	text-align: center;
+	color: #333333;
+    background-color: #f2f2f2;
+}
+
+#infoColaborador ul
+{
+	padding: 0;
+	background-color: #DDDDDD;
+}
+
+#infoColaborador span:hover
+{
+	text-decoration: none;
+}
+
+#infoColaborador span
+{
+	text-decoration: none;
+	float: left;
+	padding-top: 10px;
+	width: 50%;
+	padding-left: 5px;
+	font-size: 14px;
+	font-weight: normal;
+	text-align: left;
+	color: #333333; 
+}
+
+#infoColaborador li
+{
+	padding: 0;
+	margin-right: 10px;
+	text-align: left;
+	background-color: #FFF;
+	width: 100%;
+}
+
+#infoColaborador label
+{
+	float: left;
+	width: 30%;
+	padding: 10px 5px 10px 10px;
+	border-right-style: solid;
+	border-right-color: #DDDDDD;
+	border-right-width: 1px;
+	text-align: right;
+	background-color: #f2f2f2;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
+}
+
+
+#editorColaborador ul
+{
+	padding: 0;
+	background-color: #DDDDDD;
+}
+
+#editorColaborador li
+{
+	padding: 0;
+	margin-right: 10px;
+	text-align: left;
+	background-color: #FFF;
+	width: 100%;
+}
+
+#editorColaborador label
+{
+	float: left;
+	width: 30%;
+	padding: 10px 5px 10px 10px;
+    margin-left:0;
+	border-right-style: solid;
+	border-right-color: #DDDDDD;
+	border-right-width: 1px;
+	text-align: right;
+	background-color: #f2f2f2;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
+}
+
+#editorColaborador input[type="number"]
+{	
+	float: left;		
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+    width: 65%;
+}
+
+#editorColaborador input[type="date"]
+{	
+	float: left;		
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+    width: 65%;
+    left: -1.5%;
+}
+
+#editorColaborador input[type="text"]
+{	
+	float: left;		
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+    width: 65%;
+}
+
+#editorColaborador select
+{
+	float: left;		
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+    width: 65%;
+}
+
+.km-root .km-pane .km-view .km-grafico
+{
+	background-size: 100% 100%;
+	-webkit-background-clip: border-box;
+	background-color: currentColor;
+	width: 75px;
+	height: 54px;
+}
+
+.km-grafico
+{
+	-webkit-mask-box-image: url("iconsGrafico_off.png"); 
+}
+
+.km-root .km-pane .km-view .km-tabela
+{
+	background-size: 100% 100%;
+	-webkit-background-clip: border-box;
+	background-color: currentColor;
+	width: 75px;
+	height: 54px;
+}
+
+.km-tabela
+{
+	-webkit-mask-box-image: url("iconsTabela_off.png"); 
+}
+
+#imgPrincipal
+{
+	width: 20px; 
+	height: 20px; 
+	padding-top: 10px;
+}
+
+#divTituloFotos
+{
+	font-size: 11px;
+	font-weight: bold;
+	text-align: left;
+	padding: 5px;
+    padding-left: 15px;
+	background-color: #DDDDDD;
+    color: #333333;
+}

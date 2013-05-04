@@ -628,51 +628,34 @@ label
 	color: #000;
 }
 
-/* iPhone [portrait + landscape] */
-@media only screen and (max-device-width: 480px)
-{
-	#editorLoja input[type="text"]
-	{ 
-		alignment-adjust: left;
-		font-size: 14px;
-		font-weight: normal;
-		color: #333333; 
-		left: 35%;
-		float: left;
-	}
-}
-
-/* iPad [portrait + landscape] */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px)
-{
-	#editorLoja input[type="text"]
-	{ 
-		alignment-adjust: left;
-		font-size: 14px;
-		font-weight: normal;
-		color: #333333; 
-		left: 20%;
-		float: left;
-	}
-    
-}    
-
-#editorLoja input[type="time"]
+#editorLoja input[type="text"]
 { 
-	position: absolute;
 	alignment-adjust: left;
 	font-size: 14px;
 	font-weight: normal;
 	color: #333333; 
+	left: 35%;
+	float: left;
 }
-
+    
 #editorLoja select
 {
-	float: left; 
 	alignment-adjust: left;
 	font-size: 14px;
 	font-weight: normal;
 	color: #333333; 
+	left: 35%;
+	float: left;
+}
+    
+#editorLoja input[type="time"]
+{ 
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+	left: 7%;
+	float: left;
 }
 
 #editorTurnosLoja ul

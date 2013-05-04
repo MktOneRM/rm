@@ -349,12 +349,13 @@
 			<ul id="infoColaborador" data-role="listview" data-type="group">
 				<div>
 					<ul>
-						<li>
+						<div id="divinfoFoto">
 							<img class="fila-art" data-bind="attr: { src: colaboradorSelecionado.ColFoto }"/>
-							<div class="fila-div">
-								<h1 class="col-nome" data-bind="text: colaboradorSelecionado.ColNome"></h1>
+							<div id="divinfoFoto">
+								<h1 class="col-nome" align="center" data-bind="text: colaboradorSelecionado.ColNome"></h1>
 							</div>
-						</li>
+						</div>
+                        <li ></li>
 					</ul>
 				</div>
 				<div>
@@ -392,7 +393,7 @@
 				</div>
 				<div>
 					<ul>
-						<div id="divSubTitulo"></div>
+						<div id="divSubTitulo">Status</div>
 						<li>
 							<label>
 								Data Entrada
@@ -411,7 +412,7 @@
 				</div>
 				<div>
 					<ul>
-						<div id="divSubTitulo"></div>
+						<div id="divSubTitulo">Posição</div>
 						<li>
 							<label>Cargo</label>
 							<span data-bind="text: colaboradorSelecionado.CarDescricao"></span>
@@ -444,7 +445,7 @@
 				<table>
 					<tr>
 						<td style="padding-left:10px;">
-							<input id="ImgPequena"  data-bind="attr: { src: colaboradorSelecionado.ColFoto }" type="image" name="image" src="styles\iconFoto_fila.png"   width="60" height="60" />
+							<input id="ImgPequena"  data-bind="attr: { src: colaboradorSelecionado.ColFoto }" type="image" name="image" width="60" height="60" />
 						</td>
 						<td>
 							<input id="capturarFotoClose" type="image" src="styles\iconFoto.png" name="image" width="60" height="60">
@@ -453,13 +454,12 @@
 							<input id="galeriaFotoClose" type="image" src="styles\iconGaleria.png" name="image" width="60" height="60">
 						</td>
 					</tr>
-
 				</table>
 				<div id="divTituloFotos">Foto de corpo inteiro</div>
 				<table>
 					<tr>
 						<td style="padding-left:10px;">
-							<input id="ImgGrande"  data-bind="attr: { src: colaboradorSelecionado.ColFotoCorpo }" type="image" name="image" src="styles\iconFoto_venda.png"   width="60" height="60" />
+							<input id="ImgGrande"  data-bind="attr: { src: colaboradorSelecionado.ColFotoCorpo }" type="image" name="image" width="60" height="60" />
 						</td>
 						<td>
 							<input id="capturarFotoCorpo" type="image" src="styles\iconFoto.png" name="image" width="60" height="60">
@@ -519,7 +519,7 @@
 				</div>
 				<div>
 					<ul>
-						<div id="divSubTitulo"></div>
+						<div id="divSubTitulo">Status</div>
 						<li>
 							<label>
 								Data Entrada
@@ -534,7 +534,7 @@
 						</li>
 						<li>
 							<label>
-								Afastamento
+								Afastado
 							</label>
 							<input id="afastamento" name="Afastamento" data-role="switch" data-on-label="Sim" data-off-label="Não" checked="unchecked" data-bind="checked: colaboradorSelecionado.ColAfasttemp">
 						</li>
@@ -542,7 +542,7 @@
 				</div>
 				<div>
 					<ul>
-						<div id="divSubTitulo"></div>
+						<div id="divSubTitulo">Posição</div>
 						<li>
 							<label>
 								Cargo
@@ -558,21 +558,17 @@
 					</ul>
 				</div>
 				<div>
-					<ul data-role="listview" data-style="inset">
-						<li>
-							<a id="novoTelefone">Novo Telefone</a>
-							<a data-role="detailbutton" data-style="rowinsert"></a>
+					<ul>
+						<li class="subTitulo" style="padding:5px;margin:0;">
+							<a id="novoTelefone" class="subTitulo">Novo Telefone</a>
+							<a id="novoTelefone" data-role="detailbutton" class="subTitulo" data-style="rowinsert">&nbsp;</a>
 						</li>
 					</ul>
 				</div>
+				<div>
+					<ul id="editorTelColaborador" data-bind="source: telefonesColaborador" data-role="listview" data-template="tAtuTelColaborador"></ul>
+				</div>
 			</ul>
-			<ul data-role="listview" data-style="inset">
-				<li>
-					<a id="novoTelefone">Novo Telefone</a>
-					<a data-role="detailbutton" data-style="rowinsert"></a>
-				</li>
-			</ul>
-			<ul id="editorTelColaborador" data-bind="source: telefonesColaborador" data-role="listview" data-template="tAtuTelColaborador" data-style="inset"></ul>
 		</div>
 
 		<!--Detalhes Loja View-->
@@ -847,7 +843,7 @@
 				<div id="chart"></div>
 			</div>
 		</div>
-                        
+
 		<!--Editor Fechamento-->
 		<div id="editorFechamento-view" data-role="view" data-model="viewModelFechamento" data-before-show="editorFecViewShow" data-init="editorFecViewInit" data-title="TOP LINE PRO" data-layout="update-layout" >
 			<header data-role="header">
@@ -1027,7 +1023,7 @@
 
 		<script type="text/x-kendo-template" id="tAtuTelColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstartTelefone">
-				<ul id="editorTelColaborador" data-role="listview" data-style="inset">
+				<ul id="editorTelColaborador" data-role="listview">
 					<li>
 						<label>
 							Tipo Telefone:
@@ -1036,9 +1032,9 @@
 					</li>
 					<li>
 						<label>
-							Telefone:
-							<input id="#= uid #" name="Telefone" type="text" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
+							Telefone
 						</label>
+						<input id="#= uid #" name="Telefone" type="text" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
 					</li>
 					<li>
 						<label>
@@ -1054,6 +1050,7 @@
 					</li>
 				</ul>
 				<button id="btnEntrada" data-role="button" class="excluir" data-icon="delete"></button>
+				<div id="divSubTitulo"></div>
 			</div>
 		</script>
 

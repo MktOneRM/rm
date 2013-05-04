@@ -82,8 +82,13 @@
     <Content Include="styles\iconFoto_fila.png" />
     <Content Include="styles\iconFoto_venda.png" />
     <Content Include="styles\iconGaleria.png" />
+    <Content Include="styles\iconList.png" />
     <Content Include="styles\iconsFila_off.png" />
     <Content Include="styles\iconsFila_on.png" />
+    <Content Include="styles\iconsGrafico_off.png" />
+    <Content Include="styles\iconsGrafico_on.png" />
+    <Content Include="styles\iconsTabela_off.png" />
+    <Content Include="styles\iconsTabela_on.png" />
     <Content Include="styles\seta_off.png" />
     <Content Include="styles\seta_on.png" />
     <Content Include="kendo\cultures\kendo.culture.pt-BR.min.js" />

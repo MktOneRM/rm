@@ -352,6 +352,7 @@ label
 
 #formSaiFila
 {
+	width: 100%;
 	height: 100%;
 }
 
@@ -420,7 +421,7 @@ label
 	font-size: 16px;
 	color: #000;
 	text-align: center;
-	width: 85%;
+	width: 90%;
 	border: 1;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -432,7 +433,7 @@ label
 	font-size: 16px;
 	color: #000;
 	text-align: center;
-	width: 85%;
+	width: 90%;
 	border: 1;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -473,17 +474,22 @@ label
 	font-size: 16px;
 	color: #f2f2f2;
 	text-align: center;
-	width: 75%;
+	width: 80%;
 	border: 1;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 }
 
-#lerCoordenadas
+#salvarMaior
 {
-	background-color: #2d8402;	
-	height: 35px; 
-    alignment-adjust: center;
+	background-color: #2d8402;
+	font-size: 16px;
+	color: #f2f2f2;
+	text-align: center;
+	width: 85%;
+	border: 1;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
 }
 
 #cancelar
@@ -492,7 +498,19 @@ label
 	font-size: 16px;
 	color: #f2f2f2;
 	text-align: center;
-	width: 75%;
+	width: 80%;
+	border: 1;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+#cancelarMaior
+{
+	background-color: #681212;
+	font-size: 16px;
+	color: #f2f2f2;
+	text-align: center;
+	width: 85%;
 	border: 1;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -517,6 +535,14 @@ label
 	font-weight: bold;
 	text-align: left;
 	padding: 5px;
+	background-color: #DDDDDD;
+}
+
+.subTitulo
+{
+	font-size: 14px;
+	font-weight: bold;
+	text-align: left;
 	background-color: #DDDDDD;
 }
 
@@ -576,19 +602,22 @@ label
 
 #editorLoja li
 {
+	display: block;
 	padding: 0;
 	margin-right: 10px;
 	text-align: left;
 	background-color: #FFF;
 	width: 100%;
+	alignment-adjust: left;
 }
 
 #editorLoja label
 {
 	float: left;
+	display: block;
 	width: 30%;
 	padding: 10px 5px 10px 10px;
-    margin-left:0;
+	margin: 0;
 	border-right-style: solid;
 	border-right-color: #DDDDDD;
 	border-right-width: 1px;
@@ -599,23 +628,79 @@ label
 	color: #000;
 }
 
-#editorLoja input[type="text"]
-{	
-	float: left;		
+/* iPhone [portrait + landscape] */
+@media only screen and (max-device-width: 480px)
+{
+	#editorLoja input[type="text"]
+	{ 
+		alignment-adjust: left;
+		font-size: 14px;
+		font-weight: normal;
+		color: #333333; 
+		left: 35%;
+		float: left;
+	}
+}
+
+/* iPad [portrait + landscape] */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px)
+{
+	#editorLoja input[type="text"]
+	{ 
+		alignment-adjust: left;
+		font-size: 14px;
+		font-weight: normal;
+		color: #333333; 
+		left: 20%;
+		float: left;
+	}
+}    
+
+#editorLoja input[type="time"]
+{ 
+	position: absolute;
 	alignment-adjust: left;
 	font-size: 14px;
 	font-weight: normal;
 	color: #333333; 
-    width: 65%;
 }
 
 #editorLoja select
 {
-	float: left;		
+	float: left; 
 	alignment-adjust: left;
 	font-size: 14px;
 	font-weight: normal;
 	color: #333333; 
-    left: 110px;
-    width: 100%;
+}
+
+#editorTurnosLoja ul
+{
+	padding: 0;
+	background-color: #DDDDDD;
+}
+
+#editorTurnosLoja li
+{
+	padding: 0;
+	margin-right: 10px;
+	text-align: left;
+	background-color: #FFF;
+	width: 100%;
+}
+
+#editorTurnosLoja label
+{
+	float: left;
+	width: 30%;
+	padding: 10px 5px 10px 10px;
+	margin-left: 0;
+	border-right-style: solid;
+	border-right-color: #DDDDDD;
+	border-right-width: 1px;
+	text-align: right;
+	background-color: #f2f2f2;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
 }

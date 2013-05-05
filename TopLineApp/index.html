@@ -85,7 +85,7 @@
 			</div>
 			<div id="formAtendimento">
 				<div id="atendimento_left">
-					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFoto }"/>
+					<img class="foto_grande" data-bind="attr: { src: vendedorSelecionado.ColFotoCorpo }"/>
 				</div>
 				<div id="atendimento_rigth">
 					<div id="atendimento_nome">
@@ -236,7 +236,7 @@
 		</div>
 
 		<!--Motivos não venda View-->
-		<div id="MotNaoVenda-view" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModelNaoVenda" data-before-show="showMotivosNaoVenda" data-init="naoVendaViewInit">
+		<div id="MotNaoVenda-view" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModelNaoVenda" data-before-show="naoVendaViewShow" data-init="naoVendaViewInit">
 			<div id="formMotivosNaoVenda">
 				<div>
 					<div id="atendimento_nome">
@@ -251,7 +251,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivoNaoVenda" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
 							</td>
 						</tr>
 						<tr>
@@ -259,7 +259,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<a id="salvarMaior" data-role="button" data-bind="events: {click: salvarNaoVenda}">Salvar</a>
+								<a id="salvarMaior" data-role="button">Salvar</a>
 							</td>
 						</tr>
 						<tr>
@@ -267,7 +267,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<a id="cancelarMaior" data-role="button" data-bind="events: {click: cancelarNaoVenda}">Cancelar</a>
+								<a id="cancelarMaior" data-role="button">Cancelar</a>
 							</td>
 						</tr>
 						<tr style="height:100%">
@@ -1097,8 +1097,11 @@
 				viewModel.dsLoja.read(); 
 			
 				//Carrega os motivos de Entrada e Saida da Fila
-                viewModel.dsTiposMovto.read(); 
+				viewModel.dsTiposMovto.read(); 
 			
+				//Carrega os motivos de nao venda
+				viewModelNaoVenda.dsMotivosNaoVenda.read(); 
+                    
 				viewModelConsultas.dsData.read();
 			
 				app.hideLoading();

@@ -7,8 +7,8 @@
 		model: {
 			id: "MnvId",
 			fields: {
-				MnvId: { editable: false, nullable: false, defaultValue: 0 },
-				MnvDescricao: { editable: false, nullable: false, defaultValue: "" }
+				MnvId: { editable: false, nullable: false},
+				MnvDescricao: { editable: false, nullable: false}
 			} 
 		} 
 	};
@@ -45,8 +45,8 @@
 		},
 		batch: true,
 		schema: scMotivosNaoVenda,
-		change: function(e) {         
-			viewModelNaoVenda.set("motivos", this.view());   
+		change: function(e) {   
+			viewModelNaoVenda.set("motivos", this.view());      
 		}        
         
 	});
@@ -85,6 +85,8 @@
 		var view = e.view;
         
 		view.element.find("#salvarMaior").data("kendoMobileButton").bind("click", function() {	
+			console.log(viewModelNaoVenda.motivo);
+            
 			viewModelNaoVenda.dsNaoVenda.one("change", function() {	
 				//Marca o checkbox como default
 				document.getElementById("chkVendeu").checked = "checked";
@@ -92,8 +94,6 @@
 				app.navigate("#dentroFila-view"); 
 			});
       
-             console.log("View: " , viewModelNaoVenda);
-            
 			view.loader.show();
 			viewModelNaoVenda.dsNaoVenda.sync();
 		});
@@ -118,16 +118,11 @@
           
 		var naoVenda = viewModelNaoVenda.dsNaoVenda.add(); 
         
-        console.log("Nao Venda: " , naoVenda);
-        
 		viewModelNaoVenda.set("motivoNaoVenda", naoVenda); 
 		viewModelNaoVenda.motivoNaoVenda.set("RLojId", RLoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LcoId", LcoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);
 		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
-        
-        console.log("Nao Venda preenchido " , viewModelNaoVenda.motivoNaoVenda);
-        
 	}
     
 	$.extend(window, {

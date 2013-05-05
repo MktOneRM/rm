@@ -229,6 +229,7 @@
 				ColNome: { type: "text", validation: { required: false}, defaultValue: null },
 				ColSobreNome: { type: "text" , validation: { required: false}, defaultValue: null },				
 				ColFoto: { type: "text", validation: { required: false}, defaultValue: null },
+                ColFotoCorpo: { type: "text", validation: { required: false}, defaultValue: null },
 				ColTurno: {type: "text", validation: { required: false}, defaultValue: null },
 				ExpHInicial: { type: "time", validation: { required: false}, defaultValue: null },
 				ExpHFinal: { type: "time", validation: { required: false}, defaultValue: null },

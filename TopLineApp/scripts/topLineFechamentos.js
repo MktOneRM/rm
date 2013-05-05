@@ -175,8 +175,7 @@
 	
 	function editorFecViewInit(e) {
 		var view = e.view;
-		var that = this;
-        
+		
 		validatorFechamento = $("#editorFechamento").kendoValidator().data("kendoValidator");
   
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
@@ -186,28 +185,7 @@
 			});
          
 			view.loader.show();
-			        
-			/*
-			viewModelFechamento.set("confirma", 0);
-		
-			navigator.notification.confirm('Deseja gravar o fechamento?', 
-			function() {
-			_onConfirm.apply(that, arguments);
-			}, 
-			'Fechamento', 
-			'Sim,Não'
-			);
-			
-			alert("Fora: " + viewModelFechamento.get("confirma"));
-			navigator.notification.vibrate(2000);
-            
-			//Caso não confirme a gravação retorna para a tela de edição!
-			if (viewModelFechamento.get("confirma") != 1) {				
-			view.loader.hide();
-			return;
-			}
-			*/
-            
+			         
 			if (validatorFechamento.validate()) {
 				viewModelFechamento.dsFechamento.sync(); 
 			}
@@ -228,12 +206,6 @@
 			viewModelFechamento.dsFechamento.cancelChanges();
 		});
 	};
-	 
-	function _onConfirm(button) {
-		if (button === 1 || button) {
-			viewModelFechamento.set("confirma", 1);
-		}
-	}
 	
 	function editorFecViewShow() {		
 		viewModelFechamento.dsTurnosFunc.read();

@@ -71,13 +71,13 @@
 			<ul data-bind="source: dsVendFila" data-role="listview" data-template="tdentroFila"></ul>
 		</div>
 
-		<!-- Fora da Fila da Vez -->
+		<!--Fora da Fila da Vez-->
 		<div id="foraFila-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO" data-before-show="showVendedoresForaFila" data-model="viewModel">
 			<ul data-bind="source: dsVendForaFila" data-role="listview" data-template="tforaFila"></ul>
 		</div>
 
-		<!-- Resultado Atendimento -->
-		<div id="resultadoAtendimento-view" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel">
+		<!--Resultado Atendimento-->
+		<div id="resultadoAtendimento-view" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-init="atendimentoViewInit">
 			<div data-role="header">
 				<div data-role="navbar">
 					<span data-role="view-title"></span>
@@ -130,7 +130,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<a id="salvar" data-role="button" id="done" data-bind="events: {click: salvarAtendimento}">Salvar</a>
+								<a id="salvar" data-role="button">Salvar</a>
 							</td>
 						</tr>
 						<tr>
@@ -138,7 +138,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<a id="cancelar" data-role="button" id="cancelAtendimento" data-bind="events: {click: cancelarAtendimento}">Cancelar</a>
+								<a id="cancelar" data-role="button">Cancelar</a>
 							</td>
 						</tr>
 						<tr style="height:100%">
@@ -147,13 +147,10 @@
 					</table>
 				</div>
 			</div>
-			<script type="text/javascript">
-				validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
-			</script>
 		</div>
 
 		<!--Saida da Fila da Vez-->
-		<div id="sairdaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoSaida">
+		<div id="sairdaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoSaida" data-init="sairFilaViewInit">
 			<div id="formSaiFila">
 				<div id="atendimento_fila">
 					<div id="atendimento_nome">
@@ -196,7 +193,7 @@
 		</div>
 
 		<!--Entrada na Fila da Vez-->
-		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoEntrada">
+		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoEntrada" data-init="entrarFilaViewInit">
 			<div id="formEntrarFila">
 				<div>
 					<div id="atendimento_nome">
@@ -239,7 +236,7 @@
 		</div>
 
 		<!--Motivos não venda View-->
-		<div id="MotNaoVenda-view" data-role="view" data-model="viewModelNaoVenda" data-title="TOP LINE PRO" data-layout="home-layout" data-transition="slideup" data-before-show="showMotivosNaoVenda">
+		<div id="MotNaoVenda-view" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModelNaoVenda" data-before-show="showMotivosNaoVenda" data-init="naoVendaViewInit">
 			<div id="formMotivosNaoVenda">
 				<div>
 					<div id="atendimento_nome">
@@ -279,10 +276,6 @@
 					</table>
 				</div>
 			</div>
-			<div data-role="footer">
-				<div data-role="tabstrip">
-				</div>
-			</div>
 		</div>
 
 		<!-- Consulta -->
@@ -307,7 +300,7 @@
 				</li>
 				<li>
 					<a id="menu" href="#colaboradores-view">Cadastro de Colaboradores</a>
-				</li>                
+				</li>
 			</ul>
 		</div>
 
@@ -341,7 +334,7 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" class="nav-button" data-align="left" data-role="backbutton" href="#colaboradores-view" >Voltar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right"  data-role="button" href="#editorColaborador-view" >Editar</a>
+					<a id="btnCreate" data-role="button" type="button" data-align="right" href="#editorColaborador-view" >Editar</a>
 					<span data-role="view-title"></span>
 				</div>
 				<div id="divTitulo">COLABORADOR</div>
@@ -355,7 +348,7 @@
 								<h1 class="col-nome" align="center" data-bind="text: colaboradorSelecionado.ColNome"></h1>
 							</div>
 						</div>
-                        <li ></li>
+						<li ></li>
 					</ul>
 				</div>
 				<div>
@@ -1092,10 +1085,8 @@
 				viewModel.dsTLoja.read();
 				viewModel.dsUf.read();
 				viewModel.dsCargos.read();
-				viewModel.dsSexo.read();
-			
-				viewModel.dsTurnosFunc.read();
-			
+				viewModel.dsSexo.read();			
+				viewModel.dsTurnosFunc.read();			
 				viewModel.dsDiasFunc.read();
 			
 				viewModel.set("tipoCompl", 1);
@@ -1105,6 +1096,9 @@
 				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
 				viewModel.dsLoja.read(); 
 			
+				//Carrega os motivos de Entrada e Saida da Fila
+                viewModel.dsTiposMovto.read(); 
+			
 				viewModelConsultas.dsData.read();
 			
 				app.hideLoading();
@@ -1113,7 +1107,7 @@
 				//app.navigate("#colaboradores-view");
 				//app.navigate("#config-view");
 			}  
-		
+			
 		</script>
 	</body>
 </html>

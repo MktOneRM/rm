@@ -59,6 +59,20 @@ label
 	height: 54px;
 }
 
+.km-root .km-pane .km-view .km-seta
+{
+	background-size: 100% 100%;
+	-webkit-background-clip: border-box;
+	background-color: currentColor;
+	width: 75px;
+	height: 54px;
+}
+
+.km-seta
+{
+	-webkit-mask-box-image: url("seta_off.png"); 
+}
+
 .km-dentroFila
 {
 	-webkit-mask-box-image: url("iconsFila_off.png"); 
@@ -450,22 +464,6 @@ label
 { 
 	background-color: #2d8402;
 	color: #fff;
-}
-
-#seta
-{ 
-	background: transparent url("seta_off.png") no-repeat;
-	border: 0;
-	width: 15px;
-	height: 32px;
-}
-
-#seta:hover
-{ 
-	background: transparent url("seta_on.png") no-repeat;
-	border: 0;
-	width: 15px;
-	height: 32px;
 }
 
 #salvar

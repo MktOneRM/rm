@@ -335,13 +335,14 @@
 		}
 	});
     
-	//schemaMotivosSaidaSalao
+	//Schema de tipos de movimentação Entrada ou Saída
 	var schemaTiposMovto = { 
 		model: {
 			id: "TmoId",
 			fields: {
 				TmoId: { editable: false, nullable: false },
-				TmoDescricao: { editable: false, nullable: false }
+				TmoDescricao: { editable: false, nullable: false },
+				TmoEntradaSaida: { editable: false, nullable: false }
 			} 
 		} 
 	};
@@ -584,9 +585,6 @@
 		batch: true,
 		schema: schemaTiposMovto,        
 		change: function(e) {
-            
-            console.log(this.view(), "Change Tipos Movto");
-            
 			viewModel.set("motivos", this.view());   
 		}       
 	});
@@ -942,19 +940,15 @@
 		editorLojaViewInit: editorLojaViewInit,
 		editorLojaViewShow: editorLojaViewShow,		
 		validarCPF:validarCPF,	
-		salvarSaida: salvarSaida,
-		cancelarSaida:cancelarSaida,
-  
-		salvarEntrada: salvarEntrada,
-		cancelarEntrada: cancelarEntrada,
         
 		idLoja: null,        
 		motivos: [],
 		motivo: [],
         
 		sairFilaViewInit: sairFilaViewInit,
+		sairFilaViewShow: sairFilaViewShow,
 		entrarFilaViewInit: entrarFilaViewInit,
-        tipoMovto: false
+		entrarFilaViewShow: entrarFilaViewShow
                
         
 	});
@@ -972,42 +966,6 @@
 		viewModel.atendimento.set("LojId", LojId);  
 	}
 
-	function salvarSaida() {
-		viewModel.vendedorSelecionado.set("SaidaFila", true);
-		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
-		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
-		viewModel.dsVendFila.sync();
-		app.navigate("#dentroFila-view");
-	}
-    
-	function cancelarSaida() {
-		viewModel.dsVendFila.cancelChanges();
-		app.navigate("#dentroFila-view");                 
-	}
-    
-	function salvarEntrada() {
-        
-		var LojId = viewModel.vendedorSelecionado.get("LojId");
-		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");
-        
-		var entrada = viewModel.dsVendFila.add(); 		
-        
-		viewModel.set("vendedorSelecionado", entrada);        
-		viewModel.vendedorSelecionado.set("LojId", LojId);
-		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);        
-		viewModel.vendedorSelecionado.set("EntradaFila", 1);		
-		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
-        
-		viewModel.dsVendFila.sync();
-        
-		app.navigate("#dentroFila-view");
-	}
-    
-	function cancelarEntrada() {
-		viewModel.dsVendForaFila.cancelChanges();
-		app.navigate("#dentroFila-view");                 
-	}
- 
 	function adicionarColaborador() {
 		var novoColaborador = viewModel.dsColaborador.add();
 		viewModel.set("colaboradorSelecionado", novoColaborador);
@@ -1043,8 +1001,6 @@
 	}
 			
 	function tiposMovtoEntrada() {
-		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/true";
-		dsTiposMovto.read(); 
 	}
 	
 	function tiposMovtoSaida() {		
@@ -1319,70 +1275,92 @@
 		});
 	}
    
-    /*Sair da Fila*/
+	/*Sair da Fila*/
 	function sairFilaViewInit(e) {
 		var view = e.view;
-    
-		view.element.find("#salvar").data("kendoMobileButton").bind("click", function() {	
-			viewModel.dsAtendimento.one("change", function() {				
+       
+		view.element.find("#salvarMaior").data("kendoMobileButton").bind("click", function() {	
+			viewModel.dsVendFila.one("change", function() {				
 				view.loader.hide();
-				app.navigate("#dentroFila-view"); 
+				app.navigate("#dentroFila-view") 
 			});
             
 			view.loader.show();
+            viewModel.dsVendFila.sync();
             
-			if (validatorAtendimento.validate()) {
-				viewModel.dsAtendimento.sync(); 	                
-			}
-			else {
-				view.loader.hide();		
-				return;
-			}
 		});
         
-		view.element.find("#cancelar").data("kendoMobileButton").bind("click", function(e) {
+		view.element.find("#cancelarMaior").data("kendoMobileButton").bind("click", function(e) {
 			e.preventDefault();
-			viewModel.dsAtendimento.one("change", function() {
+			viewModel.dsVendFila.one("change", function() {
 				view.loader.hide();
 				app.navigate("#dentroFila-view");
 			});
 
 			view.loader.show();
-			viewModel.dsAtendimento.cancelChanges();			
+			viewModel.dsVendFila.cancelChanges();			
 		});
+	}
+    
+	function sairFilaViewShow() {
+		var filter = {
+			field: "TmoEntradaSaida",
+			operator: "eq",
+			value: false
+		};
+        
+		viewModel.dsTiposMovto.filter(filter);
+        
+        viewModel.vendedorSelecionado.set("SaidaFila", true);
+		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
+		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
 	}
     
 	function entrarFilaViewInit(e) {
 		var view = e.view;
-		validatorAtendimento = $("#formAtendimento").kendoValidator({}).data("kendoValidator");
-    
-		view.element.find("#salvar").data("kendoMobileButton").bind("click", function() {	
-			viewModel.dsAtendimento.one("change", function() {				
+        
+		view.element.find("#salvarMaior").data("kendoMobileButton").bind("click", function() {	
+			viewModel.dsVendFila.one("change", function() {				
 				view.loader.hide();
 				app.navigate("#dentroFila-view"); 
 			});
             
 			view.loader.show();
-            
-			if (validatorAtendimento.validate()) {
-				viewModel.dsAtendimento.sync(); 	                
-			}
-			else {
-				view.loader.hide();		
-				return;
-			}
+            viewModel.dsVendFila.sync();
+			
 		});
         
-		view.element.find("#cancelar").data("kendoMobileButton").bind("click", function(e) {
+		view.element.find("#cancelarMaior").data("kendoMobileButton").bind("click", function(e) {
 			e.preventDefault();
-			viewModel.dsAtendimento.one("change", function() {
+			viewModel.dsVendFila.one("change", function() {
 				view.loader.hide();
 				app.navigate("#dentroFila-view");
 			});
 
 			view.loader.show();
-			viewModel.dsAtendimento.cancelChanges();			
+			viewModel.dsVendFila.cancelChanges();			
 		});
+	}
+    
+	function entrarFilaViewShow() {
+		var filter = {
+			field: "TmoEntradaSaida",
+			operator: "eq",
+			value: true
+		};
+        
+		viewModel.dsTiposMovto.filter(filter);
+        
+		var LojId = viewModel.vendedorSelecionado.get("LojId");
+		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");
+        
+		var entrada = viewModel.dsVendFila.add(); 		
+        
+		viewModel.set("vendedorSelecionado", entrada);        
+		viewModel.vendedorSelecionado.set("LojId", LojId);
+		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);        
+		viewModel.vendedorSelecionado.set("EntradaFila", 1);		
+		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
 	}
     
 	function initValidacao() {
@@ -1519,6 +1497,8 @@
 		editorLojaViewInit: editorLojaViewInit,
 		editorLojaViewShow: editorLojaViewShow,
 		sairFilaViewInit: sairFilaViewInit,
-		entrarFilaViewInit: entrarFilaViewInit      
+		sairFilaViewShow: sairFilaViewShow,
+		entrarFilaViewInit: entrarFilaViewInit,
+		entrarFilaViewShow: entrarFilaViewShow
 	});
 })(jQuery);

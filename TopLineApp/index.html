@@ -150,7 +150,7 @@
 		</div>
 
 		<!--Saida da Fila da Vez-->
-		<div id="sairdaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoSaida" data-init="sairFilaViewInit">
+		<div id="sairdaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="sairFilaViewShow" data-init="sairFilaViewInit">
 			<div id="formSaiFila">
 				<div id="atendimento_fila">
 					<div id="atendimento_nome">
@@ -173,7 +173,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<a id="salvarMaior" data-role="button" data-bind="events: {click: salvarSaida}">Salvar</a>
+								<a id="salvarMaior" data-role="button">Salvar</a>
 							</td>
 						</tr>
 						<tr>
@@ -181,7 +181,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<a id="cancelarMaior" data-role="button" data-bind="events: {click: cancelarSaida}">Cancelar</a>
+								<a id="cancelarMaior" data-role="button">Cancelar</a>
 							</td>
 						</tr>
 						<tr style="height:100%">
@@ -193,7 +193,7 @@
 		</div>
 
 		<!--Entrada na Fila da Vez-->
-		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="showTiposMovtoEntrada" data-init="entrarFilaViewInit">
+		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="entrarFilaViewShow" data-init="entrarFilaViewInit">
 			<div id="formEntrarFila">
 				<div>
 					<div id="atendimento_nome">
@@ -216,7 +216,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<a id="salvarMaior" data-role="button" data-bind="events: {click: salvarEntrada}">Salvar</a>
+								<a id="salvarMaior" data-role="button">Salvar</a>
 							</td>
 						</tr>
 						<tr>
@@ -224,7 +224,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<a id="cancelarMaior" data-role="button" data-bind="events: {click: cancelarEntrada}">Cancelar</a>
+								<a id="cancelarMaior" data-role="button">Cancelar</a>
 							</td>
 						</tr>
 						<tr style="height:100%">
@@ -283,7 +283,7 @@
 			<div class="configTitulo">DESEMPENHO</div>
 			<ul data-role="listview">
 				<li>
-					<a id="menu" href="views/ConsultasView.html">Loja</a>
+					<a id="menu" href="views/ConsultasView.html">Loja e Turnos</a>
 				</li>
 				<li>
 					<a id="menu" href="#desenvView">Vendedor</a>

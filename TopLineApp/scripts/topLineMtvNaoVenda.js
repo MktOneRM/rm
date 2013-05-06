@@ -46,7 +46,10 @@
 		batch: true,
 		schema: scMotivosNaoVenda,
 		change: function(e) {   
-			viewModelNaoVenda.set("motivos", this.view());      
+			viewModelNaoVenda.set("motivos", this.view());    
+            
+            console.log(this.view(), "Change")
+            
 		}        
         
 	});
@@ -73,9 +76,11 @@
 	var viewModelNaoVenda = kendo.observable({		
 		dsMotivosNaoVenda: dsMotivosNaoVenda,
 		dsNaoVenda: dsNaoVenda,
-		motivoNaoVenda: {},        
-		motivos: [],
-		motivo: [],
+		motivoNaoVenda: [],        
+		motivosNaoVenda: [],
+        
+        motivos: [],
+        motivo: [],
 		vendedorSelecionado: {},
 		naoVendaViewInit: naoVendaViewInit,
 		naoVendaViewShow: naoVendaViewShow
@@ -85,7 +90,9 @@
 		var view = e.view;
         
 		view.element.find("#salvarMaior").data("kendoMobileButton").bind("click", function() {	
-			console.log(viewModelNaoVenda.motivo);
+            
+            viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivo.MnvId));
+            console.log(viewModelNaoVenda.motivo.MnvId);
             
 			viewModelNaoVenda.dsNaoVenda.one("change", function() {	
 				//Marca o checkbox como default
@@ -123,6 +130,8 @@
 		viewModelNaoVenda.motivoNaoVenda.set("LcoId", LcoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);
 		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
+        
+		console.log(viewModelNaoVenda.motivoNaoVenda, viewModelNaoVenda.motivos[0].MnvId);
 	}
     
 	$.extend(window, {

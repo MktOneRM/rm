@@ -527,7 +527,7 @@
 				if (operation == "read") {
 					return {
 						tipoFila: 1, 
-						idLoja: viewModel.lojaSelecionada.LojId
+						idLoja: viewModel.idLoja
 					}
 				}
 				else if (operation !== "read" && data.models) {
@@ -563,7 +563,7 @@
 				if (operation == "read") {
 					return {
 						tipoFila: 2, 
-						idLoja: viewModel.lojaSelecionada.LojId
+						idLoja: viewModel.idLoja
 					}
 				}
 				else if (operation !== "read" && data.models) {
@@ -993,6 +993,12 @@
 		app.navigate("#detalhesColaborador-view");
 	}
      
+	function showColaboradorLoja(e) {
+		var colaborador = viewModel.dsColaborador.getByUid(e.touch.target.context.id);
+		viewModel.set("colaboradorSelecionado", colaborador);
+		app.navigate("#desempenho-colaboradorView");
+	}
+
 	function adicionarLoja() {
 		var loja = viewModel.dsLoja.add();		
 		viewModel.set("lojaSelecionada", loja);
@@ -1465,6 +1471,29 @@
 		return true;
 	}
     
+	viewModel.set("idLoja", 1);
+			
+	//Carrega os dados de Loja
+	viewModel.dsLoja.read();
+	viewModel.dsTLoja.read();
+	viewModel.dsUf.read();
+	viewModel.dsCargos.read();
+	viewModel.dsSexo.read();			
+	viewModel.dsTurnosFunc.read();			
+	viewModel.dsDiasFunc.read();
+			
+	viewModel.set("tipoCompl", 1);
+	viewModel.dsTelCompl.read();
+                    
+	//Carrega os motivos de Entrada e Saida da Fila
+	viewModel.dsTiposMovto.read(); 
+			
+	//Carrega os motivos de nao venda
+	//viewModelNaoVenda.dsMotivosNaoVenda.read(); 
+			
+	//viewModelConsultas.dsData.read();
+
+		
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,		
@@ -1473,7 +1502,8 @@
 		showTurnoFunc: turnoFunc,
 		showCargos: cargos,
 		showColaboradores: colaboradores,
-		showDetalhesColaborador: detalhesColaborador,     
+		showDetalhesColaborador: detalhesColaborador,
+		showColaboradorLoja: showColaboradorLoja,
 		showAtendimento: adicionarAtendimento,
 		atendimentoViewInit: atendimentoViewInit,
 		atendimentoViewTap: atendimentoViewTap,

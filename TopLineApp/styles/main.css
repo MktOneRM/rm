@@ -192,20 +192,16 @@ label
 	margin: 0;
 }
 
-#config-view li
+#vendedoresLoja-view li
 {
-	display: block;
-	text-decoration: none; 
-	font-size: 18px;
-	padding: 10px 0 10px 0;
+	padding: 0;
+	margin: 0;
 }
 
-#config-view li:hover 
+#menu
 {
-	display: block;
 	text-decoration: none;
-	background-color: #2d8402;
-	color: #fff;
+	padding-left: 20px;
 }
 
 #consulta-view li
@@ -224,13 +220,7 @@ label
 	color: #fff;
 }
 
-#menu
-{
-	text-decoration: none;
-	padding-left: 20px;
-}
-
-#desenpenho-lojaview li
+#config-view li
 {
 	display: block;
 	text-decoration: none; 
@@ -238,7 +228,23 @@ label
 	padding: 10px 0 10px 0;
 }
 
-#desenpenho-lojaview li:hover 
+#config-view li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
+#desempenho-lojaview li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#desempenho-lojaview li:hover 
 {
 	display: block;
 	text-decoration: none;
@@ -271,6 +277,54 @@ label
 }
 
 #metas-lojaview li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
+#desempenho-colaboradorView li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#desempenho-colaboradorView li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
+#produtividade-ColaboradorView li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#produtividade-ColaboradorView li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
+#metas-ColaboradorView li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#metas-ColaboradorView li:hover 
 {
 	display: block;
 	text-decoration: none;

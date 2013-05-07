@@ -281,9 +281,9 @@
 		<!-- Consulta -->
 		<div id="consulta-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
 			<div class="configTitulo">DESEMPENHO</div>
-			<ul data-role="listview">
+			<ul data-role="listview" class="menu-desempenho">
 				<li>
-					<a id="menu" href="#desenpenho-lojaview">Loja</a>
+					<a id="menu" href="#desempenho-lojaview">Loja</a>
 				</li>
 				<li>
 					<a id="menu" href="#desenvView">Turno</a>
@@ -295,7 +295,7 @@
 		</div>
 
 		<!-- DESEMPENHO - LOJA -->
-		<div id="desenpenho-lojaview" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
+		<div id="desempenho-lojaview" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -338,7 +338,6 @@
 			</ul>
 		</div>
 
-                                    
 		<!-- Metas - LOJA-->
 		<div id="metas-lojaview" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
@@ -361,28 +360,28 @@
 			</ul>
 		</div>
 
- 		<!--TURNOS da LOJA
+		<!--TURNOS da LOJA
 		<div id="turnosLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
-			<header data-role="header">
-				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
-					<span data-role="view-title"></span>
-				</div>
-			</header>
-			<div class="configTitulo">TURNOS DA LOJA</div>
-            <ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
-			<ul data-role="listview">
-				<li>
-					<a id="menu" href="#produtividade-lojaview">Produtividade</a>
-				</li>
-				<li>
-					<a id="menu" href="#metas-lojaview">Metas</a>
-				</li>
-			</ul>
+		<header data-role="header">
+		<div data-role="navbar">
+		<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+		<span data-role="view-title"></span>
 		</div>
--->
-        <!--Vendedores da Loja -->
-		<div id="vendedoresLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
+		</header>
+		<div class="configTitulo">TURNOS DA LOJA</div>
+		<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
+		<ul data-role="listview">
+		<li>
+		<a id="menu" href="#produtividade-lojaview">Produtividade</a>
+		</li>
+		<li>
+		<a id="menu" href="#metas-lojaview">Metas</a>
+		</li>
+		</ul>
+		</div>
+		-->
+		<!--Vendedores da Loja -->
+		<div id="vendedoresLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO" data-model="viewModel" data-before-show="showColaboradores">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -390,10 +389,99 @@
 				</div>
 			</header>
 			<div class="configTitulo">VENDEDORES DA LOJA</div>
-            <ul data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaboradorLoja"></ul>
+			<ul data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaboradorLoja"></ul>
 		</div>
 
-                                    
+		<!-- DESEMPENHO - Vendedor -->
+		<div id="desempenho-colaboradorView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">
+				DESEMPENHO&nbsp;-&nbsp;<span data-bind="text: colaboradorSelecionado.ColNome"></span>
+			</div>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#produtividade-ColaboradorView">Produtividade</a>
+				</li>
+				<li>
+					<a id="menu" href="#metas-ColaboradorView">Metas</a>
+				</li>
+			</ul>
+		</div>
+
+        <!-- PRODUTIVIDADE - Vendedor -->
+		<div id="produtividade-ColaboradorView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">
+				PRODUTIVIDADE&nbsp;-&nbsp;<span data-bind="text: colaboradorSelecionado.ColNome"></span>
+			</div>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#desenvView">Vendas</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Vendas Perdidas</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Indicadores de Desempenho</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Posição no Ranking</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Campeões de Desempenho</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Clientes Contactados</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Campeões de Trabalho</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Afastamento por Motivo</a>
+				</li>
+			</ul>
+		</div>
+
+       <!-- METAS - Vendedor -->
+		<div id="metas-ColaboradorView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">
+				METAS&nbsp;-&nbsp;<span data-bind="text: colaboradorSelecionado.ColNome"></span>
+			</div>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#desenvView">Vendas</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Metas de Hoje</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Metas Diárias</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Posição no Ranking</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Vendas Acumuladas</a>
+				</li>
+			</ul>
+		</div>
+
         <!-- Configuração -->
 		<div id="config-view" data-role="view" data-layout="tools-layout" data-title="TOP LINE PRO">
 			<div class="configTitulo">CONFIGURAÇÕES</div>
@@ -1117,7 +1205,7 @@
 			</ul>			
 		</script>
 
-        <script type="text/x-kendo-template" id="tColaboradorLoja">            			
+		<script type="text/x-kendo-template" id="tColaboradorLoja">            			
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showColaboradorLoja">
 				<img class="fila-art" src="" data-bind="attr: { src: ColFoto}"/>
 				<div class="fila-div">
@@ -1125,7 +1213,7 @@
 				</div>
 			</div>
 		</script>
-                        
+
 		<script type="text/x-kendo-template" id="tAtuTelColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstartTelefone">
 				<ul id="editorTelColaborador" data-role="listview">
@@ -1169,22 +1257,7 @@
 				transition: "slide",
 				loading: '<h1 class="loading-message">Carregando...</h1>'
 			});
-			
-			$(document).ready(function () {
-				app.showLoading();
-				LoadingApp();
-				/*
-				var variable = "Lojaaa";			
-				//Verifica se o dispositivo está cadastrado para a Loja.
-				if (localStorage.getItem(variable) != undefined) {
-				app.navigate("#dentroFila-view");
-				}
-				else {
-				app.navigate("#validacaoDispositivo-view");
-				localStorage.setItem(variable, "1");
-				}
-				*/
-			});
+            
 						
 			function switchChange(e) {
 				if (!e.checked) {          
@@ -1192,36 +1265,7 @@
 				}    
 			} 
 			
-			function LoadingApp() {
-				viewModel.dsTLoja.read();
-				viewModel.dsUf.read();
-				viewModel.dsCargos.read();
-				viewModel.dsSexo.read();			
-				viewModel.dsTurnosFunc.read();			
-				viewModel.dsDiasFunc.read();
-			
-				viewModel.set("tipoCompl", 1);
-				viewModel.dsTelCompl.read();
-			
-				//Carrega os dados de Loja
-				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
-				viewModel.dsLoja.read(); 
-			
-				//Carrega os motivos de Entrada e Saida da Fila
-				viewModel.dsTiposMovto.read(); 
-			
-				//Carrega os motivos de nao venda
-				viewModelNaoVenda.dsMotivosNaoVenda.read(); 
-                    
-				viewModelConsultas.dsData.read();
-			
-				app.hideLoading();
-			
-				app.navigate("#dentroFila-view");
-				//app.navigate("#colaboradores-view");
-				//app.navigate("#config-view");
-			}  
-			
 		</script>
 	</body>
 </html>
+	

@@ -229,6 +229,54 @@ label
 	padding-left: 20px;
 }
 
+#desenpenho-lojaview li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#desenpenho-lojaview li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
+#produtividade-lojaview li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#produtividade-lojaview li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
+#metas-lojaview li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#metas-lojaview li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
 .configTitulo
 {
 	text-align: center;

@@ -251,7 +251,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivoNaoVenda" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
 							</td>
 						</tr>
 						<tr>
@@ -1048,6 +1048,7 @@
 		</script>
 
 		<script type="text/javascript">
+            
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 			//var baseUrl = "http://localhost:50000/api";
 			
@@ -1059,7 +1060,7 @@
 			});
 			
 			$(document).ready(function () {
-				app.showLoading();
+				app.showLoading();				
 				LoadingApp();
 				/*
 				var variable = "Lojaaa";			
@@ -1082,6 +1083,12 @@
 			} 
 			
 			function LoadingApp() {
+				//Carrega os dados de Loja - Obter o id da Loja cadastrado no dispositivo
+				viewModel.set("idLoja", 1);
+				viewModel.dsLoja.fetch(LoadingCompl);
+			} 
+			
+			function LoadingCompl() {
 				viewModel.dsTLoja.read();
 				viewModel.dsUf.read();
 				viewModel.dsCargos.read();
@@ -1092,24 +1099,26 @@
 				viewModel.set("tipoCompl", 1);
 				viewModel.dsTelCompl.read();
 			
-				//Carrega os dados de Loja
-				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
-				viewModel.dsLoja.read(); 
-			
 				//Carrega os motivos de Entrada e Saida da Fila
 				viewModel.dsTiposMovto.read(); 
 			
 				//Carrega os motivos de nao venda
 				viewModelNaoVenda.dsMotivosNaoVenda.read(); 
-                    
+			/*
+				//Carrega os vendedores da Fila
+				viewModel.dsVendFila.read();
+			
+				//Carrega os vendedores Fora da Fila
+				viewModel.dsVendForaFila.read();
+			*/
 				viewModelConsultas.dsData.read();
 			
-				app.hideLoading();
+				//app.hideLoading();
 			
 				app.navigate("#dentroFila-view");
 				//app.navigate("#colaboradores-view");
 				//app.navigate("#config-view");
-			}  
+			}
 			
 		</script>
 	</body>

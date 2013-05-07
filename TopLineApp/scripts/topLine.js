@@ -527,7 +527,7 @@
 				if (operation == "read") {
 					return {
 						tipoFila: 1, 
-						idLoja: viewModel.lojaSelecionada.LojId
+						idLoja: viewModel.idLoja
 					}
 				}
 				else if (operation !== "read" && data.models) {
@@ -563,7 +563,7 @@
 				if (operation == "read") {
 					return {
 						tipoFila: 2, 
-						idLoja: viewModel.lojaSelecionada.LojId
+						idLoja: viewModel.idLoja
 					}
 				}
 				else if (operation !== "read" && data.models) {
@@ -752,7 +752,7 @@
 			parameterMap: function(data, operation) {
 				if (operation == "read")
 					return {
-						id: viewModel.idLoja
+						id: 1 //viewModel.idLoja
 					}                
 				else if (operation !== "read" && data.models) {
 					return kendo.stringify(data.models[0]);

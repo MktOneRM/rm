@@ -229,7 +229,7 @@
 				ColNome: { type: "text", validation: { required: false}, defaultValue: null },
 				ColSobreNome: { type: "text" , validation: { required: false}, defaultValue: null },				
 				ColFoto: { type: "text", validation: { required: false}, defaultValue: null },
-                ColFotoCorpo: { type: "text", validation: { required: false}, defaultValue: null },
+				ColFotoCorpo: { type: "text", validation: { required: false}, defaultValue: null },
 				ColTurno: {type: "text", validation: { required: false}, defaultValue: null },
 				ExpHInicial: { type: "time", validation: { required: false}, defaultValue: null },
 				ExpHFinal: { type: "time", validation: { required: false}, defaultValue: null },
@@ -499,20 +499,20 @@
 	var dsVendFila = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl + "/RmFilaLoja/1",							
+				url: baseUrl + "/RmFilaLoja",							
 				type:"GET",
 				contentType: "application/json",
 				dataType: "json"
 			} 
 			,
 			update: {
-				url:baseUrl + "/RmFilaLoja/1",
+				url:baseUrl + "/RmFilaLoja",
 				type:"PUT"
 				,contentType:"application/json"
 				,dataType: "json"
 			},
 			create: {
-				url:baseUrl + "/RmFilaLoja/1",							
+				url:baseUrl + "/RmFilaLoja",							
 				type:"POST",
 				contentType: "application/json",
 				dataType: "json"
@@ -524,7 +524,13 @@
 				,dataType: "json"
 			},
 			parameterMap: function(data, operation) {
-				if (operation !== "read" && data.models) {
+				if (operation == "read") {
+					return {
+						tipoFila: 1, 
+						idLoja: viewModel.lojaSelecionada.LojId
+					}
+				}
+				else if (operation !== "read" && data.models) {
 					return kendo.stringify([data.models[0]]);
 				}
 			}                 
@@ -542,19 +548,25 @@
 	var dsVendForaFila = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl + "/RmFilaLoja/2",							
+				url: baseUrl + "/RmFilaLoja",							
 				type:"GET"      
 				,contentType: "application/json"
 				,dataType: "json"
 			},
 			update: {
-				url: baseUrl + "/RmFilaLoja/2",							
+				url: baseUrl + "/RmFilaLoja",							
 				type:"POST"
 				,contentType:"application/json"
 				,dataType: "json"
 			},
 			parameterMap: function(data, operation) {
-				if (operation !== "read" && data.models) {
+				if (operation == "read") {
+					return {
+						tipoFila: 2, 
+						idLoja: viewModel.lojaSelecionada.LojId
+					}
+				}
+				else if (operation !== "read" && data.models) {
 					return kendo.stringify([data.models[0]]);
 				}
 			}
@@ -740,7 +752,7 @@
 			parameterMap: function(data, operation) {
 				if (operation == "read")
 					return {
-						id: viewModel.lojaSelecionada.LojId
+						id: viewModel.idLoja
 					}                
 				else if (operation !== "read" && data.models) {
 					return kendo.stringify(data.models[0]);
@@ -925,9 +937,8 @@
 		adicionarColaborador: adicionarColaborador,
 		detalhesColaborador: detalhesColaborador,				
 		vendedoresFila : vendedoresFila,
-		vendedoresForaFila : vendedoresForaFila,		
-		tiposMovtoSaida : tiposMovtoSaida,
-		tiposMovtoEntrada : tiposMovtoEntrada,           
+		vendedoresForaFila : vendedoresForaFila,	
+		       
 		lojas: lojas,
 		initValidacao: initValidacao,
 		formatField:formatField,
@@ -988,27 +999,19 @@
 		app.navigate("#EditorLoja-view");
 	}
  
-	function vendedoresFila() {        
-		atualizaFilaNoSalao(dsVendFila, 1);		
+	function vendedoresFila() {          
+		dsVendFila.read();		
 	}
 			
 	function vendedoresForaFila() {
-		atualizaFilaNoSalao(dsVendForaFila, 2);
+		dsVendForaFila.read();		
 	}
 	    
 	function tiposMovto(e) {
 		var vendedor = viewModel.dsVendFila.get(e.context);
 		viewModel.set("vendedorSelecionado", vendedor); 	
 	}
-			
-	function tiposMovtoEntrada() {
-	}
-	
-	function tiposMovtoSaida() {		
-		dsTiposMovto.options.transport.read.url = baseUrl + "/RmTipoMovimento/false";
-		dsTiposMovto.read(); 
-	}
-    
+	   
 	function lojas() {			
 		dsLoja.read(); 
 	}
@@ -1027,12 +1030,7 @@
 		//dsColaborador.options.transport.read.url = baseUrl + "/RmColaborador";
 		dsColaborador.read(); 	
 	}
-    
-	function atualizaFilaNoSalao(context, parametro) {
-		context.options.transport.read.url = baseUrl + "/RmFilaLoja/" + parametro;					
-		context.read();
-	}
-    
+        
 	//<!--Atendimento-->
 	function onSwipe(e) {
 		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
@@ -1287,8 +1285,7 @@
 			});
             
 			view.loader.show();
-            viewModel.dsVendFila.sync();
-            
+			viewModel.dsVendFila.sync();
 		});
         
 		view.element.find("#cancelarMaior").data("kendoMobileButton").bind("click", function(e) {
@@ -1312,7 +1309,7 @@
         
 		viewModel.dsTiposMovto.filter(filter);
         
-        viewModel.vendedorSelecionado.set("SaidaFila", true);
+		viewModel.vendedorSelecionado.set("SaidaFila", true);
 		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
 		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
 	}
@@ -1327,8 +1324,7 @@
 			});
             
 			view.loader.show();
-            viewModel.dsVendFila.sync();
-			
+			viewModel.dsVendFila.sync();
 		});
         
 		view.element.find("#cancelarMaior").data("kendoMobileButton").bind("click", function(e) {
@@ -1472,9 +1468,7 @@
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,		
-		showTiposMovto: tiposMovto,
-		showTiposMovtoSaida: tiposMovtoSaida,
-		showTiposMovtoEntrada: tiposMovtoEntrada,        
+		showTiposMovto: tiposMovto,				
 		showLojas: lojas,     
 		showTurnoFunc: turnoFunc,
 		showCargos: cargos,

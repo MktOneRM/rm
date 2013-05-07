@@ -527,7 +527,7 @@
 				if (operation == "read") {
 					return {
 						tipoFila: 1, 
-						idLoja: viewModel.idLoja
+						idLoja: viewModel.lojaSelecionada.LojId
 					}
 				}
 				else if (operation !== "read" && data.models) {
@@ -563,7 +563,7 @@
 				if (operation == "read") {
 					return {
 						tipoFila: 2, 
-						idLoja: viewModel.idLoja
+						idLoja: viewModel.lojaSelecionada.LojId
 					}
 				}
 				else if (operation !== "read" && data.models) {

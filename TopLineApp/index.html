@@ -251,7 +251,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivoNaoVenda" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
 							</td>
 						</tr>
 						<tr>
@@ -283,15 +283,118 @@
 			<div class="configTitulo">DESEMPENHO</div>
 			<ul data-role="listview">
 				<li>
-					<a id="menu" href="views/ConsultasView.html">Loja e Turnos</a>
+					<a id="menu" href="#desenpenho-lojaview">Loja</a>
 				</li>
 				<li>
-					<a id="menu" href="#desenvView">Vendedor</a>
+					<a id="menu" href="#desenvView">Turno</a>
+				</li>
+				<li>
+					<a id="menu" href="#vendedoresLoja-view">Vendedor</a>
 				</li>
 			</ul>
 		</div>
 
-		<!-- Configuração -->
+		<!-- DESEMPENHO - LOJA -->
+		<div id="desenpenho-lojaview" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">DESEMPENHO - LOJA</div>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#produtividade-lojaview">Produtividade</a>
+				</li>
+				<li>
+					<a id="menu" href="#metas-lojaview">Metas</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Produtividade - LOJA-->
+		<div id="produtividade-lojaview" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">PRODUTIVIDADE - LOJA</div>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#desenvView">Vendas</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Vendas Perdidas</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Indicadores de Desempenho</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Clientes Contactados</a>
+				</li>
+			</ul>
+		</div>
+
+                                    
+		<!-- Metas - LOJA-->
+		<div id="metas-lojaview" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">METAS - LOJA</div>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#desenvView">Vendas</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Metas de Hoje</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Metas Diárias</a>
+				</li>
+			</ul>
+		</div>
+
+ 		<!--TURNOS da LOJA
+		<div id="turnosLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">TURNOS DA LOJA</div>
+            <ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#produtividade-lojaview">Produtividade</a>
+				</li>
+				<li>
+					<a id="menu" href="#metas-lojaview">Metas</a>
+				</li>
+			</ul>
+		</div>
+-->
+        <!--Vendedores da Loja -->
+		<div id="vendedoresLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">VENDEDORES DA LOJA</div>
+            <ul data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaboradorLoja"></ul>
+		</div>
+
+                                    
+        <!-- Configuração -->
 		<div id="config-view" data-role="view" data-layout="tools-layout" data-title="TOP LINE PRO">
 			<div class="configTitulo">CONFIGURAÇÕES</div>
 			<ul data-role="listview">
@@ -1014,6 +1117,15 @@
 			</ul>			
 		</script>
 
+        <script type="text/x-kendo-template" id="tColaboradorLoja">            			
+			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showColaboradorLoja">
+				<img class="fila-art" src="" data-bind="attr: { src: ColFoto}"/>
+				<div class="fila-div">
+					<h1 class="col-nome"> ${ColNome} # # ${ColSobrenome} </h1>
+				</div>
+			</div>
+		</script>
+                        
 		<script type="text/x-kendo-template" id="tAtuTelColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstartTelefone">
 				<ul id="editorTelColaborador" data-role="listview">
@@ -1048,7 +1160,6 @@
 		</script>
 
 		<script type="text/javascript">
-            
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 			//var baseUrl = "http://localhost:50000/api";
 			
@@ -1060,7 +1171,7 @@
 			});
 			
 			$(document).ready(function () {
-				app.showLoading();				
+				app.showLoading();
 				LoadingApp();
 				/*
 				var variable = "Lojaaa";			
@@ -1074,8 +1185,7 @@
 				}
 				*/
 			});
-			
-			
+						
 			function switchChange(e) {
 				if (!e.checked) {          
 					app.navigate("#MotNaoVenda-view");
@@ -1083,12 +1193,6 @@
 			} 
 			
 			function LoadingApp() {
-				//Carrega os dados de Loja - Obter o id da Loja cadastrado no dispositivo
-				viewModel.set("idLoja", 1);
-				viewModel.dsLoja.fetch(LoadingCompl);
-			} 
-			
-			function LoadingCompl() {
 				viewModel.dsTLoja.read();
 				viewModel.dsUf.read();
 				viewModel.dsCargos.read();
@@ -1099,26 +1203,24 @@
 				viewModel.set("tipoCompl", 1);
 				viewModel.dsTelCompl.read();
 			
+				//Carrega os dados de Loja
+				viewModel.dsLoja.options.transport.read.url = baseUrl + "/RmLoja/1"; 
+				viewModel.dsLoja.read(); 
+			
 				//Carrega os motivos de Entrada e Saida da Fila
 				viewModel.dsTiposMovto.read(); 
 			
 				//Carrega os motivos de nao venda
 				viewModelNaoVenda.dsMotivosNaoVenda.read(); 
-			/*
-				//Carrega os vendedores da Fila
-				viewModel.dsVendFila.read();
-			
-				//Carrega os vendedores Fora da Fila
-				viewModel.dsVendForaFila.read();
-			*/
+                    
 				viewModelConsultas.dsData.read();
 			
-				//app.hideLoading();
+				app.hideLoading();
 			
 				app.navigate("#dentroFila-view");
 				//app.navigate("#colaboradores-view");
 				//app.navigate("#config-view");
-			}
+			}  
 			
 		</script>
 	</body>

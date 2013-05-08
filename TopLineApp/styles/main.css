@@ -332,6 +332,70 @@ label
 	color: #fff;
 }
 
+#turnosLoja-view li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#turnosLoja-view li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
+#desempenho-turnoView li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#desempenho-turnoView li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
+#produtividade-TurnoView li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#produtividade-TurnoView li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
+#metas-TurnoView li
+{
+	display: block;
+	text-decoration: none; 
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
+
+#metas-TurnoView li:hover 
+{
+	display: block;
+	text-decoration: none;
+	background-color: #2d8402;
+	color: #fff;
+}
+
 .configTitulo
 {
 	text-align: center;

@@ -1038,6 +1038,12 @@
 		app.navigate("#desempenho-colaboradorView");
 	}
 
+    function showTurnodaLoja(e) {
+		var turno = viewModel.dsTurnosLoja.getByUid(e.touch.target.context.id);
+		viewModel.set("turnoSelecionado", turno);
+		app.navigate("#desempenho-turnoView");
+	}
+
 	function adicionarLoja() {
 		var loja = viewModel.dsLoja.add();		
 		viewModel.set("lojaSelecionada", loja);
@@ -1075,7 +1081,11 @@
 		//dsColaborador.options.transport.read.url = baseUrl + "/RmColaborador";
 		dsColaborador.read(); 	
 	}
-        
+
+    function showTurnosLoja() {
+		dsTurnosLoja.read(); 	
+	}
+
 	//<!--Atendimento-->
 	function onSwipe(e) {
 		var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
@@ -1541,6 +1551,8 @@
 		showTurnoFunc: turnoFunc,
 		showCargos: cargos,
 		showColaboradores: colaboradores,
+        showTurnosLoja: showTurnosLoja,
+        showTurnodaLoja: showTurnodaLoja,
 		showDetalhesColaborador: detalhesColaborador,
 		showColaboradorLoja: showColaboradorLoja,
 		showAtendimento: adicionarAtendimento,

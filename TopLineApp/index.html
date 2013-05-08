@@ -286,7 +286,7 @@
 					<a id="menu" href="#desempenho-lojaview">Loja</a>
 				</li>
 				<li>
-					<a id="menu" href="#desenvView">Turno</a>
+					<a id="menu" href="#turnosLoja-view">Turno</a>
 				</li>
 				<li>
 					<a id="menu" href="#vendedoresLoja-view">Vendedor</a>
@@ -360,26 +360,90 @@
 			</ul>
 		</div>
 
-		<!--TURNOS da LOJA
-		<div id="turnosLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
-		<header data-role="header">
-		<div data-role="navbar">
-		<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
-		<span data-role="view-title"></span>
+		<!--TURNOS da LOJA -->
+		<div id="turnosLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO" data-model="viewModel" data-before-show="showTurnosLoja">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">TURNOS DA LOJA</div>
+			<ul id="lColaborador" data-bind="source: dsTurnosLoja" data-role="listview" data-auto-bind="false" data-template="tTurnosLoja"></ul>
 		</div>
-		</header>
-		<div class="configTitulo">TURNOS DA LOJA</div>
-		<ul id="lColaborador" data-bind="source: dsColaborador" data-role="listview" data-auto-bind="false" data-template="tColaborador"></ul>
-		<ul data-role="listview">
-		<li>
-		<a id="menu" href="#produtividade-lojaview">Produtividade</a>
-		</li>
-		<li>
-		<a id="menu" href="#metas-lojaview">Metas</a>
-		</li>
-		</ul>
+
+		<!-- DESEMPENHO - Turno -->
+		<div id="desempenho-turnoView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">
+				DESEMPENHO&nbsp;-&nbsp;<span data-bind="text: turnoSelecionado.TufDescricao"></span>
+			</div>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#produtividade-TurnoView">Produtividade</a>
+				</li>
+				<li>
+					<a id="menu" href="#metas-TurnoView">Metas</a>
+				</li>
+			</ul>
 		</div>
-		-->
+
+		<!-- PRODUTIVIDADE - Turno -->
+		<div id="produtividade-TurnoView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">
+				PRODUTIVIDADE&nbsp;-&nbsp;<span data-bind="text: turnoSelecionado.TufDescricao"></span>
+			</div>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#desenvView">Vendas</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Vendas Perdidas</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Indicadores de Desempenho</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Clientes Contactados</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- METAS - Turno -->
+		<div id="metas-TurnoView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+			<div class="configTitulo">
+				METAS&nbsp;-&nbsp;<span data-bind="text: turnoSelecionado.TufDescricao"></span>
+			</div>
+			<ul data-role="listview">
+				<li>
+					<a id="menu" href="#desenvView">Vendas</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Metas de Hoje</a>
+				</li>
+				<li>
+					<a id="menu" href="#desenvView">Metas Diárias</a>
+				</li>
+			</ul>
+		</div>
+
 		<!--Vendedores da Loja -->
 		<div id="vendedoresLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO" data-model="viewModel" data-before-show="showColaboradores">
 			<header data-role="header">
@@ -413,7 +477,7 @@
 			</ul>
 		</div>
 
-        <!-- PRODUTIVIDADE - Vendedor -->
+		<!-- PRODUTIVIDADE - Vendedor -->
 		<div id="produtividade-ColaboradorView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
@@ -452,7 +516,7 @@
 			</ul>
 		</div>
 
-       <!-- METAS - Vendedor -->
+		<!-- METAS - Vendedor -->
 		<div id="metas-ColaboradorView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
@@ -482,7 +546,7 @@
 			</ul>
 		</div>
 
-        <!-- Configuração -->
+		<!-- Configuração -->
 		<div id="config-view" data-role="view" data-layout="tools-layout" data-title="TOP LINE PRO">
 			<div class="configTitulo">CONFIGURAÇÕES</div>
 			<ul data-role="listview">
@@ -1211,6 +1275,12 @@
 				<div class="fila-div">
 					<h1 class="col-nome"> ${ColNome} # # ${ColSobrenome} </h1>
 				</div>
+			</div>
+		</script>
+
+		<script type="text/x-kendo-template" id="tTurnosLoja">            			
+			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showTurnodaLoja">
+				<a id="menu"> ${TufDescricao} </a>
 			</div>
 		</script>
 

@@ -1078,21 +1078,38 @@
 		</div>
 
 		<!--Lista de Fechamentos do dia-->
-		<div id="infoFechamento-view" data-role="view" data-title="Fechamento" data-model="viewModelFechamento" data-zoom="true" data-layout="update-layout" >
+		<div id="infoFechamento-view" data-role="view" data-title="Fechamento" data-model="viewModelFechamento" data-zoom="true" data-before-show="showFechamentos" data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#dentroFila-view">Sair</a>
 					<span data-role="view-title"></span>
 				</div>
-                <div id="divTitulo">Apuração Fechamento</div>
+				<div id="divTitulo">Apuração Fechamento</div>
 			</header>
 			<ul id="infoFechamento" data-role="listview" data-type="group">
 				<div>
-					<ul>						
+					<ul>
 						<li>
+							<label>
+								Qtde de Vendas Apuradas
+							</label><span data-bind="text: fechamentoApurado.fecQtApuVenda"></span>
+						</li>
+						<li>
+
 							<label>
 								Qtde de Vendas informadas
 							</label><span data-bind="text: fechamentoApurado.fecQtInfVenda"></span>
+						</li>
+						<li>
+							<label>
+								Diferença
+							</label><span id="divergenciaQtde" data-bind="text: fechamentoApurado.divergenciaQtde"></span>
+						</li>
+						<div id="divSubTitulo"></div>
+						<li>
+							<label>
+								Valor Total Apurado
+							</label><span data-bind="valorFechamento: fechamentoApurado.fecVlApuVenda"></span>
 						</li>
 						<li>
 							<label>
@@ -1101,13 +1118,8 @@
 						</li>
 						<li>
 							<label>
-								Qtde de Vendas Apuradas
-							</label><span data-bind="text: fechamentoApurado.fecQtApuVenda"></span>
-						</li>
-						<li>
-							<label>
-								Valor Total Apurado
-							</label><span data-bind="valorFechamento: fechamentoApurado.fecVlApuVenda"></span>
+								Diferença
+							</label><span id="divergenciaValor" data-bind="valorFechamento: fechamentoApurado.divergenciaValor"></span>
 						</li>
 					</ul>
 				</div>

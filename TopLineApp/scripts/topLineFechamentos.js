@@ -166,20 +166,41 @@
 	});
 
 	function fechamentos() {        
-		viewModelFechamento.dsFechamento.read();
-		
-		setTimeout(function() {
-			// Initialize the chart with a delay to make sure
-			// the initial animation is visible
-			createChart();
-			$("#infoFechamento-view").bind("kendo:skinChange", function(e) {
-				createChart();
-			});
-		}, 100);
+		var qtdApurada = 0;
+		var qtdInformada = 0;
+		var divQtde = 0;
+		var valorApurado = 0;
+		var valorInformado = 0;
+		var divValor = 0;
+        
+		qtdApurada = viewModelFechamento.fechamentoApurado.fecQtApuVenda;
+		qtdInformada = viewModelFechamento.fechamentoApurado.fecQtInfVenda;
+		divQtde = (qtdApurada - qtdInformada);
+        
+		valorApurado = viewModelFechamento.fechamentoApurado.fecVlApuVenda;
+		valorInformado = viewModelFechamento.fechamentoApurado.fecVlInfVenda;
+		divValor = (valorApurado - valorInformado);
+        
+		viewModelFechamento.fechamentoApurado.set("divergenciaQtde", divQtde); 
+		viewModelFechamento.fechamentoApurado.set("divergenciaValor", divValor);
+        
+		if (divQtde < 0)
+			$(divergenciaQtde).css("color", "red");
+		else if (divQtde > 0)
+			$(divergenciaQtde).css("color", "blue");
+		else if (divQtde == 0)
+			$(divergenciaQtde).css("color", "#333333");
+        
+		if (divValor < 0)
+			$(divergenciaValor).css("color", "red");
+		else if (divValor > 0)
+			$(divergenciaValor).css("color", "blue");
+		else if (divValor == 0)
+			$(divergenciaValor).css("color", "#333333");
 	};
 	
 	function adicionarFechamento() {
-        viewModelFechamento.set("lojaSelecionada", viewModel.get("lojaSelecionada"));
+		viewModelFechamento.set("lojaSelecionada", viewModel.get("lojaSelecionada"));
 		var novoFechamento = viewModelFechamento.dsFechamento.add();
 		viewModelFechamento.set("fechamentoSelecionado", novoFechamento);
 		viewModelFechamento.fechamentoSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));		
@@ -191,8 +212,7 @@
 		validatorFechamento = $("#editorFechamento").kendoValidator().data("kendoValidator");
   
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
-			viewModelFechamento.dsFechamento.one("change", function() {
-				console.log(viewModelFechamento.fechamentoApurado);
+			viewModelFechamento.dsFechamento.one("change", function() {				
 				view.loader.hide();
 				app.navigate("#infoFechamento-view");                
 			});

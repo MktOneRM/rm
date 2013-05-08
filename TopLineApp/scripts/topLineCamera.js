@@ -47,7 +47,7 @@ cameraApp.prototype = {
 		}, function() {
 			that._onFalhaFotoClose.apply(that, arguments);
 		}, {
-			quality: 30, 
+			quality: 70, 
 			allowEdit: true,
 			destinationType: cameraApp._destinationType.DATA_URL,
 			targetWidth: 50,

@@ -17,6 +17,15 @@
 		}
 	});
     
+	kendo.data.binders.valorFechamento = kendo.data.Binder.extend({		
+		refresh: function() {
+			var that = this,
+			value = that.bindings["valorFechamento"].get(), //get the value from the View-Model
+			formatedValue = kendo.toString(value, "c", "pt-BR"); //format
+			$(that.element).text(formatedValue); //update the HTML input element
+		}
+	});
+    
 	var scFechamento = {
 		model:{
 			id: "FecId",
@@ -35,6 +44,10 @@
 				FecParcial: { type: "boolean", editable: true, defaultValue:true},
 				TipoFechamento: { type: "string", editable: true, defaultValue:""}
 			}
+		},
+		data: function(response) {
+			viewModelFechamento.set("fechamentoApurado", response);             
+			return response.results; 
 		}
 	};
  
@@ -141,6 +154,7 @@
 		dsTiposFech: dsTiposFech,
 		fechamentos: fechamentos,
 		fechamentoSelecionado: [],
+		fechamentoApurado: [],
 		lojaSelecionada: [],
 		turnos: [],
 		tiposFech: [],
@@ -153,7 +167,6 @@
 
 	function fechamentos() {        
 		viewModelFechamento.dsFechamento.read();
-		viewModelFechamento.set("lojaSelecionada", viewModel.get("lojaSelecionada"));        
 		
 		setTimeout(function() {
 			// Initialize the chart with a delay to make sure
@@ -166,10 +179,10 @@
 	};
 	
 	function adicionarFechamento() {
+        viewModelFechamento.set("lojaSelecionada", viewModel.get("lojaSelecionada"));
 		var novoFechamento = viewModelFechamento.dsFechamento.add();
 		viewModelFechamento.set("fechamentoSelecionado", novoFechamento);
-		viewModelFechamento.fechamentoSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));
-		app.navigate("#editorFechamento-view");
+		viewModelFechamento.fechamentoSelecionado.set("LojId", viewModel.lojaSelecionada.get("LojId"));		
 	}
 	
 	function editorFecViewInit(e) {
@@ -179,10 +192,7 @@
   
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			viewModelFechamento.dsFechamento.one("change", function() {
-                
-                //Informa as diferenças entre o Informado e o Apurado.
-				navigator.notification.alert('Alert # \r\n Teste \r\n', null, 'Diferenças Fechamento', 'Ok'); 
-                
+				console.log(viewModelFechamento.fechamentoApurado);
 				view.loader.hide();
 				app.navigate("#infoFechamento-view");                
 			});
@@ -203,18 +213,18 @@
 			e.preventDefault();
 			viewModelFechamento.dsFechamento.one("change", function() {
 				view.loader.hide();
-				app.navigate("#infoFechamento-view");
+				app.navigate("#dentroFila-view");
 			});
 			view.loader.show();			
 			viewModelFechamento.dsFechamento.cancelChanges();
 		});
 	};
 	
-	function editorFecViewShow() {		
+	function editorFecViewShow() {	
+		adicionarFechamento();
 		viewModelFechamento.dsTurnosFunc.read();
 		viewModelFechamento.dsTiposFech.read();
 		viewModelFechamento.set("dataAtual", new Date());
-		viewModelFechamento.set("confirma", 0);
 	}
     
 	//Gráfico Fechamentos

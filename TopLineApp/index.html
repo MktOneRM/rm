@@ -34,7 +34,7 @@
 				<div data-role="tabstrip">
 					<a href="#dentroFila-view" data-icon="dentroFila"></a>
 					<a href="#foraFila-view" data-icon="foraFila"></a>
-					<a href="#infoFechamento-view"  data-icon="fechamento"></a>
+					<a href="#editorFechamento-view"  data-icon="fechamento"></a>
 					<a href="#consulta-view" data-icon="desempenho"></a>
 				</div>
 			</div>
@@ -51,7 +51,7 @@
 				<div data-role="tabstrip">
 					<a href="#dentroFila-view" data-icon="dentroFila"></a>
 					<a href="#foraFila-view" data-icon="foraFila"></a>
-					<a href="#infoFechamento-view"  data-icon="fechamento"></a>
+					<a href="#editorFechamento-view"  data-icon="fechamento"></a>
 					<a href="#consulta-view" data-icon="desempenho"></a>
 				</div>
 			</footer>
@@ -251,7 +251,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivoNaoVenda" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
 							</td>
 						</tr>
 						<tr>
@@ -1078,18 +1078,40 @@
 		</div>
 
 		<!--Lista de Fechamentos do dia-->
-		<div id="infoFechamento-view" data-role="view" data-title="Fechamento" data-model="viewModelFechamento" data-zoom="true"  data-before-show="showFechamentos" data-layout="update-layout" class="k-content absConf">
+		<div id="infoFechamento-view" data-role="view" data-title="Fechamento" data-model="viewModelFechamento" data-zoom="true" data-layout="update-layout" >
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#dentroFila-view">Voltar</a>
-					<a id="btnCreate" data-role="button" type="button" data-align="right" data-bind="events: {click: adicionarFechamento}">Novo</a>
+					<a id="btnCancel" data-role="backbutton" type="button" data-align="left"  data-role="backbutton" href="#dentroFila-view">Sair</a>
 					<span data-role="view-title"></span>
 				</div>
+                <div id="divTitulo">Apuração Fechamento</div>
 			</header>
-			<!--<ul data-bind="source: dsFechamento" data-role="listview" data-template="tFechamentos" data-style="inset"></ul>-->
-			<div class="chart-wrapper"  data-stretch="true" >
-				<div id="chart"></div>
-			</div>
+			<ul id="infoFechamento" data-role="listview" data-type="group">
+				<div>
+					<ul>						
+						<li>
+							<label>
+								Qtde de Vendas informadas
+							</label><span data-bind="text: fechamentoApurado.fecQtInfVenda"></span>
+						</li>
+						<li>
+							<label>
+								Valor Total Informado
+							</label> <span data-bind="valorFechamento: fechamentoApurado.fecVlInfVenda"></span>
+						</li>
+						<li>
+							<label>
+								Qtde de Vendas Apuradas
+							</label><span data-bind="text: fechamentoApurado.fecQtApuVenda"></span>
+						</li>
+						<li>
+							<label>
+								Valor Total Apurado
+							</label><span data-bind="valorFechamento: fechamentoApurado.fecVlApuVenda"></span>
+						</li>
+					</ul>
+				</div>
+			</ul>
 		</div>
 
 		<!--Editor Fechamento-->

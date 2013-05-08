@@ -1543,6 +1543,7 @@
 			
 	//viewModelConsultas.dsData.read();
 
+    
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,		

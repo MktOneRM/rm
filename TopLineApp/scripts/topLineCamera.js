@@ -50,8 +50,8 @@ cameraApp.prototype = {
 			quality: 70, 
 			allowEdit: true,
 			destinationType: cameraApp._destinationType.DATA_URL,
-			targetWidth: 50,
-			targetHeight: 50
+			targetWidth: 60,
+			targetHeight: 60
 		});
 	},
     
@@ -72,8 +72,8 @@ cameraApp.prototype = {
 		}, {
 			quality: 70,
 			destinationType: cameraApp._destinationType.DATA_URL,
-			targetWidth: 50,
-			targetHeight: 50,
+			targetWidth: 60,
+			targetHeight: 60,
 			sourceType: source
 		});
 	},
@@ -111,8 +111,8 @@ cameraApp.prototype = {
 			quality: 70, 
 			allowEdit: true,
 			destinationType: cameraApp._destinationType.DATA_URL,
-			targetWidth: 200,
-			targetHeight: 500
+			targetWidth: 310,
+			targetHeight: 830
 		});
 	},
     
@@ -133,8 +133,8 @@ cameraApp.prototype = {
 		}, {
 			quality: 70,
 			destinationType: cameraApp._destinationType.DATA_URL,
-			targetWidth: 200,
-			targetHeight: 500,
+			targetWidth: 310,
+			targetHeight: 830,
 			sourceType: source
 		});
 	},

@@ -46,10 +46,9 @@
 		batch: true,
 		schema: scMotivosNaoVenda,
 		change: function(e) {   
-			viewModelNaoVenda.set("motivos", this.view());    
-            
-            console.log(this.view(), "Change")
-            
+			var motivoId = this.view()[0].get("MnvId");
+			viewModelNaoVenda.motivoNaoVenda.set("MnvId", motivoId);            
+			viewModelNaoVenda.set("motivos", this.view());
 		}        
         
 	});
@@ -79,8 +78,8 @@
 		motivoNaoVenda: [],        
 		motivosNaoVenda: [],
         
-        motivos: [],
-        motivo: [],
+		motivos: [],
+		motivo: [],
 		vendedorSelecionado: {},
 		naoVendaViewInit: naoVendaViewInit,
 		naoVendaViewShow: naoVendaViewShow
@@ -90,10 +89,6 @@
 		var view = e.view;
         
 		view.element.find("#salvarMaior").data("kendoMobileButton").bind("click", function() {	
-            
-            viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivo.MnvId));
-            console.log(viewModelNaoVenda.motivo.MnvId);
-            
 			viewModelNaoVenda.dsNaoVenda.one("change", function() {	
 				//Marca o checkbox como default
 				document.getElementById("chkVendeu").checked = "checked";
@@ -129,7 +124,7 @@
 		viewModelNaoVenda.motivoNaoVenda.set("RLojId", RLoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LcoId", LcoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);
-		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
+		//viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
         
 		console.log(viewModelNaoVenda.motivoNaoVenda, viewModelNaoVenda.motivos[0].MnvId);
 	}

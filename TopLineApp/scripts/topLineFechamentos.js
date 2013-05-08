@@ -1,5 +1,4 @@
 (function($, undefined) {
-    
 	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
 
@@ -92,7 +91,7 @@
 			parameterMap: function(data, operation) {
 				if (operation == "read")
 					return {
-						id: viewModel.lojaSelecionada.LojId,
+						id: viewModel.idLoja,
 						isFechamento: true
 					}
 				else if (operation !== "read" && data.models) {
@@ -180,6 +179,10 @@
   
 		view.element.find("#btnCreate").data("kendoMobileButton").bind("click", function() {			
 			viewModelFechamento.dsFechamento.one("change", function() {
+                
+                //Informa as diferenças entre o Informado e o Apurado.
+				navigator.notification.alert('Alert # \r\n Teste \r\n', null, 'Diferenças Fechamento', 'Ok'); 
+                
 				view.loader.hide();
 				app.navigate("#infoFechamento-view");                
 			});

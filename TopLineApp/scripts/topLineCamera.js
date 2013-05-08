@@ -111,8 +111,8 @@ cameraApp.prototype = {
 			quality: 70, 
 			allowEdit: true,
 			destinationType: cameraApp._destinationType.DATA_URL,
-			targetWidth: 310,
-			targetHeight: 830
+			targetWidth: 210,
+			targetHeight: 562
 		});
 	},
     
@@ -133,8 +133,8 @@ cameraApp.prototype = {
 		}, {
 			quality: 70,
 			destinationType: cameraApp._destinationType.DATA_URL,
-			targetWidth: 310,
-			targetHeight: 830,
+			targetWidth: 210,
+			targetHeight: 562,
 			sourceType: source
 		});
 	},

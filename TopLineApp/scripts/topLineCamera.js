@@ -70,7 +70,7 @@ cameraApp.prototype = {
 		}, function() {
 			cameraApp._onFalhaFotoClose.apply(that, arguments);
 		}, {
-			quality: 30,
+			quality: 70,
 			destinationType: cameraApp._destinationType.DATA_URL,
 			targetWidth: 50,
 			targetHeight: 50,
@@ -108,7 +108,7 @@ cameraApp.prototype = {
 		}, function() {
 			that._onFalhaFotoCorpo.apply(that, arguments);
 		}, {
-			quality: 30, 
+			quality: 70, 
 			allowEdit: true,
 			destinationType: cameraApp._destinationType.DATA_URL,
 			targetWidth: 200,
@@ -131,7 +131,7 @@ cameraApp.prototype = {
 		}, function() {
 			cameraApp._onFalhaFotoCorpo.apply(that, arguments);
 		}, {
-			quality: 30,
+			quality: 70,
 			destinationType: cameraApp._destinationType.DATA_URL,
 			targetWidth: 200,
 			targetHeight: 500,

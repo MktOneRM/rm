@@ -613,10 +613,44 @@
     
 	//dataSource Turnos de funcionamento
 	var dsTurnosFunc = new kendo.data.DataSource({                    
-		data: dataTurnosFunc,
+		data: dataTurnosFunc,		
 		schema: scTurnosFunc,
 		change: function(e) {
 			viewModel.set("turnos", this.view());
+		},                       
+		sort: {
+			field:"TufId", 
+			dir: "asc"
+		}
+	});
+    
+	var dsTurnosLoja = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmTurnoFunc",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation == "read") {
+					return {						 
+						id: viewModel.idLoja
+					}
+				}
+				else if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}
+		},
+		batch: true,		
+		schema: scTurnosFunc,
+		change: function(e) {
+			viewModel.set("turnosLoja", this.view());
+		},                       
+		sort: {
+			field:"TufId", 
+			dir: "asc"
 		}
 	});
     
@@ -659,7 +693,7 @@
 			},
 			parameterMap: function(data, operation) {
 				if (operation == "read") {
-					return {id: viewModel.lojaSelecionada.LojId}
+					return {id: viewModel.idLoja}
 				}
 				else if (operation !== "read" && data.models) {
 					return kendo.stringify(data.models);
@@ -752,7 +786,7 @@
 			parameterMap: function(data, operation) {
 				if (operation == "read")
 					return {
-						id: 1 //viewModel.idLoja
+						id: viewModel.idLoja
 					}                
 				else if (operation !== "read" && data.models) {
 					return kendo.stringify(data.models[0]);
@@ -795,7 +829,7 @@
 			parameterMap: function(data, operation) {
 				if (operation == "read")
 					return {
-						id: viewModel.lojaSelecionada.LojId
+						id: viewModel.idLoja
 					}  
 				if (operation !== "read" && data.models) {
 					return kendo.stringify([data.models[0]]);
@@ -835,7 +869,11 @@
 				dataType: "json"
 			},
 			parameterMap: function(data, operation) {
-				if (operation !== "read" && data.models) {
+				if (operation == "read")
+					return {
+						id: viewModel.colaboradorSelecionado.ColId
+					} 
+				else if (operation !== "read" && data.models) {
 					return kendo.stringify(data.models);
 				}
 			}     
@@ -922,7 +960,9 @@
 		dsSexo: dsSexo,
         
 		turnos: [],
-		dsTurnosFunc: dsTurnosFunc,        
+		dsTurnosFunc: dsTurnosFunc,   
+		turnosLoja: [],
+		dsTurnosLoja: dsTurnosLoja,
 		      
 		TLojas:[],
 		dsTLoja: dsTLoja,
@@ -987,8 +1027,7 @@
        
 	function detalhesColaborador(e) {
 		var colaborador = viewModel.dsColaborador.getByUid(e.touch.target.context.id);
-		viewModel.set("colaboradorSelecionado", colaborador);
-		dsTelColaborador.options.transport.read.url = baseUrl + "/RmTelColaborador/" + viewModel.colaboradorSelecionado.get("ColId");
+		viewModel.set("colaboradorSelecionado", colaborador);		
 		dsTelColaborador.read(); 
 		app.navigate("#detalhesColaborador-view");
 	}
@@ -1480,6 +1519,7 @@
 	viewModel.dsCargos.read();
 	viewModel.dsSexo.read();			
 	viewModel.dsTurnosFunc.read();			
+	viewModel.dsTurnosLoja.read();
 	viewModel.dsDiasFunc.read();
 			
 	viewModel.set("tipoCompl", 1);
@@ -1493,7 +1533,6 @@
 			
 	//viewModelConsultas.dsData.read();
 
-		
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
 		showVendedoresForaFila: vendedoresForaFila,		

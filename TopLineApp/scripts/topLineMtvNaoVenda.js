@@ -21,7 +21,7 @@
 				NveId: { type:"int", nullable: false, defaultValue: 0 },
 				RLojId: { type:"int", nullable: false },
 				LojId: { type:"int", nullable: false },
-				MnvId: { type:"int", nullable: false },
+				MnvId: {type: "int", validation: { required: false}, defaultValue: 0 },
 				RveDtNaoVenda: { type:"date", nullable: false },
 				LcoId: { type:"int", nullable: false }
 			} 
@@ -45,9 +45,7 @@
 		},
 		batch: true,
 		schema: scMotivosNaoVenda,
-		change: function(e) {   
-			var motivoId = this.view()[0].get("MnvId");
-			viewModelNaoVenda.motivoNaoVenda.set("MnvId", motivoId);            
+		change: function(e) {             
 			viewModelNaoVenda.set("motivos", this.view());
 		}        
         
@@ -124,10 +122,11 @@
 		viewModelNaoVenda.motivoNaoVenda.set("RLojId", RLoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LcoId", LcoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);
-		//viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
-        
-		console.log(viewModelNaoVenda.motivoNaoVenda, viewModelNaoVenda.motivos[0].MnvId);
+		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
+  
 	}
+    
+    viewModelNaoVenda.dsMotivosNaoVenda.read();
     
 	$.extend(window, {
 		viewModelNaoVenda: viewModelNaoVenda,

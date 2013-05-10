@@ -318,6 +318,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -337,6 +340,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -386,6 +392,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -411,6 +420,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -423,6 +435,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -444,6 +459,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -495,6 +513,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -522,6 +543,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -534,6 +558,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -555,6 +582,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -612,6 +642,9 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -642,13 +675,14 @@
 		<div id="desRealizadoCol-view" data-role="view" data-model="viewModelConsultas" data-before-show="desRealizadoColShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-                    <a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<span data-role="view-title"></span>
-                    <a data-align="right" href="#consulta-view" >
+					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
 				</div>
-				<div id="divTitulo">
+				<div class="configTitulo">
+					<span data-bind="text: colaboradorSelecionado.ColNome"></span>
 					<span data-bind="date: dataAtual" data-dateformat="dd/MM/yyyy"></span>
 				</div>
 				<ul id="tableConsulta">
@@ -658,9 +692,9 @@
 					<li id="titleTable">Peças</li>
 				</ul>
 			</header>
-
-			<ul id="infoDesRealizadoCol" data-bind="source: dsDesRealizadoCol" data-role="listview" data-template="tDesRealizadoCol"></ul>
-
+			<div>
+				<ul id="infoDesRealizadoCol" data-bind="source: dsDesRealizadoCol" data-role="listview" data-template="tDesRealizadoCol"></ul>
+			</div>
 		</div>
 
 		<!-- Configuração -->
@@ -1469,7 +1503,8 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tDesRealizadoCol">
-			<ul id="tableConsulta">
+            
+			<ul id="tableConsulta" data-role="listview">
 				<li id="detailTable">#=MetaHora#</li>
 				<li id="detailTable">#=MetaRealizadoVlVenda#</li>
 				<li id="detailTable">#=MetaRealizadoAcumulado#</li>

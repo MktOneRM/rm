@@ -71,7 +71,7 @@
 			<div data-role="footer">
 				<div data-role="tabstrip">
 					<a href="#desRealizadoCol-view" data-icon="tabela"></a>
-					<a href="#desRealizadoCol-view" data-icon="grafico"></a>
+					<a href="#desenvView" data-icon="grafico"></a>
 				</div>
 			</div>
 		</div>
@@ -642,10 +642,11 @@
 		<div id="desRealizadoCol-view" data-role="view" data-model="viewModelConsultas" data-before-show="desRealizadoColShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a data-align="right" href="#consulta-view" >
+                    <a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+                    <a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
-					<span data-role="view-title"></span>
 				</div>
 				<div id="divTitulo">
 					<span data-bind="date: dataAtual" data-dateformat="dd/MM/yyyy"></span>

@@ -682,7 +682,7 @@
 					</a>
 				</div>
 				<div class="configTitulo">
-					<span data-bind="text: colaboradorSelecionado.ColNome"></span>
+					<span >Loja - Nome</span><br>
 					<span data-bind="date: dataAtual" data-dateformat="dd/MM/yyyy"></span>
 				</div>
 				<ul id="tableConsulta">
@@ -692,9 +692,7 @@
 					<li id="titleTable">Peças</li>
 				</ul>
 			</header>
-			<div>
 				<ul id="infoDesRealizadoCol" data-bind="source: dsDesRealizadoCol" data-role="listview" data-template="tDesRealizadoCol"></ul>
-			</div>
 		</div>
 
 		<!-- Configuração -->
@@ -1503,12 +1501,11 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tDesRealizadoCol">
-            
-			<ul id="tableConsulta" data-role="listview">
-				<li id="detailTable">#=MetaHora#</li>
-				<li id="detailTable">#=MetaRealizadoVlVenda#</li>
-				<li id="detailTable">#=MetaRealizadoAcumulado#</li>
-				<li id="detailTable">#=MetaRealizadoQtPecas#</li>
+			<ul id="tableUL" data-role="listview">
+				<li style="padding-top:2px;"><span>#=MetaHora#</span></li>
+				<li><span>#=MetaRealizadoVlVenda#</span></li>
+				<li><span>#=MetaRealizadoAcumulado#</span></li>
+				<li><span>#=MetaRealizadoQtPecas#</span></li>
 			</ul>
 
 		</script>

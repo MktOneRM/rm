@@ -2,22 +2,51 @@
 	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
     
-	kendo.data.binders.date = kendo.data.Binder.extend({
+	kendo.data.binders.cabecalho = kendo.data.Binder.extend({
 		init: function (element, bindings, options) {
 			kendo.data.Binder.fn.init.call(this, element, bindings, options);
  
 			this.dateformat = $(element).data("dateformat");
 		},
 		refresh: function () {
-			var data = this.bindings["date"].get();
+			var data = this.bindings["cabecalho"].get();
 			if (data) {
 				var dateObj = new Date(data);
 				$(this.element).text(kendo.toString(dateObj, this.dateformat, "pt-BR") + " Vendas - Até " + kendo.toString(new Date(), "HH:mm") + " Hs");
 			}
 		}
 	});
-    
-	//Schema Atendimento
+   
+	kendo.data.binders.hora = kendo.data.Binder.extend({
+		refresh: function() {
+			var value = this.bindings["hora"].get();
+			console.log(value);
+			if (value) {
+				$(this.element).text(kendo.toString(value, "HH:mm"));
+			}
+		}
+        
+	});
+	
+	kendo.data.binders.valorConsulta = kendo.data.Binder.extend({
+		refresh: function() {
+			var that = this,
+			value = that.bindings["valorConsulta"].get(), //get the value from the View-Model
+			formatedValue = kendo.toString(value, "n2", "pt-BR"); //format
+			$(that.element).text(formatedValue); //update the HTML input element
+		}
+	});
+	
+	kendo.data.binders.qtdeConsulta = kendo.data.Binder.extend({
+		refresh: function() {
+			var that = this,
+			valor = that.bindings["qtdeConsulta"].get(), //get the value from the View-Model
+			formatedValue = kendo.toString(valor, "n0", "pt-BR"); //format
+			$(that.element).text(formatedValue); //update the HTML input element
+		}
+	});
+
+    //Schema Atendimento
 	var scDesRealizadoCol = { 
 		model: {
 			id: "RedeLojaId",
@@ -27,7 +56,7 @@
 				LojaColId: { editable: false, nullable: false },
 				HfuId: { editable: false, nullable: false },
 				MetaData: { editable: false, nullable: false },
-				MetaHora: { editable: false, nullable: false },
+				MetaHora: { type: "datetime", editable: false, nullable: false },
 				MetaRealizadoVlVenda: { editable: false, nullable: false },
 				MetaRealizadoQtPecas: { editable: false, nullable: false },
 				DataInicialMeta: { editable: false, nullable: false },
@@ -71,8 +100,7 @@
     
 	var viewModelConsultas = kendo.observable({	
 		dsDesRealizadoCol: dsDesRealizadoCol,
-        
-		/*Parametros para pesquisa*/
+  
 		lojaSelecionada: [],
 		colaboradorSelecionado: [],
 		turnoSelecionado: [],        
@@ -104,9 +132,8 @@
 			viewModelConsultas.set("pLojColId", viewModelConsultas.colaboradorSelecionado.LCoId); 
 		}
         
+		//Efetua a leitura do Datasource.
 		dsDesRealizadoCol.read();
-        
-		console.log(viewModelConsultas);
 	}
     
 	$.extend(window, {

@@ -318,9 +318,6 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
-					<a data-align="right" href="#consulta-view" >
-						<img id="imgPrincipal" src="styles/iconList.png"/>
-					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -420,9 +417,6 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
-					<a data-align="right" href="#consulta-view" >
-						<img id="imgPrincipal" src="styles/iconList.png"/>
-					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -543,9 +537,6 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
-					<a data-align="right" href="#consulta-view" >
-						<img id="imgPrincipal" src="styles/iconList.png"/>
-					</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -682,17 +673,19 @@
 					</a>
 				</div>
 				<div class="configTitulo">
-					<span >Loja - Nome</span><br>
-					<span data-bind="date: dataAtual" data-dateformat="dd/MM/yyyy"></span>
+					<span data-bind="text: lojaSelecionada.LojNomefantasia"></span> - <span data-bind="text: colaboradorSelecionado.ColApelido"></span><br>
+					<span data-bind="cabecalho: dataAtual" data-dateformat="dd/MM/yyyy"></span>
 				</div>
-				<ul id="tableConsulta">
-					<li id="titleTable">Hora</li>
-					<li id="titleTable">Valor(R$)</li>
-					<li id="titleTable">Acum(R$)</li>
-					<li id="titleTable">Peças</li>
+				<ul id="tableConsultaHeader">
+					<li style="width:19.5%">Hora</li>
+					<li style="width:29.5%">Valor(R$)</li>
+					<li style="width:29.5%">Acum(R$)</li>
+					<li style="width:19.5%">Peças</li>
 				</ul>
 			</header>
-				<ul id="infoDesRealizadoCol" data-bind="source: dsDesRealizadoCol" data-role="listview" data-template="tDesRealizadoCol"></ul>
+			<div id="tableConsulta">
+				<ul data-bind="source: dsDesRealizadoCol" data-role="listview" data-template="tDesRealizadoCol"></ul>
+			</div>
 		</div>
 
 		<!-- Configuração -->
@@ -1501,13 +1494,14 @@
 		</script>
 
 		<script type="text/x-kendo-template" id="tDesRealizadoCol">
-			<ul id="tableUL" data-role="listview">
-				<li style="padding-top:2px;"><span>#=MetaHora#</span></li>
-				<li><span>#=MetaRealizadoVlVenda#</span></li>
-				<li><span>#=MetaRealizadoAcumulado#</span></li>
-				<li><span>#=MetaRealizadoQtPecas#</span></li>
-			</ul>
-
+			<table id="tabelaTemplate" cellpadding="0" cellspacing="0">
+				<tr>
+					<td data-bind="hora: MetaHora" width="20%"></td>
+					<td data-bind="valorConsulta: MetaRealizadoVlVenda" width="30%"></td>
+					<td data-bind="valorConsulta: MetaRealizadoAcumulado" width="30%"></td>
+					<td data-bind="qtdeConsulta: MetaRealizadoQtPecas" width="20%"></td>
+				</tr>
+			</table>
 		</script>
 
 		<script type="text/javascript">

@@ -447,6 +447,7 @@
 			id: "ColId",
 			fields: {
 				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
+                LCoId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				CarId: { type: "int", validation: { required: false} },  
 				ColCpf: { type:"string", validation: { required: true}, editable: true, nullable: false},
 				ColSexo: { validation: { required:true}, defaultvalue: "M"},

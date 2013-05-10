@@ -78,7 +78,7 @@
 			parameterMap: function(data, operation) {
 				if (operation == "read")
 					return {
-						id: viewModel.lojaSelecionada.LojId
+						id: viewModel.idLoja
 					}                
 				else if (operation !== "read" && data.models) {
 					return kendo.stringify(data.models[0]);

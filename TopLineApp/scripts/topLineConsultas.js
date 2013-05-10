@@ -12,7 +12,7 @@
 			var data = this.bindings["date"].get();
 			if (data) {
 				var dateObj = new Date(data);
-				$(this.element).text(kendo.toString(dateObj, this.dateformat, "pt-BR") + " Vendas - Até " +  kendo.toString(new Date(), "HH:mm") + " Hs");
+				$(this.element).text(kendo.toString(dateObj, this.dateformat, "pt-BR") + " Vendas - Até " + kendo.toString(new Date(), "HH:mm") + " Hs");
 			}
 		}
 	});
@@ -49,11 +49,11 @@
 			parameterMap: function(data, operation) {
 				if (operation == "read") {
 					return {
-						lojaId: 1,
-						hfuId: 1, 
-						lojaColId: 2,
-						noDia: false, 
-						ateData: false
+						lojaId: viewModelConsultas.pLojId,
+						hfuId: viewModelConsultas.pTufId, 
+						lojaColId: viewModelConsultas.pLojColId,
+						noDia: viewModelConsultas.consultaDia, 
+						ateData: viewModelConsultas.consultaAteData
 					}
 				}
 				else if (operation !== "read" && data.models) {							
@@ -63,19 +63,54 @@
 		},
 		batch: true,
 		schema: scDesRealizadoCol,
+		change: function(e) {
+			viewModelConsultas.set("resultado", this.view());
+		}
+        
 	});
     
 	var viewModelConsultas = kendo.observable({	
 		dsDesRealizadoCol: dsDesRealizadoCol,
-		dataAtual: ""
+        
+		/*Parametros para pesquisa*/
+		lojaSelecionada: [],
+		colaboradorSelecionado: [],
+		turnoSelecionado: [],        
+		consultaDia: false,
+		consultaAteData: true,
+		dataAtual: "",
+        
+		pLojId: "null",
+		pTufId: "null",
+		pLojColId: "null",
+                
+		resultado: []
+        
 	})
     
-	function desRealizadoColShow() {	
+	function desRealizadoColShow() {
 		viewModelConsultas.set("dataAtual", new Date());
+		viewModelConsultas.set("lojaSelecionada", viewModel.get("lojaSelecionada"));
+		viewModelConsultas.set("turnoSelecionado", viewModel.get("turnoSelecionado"));
+		viewModelConsultas.set("colaboradorSelecionado", viewModel.get("colaboradorSelecionado"));
+        
+		viewModelConsultas.set("pLojId", viewModelConsultas.lojaSelecionada.LojId); 
+		
+		if (viewModelConsultas.turnoSelecionado.TufId) {
+			viewModelConsultas.set("pTufId", viewModelConsultas.turnoSelecionado.TufId); 
+		}
+        
+		if (viewModelConsultas.colaboradorSelecionado.ColId) {
+			viewModelConsultas.set("pLojColId", viewModelConsultas.colaboradorSelecionado.LCoId); 
+		}
+        
+		dsDesRealizadoCol.read();
+        
+		console.log(viewModelConsultas);
 	}
     
 	$.extend(window, {
 		viewModelConsultas: viewModelConsultas,
-        desRealizadoColShow: desRealizadoColShow
+		desRealizadoColShow: desRealizadoColShow
 	});
 })(jQuery);

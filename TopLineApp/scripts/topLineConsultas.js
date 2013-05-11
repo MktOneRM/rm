@@ -46,7 +46,7 @@
 	});
 
 	//Schema Atendimento
-	var scDesRealizadoCol = { 
+	var scDesRealizadoVenda = { 
 		model: {
 			id: "RedeLojaId",
 			fields:{
@@ -90,13 +90,16 @@
 			}
 		},
 		batch: true,
-		schema: scDesRealizadoCol,        
+		schema: scDesRealizadoVenda,        
 		sort: {
 			field: "MetaHora",
 			dir: "asc"
 		},
 		change: function(e) {
 			viewModelConsultas.set("resultado", this.view());
+            
+            console.log(viewModelConsultas, "Change");
+            
 		}
 	});
     
@@ -120,38 +123,78 @@
     
 	function desRealizadoColShow() {
 		viewModelConsultas.set("dataAtual", new Date());
-		viewModelConsultas.set("lojaSelecionada", viewModel.get("lojaSelecionada"));
-		viewModelConsultas.set("turnoSelecionado", viewModel.get("turnoSelecionado"));
+		viewModelConsultas.set("lojaSelecionada", viewModel.get("lojaSelecionada"));		
 		viewModelConsultas.set("colaboradorSelecionado", viewModel.get("colaboradorSelecionado"));
         
-		viewModelConsultas.set("pLojId", viewModelConsultas.lojaSelecionada.LojId); 
-		
-		if (viewModelConsultas.turnoSelecionado.TufId) {
-			viewModelConsultas.set("pTufId", viewModelConsultas.turnoSelecionado.TufId); 
-		}
-        
-		if (viewModelConsultas.colaboradorSelecionado.ColId) {
-			viewModelConsultas.set("pLojColId", viewModelConsultas.colaboradorSelecionado.LCoId); 
-		}
+		viewModelConsultas.set("pLojId", viewModelConsultas.lojaSelecionada.LojId);
+		viewModelConsultas.set("pLojColId", viewModelConsultas.colaboradorSelecionado.LCoId); 
+		viewModelConsultas.set("pTufId", "null"); 
         
 		//Efetua a leitura do Datasource.
 		dsDesRealizadoCol.read();
 	}
     
-	function GrafDesRealizadoColShow() {        
+	function desRealizadoLojaShow() {
+		viewModelConsultas.set("dataAtual", new Date());
+		viewModelConsultas.set("lojaSelecionada", viewModel.get("lojaSelecionada"));
+		viewModelConsultas.set("pLojId", viewModelConsultas.lojaSelecionada.LojId); 
+		viewModelConsultas.set("pTufId", "null"); 
+		viewModelConsultas.set("pLojColId", "null"); 
+        
+		//Efetua a leitura do Datasource.
+		dsDesRealizadoCol.read();
+	}
+        
+	function desRealizadoTurnoShow() {
+		viewModelConsultas.set("dataAtual", new Date());
+		viewModelConsultas.set("lojaSelecionada", viewModel.get("lojaSelecionada"));
+		viewModelConsultas.set("turnoSelecionado", viewModel.get("turnoSelecionado"));		      
+		viewModelConsultas.set("pLojId", viewModelConsultas.lojaSelecionada.LojId); 
+		viewModelConsultas.set("pTufId", viewModelConsultas.turnoSelecionado.TufId); 	
+		viewModelConsultas.set("pLojColId", "null");
+        
+        console.log(viewModelConsultas);
+        
+		//Efetua a leitura do Datasource.
+		dsDesRealizadoCol.read();
+	}
+    
+	function GrafDesRealizadoColShow() {    
 		setTimeout(function() {
 			// Initialize the chart with a delay to make sure
 			// the initial animation is visible
-			grafDesRealizadoCol();
+			grafDesRealizadoVenda("#chtGrafDesRealizadoVendaCol");
 			$("#grafDesRealizadoCol-view").bind("kendo:skinChange", function(e) {
-				grafDesRealizadoCol();
+				grafDesRealizadoVenda("#chtGrafDesRealizadoVendaCol");
+			});
+		}, 100);
+	};
+    
+	function GrafDesRealizadoLojaShow() {   
+		setTimeout(function() {
+			// Initialize the chart with a delay to make sure
+			// the initial animation is visible
+			grafDesRealizadoVenda("#chtGrafDesRealizadoVendaLoja");
+			$("#grafDesRealizadoLoja-view").bind("kendo:skinChange", function(e) {
+				grafDesRealizadoVenda("#chtGrafDesRealizadoVendaLoja");
+			});
+		}, 100);
+	};
+    
+	function GrafDesRealizadoTurnoShow() {     
+		setTimeout(function() {
+			// Initialize the chart with a delay to make sure
+			// the initial animation is visible
+			grafDesRealizadoVenda("#chtGrafDesRealizadoVendaTurno");
+			$("#grafDesRealizadoTurno-view").bind("kendo:skinChange", function(e) {
+				grafDesRealizadoVenda("#chtGrafDesRealizadoVendaTurno");
 			});
 		}, 100);
 	};
 	
 	//Gráfico Desempenho de Vendas Realizado
-	function grafDesRealizadoCol() {
-		$("#chtGrafDesRealizadoCol").kendoChart({
+	function grafDesRealizadoVenda(e) {
+		$(e).kendoChart({
 			chartArea: {
 				height: 355
 			},
@@ -204,6 +247,12 @@
 	$.extend(window, {
 		viewModelConsultas: viewModelConsultas,
 		desRealizadoColShow: desRealizadoColShow,
-		GrafDesRealizadoColShow: GrafDesRealizadoColShow
+		desRealizadoLojaShow: desRealizadoLojaShow,
+		desRealizadoTurnoShow: desRealizadoTurnoShow,
+        
+		GrafDesRealizadoColShow: GrafDesRealizadoColShow,
+		GrafDesRealizadoLojaShow: GrafDesRealizadoLojaShow,
+		GrafDesRealizadoTurnoShow: GrafDesRealizadoTurnoShow
+		
 	});
 })(jQuery);

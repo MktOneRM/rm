@@ -340,7 +340,7 @@
 			<div class="configTitulo">PRODUTIVIDADE - LOJA</div>
 			<ul data-role="listview">
 				<li>
-					<a href="#desenvView">
+					<a href="#desRealizadoLoja-view">
 						<div id="menuConsulta">Vendas</div>
 						<div id="submenuCunsulta">Hoje, acumuladas e no período</div>
 					</a>
@@ -458,7 +458,7 @@
 			</div>
 			<ul data-role="listview">
 				<li>
-					<a href="#desenvView">
+					<a href="#desRealizadoTurno-view">
 						<div id="menuConsulta">Vendas</div>
 						<div id="submenuCunsulta">Hoje, acumuladas e no período</div>
 					</a>
@@ -656,11 +656,65 @@
 			</ul>
 		</div>
 
-		<!-- Minhas vendas - Realizado -Colaborador -->
+		<!-- Minhas vendas - Realizado - Loja -->
+		<div id="desRealizadoLoja-view" data-role="view" data-model="viewModelConsultas" data-before-show="desRealizadoLojaShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#produtividade-LojaView" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
+				</div>
+				<div class="configTitulo">
+					<span data-bind="text: lojaSelecionada.LojNomefantasia"/><br>
+					<span data-bind="cabecalho: dataAtual" data-dateformat="dd/MM/yyyy"></span>
+				</div>
+				<ul id="tableConsultaHeader">
+					<li style="width:19.5%">Hora</li>
+					<li style="width:29.5%">Valor(R$)</li>
+					<li style="width:29.5%">Acum(R$)</li>
+					<li style="width:19.5%">Peças</li>
+				</ul>
+			</header>
+			<div id="tableConsulta">
+				<ul data-bind="source: resultado" data-role="listview" data-template="tDesRealizadoCol"></ul>
+			</div>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#desRealizadoLoja-view" data-icon="tabela"></a>
+					<a href="#grafDesRealizadoLoja-view" data-icon="grafico"></a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Grafico Minhas vendas - Realizado - Loja -->
+		<div id="grafDesRealizadoLoja-view" data-role="view" data-model="viewModelConsultas" data-before-show="GrafDesRealizadoLojaShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#desRealizadoLoja-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
+				</div>
+			</header>
+			<div class="chart-wrapper">
+				<div id="chtGrafDesRealizadoVendaLoja"></div>
+			</div>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#desRealizadoLoja-view" data-icon="tabela"></a>
+					<a href="#grafDesRealizadoLoja-view" data-icon="grafico"></a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Minhas vendas - Realizado - Colaborador -->
 		<div id="desRealizadoCol-view" data-role="view" data-model="viewModelConsultas" data-before-show="desRealizadoColShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#produtividade-ColaboradorView" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<span data-role="view-title"></span>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
@@ -678,7 +732,7 @@
 				</ul>
 			</header>
 			<div id="tableConsulta">
-				<ul data-bind="source: dsDesRealizadoCol" data-role="listview" data-template="tDesRealizadoCol"></ul>
+				<ul data-bind="source: resultado" data-role="listview" data-template="tDesRealizadoCol"></ul>
 			</div>
 			<div data-role="footer">
 				<div data-role="tabstrip">
@@ -688,7 +742,7 @@
 			</div>
 		</div>
 
-		<!-- Grafico Minhas vendas - Realizado -Colaborador -->
+		<!-- Grafico Minhas vendas - Realizado - Colaborador -->
 		<div id="grafDesRealizadoCol-view" data-role="view" data-model="viewModelConsultas" data-before-show="GrafDesRealizadoColShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
@@ -700,12 +754,66 @@
 				</div>
 			</header>
 			<div class="chart-wrapper">
-				<div id="chtGrafDesRealizadoCol"></div>
+				<div id="chtGrafDesRealizadoVendaCol"></div>
 			</div>
 			<div data-role="footer">
 				<div data-role="tabstrip">
 					<a href="#desRealizadoCol-view" data-icon="tabela"></a>
 					<a href="#grafDesRealizadoCol-view" data-icon="grafico"></a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Minhas vendas - Realizado - Turno -->
+		<div id="desRealizadoTurno-view" data-role="view" data-model="viewModelConsultas" data-before-show="desRealizadoTurnoShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#produtividade-TurnoView" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
+				</div>
+				<div class="configTitulo">
+					<span data-bind="text: lojaSelecionada.LojNomefantasia"></span> - <span data-bind="text: turnoSelecionado.TufDescricao"></span><br>
+					<span data-bind="cabecalho: dataAtual" data-dateformat="dd/MM/yyyy"></span>
+				</div>
+				<ul id="tableConsultaHeader">
+					<li style="width:19.5%">Hora</li>
+					<li style="width:29.5%">Valor(R$)</li>
+					<li style="width:29.5%">Acum(R$)</li>
+					<li style="width:19.5%">Peças</li>
+				</ul>
+			</header>
+			<div id="tableConsulta">
+				<ul data-bind="source: resultado" data-role="listview" data-template="tDesRealizadoCol"></ul>
+			</div>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#desRealizadoTurno-view" data-icon="tabela"></a>
+					<a href="#grafDesRealizadoTurno-view" data-icon="grafico"></a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Grafico Minhas vendas - Realizado - Turno -->
+		<div id="grafDesRealizadoTurno-view" data-role="view" data-model="viewModelConsultas" data-before-show="GrafDesRealizadoTurnoShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a href="#desRealizadoTurno-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<span data-role="view-title"></span>
+					<a data-align="right" href="#consulta-view" >
+						<img id="imgPrincipal" src="styles/iconList.png"/>
+					</a>
+				</div>
+			</header>
+			<div class="chart-wrapper">
+				<div id="chtGrafDesRealizadoVendaTurno"></div>
+			</div>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#desRealizadoTurno-view" data-icon="tabela"></a>
+					<a href="#grafDesRealizadoTurno-view" data-icon="grafico"></a>
 				</div>
 			</div>
 		</div>
@@ -1544,7 +1652,7 @@
 			} 
 			
 			$(window).resize(function() {
-				$("#chtGrafDesRealizadoCol").data("kendoChart").redraw();
+				$("#chtGrafDesRealizadoVenda").data("kendoChart").redraw();
 			});
             
 		</script>

@@ -68,12 +68,6 @@
 					</a>
 				</div>
 			</header>
-			<div data-role="footer">
-				<div data-role="tabstrip">
-					<a href="#desRealizadoCol-view" data-icon="tabela"></a>
-					<a href="#grafDesRealizadoCol-view" data-icon="grafico"></a>
-				</div>
-			</div>
 		</div>
 
 		<!-- update-Layout -->
@@ -686,13 +680,19 @@
 			<div id="tableConsulta">
 				<ul data-bind="source: dsDesRealizadoCol" data-role="listview" data-template="tDesRealizadoCol"></ul>
 			</div>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#desRealizadoCol-view" data-icon="tabela"></a>
+					<a href="#grafDesRealizadoCol-view" data-icon="grafico"></a>
+				</div>
+			</div>
 		</div>
 
 		<!-- Grafico Minhas vendas - Realizado -Colaborador -->
 		<div id="grafDesRealizadoCol-view" data-role="view" data-model="viewModelConsultas" data-before-show="GrafDesRealizadoColShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#desRealizadoCol-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<span data-role="view-title"></span>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
@@ -701,6 +701,12 @@
 			</header>
 			<div class="chart-wrapper">
 				<div id="chtGrafDesRealizadoCol"></div>
+			</div>
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#desRealizadoCol-view" data-icon="tabela"></a>
+					<a href="#grafDesRealizadoCol-view" data-icon="grafico"></a>
+				</div>
 			</div>
 		</div>
 

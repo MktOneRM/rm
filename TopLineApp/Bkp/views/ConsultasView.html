@@ -1,0 +1,67 @@
+
+<!-- consulta-Layout -->
+<div data-role="layout" data-id="consultas-layout" data-title="">
+	<header data-role="header">
+		<div data-role="navbar">
+			<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+			<span data-role="view-title"></span>
+			<a data-align="right" href="#consulta-view" >
+				<img id="imgPrincipal" src="styles/iconList.png"/>
+			</a>
+		</div>
+	</header>
+</div>
+
+<!-- Minhas vendas - Realizado -Colaborador -->
+<div id="desRealizadoCol-view" data-role="view" data-model="viewModelConsultas" data-before-show="desRealizadoColShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
+	<header data-role="header">
+		<div data-role="navbar">
+			<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+			<span data-role="view-title"></span>
+			<a data-align="right" href="#consulta-view" >
+				<img id="imgPrincipal" src="styles/iconList.png"/>
+			</a>
+		</div>
+		<div class="configTitulo">
+			<span data-bind="text: lojaSelecionada.LojNomefantasia"></span> - <span data-bind="text: colaboradorSelecionado.ColApelido"></span><br>
+			<span data-bind="cabecalho: dataAtual" data-dateformat="dd/MM/yyyy"></span>
+		</div>
+		<ul id="tableConsultaHeader">
+			<li style="width:19.5%">Hora</li>
+			<li style="width:29.5%">Valor(R$)</li>
+			<li style="width:29.5%">Acum(R$)</li>
+			<li style="width:19.5%">Peças</li>
+		</ul>
+	</header>
+	<div id="tableConsulta">
+		<ul data-bind="source: dsDesRealizadoCol" data-role="listview" data-template="tDesRealizadoCol"></ul>
+	</div>
+	<div data-role="footer">
+		<div data-role="tabstrip">
+			<a href="#desRealizadoCol-view" data-icon="tabela"></a>
+			<a href="#grafDesRealizadoCol-view" data-icon="grafico"></a>
+		</div>
+	</div>
+</div>
+
+<!-- Grafico Minhas vendas - Realizado -Colaborador -->
+<div id="grafDesRealizadoCol-view" data-role="view" data-model="viewModelConsultas" data-before-show="GrafDesRealizadoColShow" data-layout="consultas-layout" data-title="TOP LINE PRO">
+	<header data-role="header">
+		<div data-role="navbar">
+			<a href="#desRealizadoCol-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+			<span data-role="view-title"></span>
+			<a data-align="right" href="#consulta-view" >
+				<img id="imgPrincipal" src="styles/iconList.png"/>
+			</a>
+		</div>
+	</header>
+	<div class="chart-wrapper">
+		<div id="chtGrafDesRealizadoCol"></div>
+	</div>
+	<div data-role="footer">
+		<div data-role="tabstrip">
+			<a href="#desRealizadoCol-view" data-icon="tabela"></a>
+			<a href="#grafDesRealizadoCol-view" data-icon="grafico"></a>
+		</div>
+	</div>
+</div>

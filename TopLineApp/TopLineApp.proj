@@ -44,7 +44,6 @@
     <Folder Include="Bkp\views" />
     <Folder Include="kendo\styles\Black" />
     <Folder Include="kendo\styles\textures" />
-    <Folder Include="views" />
     <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
@@ -196,7 +195,8 @@
     <Content Include="Bkp\views\VFilaView.html" />
     <Content Include="Bkp\views\VForaFilaView.html" />
     <Content Include="Bkp\views\VForaTurnoView.html" />
-    <Content Include="views\ConsultasView.html" />
+    <Content Include="styles\seta_pequena.png" />
+    <Content Include="Bkp\views\ConsultasView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

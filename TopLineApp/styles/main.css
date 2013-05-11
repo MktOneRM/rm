@@ -1165,51 +1165,59 @@ label
 }
 
 /*Desempenho - Consultas*/
-#tableConsultaHeader {
-    width:100%;
-    padding:0;
+#tableConsultaHeader
+{
+	width: 100%;
+	padding: 0;
 }
 
 #tableConsultaHeader li
 {
-    float: left;
-    display: block;
-    font-weight: bold;
+	float: left;
+	display: block;
+	font-weight: bold;
 	background: #2d8402;
 	color: #fff;
 	padding: 10px 0 10px 0;
-    border:1px solid #DDDDDD;
-    text-align:center;
-    font-size:13px;
+	border: 1px solid #DDDDDD;
+	text-align: center;
+	font-size: 13px;
 }
 
-#tableConsulta {
-    padding:0;
-    margin:0;
-    border:0;
-    width:100%;
+#tableConsulta
+{
+	padding: 0;
+	margin: 0;
+	border: 0;
+	width: 100%;
 }
 
-#tableConsulta li{
-    padding:0;
-    font-size:12px;
-    border:0;
+#tableConsulta li
+{
+	padding: 0;
+	font-size: 12px;
+	border: 0;
 }
 
-#tabelaTemplate {
-    width:100%;
+#tabelaTemplate
+{
+	width: 100%;
 }
 
-#tabelaTemplate tr{
-    width:100%;
+#tabelaTemplate tr
+{
+	width: 100%;
 }
 
-#tabelaTemplate td{
-    padding: 5px 3px 5px 0;
-    border:1px solid #DDDDDD;
-    text-align:right;
-    font-size:13px;
-    font-weight: normal;
+#tabelaTemplate td
+{
+	padding: 5px 3px 5px 0;
+	border: 1px solid #DDDDDD; 
+	font-size: 13px;
+	font-weight: normal;
 }
 
-
+#chtGrafDesRealizadoCol
+{
+    width: 100%;
+}

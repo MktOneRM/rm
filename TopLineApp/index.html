@@ -698,16 +698,10 @@
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
 				</div>
-				<div class="configTitulo">
-					<span data-bind="text: lojaSelecionada.LojNomefantasia"></span> - <span data-bind="text: colaboradorSelecionado.ColApelido"></span><br>
-					<span data-bind="cabecalho: dataAtual" data-dateformat="dd/MM/yyyy"></span>
-				</div>
 			</header>
-
-			<div class="chart-wrapper" style="margin: auto;">
-				<div id="chtGrafDesRealizadoCol" style="width:100%; height:80%;"></div>
+			<div class="chart-wrapper">
+				<div id="chtGrafDesRealizadoCol"></div>
 			</div>
-
 		</div>
 
 		<!-- Configuração -->
@@ -1519,9 +1513,9 @@
 			<table id="tabelaTemplate" cellpadding="0" cellspacing="0">
 				<tr>
 					<td data-bind="hora: MetaHora" width="20%" align="center"></td>
-					<td data-bind="valorConsulta: MetaRealizadoVlVenda" width="30%"></td>
-					<td data-bind="valorConsulta: MetaRealizadoAcumulado" width="30%"></td>
-					<td data-bind="qtdeConsulta: MetaRealizadoQtPecas" width="20%"></td>
+					<td data-bind="valorConsulta: MetaRealizadoVlVenda" width="30%" align="right"></td>
+					<td data-bind="valorConsulta: MetaRealizadoAcumulado" width="30%" align="right"></td>
+					<td data-bind="qtdeConsulta: MetaRealizadoQtPecas" width="20%" align="right"></td>
 				</tr>
 			</table>
 		</script>
@@ -1543,6 +1537,11 @@
 				}    
 			} 
 			
+			$(window).resize(function() {
+				$("#chtGrafDesRealizadoCol").data("kendoChart").redraw();
+			});
+            
 		</script>
+
 	</body>
 </html>

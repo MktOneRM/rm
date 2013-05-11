@@ -177,9 +177,12 @@
 	//Gráfico Desempenho de Vendas Realizado
 	function grafDesRealizadoCol() {
 		$("#chtGrafDesRealizadoCol").kendoChart({
+			chartArea: {
+				height: 355
+			},
 			dataSource: dsDesRealizadoCol,
 			title: {
-				text: "Minhas vendas realizado"
+				text: "Minhas vendas - Realizado"
 			},
 			legend: {
 				position: "bottom"
@@ -192,14 +195,13 @@
 					//field: "MetaRealizadoAcumulado",
 					field: "MetaRealizadoVlVenda",
 					name: "Acum (R$)",
-                    color: "#0000FF"
+					color: "#0000FF"
 				}
 			],
 			categoryAxis: {				
-				field: "MetaHora",
-                
+				field: "MetaHora",                
 				labels: {
-					format: "HH:mm",
+					template: "#= kendo.toString(value.substring(0, 5)) # ",					                  
 					rotation: -90
 				},
 				majorGridLines: {
@@ -209,8 +211,8 @@
 			valueAxis: {
 				labels: {
 					format: "R$ {0}",
-					skip: 2,
-					step: 2
+					skip: 1,
+					step: 1
 				},
 				line: {
 					visible: true
@@ -218,7 +220,8 @@
 			},
 			tooltip: {
 				visible: true,
-				 format: "R$ {0}"
+				template: "R$ #= kendo.format('{0:N2}', value) #",
+				color: "#2d8402"                
 			}
 		});        
 	}

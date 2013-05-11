@@ -10,6 +10,7 @@ label
 {
 	font-size: 12px;
 }
+
 .k-invalid-msg
 {
 	background: #681212;
@@ -82,7 +83,7 @@ label
 	height: 20px;
 }
 
-.km-setaprquena
+.km-setapequena
 {
 	-webkit-mask-box-image: url("seta_pequena.png"); 
 }
@@ -211,11 +212,22 @@ label
 	margin: 0;
 }
 
+#imgMenuConsulta
+{
+	width: 30px; 
+	height: 30px; 
+}
+.km-ios .k-sprite 
+{
+    display:none;
+}
+
 #menu
 {
 	text-decoration: none;
 	padding-left: 20px;
 }
+
 
 #menuConsulta
 {
@@ -1233,5 +1245,5 @@ label
 
 #chtGrafDesRealizadoCol
 {
-    width: 100%;
+	width: 100%;
 }

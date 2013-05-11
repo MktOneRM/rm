@@ -196,7 +196,6 @@
     <Content Include="Bkp\views\VForaFilaView.html" />
     <Content Include="Bkp\views\VForaTurnoView.html" />
     <Content Include="styles\seta_pequena.png" />
-    <Content Include="Bkp\views\ConsultasView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

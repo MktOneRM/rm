@@ -97,9 +97,6 @@
 		},
 		change: function(e) {
 			viewModelConsultas.set("resultado", this.view());
-            
-            console.log(viewModelConsultas, "Change");
-            
 		}
 	});
     
@@ -153,8 +150,6 @@
 		viewModelConsultas.set("pTufId", viewModelConsultas.turnoSelecionado.TufId); 	
 		viewModelConsultas.set("pLojColId", "null");
         
-        console.log(viewModelConsultas);
-        
 		//Efetua a leitura do Datasource.
 		dsDesRealizadoCol.read();
 	}
@@ -200,7 +195,7 @@
 			},
 			dataSource: dsDesRealizadoCol,
 			title: {
-				text: "Minhas vendas - Realizado"
+				text: "Vendas - Realizado"
 			},
 			legend: {
 				position: "bottom"
@@ -212,7 +207,7 @@
 				{
 					//field: "MetaRealizadoAcumulado",
 					field: "MetaRealizadoVlVenda",
-					name: "Acum (R$)",
+					name: "Realizado Acumulado",
 					color: "#0000FF"
 				}
 			],

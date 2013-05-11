@@ -20,9 +20,8 @@
 	kendo.data.binders.hora = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["hora"].get();
-			console.log(value.substring(0,5));
 			if (value) {
-				$(this.element).text(kendo.toString(value.substring(0,5)));
+				$(this.element).text(kendo.toString(value.substring(0, 5)));
 			}
 		}
         
@@ -46,7 +45,7 @@
 		}
 	});
 
-    //Schema Atendimento
+	//Schema Atendimento
 	var scDesRealizadoCol = { 
 		model: {
 			id: "RedeLojaId",
@@ -91,11 +90,14 @@
 			}
 		},
 		batch: true,
-		schema: scDesRealizadoCol,
+		schema: scDesRealizadoCol,        
+		sort: {
+			field: "MetaHora",
+			dir: "asc"
+		},
 		change: function(e) {
 			viewModelConsultas.set("resultado", this.view());
 		}
-        
 	});
     
 	var viewModelConsultas = kendo.observable({	
@@ -136,8 +138,121 @@
 		dsDesRealizadoCol.read();
 	}
     
+	function GrafDesRealizadoColShow() {        
+		setTimeout(function() {
+			// Initialize the chart with a delay to make sure
+			// the initial animation is visible
+			grafDesRealizadoCol();
+			$("#grafDesRealizadoCol-view").bind("kendo:skinChange", function(e) {
+				grafDesRealizadoCol();
+			});
+		}, 100);
+	};
+    
+	// Minimum distance in px to start dragging
+	var DRAG_STEP = 50;
+    
+	// Minimum/maximum range length
+	var MIN_RANGE = 10;
+	var MAX_RANGE = 20;
+    
+	// Selected Range
+	var rangeStart = 0;
+	var rangeLength = MIN_RANGE;
+    
+	function getFilter(start, length) {
+		return [
+			{
+				field: "index",
+				operator: "gte",
+				value: start
+			}, {
+				field: "index",
+				operator: "lte",
+				value: start + length
+			}
+		]
+	}
+	
+	//Gráfico Desempenho de Vendas Realizado
+	function grafDesRealizadoCol() {
+		$("#chtGrafDesRealizadoCol").kendoChart({
+			dataSource: dsDesRealizadoCol,
+			title: {
+				text: "Minhas vendas realizado"
+			},
+			legend: {
+				position: "bottom"
+			},
+			seriesDefaults: {
+				type: "column"
+			},
+			series:[
+				{
+					//field: "MetaRealizadoAcumulado",
+					field: "MetaRealizadoVlVenda",
+					name: "Acum (R$)",
+                    color: "#0000FF"
+				}
+			],
+			categoryAxis: {				
+				field: "MetaHora",
+                
+				labels: {
+					format: "HH:mm",
+					rotation: -90
+				},
+				majorGridLines: {
+					visible: false
+				}
+			},
+			valueAxis: {
+				labels: {
+					format: "R$ {0}",
+					skip: 2,
+					step: 2
+				},
+				line: {
+					visible: true
+				}
+			},
+			tooltip: {
+				visible: true,
+				 format: "R$ {0}"
+			}
+		});        
+	}
+    
+	var newStart;
+	function onDrag(e) {
+		var chart = e.sender;
+		var ds = chart.dataSource;
+		var delta = Math.round(e.originalEvent.x.initialDelta / DRAG_STEP);
+                  
+		if (delta != 0) {
+			newStart = Math.max(0, rangeStart - delta);
+			newStart = Math.min(data.length - rangeLength, newStart);
+			ds.filter(getFilter(newStart, rangeLength));
+		}
+	}
+              
+	function onDragEnd() {
+		rangeStart = newStart;
+	}
+              
+	function onZoom(e) {
+		var chart = e.sender;
+		var ds = chart.dataSource;
+		rangeLength = Math.min(Math.max(rangeLength + e.delta, MIN_RANGE), MAX_RANGE);
+		ds.filter(getFilter(rangeStart, rangeLength));
+
+		// Prevent document scrolling
+		e.originalEvent.preventDefault();
+	}
+    
 	$.extend(window, {
 		viewModelConsultas: viewModelConsultas,
-		desRealizadoColShow: desRealizadoColShow
+		desRealizadoColShow: desRealizadoColShow,
+		GrafDesRealizadoColShow: GrafDesRealizadoColShow
 	});
 })(jQuery);

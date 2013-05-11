@@ -148,31 +148,6 @@
 			});
 		}, 100);
 	};
-    
-	// Minimum distance in px to start dragging
-	var DRAG_STEP = 50;
-    
-	// Minimum/maximum range length
-	var MIN_RANGE = 10;
-	var MAX_RANGE = 20;
-    
-	// Selected Range
-	var rangeStart = 0;
-	var rangeLength = MIN_RANGE;
-    
-	function getFilter(start, length) {
-		return [
-			{
-				field: "index",
-				operator: "gte",
-				value: start
-			}, {
-				field: "index",
-				operator: "lte",
-				value: start + length
-			}
-		]
-	}
 	
 	//Gráfico Desempenho de Vendas Realizado
 	function grafDesRealizadoCol() {
@@ -225,34 +200,7 @@
 			}
 		});        
 	}
-    
-	var newStart;
-	function onDrag(e) {
-		var chart = e.sender;
-		var ds = chart.dataSource;
-		var delta = Math.round(e.originalEvent.x.initialDelta / DRAG_STEP);
-                  
-		if (delta != 0) {
-			newStart = Math.max(0, rangeStart - delta);
-			newStart = Math.min(data.length - rangeLength, newStart);
-			ds.filter(getFilter(newStart, rangeLength));
-		}
-	}
-              
-	function onDragEnd() {
-		rangeStart = newStart;
-	}
-              
-	function onZoom(e) {
-		var chart = e.sender;
-		var ds = chart.dataSource;
-		rangeLength = Math.min(Math.max(rangeLength + e.delta, MIN_RANGE), MAX_RANGE);
-		ds.filter(getFilter(rangeStart, rangeLength));
-
-		// Prevent document scrolling
-		e.originalEvent.preventDefault();
-	}
-    
+  
 	$.extend(window, {
 		viewModelConsultas: viewModelConsultas,
 		desRealizadoColShow: desRealizadoColShow,

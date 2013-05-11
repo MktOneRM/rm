@@ -73,6 +73,20 @@ label
 	-webkit-mask-box-image: url("seta_off.png"); 
 }
 
+.km-root .km-pane .km-view .km-setapequena
+{
+	background-size: 100% 100%;
+	-webkit-background-clip: border-box;
+	background-color: currentColor;
+	width: 75px;
+	height: 54px;
+}
+
+.km-setaprquena
+{
+	-webkit-mask-box-image: url("seta_pequena.png"); 
+}
+
 .km-dentroFila
 {
 	-webkit-mask-box-image: url("iconsFila_off.png"); 

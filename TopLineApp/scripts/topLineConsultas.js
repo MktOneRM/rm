@@ -20,9 +20,9 @@
 	kendo.data.binders.hora = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["hora"].get();
-			console.log(value);
+			console.log(value.substring(0,5));
 			if (value) {
-				$(this.element).text(kendo.toString(value, "HH:mm"));
+				$(this.element).text(kendo.toString(value.substring(0,5)));
 			}
 		}
         
@@ -56,7 +56,7 @@
 				LojaColId: { editable: false, nullable: false },
 				HfuId: { editable: false, nullable: false },
 				MetaData: { editable: false, nullable: false },
-				MetaHora: { type: "datetime", editable: false, nullable: false },
+				MetaHora: { editable: false, nullable: false },
 				MetaRealizadoVlVenda: { editable: false, nullable: false },
 				MetaRealizadoQtPecas: { editable: false, nullable: false },
 				DataInicialMeta: { editable: false, nullable: false },

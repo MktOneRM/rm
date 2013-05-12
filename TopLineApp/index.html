@@ -294,25 +294,18 @@
 		<!-- Consulta -->
 		<div id="consulta-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
 			<div class="configTitulo">DESEMPENHO</div>
-			<ul data-role="listview" >
-				<li>
-					<a id="menu" href="#desempenho-lojaview" data-role="detailbutton" data-icon="">
-						Loja<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-					</a>
+			<ul data-role="listview" data-click="menuConsulta">
+				<li id="#desempenho-lojaview">
+					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menu">Loja</div>
 				</li>
-				<li>
-					<a id="menu" href="#turnosLoja-view">
-						Turno<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-					</a>
+				<li id="#turnosLoja-view">
+					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menu">Turno</div>
 				</li>
-
-				<li>
-					<a id="menu" href="#vendedoresLoja-view">
-						Vendedor<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-					</a>
-				</li>
-				<li>
-					<input type="button" name="button" value="Search" onclick="showUser()" class="btnTeste"/>
+				<li id="#vendedoresLoja-view">
+					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menu">Vendedor</div>
 				</li>
 			</ul>
 		</div>
@@ -321,21 +314,19 @@
 		<div id="desempenho-lojaview" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#consulta-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
 			<div class="configTitulo">DESEMPENHO - LOJA</div>
-			<ul data-role="listview">
-				<li>
-					<a id="menu" href="#produtividade-lojaview">
-						Produtividade<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-					</a>
+			<ul data-role="listview" data-click="menuConsulta">
+				<li id="#produtividade-lojaview">
+					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menu">Produtividade</div>
 				</li>
-				<li>
-					<a id="menu" href="#metas-lojaview">
-						Metas<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-					</a>
+				<li id="#metas-lojaview">
+					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menu">Metas</div>
 				</li>
 			</ul>
 		</div>
@@ -344,7 +335,7 @@
 		<div id="produtividade-lojaview" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#desempenho-lojaview" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
@@ -352,48 +343,36 @@
 				</div>
 			</header>
 			<div class="configTitulo">PRODUTIVIDADE - LOJA</div>
-			<ul data-role="listview">
-				<li>
-					<a href="#desRealizadoLoja-view">
-						<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-						<div id="menuConsulta">Vendas</div>
-						<div id="submenuCunsulta">Hoje, acumuladas e no período</div>
-					</a>
+			<ul data-role="listview" data-click="menuConsulta">
+				<li id="#desRealizadoLoja-view">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Vendas</div>
+					<div id="subMenuConsulta">Hoje, acumuladas e no período</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-						<div id="menuConsulta">Vendas Perdidas</div>
-						<div id="submenuCunsulta">Por motivo</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Vendas Perdidas</div>
+					<div id="subMenuConsulta">Por motivo</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-						<div id="menuConsulta">Indicadores de Desempenho</div>
-						<div id="submenuCunsulta">Comparados: Previsto x Realizado</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Indicadores de Desempenho</div>
+					<div id="subMenuConsulta">Comparados: Previsto x Realizado</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-						<div id="menuConsulta">Clientes Contactados</div>
-						<div id="submenuCunsulta">Por dia e acumulado</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Clientes Contactados</div>
+					<div id="subMenuConsulta">Por dia e acumulado</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-						<div id="menuConsulta">Campeões de Trabalho</div>
-						<div id="submenuCunsulta">Com clientes (CRM)</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Campeões de Trabalho</div>
+					<div id="subMenuConsulta">Com clientes (CRM)</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-						<div id="menuConsulta">Afastamento</div>
-						<div id="submenuCunsulta">Salão de Vendas por motivo</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Afastamento</div>
+					<div id="subMenuConsulta">Salão de Vendas por motivo</div>
 				</li>
 			</ul>
 		</div>
@@ -402,7 +381,7 @@
 		<div id="metas-lojaview" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#desempenho-lojaview" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
@@ -410,18 +389,21 @@
 				</div>
 			</header>
 			<div class="configTitulo">METAS - LOJA</div>
-			<ul data-role="listview">
-				<li>
-					<a id="menuConsulta" href="#desenvView">Vendas Acumuladas</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Realizadas x Projetadas para o final do período</a>
+			<ul data-role="listview" data-click="menuConsulta">
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Vendas Acumuladas</div>
+					<div id="subMenuConsulta">Realizadas x Projetadas para o final do período</div>
 				</li>
-				<li>
-					<a id="menuConsulta" href="#desenvView">Metas</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Hoje</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Metas</div>
+					<div id="subMenuConsulta">Hoje</div>
 				</li>
-				<li>
-					<a id="menuConsulta" href="#desenvView">Metas Diárias</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Previstas x Realizadas com % de atingimento</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Metas Diárias</div>
+					<div id="subMenuConsulta">Previstas x Realizadas com % de atingimento</div>
 				</li>
 			</ul>
 		</div>
@@ -430,7 +412,7 @@
 		<div id="turnosLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO" data-model="viewModel" data-before-show="showTurnosLoja">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#consulta-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -442,7 +424,7 @@
 		<div id="desempenho-turnoView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#turnosLoja-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
@@ -452,12 +434,14 @@
 			<div class="configTitulo">
 				DESEMPENHO&nbsp;-&nbsp;<span data-bind="text: turnoSelecionado.TufDescricao"></span>
 			</div>
-			<ul data-role="listview">
-				<li>
-					<a id="menu" href="#produtividade-TurnoView">Produtividade</a>
+			<ul data-role="listview" data-click="menuConsulta">
+				<li id="#produtividade-TurnoView">
+					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menu">Produtividade</div>
 				</li>
-				<li>
-					<a id="menu" href="#metas-TurnoView">Metas</a>
+				<li id="#metas-TurnoView">
+					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menu">Metas</div>
 				</li>
 			</ul>
 		</div>
@@ -466,7 +450,7 @@
 		<div id="produtividade-TurnoView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#turnosLoja-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
@@ -476,42 +460,36 @@
 			<div class="configTitulo">
 				PRODUTIVIDADE&nbsp;-&nbsp;<span data-bind="text: turnoSelecionado.TufDescricao"></span>
 			</div>
-			<ul data-role="listview">
-				<li>
-					<a href="#desRealizadoTurno-view">
-						<div id="menuConsulta">Vendas</div>
-						<div id="submenuCunsulta">Hoje, acumuladas e no período</div>
-					</a>
+			<ul data-role="listview" data-click="menuConsulta" >
+				<li id="#desRealizadoTurno-view">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Vendas</div>
+					<div id="subMenuConsulta">Hoje, acumuladas e no período</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Vendas Perdidas</div>
-						<div id="submenuCunsulta">Por motivo</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Vendas Perdidas</div>
+					<div id="subMenuConsulta">Por motivo</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Indicadores de Desempenho</div>
-						<div id="submenuCunsulta">Comparados: Previsto x Realizado</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Indicadores de Desempenho</div>
+					<div id="subMenuConsulta">Comparados: Previsto x Realizado</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Clientes Contactados</div>
-						<div id="submenuCunsulta">Por dia e acumulado</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Clientes Contactados</div>
+					<div id="subMenuConsulta">Por dia e acumulado</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Campeões de Trabalho</div>
-						<div id="submenuCunsulta">Com clientes (CRM)</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Campeões de Trabalho</div>
+					<div id="subMenuConsulta">Com clientes (CRM)</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Afastamento do Salão de Vendas</div>
-						<div id="submenuCunsulta">Por motivo</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Afastamento</div>
+					<div id="subMenuConsulta">Salão de Vendas por motivo</div>
 				</li>
 			</ul>
 		</div>
@@ -520,7 +498,7 @@
 		<div id="metas-TurnoView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#turnosLoja-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
@@ -530,18 +508,21 @@
 			<div class="configTitulo">
 				METAS&nbsp;-&nbsp;<span data-bind="text: turnoSelecionado.TufDescricao"></span>
 			</div>
-			<ul data-role="listview">
-				<li>
-					<a id="menuConsulta" href="#desenvView">Vendas Acumuladas</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Realizadas x Projetadas para o final do período</a>
+			<ul data-role="listview" data-click="menuConsulta" >
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta" >Vendas Acumuladas</div>
+					<div id="subMenuConsulta">Realizadas x Projetadas para o final do período</div>
 				</li>
-				<li>
-					<a id="menuConsulta" href="#desenvView">Metas</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Hoje</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Metas</div>
+					<div id="subMenuConsulta">Hoje</div>
 				</li>
-				<li>
-					<a id="menuConsulta" href="#desenvView">Metas Diárias</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Previstas x Realizadas com % de atingimento</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Metas Diárias</div>
+					<div id="subMenuConsulta">Previstas x Realizadas com % de atingimento</div>
 				</li>
 			</ul>
 		</div>
@@ -550,7 +531,7 @@
 		<div id="vendedoresLoja-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO" data-model="viewModel" data-before-show="showColaboradores">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#consulta-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<span data-role="view-title"></span>
 				</div>
 			</header>
@@ -562,7 +543,7 @@
 		<div id="desempenho-colaboradorView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#vendedoresLoja-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
@@ -572,12 +553,14 @@
 			<div class="configTitulo">
 				DESEMPENHO&nbsp;-&nbsp;<span data-bind="text: colaboradorSelecionado.ColNome"></span>
 			</div>
-			<ul data-role="listview">
-				<li>
-					<a id="menu" href="#produtividade-ColaboradorView">Produtividade</a>
+			<ul data-role="listview" data-click="menuConsulta">
+				<li id="#produtividade-ColaboradorView">
+					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menu" >Produtividade</div>
 				</li>
-				<li>
-					<a id="menu" href="#metas-ColaboradorView">Metas</a>
+				<li id="#metas-ColaboradorView">
+					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menu" >Metas</div>
 				</li>
 			</ul>
 		</div>
@@ -586,7 +569,7 @@
 		<div id="produtividade-ColaboradorView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#vendedoresLoja-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
@@ -596,48 +579,41 @@
 			<div class="configTitulo">
 				PRODUTIVIDADE&nbsp;-&nbsp;<span data-bind="text: colaboradorSelecionado.ColNome"></span>
 			</div>
-			<ul data-role="listview">
-				<li>
-					<a href="#desRealizadoCol-view">
-						<div id="menuConsulta">Vendas</div>
-						<div id="submenuCunsulta">Hoje, acumuladas e no período</div>
-					</a>
+			<ul data-role="listview" data-click="menuConsulta">
+				<li id="#desRealizadoCol-view">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Vendas</div>
+					<div id="subMenuConsulta">Hoje, acumuladas e no período</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Vendas Perdidas</div>
-						<div id="submenuCunsulta">Por motivo</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Vendas Perdidas</div>
+					<div id="subMenuConsulta">Por motivo</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Indicadores de Desempenho</div>
-						<div id="submenuCunsulta">Comparados: Previsto x Realizado</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Indicadores de Desempenho</div>
+					<div id="subMenuConsulta">Comparados: Previsto x Realizado</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Indicadores de Desempenho</div>
-						<div id="submenuCunsulta">Posição no ranking no período</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Indicadores de Desempenho</div>
+					<div id="subMenuConsulta">Posição no ranking no período</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Clientes Contactados</div>
-						<div id="submenuCunsulta">Por dia e acumulado</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Clientes Contactados</div>
+					<div id="subMenuConsulta">Por dia e acumulado</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Campeões de Trabalho</div>
-						<div id="submenuCunsulta">Com clientes (CRM)</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Campeões de Trabalho</div>
+					<div id="subMenuConsulta">Com clientes (CRM)</div>
 				</li>
-				<li>
-					<a href="#desenvView">
-						<div id="menuConsulta">Afastamento do Salão de Vendas</div>
-						<div id="submenuCunsulta">Por motivo</div>
-					</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta">Afastamento</div>
+					<div id="subMenuConsulta">Salão de Vendas por motivo</div>
 				</li>
 			</ul>
 		</div>
@@ -646,7 +622,7 @@
 		<div id="metas-ColaboradorView" data-role="view" data-layout="home-layout" data-model="viewModel" data-title="TOP LINE PRO">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a href="#:back" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
+					<a href="#vendedoresLoja-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
 					<a data-align="right" href="#consulta-view" >
 						<img id="imgPrincipal" src="styles/iconList.png"/>
 					</a>
@@ -656,22 +632,26 @@
 			<div class="configTitulo">
 				METAS&nbsp;-&nbsp;<span data-bind="text: colaboradorSelecionado.ColNome"></span>
 			</div>
-			<ul data-role="listview">
-				<li>
-					<a id="menuConsulta" href="#desenvView">Vendas Acumuladas</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Realizadas x Projetadas para o final do período</a>
+			<ul data-role="listview" data-click="menuConsulta">
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta" href="#desenvView">Vendas Acumuladas</div>
+					<div id="subMenuConsulta" href="#desenvView">Realizadas x Projetadas para o final do período</div>
 				</li>
-				<li>
-					<a id="menuConsulta" href="#desenvView">Metas</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Hoje</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta" href="#desenvView">Metas</div>
+					<div id="subMenuConsulta" href="#desenvView">Hoje</div>
 				</li>
-				<li>
-					<a id="menuConsulta" href="#desenvView">Metas Diárias</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Previstas x Realizadas com % de atingimento</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta" href="#desenvView">Metas Diárias</div>
+					<div id="subMenuConsulta" href="#desenvView">Previstas x Realizadas com % de atingimento</div>
 				</li>
-				<li>
-					<a id="menuConsulta" href="#desenvView">Posição no Ranking</a><br>
-					<a id="submenuCunsulta" href="#desenvView">Atingimento das Metas</a>
+				<li id="#desenvView">
+					<img id="imgMenuDuploConsulta" src="styles/seta_pequena.png" align="right" />
+					<div id="menuConsulta" href="#desenvView">Posição no Ranking</div>
+					<div id="subMenuConsulta" href="#desenvView">Atingimento das Metas</div>
 				</li>
 			</ul>
 		</div>
@@ -838,12 +818,14 @@
 		<!-- Configuração -->
 		<div id="config-view" data-role="view" data-layout="tools-layout" data-title="TOP LINE PRO">
 			<div class="configTitulo">CONFIGURAÇÕES</div>
-			<ul data-role="listview">
-				<li>
-					<a id="menu" href="#detalhesLoja-view">Cadastro de Loja</a>
+			<ul id="ulMenuConfig" data-role="listview" data-click="menuConsulta">
+				<li id="#detalhesLoja-view">
+					<img id="imgMenuConfig" src="styles/seta_trans.png" align="right" />
+					<div id="menu">Cadastro de Loja</div>
 				</li>
-				<li>
-					<a id="menu" href="#colaboradores-view">Cadastro de Colaboradores</a>
+				<li id="#colaboradores-view">
+					<img id="imgMenuConfig" src="styles/seta_trans.png" align="right" />
+					<div id="menu">Cadastro de Colaboradores</div>
 				</li>
 			</ul>
 		</div>
@@ -1596,14 +1578,15 @@
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showColaboradorLoja">
 				<img class="fila-art" src="" data-bind="attr: { src: ColFoto}"/>
 				<div class="fila-div">
-					<h1 class="col-nome"> ${ColNome} # # ${ColSobrenome} </h1>
+					<h1 class="vendedor-nome"> ${ColNome} # # ${ColSobrenome} </h1>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/x-kendo-template" id="tTurnosLoja">            			
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showTurnodaLoja">
-				<a id="menu"> ${TufDescricao} </a>
+				<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
+				<div id="menu">${TufDescricao}</div>
 			</div>
 		</script>
 
@@ -1649,6 +1632,12 @@
 					<td data-bind="qtdeConsulta: MetaRealizadoQtPecas" width="20%" align="right"></td>
 				</tr>
 			</table>
+		</script>
+
+		<script type="text/javascript">
+			function menuConsulta(e) {
+				app.navigate(e.item.context.id);
+			}
 		</script>
 
 		<script type="text/javascript">

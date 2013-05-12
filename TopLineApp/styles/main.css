@@ -212,22 +212,47 @@ label
 	margin: 0;
 }
 
+#ulMenuConfig li img
+{
+    background:url(seta_off.png) no-repeat;
+	width: 11px; 
+	height: 24px; 
+    float:right;
+    padding-right: 5px;
+}
+
+#ulMenuConfig li:hover img
+{
+    background:url(seta_on.png) no-repeat;
+	width: 11px; 
+	height: 24px; 
+    float:right;
+    padding-right: 5px;
+}
+
 #imgMenuConsulta
 {
 	width: 30px; 
 	height: 30px; 
+    float:right;
 }
-.km-ios .k-sprite 
+
+#imgMenuDuploConsulta
 {
-    display:none;
+	width: 30px; 
+	height: 30px; 
+    float:right;
+    padding-top: 4px;
 }
 
 #menu
 {
 	text-decoration: none;
-	padding-left: 20px;
+	padding-left: 10px;
+    padding-top:5px;
+    cursor:pointer;
+    padding-right: 5px;
 }
-
 
 #menuConsulta
 {
@@ -237,12 +262,20 @@ label
 	font-size: 18px;
 }
 
-#submenuCunsulta
+#subMenuConsulta
 {
 	text-decoration: none;
 	padding-left: 20px;
 	font-weight: normal;
 	font-size: 12px;
+}
+
+.vendedor-nome {
+	padding: 30px 0 0 0;
+	margin: 0;
+	border: 0;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 #consulta-view li

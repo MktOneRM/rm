@@ -294,18 +294,18 @@
 		<!-- Consulta -->
 		<div id="consulta-view" data-role="view" data-layout="home-layout" data-title="TOP LINE PRO">
 			<div class="configTitulo">DESEMPENHO</div>
-			<ul data-role="listview" data-click="menuConsulta">
+			<ul id="ulMenuConfig" data-role="listview" data-click="menuConsulta">
 				<li id="#desempenho-lojaview">
-					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-					<div id="menu">Loja</div>
+					<img src="styles/seta_trans.png" align="right" />
+					<div id="menuPrincipal">Loja</div>
 				</li>
 				<li id="#turnosLoja-view">
-					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-					<div id="menu">Turno</div>
+					<img src="styles/seta_trans.png" align="right" />
+					<div id="menuPrincipal">Turno</div>
 				</li>
 				<li id="#vendedoresLoja-view">
-					<img id="imgMenuConsulta" src="styles/seta_pequena.png" align="right" />
-					<div id="menu">Vendedor</div>
+					<img src="styles/seta_trans.png" align="right" />
+					<div id="menuPrincipal">Vendedor</div>
 				</li>
 			</ul>
 		</div>
@@ -820,12 +820,12 @@
 			<div class="configTitulo">CONFIGURAÇÕES</div>
 			<ul id="ulMenuConfig" data-role="listview" data-click="menuConsulta">
 				<li id="#detalhesLoja-view">
-					<img id="imgMenuConfig" src="styles/seta_trans.png" align="right" />
-					<div id="menu">Cadastro de Loja</div>
+					<img src="styles/seta_trans.png" align="right" />
+					<div id="menuPrincipal">Cadastro de Loja</div>
 				</li>
 				<li id="#colaboradores-view">
-					<img id="imgMenuConfig" src="styles/seta_trans.png" align="right" />
-					<div id="menu">Cadastro de Colaboradores</div>
+					<img src="styles/seta_trans.png" align="right" />
+					<div id="menuPrincipal">Cadastro de Colaboradores</div>
 				</li>
 			</ul>
 		</div>
@@ -844,7 +844,7 @@
 		</div>
 
 		<!--Colaboradores View-->
-		<div data-role="view" id="colaboradores-view" data-title="TOP LINE PRO" data-model="viewModel" data-layout="tools-layout" data-before-show="showColaboradores">
+		<div data-role="view" id="colaboradores-view" data-title="TOP LINE PRO" data-model="viewModel" data-layout="update-layout" data-before-show="showColaboradores">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a href="#config-view" class="nav-button" data-align="left" data-role="backbutton">Voltar</a>
@@ -856,7 +856,7 @@
 		</div>
 
 		<!--Detalhes Colaboradores view-->
-		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel" data-title="TOP LINE PRO" data-layout="tools-layout">
+		<div id="detalhesColaborador-view" data-role="view" data-model="viewModel" data-title="TOP LINE PRO" data-layout="update-layout">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a id="btnCancel" class="nav-button" data-align="left" data-role="backbutton" href="#colaboradores-view" >Voltar</a>
@@ -1472,7 +1472,7 @@
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showDetalhesColaborador">
 				<img class="fila-art" src="" data-bind="attr: { src: ColFoto}"/>
 				<div class="fila-div">
-					<h1 class="col-nome"> ${ColNome} # # ${ColSobrenome} </h1>
+					<h1 class="vendedor-nome"> ${ColNome} # # ${ColSobrenome} </h1>
 				</div>
 			</div>
 		</script>

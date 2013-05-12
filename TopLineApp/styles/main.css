@@ -214,44 +214,59 @@ label
 
 #ulMenuConfig li img
 {
-    background:url(seta_off.png) no-repeat;
+	background: url(seta_off.png) no-repeat;
 	width: 11px; 
 	height: 24px; 
-    float:right;
-    padding-right: 5px;
+	float: right;
+	padding-right: 5px;
+}
+
+
+#ulMenuConfig img
+{
+    vertical-align: center;
 }
 
 #ulMenuConfig li:hover img
 {
-    background:url(seta_on.png) no-repeat;
+	background: url(seta_on.png) no-repeat;
 	width: 11px; 
 	height: 24px; 
-    float:right;
-    padding-right: 5px;
+	float: right;
+	padding-right: 5px;	
 }
 
 #imgMenuConsulta
 {
 	width: 30px; 
 	height: 30px; 
-    float:right;
+	float: right;
 }
 
 #imgMenuDuploConsulta
 {
 	width: 30px; 
 	height: 30px; 
-    float:right;
-    padding-top: 4px;
+	float: right;
+	padding-top: 4px;
 }
 
 #menu
 {
 	text-decoration: none;
 	padding-left: 10px;
-    padding-top:5px;
-    cursor:pointer;
-    padding-right: 5px;
+	padding-top: 5px;
+	cursor: pointer;
+	padding-right: 5px;
+}
+
+#menuPrincipal
+{
+	text-decoration: none;
+	padding-left: 10px;
+	padding-top: 1px;
+	cursor: pointer;
+	padding-right: 5px;
 }
 
 #menuConsulta
@@ -270,7 +285,8 @@ label
 	font-size: 12px;
 }
 
-.vendedor-nome {
+.vendedor-nome
+{
 	padding: 30px 0 0 0;
 	margin: 0;
 	border: 0;

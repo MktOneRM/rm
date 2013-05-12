@@ -995,13 +995,13 @@
 							<label>
 								CPF
 							</label>
-							<input id="cpf" name="Cpf" type="text" placeholder="CPF" maxlength=11 size=11 data-bind="cpf: colaboradorSelecionado.ColCpf, value: colaboradorSelecionado.ColCpf" required validationmessage="Requerido"/>
+							<input id="cpf" name="Cpf" type="text" placeholder="CPF" maxlength=11 size=11 data-bind="cpf: colaboradorSelecionado.ColCpf, value: colaboradorSelecionado.ColCpf" required data-custom-msg="CPF Inválido"/>                            
 						</li>
 						<li>
 							<label>
 								Nome
 							</label>
-							<input id="nome" name="Nome" type="text" placeholder="Nome" data-bind="value: colaboradorSelecionado.ColNome" required validationmessage="Requerido" />
+							<input id="nome" name="Nome" type="text" placeholder="Nome" data-bind="value: colaboradorSelecionado.ColNome" required validationmessage="Requerido"/>
 						</li>
 						<li>
 							<label>
@@ -1013,7 +1013,7 @@
 							<label>
 								Sexo
 							</label>
-							<select id="sexoId" name="Sexo" data-bind="source: sexos, value: colaboradorSelecionado.ColSexo" data-text-field="Desc" data-value-field="Id"></select>
+							<select id="sexoId" name="Sexo" data-bind="source: sexos, value: colaboradorSelecionado.ColSexo" data-text-field="Desc" data-value-field="Id" required validationmessage="Requerido" ></select>
 						</li>
 						<li>
 							<label>
@@ -1025,7 +1025,7 @@
 							<label>
 								Nascimento
 							</label>
-							<input id="dtNascimento" name="DataNascimento" type="date" placeholder="Data de nascimento" data-bind="dateValue: colaboradorSelecionado.ColDtnascimento" required validationmessage="Requerido"/>
+							<input id="dtNascimento" name="DataNascimento" type="date" placeholder="Data de nascimento" min="1930-01-01" max="2013-12-31" data-bind="dateValue: colaboradorSelecionado.ColDtnascimento" required validationmessage="Requerido"/>
 						</li>
 
 						<li>
@@ -1043,13 +1043,13 @@
 							<label>
 								Data Entrada
 							</label>
-							<input id="dtEntrada" name="DataEntrada" type="date" placeholder="Data de Entrada" data-bind="dateValue: colaboradorSelecionado.ColDtentrada" required validationmessage="Requerido"/>
+							<input id="dtEntrada" name="DataEntrada" type="date" placeholder="Data de Entrada" min="2000-01-01" max="2020-12-31" data-bind="dateValue: colaboradorSelecionado.ColDtentrada" required validationmessage="Requerido"/>
 						</li>
 						<li>
 							<label>
 								Data Saída
 							</label>
-							<input id="dtSaida" name="DataSaida" type="date"  data-bind="dateValue: colaboradorSelecionado.ColDtsaida"/>
+							<input id="dtSaida" name="DataSaida" type="date" placeholder="Data de Saída" min="2000-01-01" max="2020-12-31" data-bind="dateValue: colaboradorSelecionado.ColDtsaida"/>
 						</li>
 						<li>
 							<label>
@@ -1086,7 +1086,7 @@
 				</div>
 				<div>
 					<ul id="editorTelColaborador" data-bind="source: telefonesColaborador" data-role="listview" data-template="tAtuTelColaborador"></ul>
-				</div>
+				</div>                
 			</ul>
 		</div>
 
@@ -1215,7 +1215,7 @@
 							<label>
 								CNPJ
 							</label>
-							<input id="cnpj" name="Cnpj" type="text" placeholder="Cnpj" align="left" maxlength=14 size=14 data-bind="cnpj: lojaSelecionada.LojCnpj, value: lojaSelecionada.LojCnpj" required validationmessage="Requerido"/>
+							<input id="cnpj" name="Cnpj" type="text" placeholder="Cnpj" align="left" maxlength=14 size=14 data-bind="cnpj: lojaSelecionada.LojCnpj, value: lojaSelecionada.LojCnpj" required data-custom-msg="CNPJ Inválido"/>
 						</li>
 						<li>
 							<label>

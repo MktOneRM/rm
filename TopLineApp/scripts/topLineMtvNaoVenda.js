@@ -123,8 +123,7 @@
 		viewModelNaoVenda.set("motivoNaoVenda", naoVenda); 
 		viewModelNaoVenda.motivoNaoVenda.set("RLojId", RLoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LcoId", LcoId);
-		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);
-        viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
+		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);		
 	}
     
 	viewModelNaoVenda.dsMotivosNaoVenda.read();

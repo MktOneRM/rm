@@ -45,7 +45,7 @@
 		},
 		batch: true,
 		schema: scMotivosNaoVenda,
-		change: function(e) {             
+		change: function(e) {
 			viewModelNaoVenda.set("motivos", this.view());
 		}        
         
@@ -112,6 +112,8 @@
 	}
     
 	function naoVendaViewShow() {
+		viewModelNaoVenda.dsMotivosNaoVenda.read();
+        
 		var RLoId = viewModel.vendedorSelecionado.get("RedeLojId");
 		var LcoId = viewModel.vendedorSelecionado.get("LojaColId");
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
@@ -122,11 +124,10 @@
 		viewModelNaoVenda.motivoNaoVenda.set("RLojId", RLoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LcoId", LcoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);
-		viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
-  
+        viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(viewModelNaoVenda.motivos[0].MnvId));
 	}
     
-    viewModelNaoVenda.dsMotivosNaoVenda.read();
+	viewModelNaoVenda.dsMotivosNaoVenda.read();
     
 	$.extend(window, {
 		viewModelNaoVenda: viewModelNaoVenda,

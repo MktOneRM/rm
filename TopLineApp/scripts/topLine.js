@@ -174,7 +174,7 @@
 		change: function() {
 			var value = this.element.value;
 			if (!isNaN(value)) {
-				this.bindings["valor"].set(value);
+			this.bindings["valor"].set(kendo.toString(value, "c", "pt-BR"));
 			}
 		}
 	});
@@ -447,7 +447,7 @@
 			id: "ColId",
 			fields: {
 				ColId: { type: "int", editable: false, nullable: false, defaultValue:0},
-                LCoId: { type: "int", editable: false, nullable: false, defaultValue:0},
+				LCoId: { type: "int", editable: false, nullable: false, defaultValue:0},
 				CarId: { type: "int", validation: { required: false} },  
 				ColCpf: { type:"string", validation: { required: true}, editable: true, nullable: false},
 				ColSexo: { validation: { required:true}, defaultvalue: "M"},
@@ -1039,7 +1039,7 @@
 		app.navigate("#desempenho-colaboradorView");
 	}
 
-    function showTurnodaLoja(e) {
+	function showTurnodaLoja(e) {
 		var turno = viewModel.dsTurnosLoja.getByUid(e.touch.target.context.id);
 		viewModel.set("turnoSelecionado", turno);
 		app.navigate("#desempenho-turnoView");
@@ -1083,7 +1083,7 @@
 		dsColaborador.read(); 	
 	}
 
-    function showTurnosLoja() {
+	function showTurnosLoja() {
 		dsTurnosLoja.read(); 	
 	}
 
@@ -1543,7 +1543,6 @@
 	//viewModelNaoVenda.dsMotivosNaoVenda.read(); 
 			
 	//viewModelConsultas.dsData.read();
-
     
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,
@@ -1553,8 +1552,8 @@
 		showTurnoFunc: turnoFunc,
 		showCargos: cargos,
 		showColaboradores: colaboradores,
-        showTurnosLoja: showTurnosLoja,
-        showTurnodaLoja: showTurnodaLoja,
+		showTurnosLoja: showTurnosLoja,
+		showTurnodaLoja: showTurnodaLoja,
 		showDetalhesColaborador: detalhesColaborador,
 		showColaboradorLoja: showColaboradorLoja,
 		showAtendimento: adicionarAtendimento,

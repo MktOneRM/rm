@@ -1124,6 +1124,18 @@ label
 	width: 65%;
 }
 
+
+#editorColaborador input[type="email"]
+{ 
+	float: left; 
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+	width: 65%;
+}
+
+
 #editorColaborador select
 {
 	float: left; 

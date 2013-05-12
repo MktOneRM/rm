@@ -135,7 +135,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<input id="RepValor" name="RepValor" type="number" placeholder="Valor" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: atendimento.RepValor" data-bind="text: atendimento.RepValor" required validationmessage="Requerido" />
+								<input id="RepValor" name="RepValor" type="number" placeholder="Valor" maxlength="10" size="10" min="0.01" step="0.01" data-bind="valor: atendimento.RepValor" required validationmessage="Requerido" />
 							</td>
 						</tr>
 						<tr>
@@ -264,7 +264,7 @@
 						</tr>
 						<tr align="center">
 							<td>
-								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+								<select id="Motivo" name="Motivo" data-bind="source: motivos, value: motivo" data-text-field="MnvDescricao" data-value-field="MnvId"  required data-required-msg="Selecione um motivo.." validationmessage="Requerido"></select>
 							</td>
 						</tr>
 						<tr>
@@ -1032,7 +1032,7 @@
 							<label>
 								Email
 							</label>
-							<input id="email" name="Email" type="text" placeholder="e.g. meunome@exemplo.com.br" maxlength=60 size=60 data-bind="value: colaboradorSelecionado.ColEmail" />
+							<input id="email" name="Email" type="email" placeholder="e.g. meunome@exemplo.com.br" maxlength=60 size=60 data-bind="value: colaboradorSelecionado.ColEmail" required validationmessage="Requerido" data-email-msg="Formato de E-mail inválido!"/>
 						</li>
 					</ul>
 				</div>
@@ -1644,8 +1644,6 @@
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 			//var baseUrl = "http://localhost:50000/api";
 			
-			var botaoSelecionado = 0;
-			
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
 				loading: '<h1 class="loading-message">Carregando...</h1>'
@@ -1657,9 +1655,10 @@
 				}    
 			} 
 			
-            
 			$(window).resize(function() {
-				$("#chtGrafDesRealizadoVenda").data("kendoChart").redraw();
+				$("#chtGrafDesRealizadoVendaLoja").data("kendoChart").redraw();
+                $("#chtGrafDesRealizadoVendaCol").data("kendoChart").redraw();
+                $("#chtGrafDesRealizadoVendaTurno").data("kendoChart").redraw();
 			});
             
 		</script>

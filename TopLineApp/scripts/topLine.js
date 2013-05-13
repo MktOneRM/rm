@@ -1002,7 +1002,7 @@
 		sairFilaViewShow: sairFilaViewShow,
 		entrarFilaViewInit: entrarFilaViewInit,
 		entrarFilaViewShow: entrarFilaViewShow
-               
+        
         
 	});
 
@@ -1120,6 +1120,7 @@
 		button = $(e.touch.target).find("[data-role=button]:visible");
 		if (button[0]) {
 			var schemaVendedores = viewModel.dsVendForaFila.getByUid(e.touch.target.context.id);
+            
 			viewModel.set("vendedorSelecionado", schemaVendedores);
 			//Entrar na fila			
 			app.navigate("#entrarNaFila_View");
@@ -1391,6 +1392,9 @@
 		viewModel.vendedorSelecionado.set("SaidaFila", true);
 		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
 		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
+        
+		console.log(viewModel.vendedorSelecionado);
+        
 	}
     
 	function entrarFilaViewInit(e) {
@@ -1429,14 +1433,20 @@
         
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
 		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");
+        var ColNome = viewModel.vendedorSelecionado.get("ColNome");
+        var ColTurno = viewModel.vendedorSelecionado.get("ColTurno");
         
 		var entrada = viewModel.dsVendFila.add(); 		
         
 		viewModel.set("vendedorSelecionado", entrada);        
 		viewModel.vendedorSelecionado.set("LojId", LojId);
-		viewModel.vendedorSelecionado.set("LojaColId", LojaColId);        
-		viewModel.vendedorSelecionado.set("EntradaFila", 1);		
+		viewModel.vendedorSelecionado.set("LojaColId", LojaColId); 
+        viewModel.vendedorSelecionado.set("ColNome", ColNome);
+		viewModel.vendedorSelecionado.set("ColTurno", ColTurno);  
+		viewModel.vendedorSelecionado.set("EntradaFila", true);		
 		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
+        
+		console.log(viewModel.vendedorSelecionado);
 	}
     
 	function initValidacao() {
@@ -1546,59 +1556,58 @@
 		return true;
 	}
     
-    function validarCNPJ(cnpj) {
+	function validarCNPJ(cnpj) {
+		cnpj = cnpj.replace(/[^\d]+/g, '');
 
-	cnpj = cnpj.replace(/[^\d]+/g,'');
-
-	if(cnpj == '') return false;
+		if (cnpj == '')
+			return false;
 	
-	if (cnpj.length != 14)
-		return false;
+		if (cnpj.length != 14)
+			return false;
 
-	// Elimina CNPJs invalidos conhecidos
-	if (cnpj == "00000000000000" || 
-		cnpj == "11111111111111" || 
-		cnpj == "22222222222222" || 
-		cnpj == "33333333333333" || 
-		cnpj == "44444444444444" || 
-		cnpj == "55555555555555" || 
-		cnpj == "66666666666666" || 
-		cnpj == "77777777777777" || 
-		cnpj == "88888888888888" || 
-		cnpj == "99999999999999")
-		return false;
+		// Elimina CNPJs invalidos conhecidos
+		if (cnpj == "00000000000000" || 
+			cnpj == "11111111111111" || 
+			cnpj == "22222222222222" || 
+			cnpj == "33333333333333" || 
+			cnpj == "44444444444444" || 
+			cnpj == "55555555555555" || 
+			cnpj == "66666666666666" || 
+			cnpj == "77777777777777" || 
+			cnpj == "88888888888888" || 
+			cnpj == "99999999999999")
+			return false;
 		
-	// Valida DVs
-	tamanho = cnpj.length - 2
-	numeros = cnpj.substring(0,tamanho);
-	digitos = cnpj.substring(tamanho);
-	soma = 0;
-	pos = tamanho - 7;
-	for (i = tamanho; i >= 1; i--) {
-	  soma += numeros.charAt(tamanho - i) * pos--;
-	  if (pos < 2)
-			pos = 9;
-	}
-	resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-	if (resultado != digitos.charAt(0))
-		return false;
+		// Valida DVs
+		tamanho = cnpj.length - 2
+		numeros = cnpj.substring(0, tamanho);
+		digitos = cnpj.substring(tamanho);
+		soma = 0;
+		pos = tamanho - 7;
+		for (i = tamanho; i >= 1; i--) {
+			soma += numeros.charAt(tamanho - i) * pos--;
+			if (pos < 2)
+				pos = 9;
+		}
+		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+		if (resultado != digitos.charAt(0))
+			return false;
 		
-	tamanho = tamanho + 1;
-	numeros = cnpj.substring(0,tamanho);
-	soma = 0;
-	pos = tamanho - 7;
-	for (i = tamanho; i >= 1; i--) {
-	  soma += numeros.charAt(tamanho - i) * pos--;
-	  if (pos < 2)
-			pos = 9;
-	}
-	resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-	if (resultado != digitos.charAt(1))
-		  return false;
+		tamanho = tamanho + 1;
+		numeros = cnpj.substring(0, tamanho);
+		soma = 0;
+		pos = tamanho - 7;
+		for (i = tamanho; i >= 1; i--) {
+			soma += numeros.charAt(tamanho - i) * pos--;
+			if (pos < 2)
+				pos = 9;
+		}
+		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+		if (resultado != digitos.charAt(1))
+			return false;
 		  
-	return true;
-   
-}
+		return true;
+	}
     
 	//Valor fixo, pois o Código da Loja virá conforme cadastro do dispositivo.
 	viewModel.set("idLoja", 1);
@@ -1656,5 +1665,6 @@
 		sairFilaViewShow: sairFilaViewShow,
 		entrarFilaViewInit: entrarFilaViewInit,
 		entrarFilaViewShow: entrarFilaViewShow
+		
 	});
 })(jQuery);

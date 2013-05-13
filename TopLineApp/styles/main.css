@@ -1308,36 +1308,31 @@ label
 
 /*Clientes Contactados*/
 
-editorClientesContactados
-{
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
 #editorClientesContactados li
 {
-	padding: 0;
+	padding-left: 5px;
+    padding-right: 5px;
 	margin: 0;
+	width: 100%;
 }
 
 #editorClientesContactados ul
 {
 	padding: 0;
 	background-color: #DDDDDD;
-	border: 1px solid #DDDDDD; 
+	border: 1px solid #DDDDDD;	
 }
 
 #editorClientesContactados input[type="number"]
-{     
+{ 
 	float: left; 
 	alignment-adjust: left;
-    padding-left: 5px;
+	padding-left: 5px;
 	font-size: 14px;
 	font-weight: normal;
 	color: #333333; 
 	width: 40%;
-    text-align:left;
-    left: 50%;
+	text-align: left;	
 }
 
 #editorClientesContactados span

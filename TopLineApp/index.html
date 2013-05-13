@@ -209,14 +209,6 @@
 		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="entrarFilaViewShow" data-init="entrarFilaViewInit">
 			<div id="formEntrarFila">
 				<div>
-					<ul>
-
-						<li onclick="show_or_hide('editorClientesContactados')">
-							<h2>CLIQUE - TESTE</h2>
-						</li>
-
-					</ul>
-
 					<div id="atendimento_nome">
 						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
@@ -227,22 +219,28 @@
 								<label>Motivo Entrada</label>
 							</td>
 						</tr>
+						<tr>
+							<div  onclick="show_or_hide('editorClientesContactados')">
+								<h4>CLIQUE - TESTE</h4>
+							</div>
+						</tr>
+
 						<tr align="center">
 							<td>
-								<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+								<select id="MotivosEntrada" name="MotivoEntrada" onchange="onSelect()" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId"></select>
 							</td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
 						</tr>
-						<tr>
+						<tr id="editorClientesContactados" style="display: none">
 							<td>
-								<div class="megamenu" id="editorClientesContactados" style="display: none">
+								<div >
 									<ul data-role="listview">
 										<li>
 											<label>
 												Meta para contatos
-											</label><span>10</span>
+											</label><span>100 (Fixo)</span>
 										</li>
 										<li>
 											<label>
@@ -253,13 +251,11 @@
 										<li>
 											<label>
 												Qtde. apurada
-											</label><span>Tes</span>
+											</label><span>100 (Fixo)</span>
 										</li>
 									</ul>
 								</div>
 							</td>
-						</tr>
-						<tr>
 							<td>&nbsp;</td>
 						</tr>
 						<tr align="center">
@@ -1721,7 +1717,7 @@
 				$("#chtGrafDesRealizadoVendaCol").data("kendoChart").redraw();
 				$("#chtGrafDesRealizadoVendaTurno").data("kendoChart").redraw();
 			});
-			
+            
 		</script>
 
 	</body>

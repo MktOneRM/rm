@@ -209,6 +209,14 @@
 		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="entrarFilaViewShow" data-init="entrarFilaViewInit">
 			<div id="formEntrarFila">
 				<div>
+					<ul>
+
+						<li onclick="show_or_hide('editorClientesContactados')">
+							<h2>CLIQUE - TESTE</h2>
+						</li>
+
+					</ul>
+
 					<div id="atendimento_nome">
 						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
 						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
@@ -222,6 +230,33 @@
 						<tr align="center">
 							<td>
 								<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" placeholder="Selecione o motivo..." required validationmessage="Requerido"></select>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="megamenu" id="editorClientesContactados" style="display: none">
+									<ul data-role="listview">
+										<li>
+											<label>
+												Meta para contatos
+											</label><span>10</span>
+										</li>
+										<li>
+											<label>
+												Contatos efetuados
+											</label>
+											<input id="contatosEfetuados" name="contatosEfetuados" type="number" min="0" max="9999" placeholder="Contatos Efetuados" required validationmessage="Requerido"/>
+										</li>
+										<li>
+											<label>
+												Qtde. apurada
+											</label><span>Tes</span>
+										</li>
+									</ul>
+								</div>
 							</td>
 						</tr>
 						<tr>
@@ -995,7 +1030,7 @@
 							<label>
 								CPF
 							</label>
-							<input id="cpf" name="Cpf" type="text" placeholder="CPF" maxlength=11 size=11 data-bind="cpf: colaboradorSelecionado.ColCpf, value: colaboradorSelecionado.ColCpf" required data-custom-msg="CPF Inválido"/>                            
+							<input id="cpf" name="Cpf" type="text" placeholder="CPF" maxlength=11 size=11 data-bind="cpf: colaboradorSelecionado.ColCpf, value: colaboradorSelecionado.ColCpf" required data-custom-msg="CPF Inválido"/>
 						</li>
 						<li>
 							<label>
@@ -1086,7 +1121,7 @@
 				</div>
 				<div>
 					<ul id="editorTelColaborador" data-bind="source: telefonesColaborador" data-role="listview" data-template="tAtuTelColaborador"></ul>
-				</div>                
+				</div>
 			</ul>
 		</div>
 
@@ -1640,6 +1675,32 @@
 			}
 		</script>
 
+		<!--Mostrar ou Ocultar Div-->
+		<script>
+            
+			current = "editorClientesContactados"; // div with id="m0" is currently diplayed
+			function show_or_hide (id) {
+				if (current) //if something is displayed
+				{   
+					document.getElementById(current).style.display = "none";
+					if (current == id) //if <div> is already diplayed
+					{                           
+						current = 0;
+					}
+					else {
+						document.getElementById(id).style.display = "block";
+						current = id;
+					}
+				}
+				else //if nothing is displayed
+				{
+					document.getElementById(id).style.display = "block";
+					current = id;
+				}
+			}
+			
+		</script>
+
 		<script type="text/javascript">
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 			//var baseUrl = "http://localhost:50000/api";
@@ -1657,11 +1718,12 @@
 			
 			$(window).resize(function() {
 				$("#chtGrafDesRealizadoVendaLoja").data("kendoChart").redraw();
-                $("#chtGrafDesRealizadoVendaCol").data("kendoChart").redraw();
-                $("#chtGrafDesRealizadoVendaTurno").data("kendoChart").redraw();
+				$("#chtGrafDesRealizadoVendaCol").data("kendoChart").redraw();
+				$("#chtGrafDesRealizadoVendaTurno").data("kendoChart").redraw();
 			});
-            
+			
 		</script>
 
 	</body>
 </html>
+	

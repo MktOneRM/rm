@@ -221,10 +221,9 @@ label
 	padding-right: 5px;
 }
 
-
 #ulMenuConfig img
 {
-    vertical-align: center;
+	vertical-align: center;
 }
 
 #ulMenuConfig li:hover img
@@ -233,7 +232,7 @@ label
 	width: 11px; 
 	height: 24px; 
 	float: right;
-	padding-right: 5px;	
+	padding-right: 5px; 
 }
 
 #imgMenuConsulta
@@ -1124,7 +1123,6 @@ label
 	width: 65%;
 }
 
-
 #editorColaborador input[type="email"]
 { 
 	float: left; 
@@ -1134,7 +1132,6 @@ label
 	color: #333333; 
 	width: 65%;
 }
-
 
 #editorColaborador select
 {
@@ -1307,4 +1304,66 @@ label
 #chtGrafDesRealizadoCol
 {
 	width: 100%;
+}
+
+/*Clientes Contactados*/
+
+editorClientesContactados
+{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#editorClientesContactados li
+{
+	padding: 0;
+	margin: 0;
+}
+
+#editorClientesContactados ul
+{
+	padding: 0;
+	background-color: #DDDDDD;
+	border: 1px solid #DDDDDD; 
+}
+
+#editorClientesContactados input[type="number"]
+{     
+	float: left; 
+	alignment-adjust: left;
+    padding-left: 5px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+	width: 40%;
+    text-align:left;
+    left: 50%;
+}
+
+#editorClientesContactados span
+{
+	text-decoration: none;
+	float: left;
+	padding-top: 10px;
+	width: 40%;
+	padding-left: 5px;
+	font-size: 14px;
+	font-weight: normal;
+	text-align: left;
+	color: #333333; 
+}
+
+#editorClientesContactados label
+{
+	float: left;
+	width: 40%;
+	padding: 10px 5px 10px 10px;
+	border-right-style: solid;
+	border-right-color: #DDDDDD;
+	border-right-width: 1px;
+	text-align: left;
+	background-color: #f2f2f2;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
 }

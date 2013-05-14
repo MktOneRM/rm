@@ -1,7 +1,7 @@
 (function($, undefined) {
 	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 	//var baseUrl = "http://localhost:50000/api";
-    
+
 	kendo.data.binders.cep = kendo.data.Binder.extend({
 		refresh: function() {
 			var value = this.bindings["cep"].get();
@@ -343,7 +343,8 @@
 			fields: {
 				TmoId: { editable: false, nullable: false },
 				TmoDescricao: { editable: false, nullable: false },
-				TmoEntradaSaida: { editable: false, nullable: false }
+				TmoEntradaSaida: { editable: false, nullable: false },
+				TmoContatoCliente: { editable: false, nullable: false }
 			} 
 		} 
 	};
@@ -996,13 +997,12 @@
         
 		idLoja: null,        
 		motivos: [],
-		motivo: [],
+		motivo: null,
         
 		sairFilaViewInit: sairFilaViewInit,
 		sairFilaViewShow: sairFilaViewShow,
 		entrarFilaViewInit: entrarFilaViewInit,
 		entrarFilaViewShow: entrarFilaViewShow
-        
         
 	});
 
@@ -1378,6 +1378,12 @@
 			view.loader.show();
 			viewModel.dsVendFila.cancelChanges();			
 		});
+        
+		view.element.find("#MotivosSaida").change(
+			function (e) {
+				var dataItem = $("#MotivosSaida").val(); 				                
+				viewModel.vendedorSelecionado.set("TmoId", parseInt(dataItem));			
+			});
 	}
     
 	function sairFilaViewShow() {
@@ -1387,14 +1393,10 @@
 			value: false
 		};
         
-		viewModel.dsTiposMovto.filter(filter);
-        
+		viewModel.dsTiposMovto.filter(filter);        
 		viewModel.vendedorSelecionado.set("SaidaFila", true);
 		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
 		viewModel.dsVendFila.remove(viewModel.vendedorSelecionado); 
-        
-		console.log(viewModel.vendedorSelecionado);
-        
 	}
     
 	function entrarFilaViewInit(e) {
@@ -1404,8 +1406,7 @@
 			viewModel.dsVendFila.one("change", function() {				
 				view.loader.hide();
 				app.navigate("#dentroFila-view"); 
-			});
-            
+			});            
 			view.loader.show();
 			viewModel.dsVendFila.sync();
 		});
@@ -1420,6 +1421,22 @@
 			view.loader.show();
 			viewModel.dsVendFila.cancelChanges();			
 		});
+        
+		view.element.find("#MotivosEntrada").change(
+			function (e) {
+				var dataItem = $("#MotivosEntrada").val(); 
+				                
+				viewModel.vendedorSelecionado.set("TmoId", parseInt(dataItem));
+			
+				var isContatoCliente = viewModel.motivo.get("TmoContatoCliente");			
+                
+				if (!isContatoCliente) {
+					document.getElementById('editorClientesContactados').style.display = "none";
+				}
+				else {
+					document.getElementById('editorClientesContactados').style.display = "block";
+				}	
+			});
 	}
     
 	function entrarFilaViewShow() {
@@ -1433,20 +1450,20 @@
         
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
 		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");
-        var ColNome = viewModel.vendedorSelecionado.get("ColNome");
-        var ColTurno = viewModel.vendedorSelecionado.get("ColTurno");
+		var ColNome = viewModel.vendedorSelecionado.get("ColNome");
+		var ColTurno = viewModel.vendedorSelecionado.get("ColTurno");
         
 		var entrada = viewModel.dsVendFila.add(); 		
+  
+		viewModel.motivo = viewModel.motivos[0];
         
 		viewModel.set("vendedorSelecionado", entrada);        
 		viewModel.vendedorSelecionado.set("LojId", LojId);
 		viewModel.vendedorSelecionado.set("LojaColId", LojaColId); 
-        viewModel.vendedorSelecionado.set("ColNome", ColNome);
+		viewModel.vendedorSelecionado.set("ColNome", ColNome);
 		viewModel.vendedorSelecionado.set("ColTurno", ColTurno);  
 		viewModel.vendedorSelecionado.set("EntradaFila", true);		
-		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));
-        
-		console.log(viewModel.vendedorSelecionado);
+		viewModel.vendedorSelecionado.set("TmoId", parseInt(viewModel.motivos[0].TmoId));        
 	}
     
 	function initValidacao() {
@@ -1513,7 +1530,6 @@
 	}
     
 	function validarCPF(cpf) {
-		console.log(cpf, "to aqui");
         
 		cpf = cpf.replace(/[^\d]+/g, '');
      

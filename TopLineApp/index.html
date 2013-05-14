@@ -219,15 +219,9 @@
 								<label>Motivo Entrada</label>
 							</td>
 						</tr>
-						<tr>
-							<div  onclick="show_or_hide('editorClientesContactados')">
-								<h4>CLIQUE - TESTE</h4>
-							</div>
-						</tr>
-
 						<tr align="center">
 							<td>
-								<select id="MotivosEntrada" name="MotivoEntrada" onchange="onSelect()" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId"></select>
+								<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId"></select>
 							</td>
 						</tr>
 						<tr>
@@ -1671,32 +1665,6 @@
 			}
 		</script>
 
-		<!--Mostrar ou Ocultar Div-->
-		<script>
-            
-			current = "editorClientesContactados"; // div with id="m0" is currently diplayed
-			function show_or_hide (id) {
-				if (current) //if something is displayed
-				{   
-					document.getElementById(current).style.display = "none";
-					if (current == id) //if <div> is already diplayed
-					{                           
-						current = 0;
-					}
-					else {
-						document.getElementById(id).style.display = "block";
-						current = id;
-					}
-				}
-				else //if nothing is displayed
-				{
-					document.getElementById(id).style.display = "block";
-					current = id;
-				}
-			}
-			
-		</script>
-
 		<script type="text/javascript">
 			var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
 			//var baseUrl = "http://localhost:50000/api";
@@ -1711,15 +1679,14 @@
 					app.navigate("#MotNaoVenda-view");
 				}    
 			} 
-			
+            
 			$(window).resize(function() {
 				$("#chtGrafDesRealizadoVendaLoja").data("kendoChart").redraw();
 				$("#chtGrafDesRealizadoVendaCol").data("kendoChart").redraw();
 				$("#chtGrafDesRealizadoVendaTurno").data("kendoChart").redraw();
 			});
-            
+			
 		</script>
-
 	</body>
 </html>
 	

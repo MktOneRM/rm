@@ -109,6 +109,12 @@
 			view.loader.show();
 			viewModelNaoVenda.dsNaoVenda.cancelChanges();			
 		});
+        
+		view.element.find("#Motivo").change(
+			function (e) {
+				var dataItem = $("#Motivo").val();                
+				viewModelNaoVenda.motivoNaoVenda.set("MnvId", parseInt(dataItem));			
+			});
 	}
     
 	function naoVendaViewShow() {
@@ -123,7 +129,8 @@
 		viewModelNaoVenda.set("motivoNaoVenda", naoVenda); 
 		viewModelNaoVenda.motivoNaoVenda.set("RLojId", RLoId);
 		viewModelNaoVenda.motivoNaoVenda.set("LcoId", LcoId);
-		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);		
+		viewModelNaoVenda.motivoNaoVenda.set("LojId", LojId);
+		viewModelNaoVenda.motivoNaoVenda.set("MnvId", viewModelNaoVenda.motivos[0].MnvId);			
 	}
     
 	viewModelNaoVenda.dsMotivosNaoVenda.read();

@@ -229,25 +229,16 @@
 						</tr>
 						<tr id="editorClientesContactados" style="display: none">
 							<td>
-								<div >
-									<ul data-role="listview">
-										<li>
-											<label>
-												Meta para contatos
-											</label><span>100 (Fixo)</span>
-										</li>
-										<li>
-											<label>
-												Contatos efetuados
-											</label>
-											<input id="contatosEfetuados" name="contatosEfetuados" type="number" min="0" max="9999" placeholder="Contatos Efetuados" required validationmessage="Requerido"/>
-										</li>
-										<li>
-											<label>
-												Qtde. apurada
-											</label><span>100 (Fixo)</span>
+								<div>
+									<ul>
+										<li class="subTitulo" style="padding:5px;margin:0;">
+											<a id="novoContato" class="subTitulo">Novo Contato</a>
+											<a id="novoContato" data-role="detailbutton" class="subTitulo" data-style="rowinsert">&nbsp;</a>
 										</li>
 									</ul>
+								</div>
+								<div>
+									<ul id="editorContatoCliente" data-role="listview" data-template="tAtuTiposContato"></ul>
 								</div>
 							</td>
 							<td>&nbsp;</td>
@@ -1646,6 +1637,23 @@
 				<button id="btnEntrada" data-role="button" class="excluir" data-icon="delete"></button>
 				<div id="divSubTitulo"></div>
 			</div>
+		</script>
+
+		<script type="text/x-kendo-template" id="tAtuTiposContato">            			
+			<ul id="editorContatoCliente" data-role="listview">
+				<li>
+					<label>
+						Tipo Contato
+					</label>
+					<select id="TcoId" name="TcoId" data-bind="source: tiposContato, value: TcoId" data-text-field="TcoDescricao" data-value-field="TcoId" required validationmessage="Requerido"></select>
+				</li>
+				<li>
+					<label>
+						Qtde. Contatos
+					</label>
+					<input id="#= uid #" name="Telefone" type="text" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
+				</li>
+			</ul>			
 		</script>
 
 		<script type="text/x-kendo-template" id="tDesRealizadoCol">

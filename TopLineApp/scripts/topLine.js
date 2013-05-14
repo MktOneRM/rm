@@ -348,6 +348,17 @@
 			} 
 		} 
 	};
+    
+	//Schema de tipos de Contato
+	var scTiposContato = { 
+		model: {
+			id: "TmoId",
+			fields: {
+				TcoId: { editable: false, nullable: false },
+				TcoDescricao: { editable: false, nullable: false }
+			} 
+		} 
+	};
 	   
 	//Schema Turnos de funcionamento
 	var scTurnosFunc = { 
@@ -604,6 +615,28 @@
 		}       
 	});
 
+	//dataSource tipos de Contato
+	var dsTiposContato = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmTipoContato",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}
+		},
+		batch: true,
+		schema: scTiposContato,        
+		change: function(e) {
+			viewModel.set("tiposContato", this.view());   
+		}       
+	});
+    
 	//Dados para Turnos de Funcionamento.
 	var dataTurnosFunc = [
 		{ TufId:1, TufDescricao:"1º Turno"},
@@ -942,6 +975,9 @@
         
 		dsTelColaborador:dsTelColaborador,                
 		dsTelCompl: dsTelCompl,
+        
+		dsTiposContato:dsTiposContato,
+		tiposContato: [],
         
 		diasFunc: [],
 		dsDiasFunc: dsDiasFunc,
@@ -1437,6 +1473,15 @@
 					document.getElementById('editorClientesContactados').style.display = "block";
 				}	
 			});
+        
+		view.element.find('#novoContato').click(function() {
+			viewModel.dsTiposContato.add(
+				{
+				TcoId: 0, 
+				TcoDescricao: null, 				 
+			});  
+			return false;
+		});
 	}
     
 	function entrarFilaViewShow() {
@@ -1530,7 +1575,6 @@
 	}
     
 	function validarCPF(cpf) {
-        
 		cpf = cpf.replace(/[^\d]+/g, '');
      
 		if (cpf == '')
@@ -1640,14 +1684,8 @@
 			
 	viewModel.set("tipoCompl", 1);
 	viewModel.dsTelCompl.read();
-                    
-	//Carrega os motivos de Entrada e Saida da Fila
 	viewModel.dsTiposMovto.read(); 
-			
-	//Carrega os motivos de nao venda
-	//viewModelNaoVenda.dsMotivosNaoVenda.read(); 
-			
-	//viewModelConsultas.dsData.read();
+	viewModel.dsTiposContato.read();
     
 	$.extend(window, {
 		showVendedoresFila: vendedoresFila,

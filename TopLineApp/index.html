@@ -208,60 +208,39 @@
 		<!--Entrada na Fila da Vez-->
 		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="entrarFilaViewShow" data-init="entrarFilaViewInit">
 			<div id="formEntrarFila">
-				<div>
-					<div id="atendimento_nome">
-						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
-					</div>
-					<table id="atendimento_tb">
-						<tr align="center">
-							<td>
-								<label>Motivo Entrada</label>
-							</td>
-						</tr>
-						<tr align="center">
-							<td>
-								<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId"></select>
-							</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-						</tr>
-						<tr id="editorClientesContactados" style="display: none">
-							<td>
-								<ul id="editorContatoCliente" data-role="listview" data-type="group">
-									<div>
-										<ul>
-											<li class="subTitulo" style="padding:5px;margin:0;">
-												<a id="novoContato" class="subTitulo">Novo Contato</a>
-												<a id="novoContato" data-role="detailbutton" class="subTitulo" data-style="rowinsert">&nbsp;</a>
-											</li>
-										</ul>
-									</div>
-									<div>
-										<ul id="editorContatoCliente" data-bind="source: frequenciaContato" data-role="listview" data-template="tAtuTiposContato"></ul>                                              
-									</div>
-								</ul>
-							</td>
-						</tr>
-						<tr align="center">
-							<td>
-								<a id="salvarMaior" data-role="button">Salvar</a>
-							</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-						</tr>
-						<tr align="center">
-							<td>
-								<a id="cancelarMaior" data-role="button">Cancelar</a>
-							</td>
-						</tr>
-						<tr style="height:100%">
-							<td>&nbsp;</td>
-						</tr>
-					</table>
+				<div id="atendimento_nome">
+					<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+					<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
 				</div>
+				<ul>
+					<li>
+						<label>Motivo Entrada</label>
+					</li>
+					<li>
+						<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId"></select>
+					</li>
+				</ul>
+				<ul id="editorClientesContactados" data-role="listview" data-type="group" style="display: none;">
+					<div>
+						<ul style="width:100%">
+							<li class="subTitulo" style="padding:5px;margin:0;">
+								<a id="novoContato" class="subTitulo">Novo Contato</a>
+								<a id="novoContato" data-role="detailbutton" class="subTitulo" data-style="rowinsert">&nbsp;</a>
+							</li>
+						</ul>
+					</div>
+					<ul data-bind="source: frequenciaContato" data-role="listview" data-template="tAtuTiposContato"></ul>
+				</ul>
+				<div>&nbsp;</div>
+				<ul>
+					<li>
+						<a id="salvarMaior" data-role="button">Salvar</a>
+					</li>
+					<div>&nbsp;</div>
+					<li>
+						<a id="cancelarMaior" data-role="button">Cancelar</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 
@@ -1612,7 +1591,7 @@
 				<ul id="editorTelColaborador" data-role="listview">
 					<li>
 						<label>
-							Tipo Telefone:
+							Tipo Telefone
 						</label>
 						<select id="TteId" class="TteId" name="TteId" data-bind="source: tiposTels, value: TteId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Tipo de Telefone" required validationmessage="Requerido"></select>
 					</li>
@@ -1624,13 +1603,13 @@
 					</li>
 					<li>
 						<label>
-							Operadora:
+							Operadora
 						</label>
 						<select id="OpeId" name="OpeId" data-bind="source: tiposOper, value: OpeId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Operadora" required validationmessage="Requerido"></select>
 					</li>
 					<li>
 						<label>
-							Tipo Celular:
+							Tipo Celular
 						</label>
 						<select id="TceId" name="TceId" data-bind="source: tiposCel, value: TceId" data-text-field="DescricaoTipo" data-value-field="IdTipo" placeholder="Tipo Celular"></select>
 					</li>
@@ -1640,23 +1619,22 @@
 			</div>
 		</script>
 
-		<script type="text/x-kendo-template" id="tAtuTiposContato">            			
+		<script type="text/x-kendo-template" id="tAtuTiposContato"> 
 			<ul id="editorContatoCliente" data-role="listview">
 				<li>
 					<label>
-						Tipo Contato
+						Qtde.
 					</label>
-					<select id="TcoId" name="TcoId" data-bind="source: tiposContato, value: TcoId" data-text-field="TcoDescricao" data-value-field="TcoId" required validationmessage="Requerido"></select>
+					<input id="#= uid #" name="Quantidade" type="number" placeholder="Qtd." data-bind="value: FcoQtdCliente" required validationmessage="Requerido"/>
 				</li>
-				<!--
 				<li>
-				<label>
-				Qtde. Contatos
-				</label>
-				<input id="#= uid #" name="Telefone" type="text" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
-				</li>-->
-			</ul>			
-		</script>
+					<label>
+						Tipo
+					</label>
+					<select id="TcoId" name="TcoId" data-bind="source: tiposContato, value: TcoId" data-text-field="TcoDescricao" data-value-field="TcoId"></select>
+				</li>
+			</ul>
+ 		</script>
 
 		<script type="text/x-kendo-template" id="tDesRealizadoCol">
 			<table id="tabelaTemplate" cellpadding="0" cellspacing="0">

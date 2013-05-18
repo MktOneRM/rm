@@ -359,7 +359,20 @@
 			} 
 		} 
 	};
-	   
+	  
+	//Schema Frequencia de contatos com Cliente
+	var scFrequenciaContato = { 
+		model: {
+			id: "FcoId",
+			fields: {
+				FcoId: { type: "int", defaultValue:0, validation: { required: true}  },
+				FveId: { type: "int", defaultValue:0, validation: { required: true}  },
+				TcoId: { type: "int", defaultValue:0, validation: { required: true}  },
+				FcoQtdCliente: { type: "int", defaultValue:0, validation: { required: true}  }
+			} 
+		} 
+	};
+    
 	//Schema Turnos de funcionamento
 	var scTurnosFunc = { 
 		model: {
@@ -635,6 +648,28 @@
 		change: function(e) {
 			viewModel.set("tiposContato", this.view());   
 		}       
+	});
+    
+	//dataSource tipos de Contato
+	var dsFrequenciaContato = new kendo.data.DataSource({                    
+		transport: {						
+			read:  {
+				url: baseUrl + "/RmTipoContato",							
+				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+			parameterMap: function(data, operation) {
+				if (operation !== "read" && data.models) {
+					return kendo.stringify([data.models[0]]);
+				}
+			}
+		},
+		batch: true,
+		schema: scFrequenciaContato,
+        change: function(e){
+            viewModel.set("frequenciaContato", this.view());
+        }
 	});
     
 	//Dados para Turnos de Funcionamento.
@@ -964,7 +999,7 @@
     
 	var viewModel = kendo.observable({		
 		dsVendFila: dsVendFila,		
-		dsVendForaFila: dsVendForaFila,		
+		dsVendForaFila: dsVendForaFila,			
 		dsTiposMovto: dsTiposMovto,        		
 		dsAtendimento: dsAtendimento,  
 		dsLoja: dsLoja,
@@ -981,6 +1016,9 @@
         
 		diasFunc: [],
 		dsDiasFunc: dsDiasFunc,
+        
+        frequenciaContato: [],
+        dsFrequenciaContato: dsFrequenciaContato,
         
 		tiposTels: [],
 		tiposOper: [],
@@ -1475,10 +1513,12 @@
 			});
         
 		view.element.find('#novoContato').click(function() {
-			viewModel.dsTiposContato.add(
+			viewModel.dsFrequenciaContato.add(
 				{
-				TcoId: 0, 
-				TcoDescricao: null, 				 
+				FcoId: 0, 
+				FveId: 0,
+				TcoId: viewModel.vendedorSelecionado.TmoId,
+				FcoQtdCliente: 0
 			});  
 			return false;
 		});

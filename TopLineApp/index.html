@@ -229,19 +229,20 @@
 						</tr>
 						<tr id="editorClientesContactados" style="display: none">
 							<td>
-								<div>
-									<ul>
-										<li class="subTitulo" style="padding:5px;margin:0;">
-											<a id="novoContato" class="subTitulo">Novo Contato</a>
-											<a id="novoContato" data-role="detailbutton" class="subTitulo" data-style="rowinsert">&nbsp;</a>
-										</li>
-									</ul>
-								</div>
-								<div>
-									<ul id="editorContatoCliente" data-role="listview" data-template="tAtuTiposContato"></ul>
-								</div>
+								<ul id="editorContatoCliente" data-role="listview" data-type="group">
+									<div>
+										<ul>
+											<li class="subTitulo" style="padding:5px;margin:0;">
+												<a id="novoContato" class="subTitulo">Novo Contato</a>
+												<a id="novoContato" data-role="detailbutton" class="subTitulo" data-style="rowinsert">&nbsp;</a>
+											</li>
+										</ul>
+									</div>
+									<div>
+										<ul id="editorContatoCliente" data-bind="source: frequenciaContato" data-role="listview" data-template="tAtuTiposContato"></ul>                                              
+									</div>
+								</ul>
 							</td>
-							<td>&nbsp;</td>
 						</tr>
 						<tr align="center">
 							<td>
@@ -855,7 +856,7 @@
 				</div>
 			</header>
 			<div>
-				<h1>Em desenvolvimento!</h1>
+				<h1>Em breve teremos novidades! Aguarde...</h1>
 			</div>
 		</div>
 
@@ -1647,12 +1648,13 @@
 					</label>
 					<select id="TcoId" name="TcoId" data-bind="source: tiposContato, value: TcoId" data-text-field="TcoDescricao" data-value-field="TcoId" required validationmessage="Requerido"></select>
 				</li>
+				<!--
 				<li>
-					<label>
-						Qtde. Contatos
-					</label>
-					<input id="#= uid #" name="Telefone" type="text" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
-				</li>
+				<label>
+				Qtde. Contatos
+				</label>
+				<input id="#= uid #" name="Telefone" type="text" placeholder="Telefone" data-bind="value: TelNumero" required validationmessage="Requerido"/>
+				</li>-->
 			</ul>			
 		</script>
 

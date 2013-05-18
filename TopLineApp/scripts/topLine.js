@@ -1530,13 +1530,15 @@
                 
 				if (!isContatoCliente) {
 					document.getElementById('editorClientesContactados').style.display = "none";
+					document.getElementById('editorClientesContactadosLista').style.display = "none";
 				}
 				else {
 					document.getElementById('editorClientesContactados').style.display = "block";
+                    document.getElementById('editorClientesContactadosLista').style.display = "block";
 				}	
 			});
         
-		view.element.find('#novoContato').click(function() {
+		  $('#novoContato').click(function() {
 			viewModel.dsFrequenciaContato.add(
 				{
 				FcoId: 0, 

@@ -207,43 +207,47 @@
 
 		<!--Entrada na Fila da Vez-->
 		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="entrarFilaViewShow" data-init="entrarFilaViewInit">
-			<div id="formEntrarFila">
-				<div id="atendimento_nome">
-					<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-					<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+			<ul id="formEntrarFila">
+				<div>
+					<ul align="center">
+						<li id="atendimento_nome">
+							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+							<div>&nbsp;</div>
+						</li>
+						<li>&nbsp;</li>
+						<li>
+							<label style="font-size: 16px;font-weight: bold;">Motivo Entrada</label>
+						</li>
+						<li>
+							<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" style="width: 97%;"></select>
+						</li>
+					</ul>
+				</div>
+				<div style="padding-top: 5px;"></div>
+				<div id="editorClientesContactados" style="display: none;">
+					<ul data-role="listview">
+						<li class="subTitulo" style="padding:5px;margin:0;">
+							<a id="novoContato" class="subTitulo">Novo Contato</a>
+							<a id="novoContato" data-role="detailbutton" data-style="rowinsert">&nbsp;</a>
+						</li>
+					</ul>
+				</div>
+				<div id="editorClientesContactadosLista" style="display: none;">
+					<ul id="editorContatoCliente" data-bind="source: frequenciaContato" data-role="listview" data-template="tAtuTiposContato"></ul>
 				</div>
 				<div align="center">
-					<div>
-						<label style="font-size: 16px;font-weight: bold;">Motivo Entrada</label>
-					</div>
-					<div>
-						<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" style="width: 95%;"></select>
-					</div>
+					<ul>
+						<li>
+							<a id="salvarMaior" data-role="button">Salvar</a>
+						</li>
+						<li>&nbsp;</li>
+						<li>
+							<a id="cancelarMaior" data-role="button">Cancelar</a>
+						</li>
+					</ul>
 				</div>
-				<div>&nbsp;</div>
-				<div id="editorClientesContactados" style="display: none;">
-						<div>
-							<ul>
-								<li class="subTitulo" style="padding:5px;margin:0;">
-									<a id="novoContato" class="subTitulo">Novo Contato</a>
-									<a id="novoContato" data-role="detailbutton" class="subTitulo" data-style="rowinsert">&nbsp;</a>
-								</li>
-							</ul>
-						</div>
-						<div>
-							<ul data-bind="source: frequenciaContato" data-role="listview" data-template="tAtuTiposContato"></ul>
-						</div>
-				</div>
-					<div align="center">
-						<a id="salvarMaior" data-role="button">Salvar</a>
-					</div>
-					<div>&nbsp;</div>
-					<div align="center">
-						<a id="cancelarMaior" data-role="button">Cancelar</a>
-					</div>
-
-
-			</div>
+			</ul>
 		</div>
 
 		<!--Motivos não venda View-->

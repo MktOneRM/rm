@@ -662,6 +662,16 @@ label
 	margin-bottom: 20px;
 }
 
+#atendimento_nome li
+{
+	color: #f2f2f2;
+	background-color: #2d8402;
+	text-align: center;
+	vertical-align: center;
+	height: 20%;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
 #atendimento_tb
 {
 	width: 100%;
@@ -1333,7 +1343,7 @@ label
 	text-shadow: none;
 }
 
-#entrarNaFila_View li
+#entrarNaFila_View ul
 {
 	padding: 0;
 	margin: 0;
@@ -1343,7 +1353,14 @@ label
 {
 	padding: 0;
 	margin: 0;
-    width: 100%;
+	width: 100%;
+}
+
+#formEntrarFila li
+{
+	padding: 0;
+	margin: 0;
+	width: 100%;
 }
 
 #entrarNaFila_View select
@@ -1352,4 +1369,65 @@ label
 	font-size: 14px;
 	font-weight: normal;
 	color: #333333; 
+}
+
+#editorClientesContactadosLista ul
+{
+	padding: 0;
+	background-color: #DDDDDD;
+}
+
+#editorClientesContactadosLista li
+{
+	padding: 0;
+	margin-right: 10px;
+	text-align: left;
+	background-color: #FFF;
+	width: 100%;
+}
+
+#editorClientesContactadosLista label
+{
+	float: left;
+	width: 30%;
+	padding: 10px 5px 10px 10px;
+	margin-left: 0;
+	border-right-style: solid;
+	border-right-color: #DDDDDD;
+	border-right-width: 1px;
+	text-align: right;
+	background-color: #f2f2f2;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
+}
+
+#editorClientesContactadosLista input[type="number"]
+{ 
+	float: left; 
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+	width: 65%;
+}
+
+#editorClientesContactadosLista input[type="text"]
+{ 
+	float: left; 
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+	width: 65%;
+}
+
+#editorClientesContactadosLista select
+{
+	float: left; 
+	alignment-adjust: left;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333; 
+	width: 65%;
 }

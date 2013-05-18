@@ -650,12 +650,18 @@
 		}       
 	});
     
-	//dataSource tipos de Contato
+	//DataSource para registro da Frequencia de Contatos.
 	var dsFrequenciaContato = new kendo.data.DataSource({                    
 		transport: {						
 			read:  {
-				url: baseUrl + "/RmTipoContato",							
+				url: baseUrl + "/RmFrequenciaContato",							
 				type:"GET"      
+				,contentType: "application/json"
+				,dataType: "json"
+			},
+            update:  {
+				url: baseUrl + "/RmFrequenciaContato",							
+				type:"POST"      
 				,contentType: "application/json"
 				,dataType: "json"
 			},
@@ -667,11 +673,11 @@
 		},
 		batch: true,
 		schema: scFrequenciaContato,
-        change: function(e){
-            viewModel.set("frequenciaContato", this.view());
-        }
+		change: function(e) {
+			viewModel.set("frequenciaContato", this.view());
+		}
 	});
-    
+  
 	//Dados para Turnos de Funcionamento.
 	var dataTurnosFunc = [
 		{ TufId:1, TufDescricao:"1º Turno"},
@@ -1017,8 +1023,8 @@
 		diasFunc: [],
 		dsDiasFunc: dsDiasFunc,
         
-        frequenciaContato: [],
-        dsFrequenciaContato: dsFrequenciaContato,
+		frequenciaContato: [],
+		dsFrequenciaContato: dsFrequenciaContato,
         
 		tiposTels: [],
 		tiposOper: [],
@@ -1065,7 +1071,7 @@
 		onTouchstart:onTouchstart,
 		onTouchstartFora:onTouchstartFora,
 		onTouchstarContato:onTouchstarContato,
-        onTouchstartTelefone:onTouchstartTelefone,
+		onTouchstartTelefone:onTouchstartTelefone,
 		editorLojaViewInit: editorLojaViewInit,
 		editorLojaViewShow: editorLojaViewShow,		
 		validarCPF:validarCPF,	
@@ -1295,7 +1301,7 @@
 		button = $(e.touch.target).find("[data-role=button]:visible");        
         
 		if (button[0]) {
-			var contato =viewModel.dsFrequenciaContato.getByUid(e.touch.target.context.id);			    
+			var contato = viewModel.dsFrequenciaContato.getByUid(e.touch.target.context.id);			    
 			dsFrequenciaContato.remove(contato);
 			
 			//prevent `swipe`
@@ -1766,7 +1772,7 @@
 		formatField:formatField,
 		onSwipe:onSwipe,
 		onSwipeFora:onSwipeFora,
-        onTouchstarContato:onTouchstarContato,
+		onTouchstarContato:onTouchstarContato,
 		editorColViewInit:editorColViewInit,
 		editorColViewShow: editorColViewShow,
 		onTouchstart:onTouchstart,

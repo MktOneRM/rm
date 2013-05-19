@@ -1431,3 +1431,60 @@ label
 	color: #333333; 
 	width: 65%;
 }
+
+/*APAGAR*/
+
+#Modalview-login-button,
+#modalview-reg-button,
+#modalview-open-button
+{
+	display: block;
+	text-align: center;
+	margin: .6em .8em 0;
+	font-size: 1.2em;
+}
+
+#modalview-open-button
+{
+	margin: 0 3em;
+	padding: .5em;
+}
+
+#modalview-camera
+{
+	text-align: center;
+}
+
+#modalview-camera img
+{
+	display: block;
+	margin: 30px auto;
+}
+
+.km-ios #modalview-camera .km-button,
+.km-ios #Modalview-login .km-button,
+.km-ios #modalview-camera .km-navbar,
+.km-ios #Modalview-login .km-header
+{
+	background-color: #000;
+}
+
+.km-ios #modalview-camera .km-button:active,
+.km-ios #modalview-camera .km-state-active,
+.km-ios #Modalview-login .km-button:active,
+.km-ios #Modalview-login .km-state-active
+{
+	background-color: #2e2e2e;
+}
+
+.km-ios #Modalview-login #Modalview-login-button
+{
+	background-color: Green;
+}
+
+.km-tablet .km-ios #modalview-camera .km-view-title, .km-tablet .km-ios #Modalview-login .km-view-title
+{
+	color: #fff;
+	text-shadow: 0 -1px rgba(0, 0, 0, .5);
+}
+/*TESTE - APAGAR*/

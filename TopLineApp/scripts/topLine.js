@@ -650,6 +650,7 @@
 		}       
 	});
     
+    
 	//DataSource para registro da Frequencia de Contatos.
 	var dsFrequenciaContato = new kendo.data.DataSource({                    
 		transport: {						
@@ -1528,7 +1529,7 @@
 		view.element.find("#MotivosEntrada").change(
 			function (e) {
 				var dataItem = $("#MotivosEntrada").val(); 
-				            
+				         
 				var isContatoCliente = viewModel.motivo.get("TmoContatoCliente");                
 				viewModel.vendedorSelecionado.set("TmoId", parseInt(dataItem));
                 
@@ -1536,15 +1537,17 @@
 					document.getElementById('editorClientesContactados').style.display = "none";
 				}
 				else {
-					document.getElementById('editorClientesContactados').style.display = "block";
+                    
+                    app.navigate("#modalview-login");
+                    
+					//document.getElementById('editorClientesContactados').style.display = "block";
 				}	  
                 
                 viewModel.dsFrequenciaContato.cancelChanges();
                 
 			});
         
-		$('#novoContato').click(function() {
-            
+		$('#novoContato').click(function() {            
 			viewModel.dsFrequenciaContato.add(
 				{
 				FcoId: 0, 

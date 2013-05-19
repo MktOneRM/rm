@@ -659,7 +659,7 @@
 				,contentType: "application/json"
 				,dataType: "json"
 			},
-            update:  {
+			update:  {
 				url: baseUrl + "/RmFrequenciaContato",							
 				type:"POST"      
 				,contentType: "application/json"
@@ -1502,6 +1502,8 @@
         
 		view.element.find("#salvarMaior").data("kendoMobileButton").bind("click", function() {	
 			viewModel.dsVendFila.one("change", function() {				
+				document.getElementById('editorClientesContactados').style.display = "none";
+				document.getElementById('editorClientesContactadosLista').style.display = "none";
 				view.loader.hide();
 				app.navigate("#dentroFila-view"); 
 			});            
@@ -1512,38 +1514,42 @@
 		view.element.find("#cancelarMaior").data("kendoMobileButton").bind("click", function(e) {
 			e.preventDefault();
 			viewModel.dsVendFila.one("change", function() {
+				document.getElementById('editorClientesContactados').style.display = "none";
+				document.getElementById('editorClientesContactadosLista').style.display = "none";                
 				view.loader.hide();
 				app.navigate("#dentroFila-view");
 			});
 
 			view.loader.show();
-			viewModel.dsVendFila.cancelChanges();			
-		});
+			viewModel.dsVendFila.cancelChanges();	
+			viewModel.dsFrequenciaContato.cancelChanges();
+		});        
         
 		view.element.find("#MotivosEntrada").change(
 			function (e) {
 				var dataItem = $("#MotivosEntrada").val(); 
-				                
+				            
+				var isContatoCliente = viewModel.motivo.get("TmoContatoCliente");                
 				viewModel.vendedorSelecionado.set("TmoId", parseInt(dataItem));
-			
-				var isContatoCliente = viewModel.motivo.get("TmoContatoCliente");			
                 
 				if (!isContatoCliente) {
 					document.getElementById('editorClientesContactados').style.display = "none";
-					document.getElementById('editorClientesContactadosLista').style.display = "none";
 				}
 				else {
 					document.getElementById('editorClientesContactados').style.display = "block";
-                    document.getElementById('editorClientesContactadosLista').style.display = "block";
-				}	
+				}	  
+                
+                viewModel.dsFrequenciaContato.cancelChanges();
+                
 			});
         
-		  $('#novoContato').click(function() {
+		$('#novoContato').click(function() {
+            
 			viewModel.dsFrequenciaContato.add(
 				{
 				FcoId: 0, 
 				FveId: 0,
-				TcoId: viewModel.vendedorSelecionado.TmoId,
+				TcoId: 0, //viewModel.vendedorSelecionado.TmoId,
 				FcoQtdCliente: 0
 			});  
 			return false;
@@ -1558,6 +1564,7 @@
 		};
         
 		viewModel.dsTiposMovto.filter(filter);
+		viewModel.dsTiposContato.read();
         
 		var LojId = viewModel.vendedorSelecionado.get("LojId");
 		var LojaColId = viewModel.vendedorSelecionado.get("LojaColId");

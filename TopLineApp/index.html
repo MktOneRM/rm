@@ -18,7 +18,6 @@
 			kendo.culture("pt-BR");
 		</script>
 	</head>
-
 	<body>
 		<!-- Home-Layout -->
 		<div data-role="layout" data-id="home-layout" data-title="">
@@ -207,47 +206,51 @@
 
 		<!--Entrada na Fila da Vez-->
 		<div id="entrarNaFila_View" data-role="view" data-title="TOP LINE PRO" data-layout="update-layout" data-model="viewModel" data-before-show="entrarFilaViewShow" data-init="entrarFilaViewInit">
-			<ul id="formEntrarFila">
-				<div>
-					<ul align="center">
-						<li id="atendimento_nome">
-							<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
-							<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
-							<div>&nbsp;</div>
-						</li>
-						<li>&nbsp;</li>
-						<li>
-							<label style="font-size: 16px;font-weight: bold;">Motivo Entrada</label>
-						</li>
-						<li>
-							<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" style="width: 97%;"></select>
-						</li>
-					</ul>
-				</div>
-				<div style="padding-top: 5px;"></div>
-				<div id="editorClientesContactados" style="display: none;">
-					<ul data-role="listview">
-						<li class="subTitulo" style="padding:5px;margin:0;">
-							<a id="novoContato" class="subTitulo">Novo Contato</a>
-							<a id="novoContato" data-role="detailbutton" data-style="rowinsert">&nbsp;</a>
-						</li>
-					</ul>
-				</div>
-				<div id="editorClientesContactadosLista" style="display: none;">
-					<ul id="editorContatoCliente" data-bind="source: frequenciaContato" data-role="listview" data-template="tAtuTiposContato"></ul>
-				</div>
-				<div align="center">
-					<ul>
-						<li>
-							<a id="salvarMaior" data-role="button">Salvar</a>
-						</li>
-						<li>&nbsp;</li>
-						<li>
-							<a id="cancelarMaior" data-role="button">Cancelar</a>
-						</li>
-					</ul>
-				</div>
-			</ul>
+			<div>
+				<ul align="center">
+					<li id="atendimento_nome">
+						<h1 class="fila-nome" data-bind="text: vendedorSelecionado.ColNome"></h1>
+						<h2 class="fila-turno"data-bind="text: vendedorSelecionado.ColTurno"></h2>
+						<div>&nbsp;</div>
+					</li>
+					<li>&nbsp;</li>
+					<li>
+						<label style="font-size: 16px;font-weight: bold;">Motivo Entrada</label>
+					</li>
+					<li>
+						<select id="MotivosEntrada" name="MotivoEntrada" data-bind="source: motivos, value: motivo" data-text-field="TmoDescricao" data-value-field="TmoId" style="width: 90%; text-align: center;"></select>
+					</li>
+				</ul>
+			</div>
+			<div style="padding-top: 5px;"></div>
+			<div id="editorClientesContactados" style="display: none;">
+				<ul id="formEntrarFila" data-role="listview" data-type="group">
+					<div >
+						<ul>
+							<li class="subTitulo" style="padding:5px;margin:0;">
+								<a id="novoContato" class="subTitulo">Novo Contato</a>
+								<a id="novoContato" data-role="detailbutton" class="subTitulo" data-style="rowinsert">&nbsp;</a>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<ul id="editorClientesContactadosLista" data-bind="source: frequenciaContato" data-role="listview" data-template="tAtuTiposContato"></ul>
+					</div>
+				</ul>
+			</div>
+			<div style="padding-top: 5px;"></div>
+			<div align="center">
+				<ul>
+					<li>
+						<a id="salvarMaior" data-role="button">Salvar</a>
+					</li>
+					<li>&nbsp;</li>
+					<li>
+						<a id="cancelarMaior" data-role="button">Cancelar</a>
+					</li>
+				</ul>
+			</div>
+
 		</div>
 
 		<!--Motivos não venda View-->
@@ -1627,20 +1630,18 @@
 
 		<script type="text/x-kendo-template" id="tAtuTiposContato"> 
 			<div id="#= uid #" data-role="touch" data-enable-swipe="1" data-swipe="onSwipe" data-touchstart="onTouchstarContato">
-				<ul id="editorContatoCliente" data-role="listview">
-					<li>
-						<label>
-							Qtde.
-						</label>
-						<input id="#= uid #" name="Quantidade" type="number" placeholder="Qtd." data-bind="value: FcoQtdCliente" required validationmessage="Requerido"/>
-					</li>
-					<li>
-						<label>
-							Tipo
-						</label>
-						<select id="TcoId" name="TcoId" data-bind="source: tiposContato, value: TcoId" data-text-field="TcoDescricao" data-value-field="TcoId"></select>
-					</li>
-				</ul>
+				<li>
+					<label>
+						Qtde
+					</label>
+					<input id="#= uid #" name="Quantidade" type="number" placeholder="Qtd." data-bind="value: FcoQtdCliente" required validationmessage="Requerido"/>
+				</li>
+				<li>
+					<label>
+						Tipo
+					</label>
+					<select id="TcoId" name="TcoId" data-bind="source: tiposContato, value: TcoId" data-text-field="TcoDescricao" data-value-field="TcoId"></select>
+				</li>
 				<button id="btnContato" data-role="button" class="excluir" data-icon="delete"></button>
 				<div id="divSubTitulo"></div>
 			</div>  

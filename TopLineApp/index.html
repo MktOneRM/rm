@@ -23,6 +23,7 @@
 		</script>
 	</head>
 	<body>
+
 		<!-- Home-Layout -->
 		<div data-role="layout" data-id="home-layout" data-title="">
 			<header data-role="header">
@@ -256,7 +257,7 @@
 			</div>
 		</div>
 
-		<div data-role="modalview" id="Modalview-login" style="width: 95%; height: 18em;">
+		<div data-role="modalview" id="modalview-login" data-layout="home-layout" style="width: 95%; height: 18em;">
 			<div data-role="header">
 				<div data-role="navbar">
 					<span>Login</span>
@@ -274,7 +275,7 @@
 					<input type="password" id="password" />
 				</li>
 			</ul>
-			<a data-click="closeModalViewLogin" id="Modalview-login-button" type="button" data-role="button">Login</a>
+			<a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Login</a>
 			<a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button">Register</a>
 		</div>
 
@@ -1695,7 +1696,8 @@
 			
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
-				loading: '<h1 class="loading-message">Carregando...</h1>'
+				loading: '<h1 class="loading-message">Carregando...</h1>',
+                initial: "#modalview-login"
 			});
 			
 			function switchChange(e) {
@@ -1714,7 +1716,7 @@
 
 		<script>
 			function closeModalViewLogin() {
-				$("#Modalview-login").kendoMobileModalView("close");
+				$("#modalview-login").kendoMobileModalView("close");
 			}
 		</script>
 

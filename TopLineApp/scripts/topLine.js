@@ -1537,10 +1537,7 @@
 					document.getElementById('editorClientesContactados').style.display = "none";
 				}
 				else {
-                    
-                    app.navigate("#modalview-login");
-                    
-					//document.getElementById('editorClientesContactados').style.display = "block";
+                    document.getElementById('editorClientesContactados').style.display = "block";
 				}	  
                 
                 viewModel.dsFrequenciaContato.cancelChanges();

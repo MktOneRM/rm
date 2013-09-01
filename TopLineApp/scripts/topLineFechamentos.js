@@ -1,6 +1,9 @@
 (function($, undefined) {
-	var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
-	//var baseUrl = "http://localhost:50000/api";
+
+     var baseUrl = "http://revenue.azurewebsites.net/api";
+    //var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
+    //var baseUrl = "http://localhost:63504/api";
+
 
 	//Schema Motivos não venda
 	var scMotivosNaoVenda = { 

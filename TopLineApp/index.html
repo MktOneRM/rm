@@ -28,10 +28,14 @@
 		<div data-role="layout" data-id="home-layout" data-title="">
 			<header data-role="header">
 				<div data-role="navbar">
+                    <!--
 					<a data-align="right" href="#config-view" >
 						<img id="imgConfig" src="styles/iconConfig.png"/>
 					</a>
-					<span data-role="view-title"></span>
+                    <span data-role="view-title"></span>
+                    -->
+                    <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="right"></a>
+                    <span data-role="view-title"></span>					
 				</div>
 			</header>
 			<div data-role="footer">
@@ -1498,6 +1502,38 @@
 			</ul>
 		</div>
 
+        
+        <!--Test-->
+        <div data-role="drawer" id="my-drawer" style="width: 270px" data-views="['drawer-home', 'drawer-starred', 'drawer-deleted', 'drawer-spam', 'drawer-drafts', 'drawer-sent', '/mobile/m/drawer/index.html']">
+            <ul data-role="listview" data-type="group">
+                <li>Mailbox
+                    <ul>
+                        <li data-icon="inbox"><a href="#drawer-home" data-transition="none">Inbox</a></li>
+                        <li data-icon="star"><a href="#drawer-starred" data-transition="none">Starred Items</a></li>
+                        <li data-icon="compose"><a href="#drawer-drafts" data-transition="none">Drafts</a></li>
+                        <li data-icon="sent"><a href="#drawer-sent" data-transition="none">Sent Items</a></li>
+                        <li data-icon="trash"><a href="#drawer-deleted" data-transition="none">Deleted Items</a></li>
+                        <li data-icon="spam"><a href="#drawer-spam" data-transition="none">Spam</a></li>
+                    </ul>
+                </li>
+                <li>Tasks
+                    <ul>
+                        <li>To Do</li>
+                        <li>In Progress</li>
+                        <li>Done</li>
+                        <li>High Priority</li>
+                        <li>Low Priority</li>
+                    </ul>
+                </li>
+                <li>Account
+                    <ul>
+                        <li data-icon="settings">Settings</li>
+                        <li data-icon="off">Log Out</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
 		<!--Template Colaborador-->
 		<script type="text/x-kendo-template" id="tColaborador">
 			<div id="#= uid #" data-role="touch" data-enable-swipe="0" data-tap="showDetalhesColaborador">
@@ -1695,6 +1731,8 @@
             var baseUrl = "http://revenue.azurewebsites.net/api";
             //var baseUrl = "http://www.revenuemachine.com.br/mobile/api";
             //var baseUrl = "http://localhost:63504/api";
+            
+            kendo.mobile.ui.Drawer.current = null;
             
 			app = new kendo.mobile.Application($(document.body), { 
 				transition: "slide",
